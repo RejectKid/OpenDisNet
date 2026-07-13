@@ -17,7 +17,7 @@ internal static class EnumerationWriter
             if (definition.Kind == "sisoenum") WriteEnum(text, definition);
             else WriteBitField(text, definition);
         }
-        return text.ToString().ReplaceLineEndings("\n");
+        return text.ToString().TrimEnd().ReplaceLineEndings("\n") + "\n";
     }
 
     private static void WriteEnum(StringBuilder text, SisoTypeDefinition definition)

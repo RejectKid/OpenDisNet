@@ -11,3 +11,8 @@ OpenDisNet's implementation was independently designed with reference to:
 
 IEEE and SISO specification names are used only to identify interoperability
 targets. No endorsement is implied. Specification text is not redistributed.
+
+The generated enumeration API and its compact source catalog are derived from
+the SISO-REF-010-2025 v36 machine-readable schema/API data under its general,
+royalty-free derivative-works license. “Reprinted with permission from SISO
+Inc.” The full SISO documentation is not redistributed.

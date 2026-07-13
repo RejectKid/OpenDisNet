@@ -12205,4 +12205,3 @@ public enum VariableRecordType : uint
     /// <summary>Intent-Based EW Message</summary>
     IntentBasedEwMessage = 5507010u,
 }
-

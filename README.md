@@ -21,6 +21,7 @@ dotnet add package OpenDisNet
 
 ```csharp
 using OpenDisNet;
+using OpenDisNet.Enumerations;
 using OpenDisNet.Pdus;
 
 if (DisSerializer.TryDeserialize<SignalPdu>(datagram, out SignalPdu? signal, out DisParseError error))
@@ -56,8 +57,8 @@ var signal = new SignalPdu
     ExerciseId = 1,
     Timestamp = 42,
     Radio = new RadioId(new EntityId(1, 10, 42), number: 7),
-    EncodingScheme = 1,
-    TdlType = 0,
+    EncodingScheme = SignalEncodingScheme.EncodedAudio(SignalEncodingType.Opus),
+    TdlType = SignalTdlType.Other,
     SampleRate = 8_000,
     SampleCount = 1,
 };
@@ -71,6 +72,26 @@ are managed by the library. Signal payload interpretation remains with the
 application because DIS can carry many audio encodings and tactical data-link
 formats. For the uncommon case of a non-byte-aligned payload, `SetData` also
 accepts an explicit meaningful bit length.
+
+## Typed wire values
+
+Fields defined by SISO-REF-010 v36 use generated enums instead of unexplained
+integers. Composite bitfields expose named properties and immutable `With...`
+methods while retaining their complete wire value:
+
+```csharp
+using OpenDisNet.Enumerations;
+
+signal.TdlType = SignalTdlType.Link16StandardizedFormatJtidsMidsTadilJ;
+
+var behavior = StopFreezeFrozenBehavior.None
+    .WithRunSimulationClock(true)
+    .WithProcessUpdates(true);
+```
+
+Forward compatibility is lossless. An unrecognized enumeration can be assigned
+with a normal enum cast, and unknown or reserved bitfield bits remain available
+through `Value`; parsing and reserialization preserve both exactly.
 
 ## Standards and provenance
 
