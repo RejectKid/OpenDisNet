@@ -7,7 +7,10 @@ namespace OpenDisNet.Pdus;
 /// </summary>
 public partial class AppearancePdu : LiveEntityFamilyPdu
 {
-    public EntityID LiveEntityId { get; set; } = new EntityID();
+    /// <summary>Creates a DIS v7 AppearancePdu with its wire discriminator fields initialized.</summary>
+    public AppearancePdu() => Initialize(47, 11);
+
+    public EntityId LiveEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// 16-bit bit field
@@ -33,7 +36,10 @@ public partial class AppearancePdu : LiveEntityFamilyPdu
 /// </summary>
 public partial class ArticulatedPartsPdu : LiveEntityFamilyPdu
 {
-    public EntityID LiveEntityId { get; set; } = new EntityID();
+    /// <summary>Creates a DIS v7 ArticulatedPartsPdu with its wire discriminator fields initialized.</summary>
+    public ArticulatedPartsPdu() => Initialize(48, 11);
+
+    public EntityId LiveEntityId { get; set; } = new EntityId();
 
     internal byte NumberOfParameterRecords { get; set; }
 
@@ -46,15 +52,18 @@ public partial class ArticulatedPartsPdu : LiveEntityFamilyPdu
 /// </summary>
 public partial class LEDetonationPdu : LiveEntityFamilyPdu
 {
-    public EntityID FiringLiveEntityId { get; set; } = new EntityID();
+    /// <summary>Creates a DIS v7 LEDetonationPdu with its wire discriminator fields initialized.</summary>
+    public LEDetonationPdu() => Initialize(50, 11);
+
+    public EntityId FiringLiveEntityId { get; set; } = new EntityId();
 
     public byte DetonationFlag1 { get; set; }
 
     public byte DetonationFlag2 { get; set; }
 
-    public EntityID TargetLiveEntityId { get; set; } = new EntityID();
+    public EntityId TargetLiveEntityId { get; set; } = new EntityId();
 
-    public EntityID MunitionLiveEntityId { get; set; } = new EntityID();
+    public EntityId MunitionLiveEntityId { get; set; } = new EntityId();
 
     public EventIdentifier EventId { get; set; } = new EventIdentifier();
 
@@ -80,16 +89,19 @@ public partial class LEDetonationPdu : LiveEntityFamilyPdu
 /// </summary>
 public partial class LEFirePdu : LiveEntityFamilyPdu
 {
-    public EntityID FiringLiveEntityId { get; set; } = new EntityID();
+    /// <summary>Creates a DIS v7 LEFirePdu with its wire discriminator fields initialized.</summary>
+    public LEFirePdu() => Initialize(49, 11);
+
+    public EntityId FiringLiveEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// Bits defined in IEEE Standard
     /// </summary>
     public byte Flags { get; set; }
 
-    public EntityID TargetLiveEntityId { get; set; } = new EntityID();
+    public EntityId TargetLiveEntityId { get; set; } = new EntityId();
 
-    public EntityID MunitionLiveEntityId { get; set; } = new EntityID();
+    public EntityId MunitionLiveEntityId { get; set; } = new EntityId();
 
     public EventIdentifier EventId { get; set; } = new EventIdentifier();
 
@@ -129,7 +141,10 @@ public partial class LiveEntityFirePdu
 /// </summary>
 public partial class TSPIPdu : LiveEntityFamilyPdu
 {
-    public EntityID LiveEntityId { get; set; } = new EntityID();
+    /// <summary>Creates a DIS v7 TSPIPdu with its wire discriminator fields initialized.</summary>
+    public TSPIPdu() => Initialize(46, 11);
+
+    public EntityId LiveEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// bit field

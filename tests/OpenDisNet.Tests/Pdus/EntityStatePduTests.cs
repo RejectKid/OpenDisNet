@@ -10,7 +10,7 @@ public sealed class EntityStatePduTests
     public void EntityStatePduUsesObjectInitializerAndRoundTrips()
     {
         var expected = (EntityStatePdu)PduFactory.Create(PduType.EntityState, exerciseId: 4);
-        expected.EntityId = new() { SiteId = 1, ApplicationId = 2, EntityId = 3 };
+        expected.EntityId = new EntityId(1, 2, 3);
         expected.ForceId = 2;
         expected.EntityLocation = new() { X = 100, Y = 200, Z = 300 };
         expected.EntityOrientation = new() { Psi = 1, Theta = 2, Phi = 3 };
@@ -21,7 +21,7 @@ public sealed class EntityStatePduTests
         var actual = Assert.IsType<EntityStatePdu>(DisSerializer.Deserialize(bytes));
 
         Assert.Equal(144, bytes.Length);
-        Assert.Equal((ushort)3, actual.EntityId.EntityId);
+        Assert.Equal((ushort)3, actual.EntityId.EntityNumber);
         Assert.Equal(300, actual.EntityLocation.Z);
         Assert.StartsWith("EAGLE-1", Encoding.ASCII.GetString(actual.Marking.Characters));
     }

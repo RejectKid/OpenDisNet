@@ -7,6 +7,9 @@ namespace OpenDisNet.Pdus;
 /// </summary>
 public partial class IntercomControlPdu : RadioCommunicationsFamilyPdu
 {
+    /// <summary>Creates a DIS v7 IntercomControlPdu with its wire discriminator fields initialized.</summary>
+    public IntercomControlPdu() => Initialize(32, 4);
+
     /// <summary>
     /// control type
     /// </summary>
@@ -20,7 +23,7 @@ public partial class IntercomControlPdu : RadioCommunicationsFamilyPdu
     /// <summary>
     /// Source entity ID, this can also be ObjectIdentifier or UnattachedIdentifier
     /// </summary>
-    public EntityID SourceEntityId { get; set; } = new EntityID();
+    public EntityId SourceEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// The specific intercom device being simulated within an entity.
@@ -50,7 +53,7 @@ public partial class IntercomControlPdu : RadioCommunicationsFamilyPdu
     /// <summary>
     /// eid of the entity that has created this intercom channel, same comments as sourceEntityId
     /// </summary>
-    public EntityID MasterIntercomReferenceId { get; set; } = new EntityID();
+    public EntityId MasterIntercomReferenceId { get; set; } = new EntityId();
 
     /// <summary>
     /// specific intercom device that has created this intercom channel
@@ -86,6 +89,9 @@ public partial class IntercomReferenceID
 /// </summary>
 public partial class IntercomSignalPdu : RadioCommunicationsFamilyPdu
 {
+    /// <summary>Creates a DIS v7 IntercomSignalPdu with its wire discriminator fields initialized.</summary>
+    public IntercomSignalPdu() => Initialize(31, 4);
+
     /// <summary>
     /// The unique designation of an attached or unattached intercom in an event or exercise
     /// </summary>
@@ -136,7 +142,7 @@ public partial class RadioCommsHeader
     /// <summary>
     /// ID of the entitythat is the source of the communication
     /// </summary>
-    public EntityID RadioReferenceId { get; set; } = new EntityID();
+    public EntityId RadioReferenceId { get; set; } = new EntityId();
 
     /// <summary>
     /// particular radio within an entity
@@ -157,6 +163,9 @@ public abstract partial class RadioCommunicationsFamilyPdu : PduBase
 /// </summary>
 public partial class ReceiverPdu : RadioCommunicationsFamilyPdu
 {
+    /// <summary>Creates a DIS v7 ReceiverPdu with its wire discriminator fields initialized.</summary>
+    public ReceiverPdu() => Initialize(27, 4);
+
     public RadioCommsHeader RadioHeader { get; set; } = new RadioCommsHeader();
 
     /// <summary>
@@ -174,7 +183,7 @@ public partial class ReceiverPdu : RadioCommunicationsFamilyPdu
     /// <summary>
     /// ID of transmitter
     /// </summary>
-    public EntityID TransmitterEntityId { get; set; } = new EntityID();
+    public EntityId TransmitterEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// ID of transmitting radio
@@ -188,6 +197,9 @@ public partial class ReceiverPdu : RadioCommunicationsFamilyPdu
 /// </summary>
 public partial class SignalPdu : RadioCommunicationsFamilyPdu
 {
+    /// <summary>Creates a DIS v7 SignalPdu with its wire discriminator fields initialized.</summary>
+    public SignalPdu() => Initialize(26, 4);
+
     public RadioCommsHeader RadioHeader { get; set; } = new RadioCommsHeader();
 
     /// <summary>
@@ -227,6 +239,9 @@ public partial class SignalPdu : RadioCommunicationsFamilyPdu
 /// </summary>
 public partial class TransmitterPdu : RadioCommunicationsFamilyPdu
 {
+    /// <summary>Creates a DIS v7 TransmitterPdu with its wire discriminator fields initialized.</summary>
+    public TransmitterPdu() => Initialize(25, 4);
+
     public RadioCommsHeader RadioHeader { get; set; } = new RadioCommsHeader();
 
     /// <summary>

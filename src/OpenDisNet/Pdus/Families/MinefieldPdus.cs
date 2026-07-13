@@ -18,6 +18,9 @@ public partial class MineEmplacementTime
 /// </summary>
 public partial class MinefieldDataPdu : MinefieldFamilyPdu
 {
+    /// <summary>Creates a DIS v7 MinefieldDataPdu with its wire discriminator fields initialized.</summary>
+    public MinefieldDataPdu() => Initialize(39, 8);
+
     /// <summary>
     /// Minefield ID provides a unique identifier
     /// </summary>
@@ -123,6 +126,9 @@ public abstract partial class MinefieldFamilyPdu : PduBase
 /// </summary>
 public partial class MinefieldQueryPdu : MinefieldFamilyPdu
 {
+    /// <summary>Creates a DIS v7 MinefieldQueryPdu with its wire discriminator fields initialized.</summary>
+    public MinefieldQueryPdu() => Initialize(38, 8);
+
     /// <summary>
     /// Minefield ID provides a unique identifier
     /// </summary>
@@ -131,7 +137,7 @@ public partial class MinefieldQueryPdu : MinefieldFamilyPdu
     /// <summary>
     /// EID of entity making the request
     /// </summary>
-    public EntityID RequestingEntityId { get; set; } = new EntityID();
+    public EntityId RequestingEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// request ID provides a unique identifier
@@ -180,6 +186,9 @@ public partial class MinefieldQueryPdu : MinefieldFamilyPdu
 /// </summary>
 public partial class MinefieldResponseNACKPdu : MinefieldFamilyPdu
 {
+    /// <summary>Creates a DIS v7 MinefieldResponseNACKPdu with its wire discriminator fields initialized.</summary>
+    public MinefieldResponseNACKPdu() => Initialize(40, 8);
+
     /// <summary>
     /// Minefield ID provides a unique identifier
     /// </summary>
@@ -212,6 +221,9 @@ public partial class MinefieldResponseNACKPdu : MinefieldFamilyPdu
 /// </summary>
 public partial class MinefieldStatePdu : MinefieldFamilyPdu
 {
+    /// <summary>Creates a DIS v7 MinefieldStatePdu with its wire discriminator fields initialized.</summary>
+    public MinefieldStatePdu() => Initialize(37, 8);
+
     /// <summary>
     /// Minefield ID provides a unique identifier
     /// </summary>

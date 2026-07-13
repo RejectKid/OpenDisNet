@@ -12,8 +12,8 @@ public sealed class OpenDisReferenceTests
     {
         var expected = (FirePdu)PduFactory.Create(PduType.Fire, exerciseId: 7);
         expected.Timestamp = 123;
-        expected.FiringEntityId = new() { SiteId = 1, ApplicationId = 2, EntityId = 3 };
-        expected.TargetEntityId = new() { SiteId = 4, ApplicationId = 5, EntityId = 6 };
+        expected.FiringEntityId = new EntityId(1, 2, 3);
+        expected.TargetEntityId = new EntityId(4, 5, 6);
         expected.FireMissionIndex = 13;
         expected.Range = 20;
 

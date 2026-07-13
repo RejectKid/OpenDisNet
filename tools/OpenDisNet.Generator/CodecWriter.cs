@@ -165,6 +165,13 @@ internal static class CodecWriter
 
         text.AppendLine($"    private static void Prepare{definition.Name}Fields({definition.Name} value)");
         text.AppendLine("    {");
+        if (definition.Name is "SignalPdu" or "IntercomSignalPdu")
+        {
+            text.AppendLine("        if (value.DataBitLength == 0 && value.Data.Length != 0)");
+            text.AppendLine("            value.DataBitLength = checked((ushort)(value.Data.Length * 8));");
+            text.AppendLine("        if ((value.DataBitLength + 7) / 8 != value.Data.Length)");
+            text.AppendLine("            throw new ArgumentException(\"DataBitLength must match Data, allowing only unused bits in the final octet.\", nameof(value));");
+        }
         var countOwners = new HashSet<string>(StringComparer.Ordinal);
         foreach (FieldDefinition field in definition.Fields)
             WritePrepareField(text, field, definition, countOwners);
@@ -500,6 +507,8 @@ internal static class CodecWriter
     {
         string normalized = value.Replace("ID", "Id", StringComparison.Ordinal);
         string property = char.ToUpperInvariant(normalized[0]) + normalized[1..];
+        if (owner == "EntityId" && property == "EntityId")
+            return "EntityNumber";
         return string.Equals(property, owner, StringComparison.Ordinal) ? property + "Value" : property;
     }
 

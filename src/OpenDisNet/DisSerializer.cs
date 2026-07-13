@@ -7,6 +7,31 @@ namespace OpenDisNet;
 /// <summary>Serializes and deserializes Distributed Interactive Simulation PDUs.</summary>
 public static class DisSerializer
 {
+    /// <summary>Deserializes one complete DIS datagram and requires the specified PDU type.</summary>
+    public static TPdu Deserialize<TPdu>(ReadOnlySpan<byte> datagram, DisParseOptions? options = null)
+        where TPdu : class, IDisPdu
+    {
+        if (TryDeserialize(datagram, out TPdu? pdu, out DisParseError error, options))
+            return pdu!;
+        throw new FormatException(error.Message);
+    }
+
+    /// <summary>Attempts to deserialize one complete DIS datagram as the specified PDU type.</summary>
+    public static bool TryDeserialize<TPdu>(ReadOnlySpan<byte> datagram, out TPdu? pdu, out DisParseError error, DisParseOptions? options = null)
+        where TPdu : class, IDisPdu
+    {
+        pdu = null;
+        if (!TryDeserialize(datagram, out IDisPdu? parsed, out error, options))
+            return false;
+        if (parsed is TPdu typed)
+        {
+            pdu = typed;
+            return true;
+        }
+        return Fail(DisParseErrorCode.UnexpectedPduType,
+            $"Expected {typeof(TPdu).Name}; received {parsed!.GetType().Name} ({parsed.Header.PduType}).", 2, out error);
+    }
+
     /// <summary>Deserializes one complete DIS datagram.</summary>
     public static IDisPdu Deserialize(ReadOnlySpan<byte> datagram, DisParseOptions? options = null)
     {

@@ -7,6 +7,9 @@ namespace OpenDisNet.Pdus;
 /// </summary>
 public partial class AcknowledgeRPdu : SimulationManagementWithReliabilityFamilyPdu
 {
+    /// <summary>Creates a DIS v7 AcknowledgeRPdu with its wire discriminator fields initialized.</summary>
+    public AcknowledgeRPdu() => Initialize(55, 10);
+
     /// <summary>
     /// ack flags
     /// </summary>
@@ -36,6 +39,9 @@ public partial class AcknowledgeReliablePdu
 /// </summary>
 public partial class ActionRequestRPdu : SimulationManagementWithReliabilityFamilyPdu
 {
+    /// <summary>Creates a DIS v7 ActionRequestRPdu with its wire discriminator fields initialized.</summary>
+    public ActionRequestRPdu() => Initialize(56, 10);
+
     /// <summary>
     /// level of reliability service used for this transaction
     /// </summary>
@@ -95,6 +101,9 @@ public partial class ActionRequestReliablePdu
 /// </summary>
 public partial class ActionResponseRPdu : SimulationManagementWithReliabilityFamilyPdu
 {
+    /// <summary>Creates a DIS v7 ActionResponseRPdu with its wire discriminator fields initialized.</summary>
+    public ActionResponseRPdu() => Initialize(57, 10);
+
     /// <summary>
     /// request ID provides a unique identifier
     /// </summary>
@@ -139,6 +148,9 @@ public partial class ActionResponseReliablePdu
 /// </summary>
 public partial class CommentRPdu : SimulationManagementWithReliabilityFamilyPdu
 {
+    /// <summary>Creates a DIS v7 CommentRPdu with its wire discriminator fields initialized.</summary>
+    public CommentRPdu() => Initialize(62, 10);
+
     /// <summary>
     /// Fixed datum record count, not used in this Pdu
     /// </summary>
@@ -168,6 +180,9 @@ public partial class CommentReliablePdu
 /// </summary>
 public partial class CreateEntityRPdu : SimulationManagementWithReliabilityFamilyPdu
 {
+    /// <summary>Creates a DIS v7 CreateEntityRPdu with its wire discriminator fields initialized.</summary>
+    public CreateEntityRPdu() => Initialize(51, 10);
+
     /// <summary>
     /// level of reliability service used for this transaction
     /// </summary>
@@ -196,6 +211,9 @@ public partial class CreateEntityReliablePdu
 /// </summary>
 public partial class DataQueryRPdu : SimulationManagementWithReliabilityFamilyPdu
 {
+    /// <summary>Creates a DIS v7 DataQueryRPdu with its wire discriminator fields initialized.</summary>
+    public DataQueryRPdu() => Initialize(58, 10);
+
     /// <summary>
     /// level of reliability service used for this transaction
     /// </summary>
@@ -255,6 +273,9 @@ public partial class DataQueryReliablePdu
 /// </summary>
 public partial class DataRPdu : SimulationManagementWithReliabilityFamilyPdu
 {
+    /// <summary>Creates a DIS v7 DataRPdu with its wire discriminator fields initialized.</summary>
+    public DataRPdu() => Initialize(60, 10);
+
     /// <summary>
     /// Request ID provides a unique identifier
     /// </summary>
@@ -309,6 +330,9 @@ public partial class DataReliablePdu
 /// </summary>
 public partial class EventReportRPdu : SimulationManagementWithReliabilityFamilyPdu
 {
+    /// <summary>Creates a DIS v7 EventReportRPdu with its wire discriminator fields initialized.</summary>
+    public EventReportRPdu() => Initialize(61, 10);
+
     /// <summary>
     /// Event type
     /// </summary>
@@ -353,6 +377,9 @@ public partial class EventReportReliablePdu
 /// </summary>
 public partial class RecordQueryRPdu : SimulationManagementWithReliabilityFamilyPdu
 {
+    /// <summary>Creates a DIS v7 RecordQueryRPdu with its wire discriminator fields initialized.</summary>
+    public RecordQueryRPdu() => Initialize(65, 10);
+
     /// <summary>
     /// request ID provides a unique identifier
     /// </summary>
@@ -402,6 +429,9 @@ public partial class RecordQueryReliablePdu
 /// </summary>
 public partial class RecordRPdu : SimulationManagementWithReliabilityFamilyPdu
 {
+    /// <summary>Creates a DIS v7 RecordRPdu with its wire discriminator fields initialized.</summary>
+    public RecordRPdu() => Initialize(63, 10);
+
     /// <summary>
     /// request ID provides a unique identifier
     /// </summary>
@@ -440,6 +470,9 @@ public partial class RecordReliablePdu
 /// </summary>
 public partial class RemoveEntityRPdu : SimulationManagementWithReliabilityFamilyPdu
 {
+    /// <summary>Creates a DIS v7 RemoveEntityRPdu with its wire discriminator fields initialized.</summary>
+    public RemoveEntityRPdu() => Initialize(52, 10);
+
     /// <summary>
     /// level of reliability service used for this transaction
     /// </summary>
@@ -468,6 +501,9 @@ public partial class RemoveEntityReliablePdu
 /// </summary>
 public partial class SetDataRPdu : SimulationManagementWithReliabilityFamilyPdu
 {
+    /// <summary>Creates a DIS v7 SetDataRPdu with its wire discriminator fields initialized.</summary>
+    public SetDataRPdu() => Initialize(59, 10);
+
     /// <summary>
     /// level of reliability service used for this transaction
     /// </summary>
@@ -522,6 +558,9 @@ public partial class SetDataReliablePdu
 /// </summary>
 public partial class SetRecordRPdu : SimulationManagementWithReliabilityFamilyPdu
 {
+    /// <summary>Creates a DIS v7 SetRecordRPdu with its wire discriminator fields initialized.</summary>
+    public SetRecordRPdu() => Initialize(64, 10);
+
     /// <summary>
     /// request ID provides a unique identifier
     /// </summary>
@@ -579,6 +618,9 @@ public abstract partial class SimulationManagementWithReliabilityFamilyPdu : Pdu
 /// </summary>
 public partial class StartResumeRPdu : SimulationManagementWithReliabilityFamilyPdu
 {
+    /// <summary>Creates a DIS v7 StartResumeRPdu with its wire discriminator fields initialized.</summary>
+    public StartResumeRPdu() => Initialize(53, 10);
+
     /// <summary>
     /// time in real world for this operation to happen
     /// </summary>
@@ -617,6 +659,9 @@ public partial class StartResumeReliablePdu
 /// </summary>
 public partial class StopFreezeRPdu : SimulationManagementWithReliabilityFamilyPdu
 {
+    /// <summary>Creates a DIS v7 StopFreezeRPdu with its wire discriminator fields initialized.</summary>
+    public StopFreezeRPdu() => Initialize(54, 10);
+
     /// <summary>
     /// time in real world for this operation to happen
     /// </summary>

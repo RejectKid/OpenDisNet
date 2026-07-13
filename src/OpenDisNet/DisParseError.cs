@@ -9,6 +9,7 @@ public enum DisParseErrorCode
     TruncatedPdu,
     TrailingData,
     InvalidField,
+    UnexpectedPduType,
 }
 
 public readonly record struct DisParseError(DisParseErrorCode Code, string Message, int Offset = 0);

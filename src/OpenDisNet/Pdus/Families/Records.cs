@@ -568,7 +568,7 @@ public partial class ClockTime
 /// </summary>
 public partial class CommunicationsNodeID
 {
-    public EntityID EntityId { get; set; } = new EntityID();
+    public EntityId EntityId { get; set; } = new EntityId();
 
     public ushort ElementId { get; set; }
 
@@ -819,7 +819,7 @@ public partial class DirectedEnergyPrecisionAimpoint
     /// <summary>
     /// Unique ID of the target entity.
     /// </summary>
-    public EntityID TargetEntityId { get; set; } = new EntityID();
+    public EntityId TargetEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// Target Component ID ENUM, same as in DamageDescriptionRecord.
@@ -866,7 +866,7 @@ public partial class DirectedEnergyTargetEnergyDeposition
     /// <summary>
     /// Unique ID of the target entity.
     /// </summary>
-    public EntityID TargetEntityId { get; set; } = new EntityID();
+    public EntityId TargetEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// zero-filled array of padding bits for byte alignment and consistent sizing of PDU data
@@ -1050,7 +1050,7 @@ public partial class EntityAssociationVP
     /// <summary>
     /// Object ID of entity associated with this entity
     /// </summary>
-    public EntityID EntityId { get; set; } = new EntityID();
+    public EntityId EntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// Station location on one's own entity
@@ -1077,7 +1077,7 @@ public partial class EntityAssociationVP
 /// <summary>
 /// Unique identifier triplet for this entity.  Also referred to as EntityIdentifier
 /// </summary>
-public partial class EntityID
+public partial class EntityId
 {
     /// <summary>
     /// Site ID values are unique identification number for originating site, often corresponding to an internet address.  Site ID values are agreed upon by individual simulations.
@@ -1092,7 +1092,7 @@ public partial class EntityID
     /// <summary>
     /// Entity ID values are unique identification number for s givent entity in the originating application at a given site.  Entity ID values are sssigned by individual simulation programs.
     /// </summary>
-    public ushort EntityId { get; set; }
+    public ushort EntityNumber { get; set; }
 
 }
 
@@ -1921,11 +1921,11 @@ public partial class LaunchedMunitionRecord
     /// </summary>
     public ushort Padding { get; set; }
 
-    public EntityID FiringEntityId { get; set; } = new EntityID();
+    public EntityId FiringEntityId { get; set; } = new EntityId();
 
     public ushort Padding2 { get; set; }
 
-    public EntityID TargetEntityId { get; set; } = new EntityID();
+    public EntityId TargetEntityId { get; set; } = new EntityId();
 
     public ushort Padding3 { get; set; }
 
@@ -2379,7 +2379,7 @@ public partial class OwnershipStatusRecord
     /// <summary>
     /// EntityID
     /// </summary>
-    public EntityID EntityId { get; set; } = new EntityID();
+    public EntityId EntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// The ownership and/or ownership conflict status of the entity represented by the Entity ID field.
@@ -2740,7 +2740,7 @@ public partial class SeparationVP
     /// <summary>
     /// ID of parent
     /// </summary>
-    public EntityID ParentEntityId { get; set; } = new EntityID();
+    public EntityId ParentEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// padding
@@ -3006,7 +3006,7 @@ public partial class TrackJamData
     /// <summary>
     /// The entity tracked or illumated, or an emitter beam targeted with jamming
     /// </summary>
-    public EntityID EntityId { get; set; } = new EntityID();
+    public EntityId EntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// Emitter system associated with the entity

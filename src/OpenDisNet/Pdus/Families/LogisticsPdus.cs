@@ -14,15 +14,18 @@ public abstract partial class LogisticsFamilyPdu : PduBase
 /// </summary>
 public partial class RepairCompletePdu : LogisticsFamilyPdu
 {
+    /// <summary>Creates a DIS v7 RepairCompletePdu with its wire discriminator fields initialized.</summary>
+    public RepairCompletePdu() => Initialize(9, 3);
+
     /// <summary>
     /// Entity that is receiving service.  See 6.2.28
     /// </summary>
-    public EntityID ReceivingEntityId { get; set; } = new EntityID();
+    public EntityId ReceivingEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// Entity that is supplying.  See 6.2.28
     /// </summary>
-    public EntityID RepairingEntityId { get; set; } = new EntityID();
+    public EntityId RepairingEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// Enumeration for type of repair.  See 6.2.74
@@ -41,15 +44,18 @@ public partial class RepairCompletePdu : LogisticsFamilyPdu
 /// </summary>
 public partial class RepairResponsePdu : LogisticsFamilyPdu
 {
+    /// <summary>Creates a DIS v7 RepairResponsePdu with its wire discriminator fields initialized.</summary>
+    public RepairResponsePdu() => Initialize(10, 3);
+
     /// <summary>
     /// Entity that requested repairs.  See 6.2.28
     /// </summary>
-    public EntityID ReceivingEntityId { get; set; } = new EntityID();
+    public EntityId ReceivingEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// Entity that is repairing.  See 6.2.28
     /// </summary>
-    public EntityID RepairingEntityId { get; set; } = new EntityID();
+    public EntityId RepairingEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// Result of repair operation
@@ -73,15 +79,18 @@ public partial class RepairResponsePdu : LogisticsFamilyPdu
 /// </summary>
 public partial class ResupplyCancelPdu : LogisticsFamilyPdu
 {
+    /// <summary>Creates a DIS v7 ResupplyCancelPdu with its wire discriminator fields initialized.</summary>
+    public ResupplyCancelPdu() => Initialize(8, 3);
+
     /// <summary>
     /// Requesting entity, Section 7.4.5
     /// </summary>
-    public EntityID ReceivingEntityId { get; set; } = new EntityID();
+    public EntityId ReceivingEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// Supplying entity, Section 7.4.5
     /// </summary>
-    public EntityID SupplyingEntityId { get; set; } = new EntityID();
+    public EntityId SupplyingEntityId { get; set; } = new EntityId();
 
 }
 
@@ -90,15 +99,18 @@ public partial class ResupplyCancelPdu : LogisticsFamilyPdu
 /// </summary>
 public partial class ResupplyOfferPdu : LogisticsFamilyPdu
 {
+    /// <summary>Creates a DIS v7 ResupplyOfferPdu with its wire discriminator fields initialized.</summary>
+    public ResupplyOfferPdu() => Initialize(6, 3);
+
     /// <summary>
     /// Field identifies the Entity and respective Entity Record ID that is receiving service (see 6.2.28), Section 7.4.3
     /// </summary>
-    public EntityID ReceivingEntityId { get; set; } = new EntityID();
+    public EntityId ReceivingEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// Identifies the Entity and respective Entity ID Record that is supplying  (see 6.2.28), Section 7.4.3
     /// </summary>
-    public EntityID SupplyingEntityId { get; set; } = new EntityID();
+    public EntityId SupplyingEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// How many supplies types are being offered, Section 7.4.3
@@ -127,15 +139,18 @@ public partial class ResupplyOfferPdu : LogisticsFamilyPdu
 /// </summary>
 public partial class ResupplyReceivedPdu : LogisticsFamilyPdu
 {
+    /// <summary>Creates a DIS v7 ResupplyReceivedPdu with its wire discriminator fields initialized.</summary>
+    public ResupplyReceivedPdu() => Initialize(7, 3);
+
     /// <summary>
     /// Entity that is receiving service.  Shall be represented by Entity Identifier record (see 6.2.28)
     /// </summary>
-    public EntityID ReceivingEntityId { get; set; } = new EntityID();
+    public EntityId ReceivingEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// Entity that is supplying.  Shall be represented by Entity Identifier record (see 6.2.28)
     /// </summary>
-    public EntityID SupplyingEntityId { get; set; } = new EntityID();
+    public EntityId SupplyingEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// How many supplies are taken by receiving entity
@@ -164,15 +179,18 @@ public partial class ResupplyReceivedPdu : LogisticsFamilyPdu
 /// </summary>
 public partial class ServiceRequestPdu : LogisticsFamilyPdu
 {
+    /// <summary>Creates a DIS v7 ServiceRequestPdu with its wire discriminator fields initialized.</summary>
+    public ServiceRequestPdu() => Initialize(5, 3);
+
     /// <summary>
     /// Entity that is requesting service (see 6.2.28), Section 7.4.2
     /// </summary>
-    public EntityID RequestingEntityId { get; set; } = new EntityID();
+    public EntityId RequestingEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// Entity that is providing the service (see 6.2.28), Section 7.4.2
     /// </summary>
-    public EntityID ServicingEntityId { get; set; } = new EntityID();
+    public EntityId ServicingEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// Type of service requested, Section 7.4.2

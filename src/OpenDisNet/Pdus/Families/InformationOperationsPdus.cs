@@ -7,10 +7,13 @@ namespace OpenDisNet.Pdus;
 /// </summary>
 public partial class InformationOperationsActionPdu : InformationOperationsFamilyPdu
 {
+    /// <summary>Creates a DIS v7 InformationOperationsActionPdu with its wire discriminator fields initialized.</summary>
+    public InformationOperationsActionPdu() => Initialize(70, 13);
+
     /// <summary>
     /// the simulation to which this PDU is addressed
     /// </summary>
-    public EntityID ReceivingSimId { get; set; } = new EntityID();
+    public EntityId ReceivingSimId { get; set; } = new EntityId();
 
     /// <summary>
     /// request ID provides a unique identifier
@@ -27,9 +30,9 @@ public partial class InformationOperationsActionPdu : InformationOperationsFamil
 
     public uint Padding1 { get; set; }
 
-    public EntityID IoAttackerId { get; set; } = new EntityID();
+    public EntityId IoAttackerId { get; set; } = new EntityId();
 
-    public EntityID IoPrimaryTargetId { get; set; } = new EntityID();
+    public EntityId IoPrimaryTargetId { get; set; } = new EntityId();
 
     public ushort Padding2 { get; set; }
 
@@ -47,7 +50,7 @@ public abstract partial class InformationOperationsFamilyPdu : PduBase
     /// <summary>
     /// Object originating the request
     /// </summary>
-    public EntityID OriginatingSimId { get; set; } = new EntityID();
+    public EntityId OriginatingSimId { get; set; } = new EntityId();
 
 }
 
@@ -56,6 +59,9 @@ public abstract partial class InformationOperationsFamilyPdu : PduBase
 /// </summary>
 public partial class InformationOperationsReportPdu : InformationOperationsFamilyPdu
 {
+    /// <summary>Creates a DIS v7 InformationOperationsReportPdu with its wire discriminator fields initialized.</summary>
+    public InformationOperationsReportPdu() => Initialize(71, 13);
+
     public ushort IoSimSource { get; set; }
 
     /// <summary>
@@ -65,9 +71,9 @@ public partial class InformationOperationsReportPdu : InformationOperationsFamil
 
     public byte Padding1 { get; set; }
 
-    public EntityID IoAttackerId { get; set; } = new EntityID();
+    public EntityId IoAttackerId { get; set; } = new EntityId();
 
-    public EntityID IoPrimaryTargetId { get; set; } = new EntityID();
+    public EntityId IoPrimaryTargetId { get; set; } = new EntityId();
 
     public ushort Padding2 { get; set; }
 

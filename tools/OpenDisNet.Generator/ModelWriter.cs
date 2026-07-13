@@ -20,12 +20,22 @@ internal static class ModelWriter
             text.AppendLine($"public {abstractModifier}partial class {definition.Name}{baseClause}");
             text.AppendLine("{");
 
+            PduDefinition? pdu = schema.Pdus.FirstOrDefault(x => x.Name == definition.Name);
+            if (pdu is not null)
+            {
+                text.AppendLine($"    /// <summary>Creates a DIS v7 {definition.Name} with its wire discriminator fields initialized.</summary>");
+                text.AppendLine($"    public {definition.Name}() => Initialize({pdu.Type}, {Family(pdu.SourceFile)});");
+                text.AppendLine();
+            }
+
             foreach (FieldDefinition field in definition.Fields)
             {
                 if (field.Kind is FieldKind.PaddingBoundary or FieldKind.StaticIvar)
                     continue;
                 WriteDocumentation(text, field.Comment, 1);
                 string propertyName = PropertyName(field.Name);
+                if (definition.Name == "EntityId" && propertyName == "EntityId")
+                    propertyName = "EntityNumber";
                 if (string.Equals(propertyName, definition.Name, StringComparison.Ordinal))
                     propertyName += "Value";
                 string type = TypeName(field);
@@ -107,4 +117,21 @@ internal static class ModelWriter
         .Replace("&", "&amp;", StringComparison.Ordinal)
         .Replace("<", "&lt;", StringComparison.Ordinal)
         .Replace(">", "&gt;", StringComparison.Ordinal);
+
+    private static byte Family(string sourceFile) => sourceFile switch
+    {
+        "EntityInformationFamilyPdus.xml" => 1,
+        "WarfareFamilyPdus.xml" => 2,
+        "LogisticsFamilyPdus.xml" => 3,
+        "RadioCommunicationsFamilyPdus.xml" => 4,
+        "SimulationManagementFamilyPdus.xml" => 5,
+        "DistributedEmissionsFamilyPdus.xml" => 6,
+        "EntityManagementFamilyPdus.xml" => 7,
+        "MinefieldFamilyPdus.xml" => 8,
+        "SyntheticEnvironmentFamilyPdus.xml" => 9,
+        "SimulationManagementWithReliabilityFamilyPdus.xml" => 10,
+        "LiveEntityFamilyPdus.xml" => 11,
+        "InformationOperationsFamilyPdus.xml" => 13,
+        _ => throw new InvalidDataException($"No protocol-family mapping for '{sourceFile}'."),
+    };
 }

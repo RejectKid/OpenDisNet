@@ -22,9 +22,9 @@ dotnet add package OpenDisNet
 using OpenDisNet;
 using OpenDisNet.Pdus;
 
-if (DisSerializer.TryDeserialize(datagram, out IDisPdu? pdu, out DisParseError error))
+if (DisSerializer.TryDeserialize<SignalPdu>(datagram, out SignalPdu? signal, out DisParseError error))
 {
-    Console.WriteLine($"{pdu.Header.PduType}: {pdu.Header.Length} bytes");
+    Console.WriteLine($"Radio {signal.Radio.Number}: {signal.DataBitLength} meaningful bits");
 }
 else
 {
@@ -42,14 +42,19 @@ Use `DisSerializer.Serialize(pdu)` for the reverse operation. See the
 ```csharp
 using OpenDisNet;
 using OpenDisNet.Pdus;
-using OpenDisNet.Protocol;
+var signal = new SignalPdu
+{
+    ExerciseId = 1,
+    Timestamp = 42,
+    Radio = new RadioId(new EntityId(1, 10, 42), number: 7),
+    EncodingScheme = 1,
+    TdlType = 0,
+    SampleRate = 8_000,
+    SampleCount = 1,
+};
+signal.SetData([0xaa, 0xbb, 0xc0], meaningfulBitLength: 20);
 
-var fire = (FirePdu)PduFactory.Create(PduType.Fire, exerciseId: 1);
-fire.FiringEntityId = new() { SiteId = 1, ApplicationId = 10, EntityId = 42 };
-fire.TargetEntityId = new() { SiteId = 1, ApplicationId = 10, EntityId = 99 };
-fire.Range = 2_500;
-
-byte[] datagram = DisSerializer.Serialize(fire);
+byte[] datagram = DisSerializer.Serialize(signal);
 ```
 
 Protocol version, family, PDU type, PDU length, collection counts, and padding

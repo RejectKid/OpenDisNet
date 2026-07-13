@@ -7,6 +7,9 @@ namespace OpenDisNet.Pdus;
 /// </summary>
 public partial class AcknowledgePdu : SimulationManagementFamilyPdu
 {
+    /// <summary>Creates a DIS v7 AcknowledgePdu with its wire discriminator fields initialized.</summary>
+    public AcknowledgePdu() => Initialize(15, 5);
+
     /// <summary>
     /// type of message being acknowledged
     /// </summary>
@@ -29,6 +32,9 @@ public partial class AcknowledgePdu : SimulationManagementFamilyPdu
 /// </summary>
 public partial class ActionRequestPdu : SimulationManagementFamilyPdu
 {
+    /// <summary>Creates a DIS v7 ActionRequestPdu with its wire discriminator fields initialized.</summary>
+    public ActionRequestPdu() => Initialize(16, 5);
+
     /// <summary>
     /// identifies the request being made by the simulation manager
     /// </summary>
@@ -66,6 +72,9 @@ public partial class ActionRequestPdu : SimulationManagementFamilyPdu
 /// </summary>
 public partial class ActionResponsePdu : SimulationManagementFamilyPdu
 {
+    /// <summary>Creates a DIS v7 ActionResponsePdu with its wire discriminator fields initialized.</summary>
+    public ActionResponsePdu() => Initialize(17, 5);
+
     /// <summary>
     /// Request ID that is unique
     /// </summary>
@@ -103,6 +112,9 @@ public partial class ActionResponsePdu : SimulationManagementFamilyPdu
 /// </summary>
 public partial class CommentPdu : SimulationManagementFamilyPdu
 {
+    /// <summary>Creates a DIS v7 CommentPdu with its wire discriminator fields initialized.</summary>
+    public CommentPdu() => Initialize(22, 5);
+
     /// <summary>
     /// Number of fixed datum records, not used in this Pdu
     /// </summary>
@@ -125,6 +137,9 @@ public partial class CommentPdu : SimulationManagementFamilyPdu
 /// </summary>
 public partial class CreateEntityPdu : SimulationManagementFamilyPdu
 {
+    /// <summary>Creates a DIS v7 CreateEntityPdu with its wire discriminator fields initialized.</summary>
+    public CreateEntityPdu() => Initialize(11, 5);
+
     /// <summary>
     /// Identifier for the request.  See 6.2.75
     /// </summary>
@@ -137,6 +152,9 @@ public partial class CreateEntityPdu : SimulationManagementFamilyPdu
 /// </summary>
 public partial class DataPdu : SimulationManagementFamilyPdu
 {
+    /// <summary>Creates a DIS v7 DataPdu with its wire discriminator fields initialized.</summary>
+    public DataPdu() => Initialize(20, 5);
+
     /// <summary>
     /// ID of request
     /// </summary>
@@ -174,6 +192,9 @@ public partial class DataPdu : SimulationManagementFamilyPdu
 /// </summary>
 public partial class DataQueryPdu : SimulationManagementFamilyPdu
 {
+    /// <summary>Creates a DIS v7 DataQueryPdu with its wire discriminator fields initialized.</summary>
+    public DataQueryPdu() => Initialize(18, 5);
+
     /// <summary>
     /// ID of request
     /// </summary>
@@ -211,6 +232,9 @@ public partial class DataQueryPdu : SimulationManagementFamilyPdu
 /// </summary>
 public partial class EventReportPdu : SimulationManagementFamilyPdu
 {
+    /// <summary>Creates a DIS v7 EventReportPdu with its wire discriminator fields initialized.</summary>
+    public EventReportPdu() => Initialize(21, 5);
+
     /// <summary>
     /// Type of event
     /// </summary>
@@ -248,6 +272,9 @@ public partial class EventReportPdu : SimulationManagementFamilyPdu
 /// </summary>
 public partial class RemoveEntityPdu : SimulationManagementFamilyPdu
 {
+    /// <summary>Creates a DIS v7 RemoveEntityPdu with its wire discriminator fields initialized.</summary>
+    public RemoveEntityPdu() => Initialize(12, 5);
+
     /// <summary>
     /// This field shall identify the specific and unique start/resume request being made by the SM
     /// </summary>
@@ -260,6 +287,9 @@ public partial class RemoveEntityPdu : SimulationManagementFamilyPdu
 /// </summary>
 public partial class SetDataPdu : SimulationManagementFamilyPdu
 {
+    /// <summary>Creates a DIS v7 SetDataPdu with its wire discriminator fields initialized.</summary>
+    public SetDataPdu() => Initialize(19, 5);
+
     /// <summary>
     /// ID of request
     /// </summary>
@@ -314,6 +344,9 @@ public abstract partial class SimulationManagementFamilyPdu : PduBase
 /// </summary>
 public partial class StartResumePdu : SimulationManagementFamilyPdu
 {
+    /// <summary>Creates a DIS v7 StartResumePdu with its wire discriminator fields initialized.</summary>
+    public StartResumePdu() => Initialize(13, 5);
+
     /// <summary>
     /// This field shall specify the real-world time (UTC) at which the entity is to start/resume in the exercise. This information shall be used by the participating simulation applications to start/resume an exercise synchronously. This field shall be represented by a Clock Time record (see 6.2.16).
     /// </summary>
@@ -336,6 +369,9 @@ public partial class StartResumePdu : SimulationManagementFamilyPdu
 /// </summary>
 public partial class StopFreezePdu : SimulationManagementFamilyPdu
 {
+    /// <summary>Creates a DIS v7 StopFreezePdu with its wire discriminator fields initialized.</summary>
+    public StopFreezePdu() => Initialize(14, 5);
+
     /// <summary>
     /// real-world(UTC) time at which the entity shall stop or freeze in the exercise
     /// </summary>

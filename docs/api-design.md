@@ -6,14 +6,10 @@ DIS packets, not for users of a particular source generator.
 ## Primary workflow
 
 ```csharp
-IDisPdu pdu = DisSerializer.Deserialize(datagram);
+SignalPdu signal = DisSerializer.Deserialize<SignalPdu>(datagram);
+Console.WriteLine(signal.Radio.Entity);
 
-if (pdu is EntityStatePdu entityState)
-{
-    Console.WriteLine(entityState.EntityId);
-}
-
-byte[] response = DisSerializer.Serialize(pdu);
+byte[] response = DisSerializer.Serialize(signal);
 ```
 
 The same serializer accepts caller-owned `Span<byte>` storage for allocation-
@@ -26,7 +22,9 @@ untrusted network input.
 2. Constructors provide valid defaults; object initializers are sufficient for
    ordinary use.
 3. The serializer owns protocol version, PDU type, protocol family, PDU length,
-   list counts, bit lengths, record lengths, and required padding.
+   list counts, derived lengths, record lengths, and required padding. APIs such
+   as `SignalPdu.SetData` safely capture meaningful lengths that are part of the
+   user's data.
 4. Collections use `List<T>` or arrays according to whether records or raw
    octets are represented. Callers never update a parallel count property.
 5. Known records are strongly typed. Standard-defined open or system-specific

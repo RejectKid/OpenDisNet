@@ -64,11 +64,11 @@ internal static class DisSchemaLoader
 
     private static ClassDefinition ParseClass(XElement element, string sourceFile, IReadOnlyDictionary<string, SisoWireType> sisoTypes)
     {
-        string name = Required(element, "name");
+        string name = PublicTypeName(Required(element, "name"));
         var fields = element.Elements("attribute").Select(x => ParseField(x, sisoTypes)).ToImmutableArray();
         return new(
             name,
-            (string?)element.Attribute("inheritsFrom") ?? "root",
+            PublicTypeName((string?)element.Attribute("inheritsFrom") ?? "root"),
             string.Equals((string?)element.Attribute("abstract"), "true", StringComparison.OrdinalIgnoreCase),
             (string?)element.Attribute("comment"),
             fields,
@@ -84,7 +84,7 @@ internal static class DisSchemaLoader
         return shape.Name.LocalName switch
         {
             "primitive" => Field(name, FieldKind.Primitive, Required(shape, "type")),
-            "classRef" => Field(name, FieldKind.ClassReference, Required(shape, "name")),
+            "classRef" => Field(name, FieldKind.ClassReference, PublicTypeName(Required(shape, "name"))),
             "sisoenum" => SisoField(FieldKind.Enumeration),
             "sisobitfield" => SisoField(FieldKind.BitField),
             "objectlist" => ParseObjectList(name, shape, sisoTypes),
@@ -115,10 +115,13 @@ internal static class DisSchemaLoader
         }
     }
 
+    private static string PublicTypeName(string name) =>
+        string.Equals(name, "EntityID", StringComparison.Ordinal) ? "EntityId" : name;
+
     private static FieldDefinition ParseObjectList(string name, XElement shape, IReadOnlyDictionary<string, SisoWireType> sisoTypes)
     {
         XElement item = shape.Elements().Single();
-        string type = item.Name.LocalName == "classRef" ? Required(item, "name") : Required(item, "type");
+        string type = item.Name.LocalName == "classRef" ? PublicTypeName(Required(item, "name")) : Required(item, "type");
         int? bitSize = null;
         if (item.Name.LocalName is "sisoenum" or "sisobitfield")
         {

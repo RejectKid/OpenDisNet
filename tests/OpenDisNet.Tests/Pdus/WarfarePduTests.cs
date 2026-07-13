@@ -9,9 +9,9 @@ public sealed class WarfarePduTests
     public void FirePduRoundTrips()
     {
         var expected = (FirePdu)PduFactory.Create(PduType.Fire, exerciseId: 1);
-        expected.FiringEntityId = new() { SiteId = 1, ApplicationId = 2, EntityId = 3 };
-        expected.TargetEntityId = new() { SiteId = 1, ApplicationId = 2, EntityId = 4 };
-        expected.MunitionExpendibleId = new() { SiteId = 1, ApplicationId = 2, EntityId = 5 };
+        expected.FiringEntityId = new EntityId(1, 2, 3);
+        expected.TargetEntityId = new EntityId(1, 2, 4);
+        expected.MunitionExpendibleId = new EntityId(1, 2, 5);
         expected.FireMissionIndex = 7;
         expected.Range = 5_000;
 
@@ -19,7 +19,7 @@ public sealed class WarfarePduTests
         var actual = Assert.IsType<FirePdu>(DisSerializer.Deserialize(bytes));
 
         Assert.Equal(96, bytes.Length);
-        Assert.Equal((ushort)3, actual.FiringEntityId.EntityId);
+        Assert.Equal((ushort)3, actual.FiringEntityId.EntityNumber);
         Assert.Equal(5_000, actual.Range);
     }
 

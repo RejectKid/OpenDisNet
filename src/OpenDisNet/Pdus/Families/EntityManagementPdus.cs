@@ -7,6 +7,9 @@ namespace OpenDisNet.Pdus;
 /// </summary>
 public partial class AggregateStatePdu : EntityManagementFamilyPdu
 {
+    /// <summary>Creates a DIS v7 AggregateStatePdu with its wire discriminator fields initialized.</summary>
+    public AggregateStatePdu() => Initialize(33, 7);
+
     /// <summary>
     /// ID of aggregated entities
     /// </summary>
@@ -85,7 +88,7 @@ public partial class AggregateStatePdu : EntityManagementFamilyPdu
     /// <summary>
     /// entity ID list
     /// </summary>
-    public List<EntityID> EntityIdList { get; set; } = [];
+    public List<EntityId> EntityIdList { get; set; } = [];
 
     /// <summary>
     /// silent entity types
@@ -121,10 +124,13 @@ public abstract partial class EntityManagementFamilyPdu : PduBase
 /// </summary>
 public partial class IsGroupOfPdu : EntityManagementFamilyPdu
 {
+    /// <summary>Creates a DIS v7 IsGroupOfPdu with its wire discriminator fields initialized.</summary>
+    public IsGroupOfPdu() => Initialize(34, 7);
+
     /// <summary>
     /// ID of aggregated entities
     /// </summary>
-    public EntityID GroupEntityId { get; set; } = new EntityID();
+    public EntityId GroupEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// type of entities constituting the group
@@ -163,15 +169,18 @@ public partial class IsGroupOfPdu : EntityManagementFamilyPdu
 /// </summary>
 public partial class IsPartOfPdu : EntityManagementFamilyPdu
 {
+    /// <summary>Creates a DIS v7 IsPartOfPdu with its wire discriminator fields initialized.</summary>
+    public IsPartOfPdu() => Initialize(36, 7);
+
     /// <summary>
     /// ID of entity originating PDU
     /// </summary>
-    public EntityID OrginatingEntityId { get; set; } = new EntityID();
+    public EntityId OrginatingEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// ID of entity receiving PDU
     /// </summary>
-    public EntityID ReceivingEntityId { get; set; } = new EntityID();
+    public EntityId ReceivingEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// relationship of joined parts
@@ -200,15 +209,18 @@ public partial class IsPartOfPdu : EntityManagementFamilyPdu
 /// </summary>
 public partial class TransferOwnershipPdu : EntityManagementFamilyPdu
 {
+    /// <summary>Creates a DIS v7 TransferOwnershipPdu with its wire discriminator fields initialized.</summary>
+    public TransferOwnershipPdu() => Initialize(35, 7);
+
     /// <summary>
     /// ID of entity originating request
     /// </summary>
-    public EntityID OriginatingEntityId { get; set; } = new EntityID();
+    public EntityId OriginatingEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// ID of entity receiving request
     /// </summary>
-    public EntityID ReceivingEntityId { get; set; } = new EntityID();
+    public EntityId ReceivingEntityId { get; set; } = new EntityId();
 
     /// <summary>
     /// ID of request
@@ -228,7 +240,7 @@ public partial class TransferOwnershipPdu : EntityManagementFamilyPdu
     /// <summary>
     /// The entity for which control is being requested to transfer
     /// </summary>
-    public EntityID TransferEntityId { get; set; } = new EntityID();
+    public EntityId TransferEntityId { get; set; } = new EntityId();
 
     public RecordSpecification RecordSets { get; set; } = new RecordSpecification();
 

@@ -7,6 +7,9 @@ namespace OpenDisNet.Pdus;
 /// </summary>
 public partial class ArealObjectStatePdu : SyntheticEnvironmentFamilyPdu
 {
+    /// <summary>Creates a DIS v7 ArealObjectStatePdu with its wire discriminator fields initialized.</summary>
+    public ArealObjectStatePdu() => Initialize(45, 9);
+
     /// <summary>
     /// Object in synthetic environment
     /// </summary>
@@ -74,6 +77,9 @@ public partial class ArealObjectStatePdu : SyntheticEnvironmentFamilyPdu
 /// </summary>
 public partial class EnvironmentalProcessPdu : SyntheticEnvironmentFamilyPdu
 {
+    /// <summary>Creates a DIS v7 EnvironmentalProcessPdu with its wire discriminator fields initialized.</summary>
+    public EnvironmentalProcessPdu() => Initialize(41, 9);
+
     /// <summary>
     /// Environmental process ID provides a unique identifier
     /// </summary>
@@ -116,6 +122,9 @@ public partial class EnvironmentalProcessPdu : SyntheticEnvironmentFamilyPdu
 /// </summary>
 public partial class GriddedDataPdu : SyntheticEnvironmentFamilyPdu
 {
+    /// <summary>Creates a DIS v7 GriddedDataPdu with its wire discriminator fields initialized.</summary>
+    public GriddedDataPdu() => Initialize(42, 9);
+
     /// <summary>
     /// environmental simulation application ID provides a unique identifier
     /// </summary>
@@ -197,6 +206,9 @@ public partial class GriddedDataPdu : SyntheticEnvironmentFamilyPdu
 /// </summary>
 public partial class LinearObjectStatePdu : SyntheticEnvironmentFamilyPdu
 {
+    /// <summary>Creates a DIS v7 LinearObjectStatePdu with its wire discriminator fields initialized.</summary>
+    public LinearObjectStatePdu() => Initialize(44, 9);
+
     /// <summary>
     /// Object in synthetic environment
     /// </summary>
@@ -249,10 +261,13 @@ public partial class LinearObjectStatePdu : SyntheticEnvironmentFamilyPdu
 /// </summary>
 public partial class PointObjectStatePdu : SyntheticEnvironmentFamilyPdu
 {
+    /// <summary>Creates a DIS v7 PointObjectStatePdu with its wire discriminator fields initialized.</summary>
+    public PointObjectStatePdu() => Initialize(43, 9);
+
     /// <summary>
     /// Object in synthetic environment
     /// </summary>
-    public EntityID ObjectId { get; set; } = new EntityID();
+    public EntityId ObjectId { get; set; } = new EntityId();
 
     /// <summary>
     /// Object with which this point object is associated

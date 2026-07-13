@@ -70,6 +70,6 @@ public ref struct DisBinaryReader
     private readonly void Ensure(int count, string field)
     {
         if (count < 0 || count > Remaining)
-            throw new DisParseException(_offset, field, count, Remaining);
+            throw new DisParseException(Offset, field, count, Remaining);
     }
 }
