@@ -27,9 +27,6 @@ public partial class SignalPdu
         }
     }
 
-    /// <summary>Number of samples represented by <see cref="Data"/>.</summary>
-    public ushort SampleCount { get => Samples; set => Samples = value; }
-
     /// <summary>Sets signal bytes and their meaningful bit length. The default uses every bit.</summary>
     public void SetData(ReadOnlySpan<byte> data, int? meaningfulBitLength = null)
     {

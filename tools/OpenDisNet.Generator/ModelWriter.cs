@@ -9,6 +9,9 @@ internal static class ModelWriter
         var text = new StringBuilder();
         text.AppendLine($"// DIS v7 protocol models reviewed from {sourceFile}.");
         text.AppendLine("#pragma warning disable CS0108");
+        text.AppendLine("using OpenDisNet.Enumerations;");
+        text.AppendLine("using OpenDisNet.Protocol;");
+        text.AppendLine();
         text.AppendLine("namespace OpenDisNet.Pdus;");
         text.AppendLine();
 
@@ -34,11 +37,15 @@ internal static class ModelWriter
                     continue;
                 WriteDocumentation(text, field.Comment, 1);
                 string propertyName = PropertyName(field.Name);
+                if (definition.Name is "SignalPdu" or "IntercomSignalPdu" && propertyName == "Samples")
+                    propertyName = "SampleCount";
                 if (definition.Name == "EntityId" && propertyName == "EntityId")
                     propertyName = "EntityNumber";
                 if (string.Equals(propertyName, definition.Name, StringComparison.Ordinal))
                     propertyName += "Value";
-                string type = TypeName(field);
+                string type = definition.Name is "SignalPdu" or "IntercomSignalPdu" && propertyName == "EncodingScheme"
+                    ? "SignalEncodingScheme"
+                    : TypeName(field);
                 string initializer = Initializer(field);
                 string access = field.IsHidden ? "internal" : "public";
                 text.AppendLine($"    {access} {type} {propertyName} {{ get; set; }}{initializer}");
@@ -56,8 +63,8 @@ internal static class ModelWriter
     {
         FieldKind.Primitive => Primitive(field.TypeName),
         FieldKind.ClassReference => field.TypeName,
-        FieldKind.Enumeration or FieldKind.BitField => UnsignedBits(field.BitSize),
-        FieldKind.ObjectList => $"List<{(field.BitSize is null ? field.TypeName : UnsignedBits(field.BitSize))}>",
+        FieldKind.Enumeration or FieldKind.BitField => field.TypeName,
+        FieldKind.ObjectList => $"List<{field.TypeName}>",
         FieldKind.PrimitiveList => $"{Primitive(field.TypeName)}[]",
         _ => throw new InvalidOperationException($"Cannot emit model field kind {field.Kind}."),
     };

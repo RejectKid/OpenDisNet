@@ -772,5 +772,17 @@
     "uid": 294,
     "bits": 8,
     "kind": "sisoenum"
+  },
+  {
+    "name": "SignalEncodingClass",
+    "uid": 270,
+    "bits": 2,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "SignalEncodingType",
+    "uid": 271,
+    "bits": 14,
+    "kind": "sisoenum"
   }
 ]

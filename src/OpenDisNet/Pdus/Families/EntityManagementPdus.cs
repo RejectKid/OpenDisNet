@@ -1,5 +1,8 @@
 // DIS v7 protocol models reviewed from EntityManagementFamilyPdus.xml.
 #pragma warning disable CS0108
+using OpenDisNet.Enumerations;
+using OpenDisNet.Protocol;
+
 namespace OpenDisNet.Pdus;
 
 /// <summary>
@@ -18,12 +21,12 @@ public partial class AggregateStatePdu : EntityManagementFamilyPdu
     /// <summary>
     /// force ID provides a unique identifier
     /// </summary>
-    public byte ForceId { get; set; }
+    public ForceId ForceId { get; set; }
 
     /// <summary>
     /// state of aggregate
     /// </summary>
-    public byte AggregateState { get; set; }
+    public AggregateStateAggregateState AggregateState { get; set; }
 
     /// <summary>
     /// entity type of the aggregated entities
@@ -33,7 +36,7 @@ public partial class AggregateStatePdu : EntityManagementFamilyPdu
     /// <summary>
     /// formation of aggregated entities
     /// </summary>
-    public uint Formation { get; set; }
+    public AggregateStateFormation Formation { get; set; }
 
     /// <summary>
     /// marking for aggregate; first char is charset type, rest is char data
@@ -135,7 +138,7 @@ public partial class IsGroupOfPdu : EntityManagementFamilyPdu
     /// <summary>
     /// type of entities constituting the group
     /// </summary>
-    public byte GroupedEntityCategory { get; set; }
+    public IsGroupOfGroupedEntityCategory GroupedEntityCategory { get; set; }
 
     /// <summary>
     /// Number of individual entities constituting the group
@@ -230,12 +233,12 @@ public partial class TransferOwnershipPdu : EntityManagementFamilyPdu
     /// <summary>
     /// required level of reliability service.
     /// </summary>
-    public byte RequiredReliabilityService { get; set; }
+    public RequiredReliabilityService RequiredReliabilityService { get; set; }
 
     /// <summary>
     /// type of transfer desired
     /// </summary>
-    public byte TransferType { get; set; }
+    public TransferControlTransferType TransferType { get; set; }
 
     /// <summary>
     /// The entity for which control is being requested to transfer

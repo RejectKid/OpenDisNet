@@ -1,5 +1,6 @@
 // DIS v7 binary codec. Every standardized PDU dispatch route is listed below.
 using OpenDisNet.Binary;
+using OpenDisNet.Enumerations;
 using OpenDisNet.Protocol;
 
 namespace OpenDisNet.Pdus;
@@ -122,16 +123,16 @@ internal static partial class PduCodec
                 ReadReceiverPduFields(ref reader, (ReceiverPdu)value);
                 break;
             case 28:
-                ReadDistributedEmissionsRegenerationFamilyPduFields(ref reader, (IFFPdu)value);
-                ReadIFFPduFields(ref reader, (IFFPdu)value);
+                ReadDistributedEmissionsRegenerationFamilyPduFields(ref reader, (IdentificationFriendOrFoePdu)value);
+                ReadIdentificationFriendOrFoePduFields(ref reader, (IdentificationFriendOrFoePdu)value);
                 break;
             case 29:
                 ReadDistributedEmissionsRegenerationFamilyPduFields(ref reader, (UnderwaterAcousticPdu)value);
                 ReadUnderwaterAcousticPduFields(ref reader, (UnderwaterAcousticPdu)value);
                 break;
             case 30:
-                ReadDistributedEmissionsRegenerationFamilyPduFields(ref reader, (SEESPdu)value);
-                ReadSEESPduFields(ref reader, (SEESPdu)value);
+                ReadDistributedEmissionsRegenerationFamilyPduFields(ref reader, (SupplementalEmissionEntityStatePdu)value);
+                ReadSupplementalEmissionEntityStatePduFields(ref reader, (SupplementalEmissionEntityStatePdu)value);
                 break;
             case 31:
                 ReadRadioCommunicationsFamilyPduFields(ref reader, (IntercomSignalPdu)value);
@@ -194,8 +195,8 @@ internal static partial class PduCodec
                 ReadArealObjectStatePduFields(ref reader, (ArealObjectStatePdu)value);
                 break;
             case 46:
-                ReadLiveEntityFamilyPduFields(ref reader, (TSPIPdu)value);
-                ReadTSPIPduFields(ref reader, (TSPIPdu)value);
+                ReadLiveEntityFamilyPduFields(ref reader, (TimeSpacePositionInformationPdu)value);
+                ReadTimeSpacePositionInformationPduFields(ref reader, (TimeSpacePositionInformationPdu)value);
                 break;
             case 47:
                 ReadLiveEntityFamilyPduFields(ref reader, (AppearancePdu)value);
@@ -206,72 +207,72 @@ internal static partial class PduCodec
                 ReadArticulatedPartsPduFields(ref reader, (ArticulatedPartsPdu)value);
                 break;
             case 49:
-                ReadLiveEntityFamilyPduFields(ref reader, (LEFirePdu)value);
-                ReadLEFirePduFields(ref reader, (LEFirePdu)value);
+                ReadLiveEntityFamilyPduFields(ref reader, (LiveEntityFirePdu)value);
+                ReadLiveEntityFirePduFields(ref reader, (LiveEntityFirePdu)value);
                 break;
             case 50:
-                ReadLiveEntityFamilyPduFields(ref reader, (LEDetonationPdu)value);
-                ReadLEDetonationPduFields(ref reader, (LEDetonationPdu)value);
+                ReadLiveEntityFamilyPduFields(ref reader, (LiveEntityDetonationPdu)value);
+                ReadLiveEntityDetonationPduFields(ref reader, (LiveEntityDetonationPdu)value);
                 break;
             case 51:
-                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (CreateEntityRPdu)value);
-                ReadCreateEntityRPduFields(ref reader, (CreateEntityRPdu)value);
+                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (CreateEntityReliablePdu)value);
+                ReadCreateEntityReliablePduFields(ref reader, (CreateEntityReliablePdu)value);
                 break;
             case 52:
-                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (RemoveEntityRPdu)value);
-                ReadRemoveEntityRPduFields(ref reader, (RemoveEntityRPdu)value);
+                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (RemoveEntityReliablePdu)value);
+                ReadRemoveEntityReliablePduFields(ref reader, (RemoveEntityReliablePdu)value);
                 break;
             case 53:
-                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (StartResumeRPdu)value);
-                ReadStartResumeRPduFields(ref reader, (StartResumeRPdu)value);
+                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (StartResumeReliablePdu)value);
+                ReadStartResumeReliablePduFields(ref reader, (StartResumeReliablePdu)value);
                 break;
             case 54:
-                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (StopFreezeRPdu)value);
-                ReadStopFreezeRPduFields(ref reader, (StopFreezeRPdu)value);
+                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (StopFreezeReliablePdu)value);
+                ReadStopFreezeReliablePduFields(ref reader, (StopFreezeReliablePdu)value);
                 break;
             case 55:
-                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (AcknowledgeRPdu)value);
-                ReadAcknowledgeRPduFields(ref reader, (AcknowledgeRPdu)value);
+                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (AcknowledgeReliablePdu)value);
+                ReadAcknowledgeReliablePduFields(ref reader, (AcknowledgeReliablePdu)value);
                 break;
             case 56:
-                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (ActionRequestRPdu)value);
-                ReadActionRequestRPduFields(ref reader, (ActionRequestRPdu)value);
+                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (ActionRequestReliablePdu)value);
+                ReadActionRequestReliablePduFields(ref reader, (ActionRequestReliablePdu)value);
                 break;
             case 57:
-                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (ActionResponseRPdu)value);
-                ReadActionResponseRPduFields(ref reader, (ActionResponseRPdu)value);
+                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (ActionResponseReliablePdu)value);
+                ReadActionResponseReliablePduFields(ref reader, (ActionResponseReliablePdu)value);
                 break;
             case 58:
-                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (DataQueryRPdu)value);
-                ReadDataQueryRPduFields(ref reader, (DataQueryRPdu)value);
+                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (DataQueryReliablePdu)value);
+                ReadDataQueryReliablePduFields(ref reader, (DataQueryReliablePdu)value);
                 break;
             case 59:
-                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (SetDataRPdu)value);
-                ReadSetDataRPduFields(ref reader, (SetDataRPdu)value);
+                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (SetDataReliablePdu)value);
+                ReadSetDataReliablePduFields(ref reader, (SetDataReliablePdu)value);
                 break;
             case 60:
-                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (DataRPdu)value);
-                ReadDataRPduFields(ref reader, (DataRPdu)value);
+                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (DataReliablePdu)value);
+                ReadDataReliablePduFields(ref reader, (DataReliablePdu)value);
                 break;
             case 61:
-                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (EventReportRPdu)value);
-                ReadEventReportRPduFields(ref reader, (EventReportRPdu)value);
+                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (EventReportReliablePdu)value);
+                ReadEventReportReliablePduFields(ref reader, (EventReportReliablePdu)value);
                 break;
             case 62:
-                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (CommentRPdu)value);
-                ReadCommentRPduFields(ref reader, (CommentRPdu)value);
+                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (CommentReliablePdu)value);
+                ReadCommentReliablePduFields(ref reader, (CommentReliablePdu)value);
                 break;
             case 63:
-                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (RecordRPdu)value);
-                ReadRecordRPduFields(ref reader, (RecordRPdu)value);
+                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (RecordReliablePdu)value);
+                ReadRecordReliablePduFields(ref reader, (RecordReliablePdu)value);
                 break;
             case 64:
-                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (SetRecordRPdu)value);
-                ReadSetRecordRPduFields(ref reader, (SetRecordRPdu)value);
+                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (SetRecordReliablePdu)value);
+                ReadSetRecordReliablePduFields(ref reader, (SetRecordReliablePdu)value);
                 break;
             case 65:
-                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (RecordQueryRPdu)value);
-                ReadRecordQueryRPduFields(ref reader, (RecordQueryRPdu)value);
+                ReadSimulationManagementWithReliabilityFamilyPduFields(ref reader, (RecordQueryReliablePdu)value);
+                ReadRecordQueryReliablePduFields(ref reader, (RecordQueryReliablePdu)value);
                 break;
             case 66:
                 ReadEntityInformationInteractionFamilyPduFields(ref reader, (CollisionElasticPdu)value);
@@ -449,16 +450,16 @@ internal static partial class PduCodec
                 PrepareReceiverPduFields((ReceiverPdu)value);
                 break;
             case 28:
-                PrepareDistributedEmissionsRegenerationFamilyPduFields((IFFPdu)value);
-                PrepareIFFPduFields((IFFPdu)value);
+                PrepareDistributedEmissionsRegenerationFamilyPduFields((IdentificationFriendOrFoePdu)value);
+                PrepareIdentificationFriendOrFoePduFields((IdentificationFriendOrFoePdu)value);
                 break;
             case 29:
                 PrepareDistributedEmissionsRegenerationFamilyPduFields((UnderwaterAcousticPdu)value);
                 PrepareUnderwaterAcousticPduFields((UnderwaterAcousticPdu)value);
                 break;
             case 30:
-                PrepareDistributedEmissionsRegenerationFamilyPduFields((SEESPdu)value);
-                PrepareSEESPduFields((SEESPdu)value);
+                PrepareDistributedEmissionsRegenerationFamilyPduFields((SupplementalEmissionEntityStatePdu)value);
+                PrepareSupplementalEmissionEntityStatePduFields((SupplementalEmissionEntityStatePdu)value);
                 break;
             case 31:
                 PrepareRadioCommunicationsFamilyPduFields((IntercomSignalPdu)value);
@@ -521,8 +522,8 @@ internal static partial class PduCodec
                 PrepareArealObjectStatePduFields((ArealObjectStatePdu)value);
                 break;
             case 46:
-                PrepareLiveEntityFamilyPduFields((TSPIPdu)value);
-                PrepareTSPIPduFields((TSPIPdu)value);
+                PrepareLiveEntityFamilyPduFields((TimeSpacePositionInformationPdu)value);
+                PrepareTimeSpacePositionInformationPduFields((TimeSpacePositionInformationPdu)value);
                 break;
             case 47:
                 PrepareLiveEntityFamilyPduFields((AppearancePdu)value);
@@ -533,72 +534,72 @@ internal static partial class PduCodec
                 PrepareArticulatedPartsPduFields((ArticulatedPartsPdu)value);
                 break;
             case 49:
-                PrepareLiveEntityFamilyPduFields((LEFirePdu)value);
-                PrepareLEFirePduFields((LEFirePdu)value);
+                PrepareLiveEntityFamilyPduFields((LiveEntityFirePdu)value);
+                PrepareLiveEntityFirePduFields((LiveEntityFirePdu)value);
                 break;
             case 50:
-                PrepareLiveEntityFamilyPduFields((LEDetonationPdu)value);
-                PrepareLEDetonationPduFields((LEDetonationPdu)value);
+                PrepareLiveEntityFamilyPduFields((LiveEntityDetonationPdu)value);
+                PrepareLiveEntityDetonationPduFields((LiveEntityDetonationPdu)value);
                 break;
             case 51:
-                PrepareSimulationManagementWithReliabilityFamilyPduFields((CreateEntityRPdu)value);
-                PrepareCreateEntityRPduFields((CreateEntityRPdu)value);
+                PrepareSimulationManagementWithReliabilityFamilyPduFields((CreateEntityReliablePdu)value);
+                PrepareCreateEntityReliablePduFields((CreateEntityReliablePdu)value);
                 break;
             case 52:
-                PrepareSimulationManagementWithReliabilityFamilyPduFields((RemoveEntityRPdu)value);
-                PrepareRemoveEntityRPduFields((RemoveEntityRPdu)value);
+                PrepareSimulationManagementWithReliabilityFamilyPduFields((RemoveEntityReliablePdu)value);
+                PrepareRemoveEntityReliablePduFields((RemoveEntityReliablePdu)value);
                 break;
             case 53:
-                PrepareSimulationManagementWithReliabilityFamilyPduFields((StartResumeRPdu)value);
-                PrepareStartResumeRPduFields((StartResumeRPdu)value);
+                PrepareSimulationManagementWithReliabilityFamilyPduFields((StartResumeReliablePdu)value);
+                PrepareStartResumeReliablePduFields((StartResumeReliablePdu)value);
                 break;
             case 54:
-                PrepareSimulationManagementWithReliabilityFamilyPduFields((StopFreezeRPdu)value);
-                PrepareStopFreezeRPduFields((StopFreezeRPdu)value);
+                PrepareSimulationManagementWithReliabilityFamilyPduFields((StopFreezeReliablePdu)value);
+                PrepareStopFreezeReliablePduFields((StopFreezeReliablePdu)value);
                 break;
             case 55:
-                PrepareSimulationManagementWithReliabilityFamilyPduFields((AcknowledgeRPdu)value);
-                PrepareAcknowledgeRPduFields((AcknowledgeRPdu)value);
+                PrepareSimulationManagementWithReliabilityFamilyPduFields((AcknowledgeReliablePdu)value);
+                PrepareAcknowledgeReliablePduFields((AcknowledgeReliablePdu)value);
                 break;
             case 56:
-                PrepareSimulationManagementWithReliabilityFamilyPduFields((ActionRequestRPdu)value);
-                PrepareActionRequestRPduFields((ActionRequestRPdu)value);
+                PrepareSimulationManagementWithReliabilityFamilyPduFields((ActionRequestReliablePdu)value);
+                PrepareActionRequestReliablePduFields((ActionRequestReliablePdu)value);
                 break;
             case 57:
-                PrepareSimulationManagementWithReliabilityFamilyPduFields((ActionResponseRPdu)value);
-                PrepareActionResponseRPduFields((ActionResponseRPdu)value);
+                PrepareSimulationManagementWithReliabilityFamilyPduFields((ActionResponseReliablePdu)value);
+                PrepareActionResponseReliablePduFields((ActionResponseReliablePdu)value);
                 break;
             case 58:
-                PrepareSimulationManagementWithReliabilityFamilyPduFields((DataQueryRPdu)value);
-                PrepareDataQueryRPduFields((DataQueryRPdu)value);
+                PrepareSimulationManagementWithReliabilityFamilyPduFields((DataQueryReliablePdu)value);
+                PrepareDataQueryReliablePduFields((DataQueryReliablePdu)value);
                 break;
             case 59:
-                PrepareSimulationManagementWithReliabilityFamilyPduFields((SetDataRPdu)value);
-                PrepareSetDataRPduFields((SetDataRPdu)value);
+                PrepareSimulationManagementWithReliabilityFamilyPduFields((SetDataReliablePdu)value);
+                PrepareSetDataReliablePduFields((SetDataReliablePdu)value);
                 break;
             case 60:
-                PrepareSimulationManagementWithReliabilityFamilyPduFields((DataRPdu)value);
-                PrepareDataRPduFields((DataRPdu)value);
+                PrepareSimulationManagementWithReliabilityFamilyPduFields((DataReliablePdu)value);
+                PrepareDataReliablePduFields((DataReliablePdu)value);
                 break;
             case 61:
-                PrepareSimulationManagementWithReliabilityFamilyPduFields((EventReportRPdu)value);
-                PrepareEventReportRPduFields((EventReportRPdu)value);
+                PrepareSimulationManagementWithReliabilityFamilyPduFields((EventReportReliablePdu)value);
+                PrepareEventReportReliablePduFields((EventReportReliablePdu)value);
                 break;
             case 62:
-                PrepareSimulationManagementWithReliabilityFamilyPduFields((CommentRPdu)value);
-                PrepareCommentRPduFields((CommentRPdu)value);
+                PrepareSimulationManagementWithReliabilityFamilyPduFields((CommentReliablePdu)value);
+                PrepareCommentReliablePduFields((CommentReliablePdu)value);
                 break;
             case 63:
-                PrepareSimulationManagementWithReliabilityFamilyPduFields((RecordRPdu)value);
-                PrepareRecordRPduFields((RecordRPdu)value);
+                PrepareSimulationManagementWithReliabilityFamilyPduFields((RecordReliablePdu)value);
+                PrepareRecordReliablePduFields((RecordReliablePdu)value);
                 break;
             case 64:
-                PrepareSimulationManagementWithReliabilityFamilyPduFields((SetRecordRPdu)value);
-                PrepareSetRecordRPduFields((SetRecordRPdu)value);
+                PrepareSimulationManagementWithReliabilityFamilyPduFields((SetRecordReliablePdu)value);
+                PrepareSetRecordReliablePduFields((SetRecordReliablePdu)value);
                 break;
             case 65:
-                PrepareSimulationManagementWithReliabilityFamilyPduFields((RecordQueryRPdu)value);
-                PrepareRecordQueryRPduFields((RecordQueryRPdu)value);
+                PrepareSimulationManagementWithReliabilityFamilyPduFields((RecordQueryReliablePdu)value);
+                PrepareRecordQueryReliablePduFields((RecordQueryReliablePdu)value);
                 break;
             case 66:
                 PrepareEntityInformationInteractionFamilyPduFields((CollisionElasticPdu)value);
@@ -745,16 +746,16 @@ internal static partial class PduCodec
                 WriteReceiverPduFields(ref writer, (ReceiverPdu)value);
                 break;
             case 28:
-                WriteDistributedEmissionsRegenerationFamilyPduFields(ref writer, (IFFPdu)value);
-                WriteIFFPduFields(ref writer, (IFFPdu)value);
+                WriteDistributedEmissionsRegenerationFamilyPduFields(ref writer, (IdentificationFriendOrFoePdu)value);
+                WriteIdentificationFriendOrFoePduFields(ref writer, (IdentificationFriendOrFoePdu)value);
                 break;
             case 29:
                 WriteDistributedEmissionsRegenerationFamilyPduFields(ref writer, (UnderwaterAcousticPdu)value);
                 WriteUnderwaterAcousticPduFields(ref writer, (UnderwaterAcousticPdu)value);
                 break;
             case 30:
-                WriteDistributedEmissionsRegenerationFamilyPduFields(ref writer, (SEESPdu)value);
-                WriteSEESPduFields(ref writer, (SEESPdu)value);
+                WriteDistributedEmissionsRegenerationFamilyPduFields(ref writer, (SupplementalEmissionEntityStatePdu)value);
+                WriteSupplementalEmissionEntityStatePduFields(ref writer, (SupplementalEmissionEntityStatePdu)value);
                 break;
             case 31:
                 WriteRadioCommunicationsFamilyPduFields(ref writer, (IntercomSignalPdu)value);
@@ -817,8 +818,8 @@ internal static partial class PduCodec
                 WriteArealObjectStatePduFields(ref writer, (ArealObjectStatePdu)value);
                 break;
             case 46:
-                WriteLiveEntityFamilyPduFields(ref writer, (TSPIPdu)value);
-                WriteTSPIPduFields(ref writer, (TSPIPdu)value);
+                WriteLiveEntityFamilyPduFields(ref writer, (TimeSpacePositionInformationPdu)value);
+                WriteTimeSpacePositionInformationPduFields(ref writer, (TimeSpacePositionInformationPdu)value);
                 break;
             case 47:
                 WriteLiveEntityFamilyPduFields(ref writer, (AppearancePdu)value);
@@ -829,72 +830,72 @@ internal static partial class PduCodec
                 WriteArticulatedPartsPduFields(ref writer, (ArticulatedPartsPdu)value);
                 break;
             case 49:
-                WriteLiveEntityFamilyPduFields(ref writer, (LEFirePdu)value);
-                WriteLEFirePduFields(ref writer, (LEFirePdu)value);
+                WriteLiveEntityFamilyPduFields(ref writer, (LiveEntityFirePdu)value);
+                WriteLiveEntityFirePduFields(ref writer, (LiveEntityFirePdu)value);
                 break;
             case 50:
-                WriteLiveEntityFamilyPduFields(ref writer, (LEDetonationPdu)value);
-                WriteLEDetonationPduFields(ref writer, (LEDetonationPdu)value);
+                WriteLiveEntityFamilyPduFields(ref writer, (LiveEntityDetonationPdu)value);
+                WriteLiveEntityDetonationPduFields(ref writer, (LiveEntityDetonationPdu)value);
                 break;
             case 51:
-                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (CreateEntityRPdu)value);
-                WriteCreateEntityRPduFields(ref writer, (CreateEntityRPdu)value);
+                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (CreateEntityReliablePdu)value);
+                WriteCreateEntityReliablePduFields(ref writer, (CreateEntityReliablePdu)value);
                 break;
             case 52:
-                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (RemoveEntityRPdu)value);
-                WriteRemoveEntityRPduFields(ref writer, (RemoveEntityRPdu)value);
+                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (RemoveEntityReliablePdu)value);
+                WriteRemoveEntityReliablePduFields(ref writer, (RemoveEntityReliablePdu)value);
                 break;
             case 53:
-                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (StartResumeRPdu)value);
-                WriteStartResumeRPduFields(ref writer, (StartResumeRPdu)value);
+                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (StartResumeReliablePdu)value);
+                WriteStartResumeReliablePduFields(ref writer, (StartResumeReliablePdu)value);
                 break;
             case 54:
-                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (StopFreezeRPdu)value);
-                WriteStopFreezeRPduFields(ref writer, (StopFreezeRPdu)value);
+                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (StopFreezeReliablePdu)value);
+                WriteStopFreezeReliablePduFields(ref writer, (StopFreezeReliablePdu)value);
                 break;
             case 55:
-                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (AcknowledgeRPdu)value);
-                WriteAcknowledgeRPduFields(ref writer, (AcknowledgeRPdu)value);
+                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (AcknowledgeReliablePdu)value);
+                WriteAcknowledgeReliablePduFields(ref writer, (AcknowledgeReliablePdu)value);
                 break;
             case 56:
-                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (ActionRequestRPdu)value);
-                WriteActionRequestRPduFields(ref writer, (ActionRequestRPdu)value);
+                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (ActionRequestReliablePdu)value);
+                WriteActionRequestReliablePduFields(ref writer, (ActionRequestReliablePdu)value);
                 break;
             case 57:
-                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (ActionResponseRPdu)value);
-                WriteActionResponseRPduFields(ref writer, (ActionResponseRPdu)value);
+                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (ActionResponseReliablePdu)value);
+                WriteActionResponseReliablePduFields(ref writer, (ActionResponseReliablePdu)value);
                 break;
             case 58:
-                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (DataQueryRPdu)value);
-                WriteDataQueryRPduFields(ref writer, (DataQueryRPdu)value);
+                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (DataQueryReliablePdu)value);
+                WriteDataQueryReliablePduFields(ref writer, (DataQueryReliablePdu)value);
                 break;
             case 59:
-                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (SetDataRPdu)value);
-                WriteSetDataRPduFields(ref writer, (SetDataRPdu)value);
+                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (SetDataReliablePdu)value);
+                WriteSetDataReliablePduFields(ref writer, (SetDataReliablePdu)value);
                 break;
             case 60:
-                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (DataRPdu)value);
-                WriteDataRPduFields(ref writer, (DataRPdu)value);
+                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (DataReliablePdu)value);
+                WriteDataReliablePduFields(ref writer, (DataReliablePdu)value);
                 break;
             case 61:
-                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (EventReportRPdu)value);
-                WriteEventReportRPduFields(ref writer, (EventReportRPdu)value);
+                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (EventReportReliablePdu)value);
+                WriteEventReportReliablePduFields(ref writer, (EventReportReliablePdu)value);
                 break;
             case 62:
-                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (CommentRPdu)value);
-                WriteCommentRPduFields(ref writer, (CommentRPdu)value);
+                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (CommentReliablePdu)value);
+                WriteCommentReliablePduFields(ref writer, (CommentReliablePdu)value);
                 break;
             case 63:
-                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (RecordRPdu)value);
-                WriteRecordRPduFields(ref writer, (RecordRPdu)value);
+                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (RecordReliablePdu)value);
+                WriteRecordReliablePduFields(ref writer, (RecordReliablePdu)value);
                 break;
             case 64:
-                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (SetRecordRPdu)value);
-                WriteSetRecordRPduFields(ref writer, (SetRecordRPdu)value);
+                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (SetRecordReliablePdu)value);
+                WriteSetRecordReliablePduFields(ref writer, (SetRecordReliablePdu)value);
                 break;
             case 65:
-                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (RecordQueryRPdu)value);
-                WriteRecordQueryRPduFields(ref writer, (RecordQueryRPdu)value);
+                WriteSimulationManagementWithReliabilityFamilyPduFields(ref writer, (RecordQueryReliablePdu)value);
+                WriteRecordQueryReliablePduFields(ref writer, (RecordQueryReliablePdu)value);
                 break;
             case 66:
                 WriteEntityInformationInteractionFamilyPduFields(ref writer, (CollisionElasticPdu)value);
@@ -1041,16 +1042,16 @@ internal static partial class PduCodec
                 MeasureReceiverPduFields((ReceiverPdu)value, ref offset);
                 break;
             case 28:
-                MeasureDistributedEmissionsRegenerationFamilyPduFields((IFFPdu)value, ref offset);
-                MeasureIFFPduFields((IFFPdu)value, ref offset);
+                MeasureDistributedEmissionsRegenerationFamilyPduFields((IdentificationFriendOrFoePdu)value, ref offset);
+                MeasureIdentificationFriendOrFoePduFields((IdentificationFriendOrFoePdu)value, ref offset);
                 break;
             case 29:
                 MeasureDistributedEmissionsRegenerationFamilyPduFields((UnderwaterAcousticPdu)value, ref offset);
                 MeasureUnderwaterAcousticPduFields((UnderwaterAcousticPdu)value, ref offset);
                 break;
             case 30:
-                MeasureDistributedEmissionsRegenerationFamilyPduFields((SEESPdu)value, ref offset);
-                MeasureSEESPduFields((SEESPdu)value, ref offset);
+                MeasureDistributedEmissionsRegenerationFamilyPduFields((SupplementalEmissionEntityStatePdu)value, ref offset);
+                MeasureSupplementalEmissionEntityStatePduFields((SupplementalEmissionEntityStatePdu)value, ref offset);
                 break;
             case 31:
                 MeasureRadioCommunicationsFamilyPduFields((IntercomSignalPdu)value, ref offset);
@@ -1113,8 +1114,8 @@ internal static partial class PduCodec
                 MeasureArealObjectStatePduFields((ArealObjectStatePdu)value, ref offset);
                 break;
             case 46:
-                MeasureLiveEntityFamilyPduFields((TSPIPdu)value, ref offset);
-                MeasureTSPIPduFields((TSPIPdu)value, ref offset);
+                MeasureLiveEntityFamilyPduFields((TimeSpacePositionInformationPdu)value, ref offset);
+                MeasureTimeSpacePositionInformationPduFields((TimeSpacePositionInformationPdu)value, ref offset);
                 break;
             case 47:
                 MeasureLiveEntityFamilyPduFields((AppearancePdu)value, ref offset);
@@ -1125,72 +1126,72 @@ internal static partial class PduCodec
                 MeasureArticulatedPartsPduFields((ArticulatedPartsPdu)value, ref offset);
                 break;
             case 49:
-                MeasureLiveEntityFamilyPduFields((LEFirePdu)value, ref offset);
-                MeasureLEFirePduFields((LEFirePdu)value, ref offset);
+                MeasureLiveEntityFamilyPduFields((LiveEntityFirePdu)value, ref offset);
+                MeasureLiveEntityFirePduFields((LiveEntityFirePdu)value, ref offset);
                 break;
             case 50:
-                MeasureLiveEntityFamilyPduFields((LEDetonationPdu)value, ref offset);
-                MeasureLEDetonationPduFields((LEDetonationPdu)value, ref offset);
+                MeasureLiveEntityFamilyPduFields((LiveEntityDetonationPdu)value, ref offset);
+                MeasureLiveEntityDetonationPduFields((LiveEntityDetonationPdu)value, ref offset);
                 break;
             case 51:
-                MeasureSimulationManagementWithReliabilityFamilyPduFields((CreateEntityRPdu)value, ref offset);
-                MeasureCreateEntityRPduFields((CreateEntityRPdu)value, ref offset);
+                MeasureSimulationManagementWithReliabilityFamilyPduFields((CreateEntityReliablePdu)value, ref offset);
+                MeasureCreateEntityReliablePduFields((CreateEntityReliablePdu)value, ref offset);
                 break;
             case 52:
-                MeasureSimulationManagementWithReliabilityFamilyPduFields((RemoveEntityRPdu)value, ref offset);
-                MeasureRemoveEntityRPduFields((RemoveEntityRPdu)value, ref offset);
+                MeasureSimulationManagementWithReliabilityFamilyPduFields((RemoveEntityReliablePdu)value, ref offset);
+                MeasureRemoveEntityReliablePduFields((RemoveEntityReliablePdu)value, ref offset);
                 break;
             case 53:
-                MeasureSimulationManagementWithReliabilityFamilyPduFields((StartResumeRPdu)value, ref offset);
-                MeasureStartResumeRPduFields((StartResumeRPdu)value, ref offset);
+                MeasureSimulationManagementWithReliabilityFamilyPduFields((StartResumeReliablePdu)value, ref offset);
+                MeasureStartResumeReliablePduFields((StartResumeReliablePdu)value, ref offset);
                 break;
             case 54:
-                MeasureSimulationManagementWithReliabilityFamilyPduFields((StopFreezeRPdu)value, ref offset);
-                MeasureStopFreezeRPduFields((StopFreezeRPdu)value, ref offset);
+                MeasureSimulationManagementWithReliabilityFamilyPduFields((StopFreezeReliablePdu)value, ref offset);
+                MeasureStopFreezeReliablePduFields((StopFreezeReliablePdu)value, ref offset);
                 break;
             case 55:
-                MeasureSimulationManagementWithReliabilityFamilyPduFields((AcknowledgeRPdu)value, ref offset);
-                MeasureAcknowledgeRPduFields((AcknowledgeRPdu)value, ref offset);
+                MeasureSimulationManagementWithReliabilityFamilyPduFields((AcknowledgeReliablePdu)value, ref offset);
+                MeasureAcknowledgeReliablePduFields((AcknowledgeReliablePdu)value, ref offset);
                 break;
             case 56:
-                MeasureSimulationManagementWithReliabilityFamilyPduFields((ActionRequestRPdu)value, ref offset);
-                MeasureActionRequestRPduFields((ActionRequestRPdu)value, ref offset);
+                MeasureSimulationManagementWithReliabilityFamilyPduFields((ActionRequestReliablePdu)value, ref offset);
+                MeasureActionRequestReliablePduFields((ActionRequestReliablePdu)value, ref offset);
                 break;
             case 57:
-                MeasureSimulationManagementWithReliabilityFamilyPduFields((ActionResponseRPdu)value, ref offset);
-                MeasureActionResponseRPduFields((ActionResponseRPdu)value, ref offset);
+                MeasureSimulationManagementWithReliabilityFamilyPduFields((ActionResponseReliablePdu)value, ref offset);
+                MeasureActionResponseReliablePduFields((ActionResponseReliablePdu)value, ref offset);
                 break;
             case 58:
-                MeasureSimulationManagementWithReliabilityFamilyPduFields((DataQueryRPdu)value, ref offset);
-                MeasureDataQueryRPduFields((DataQueryRPdu)value, ref offset);
+                MeasureSimulationManagementWithReliabilityFamilyPduFields((DataQueryReliablePdu)value, ref offset);
+                MeasureDataQueryReliablePduFields((DataQueryReliablePdu)value, ref offset);
                 break;
             case 59:
-                MeasureSimulationManagementWithReliabilityFamilyPduFields((SetDataRPdu)value, ref offset);
-                MeasureSetDataRPduFields((SetDataRPdu)value, ref offset);
+                MeasureSimulationManagementWithReliabilityFamilyPduFields((SetDataReliablePdu)value, ref offset);
+                MeasureSetDataReliablePduFields((SetDataReliablePdu)value, ref offset);
                 break;
             case 60:
-                MeasureSimulationManagementWithReliabilityFamilyPduFields((DataRPdu)value, ref offset);
-                MeasureDataRPduFields((DataRPdu)value, ref offset);
+                MeasureSimulationManagementWithReliabilityFamilyPduFields((DataReliablePdu)value, ref offset);
+                MeasureDataReliablePduFields((DataReliablePdu)value, ref offset);
                 break;
             case 61:
-                MeasureSimulationManagementWithReliabilityFamilyPduFields((EventReportRPdu)value, ref offset);
-                MeasureEventReportRPduFields((EventReportRPdu)value, ref offset);
+                MeasureSimulationManagementWithReliabilityFamilyPduFields((EventReportReliablePdu)value, ref offset);
+                MeasureEventReportReliablePduFields((EventReportReliablePdu)value, ref offset);
                 break;
             case 62:
-                MeasureSimulationManagementWithReliabilityFamilyPduFields((CommentRPdu)value, ref offset);
-                MeasureCommentRPduFields((CommentRPdu)value, ref offset);
+                MeasureSimulationManagementWithReliabilityFamilyPduFields((CommentReliablePdu)value, ref offset);
+                MeasureCommentReliablePduFields((CommentReliablePdu)value, ref offset);
                 break;
             case 63:
-                MeasureSimulationManagementWithReliabilityFamilyPduFields((RecordRPdu)value, ref offset);
-                MeasureRecordRPduFields((RecordRPdu)value, ref offset);
+                MeasureSimulationManagementWithReliabilityFamilyPduFields((RecordReliablePdu)value, ref offset);
+                MeasureRecordReliablePduFields((RecordReliablePdu)value, ref offset);
                 break;
             case 64:
-                MeasureSimulationManagementWithReliabilityFamilyPduFields((SetRecordRPdu)value, ref offset);
-                MeasureSetRecordRPduFields((SetRecordRPdu)value, ref offset);
+                MeasureSimulationManagementWithReliabilityFamilyPduFields((SetRecordReliablePdu)value, ref offset);
+                MeasureSetRecordReliablePduFields((SetRecordReliablePdu)value, ref offset);
                 break;
             case 65:
-                MeasureSimulationManagementWithReliabilityFamilyPduFields((RecordQueryRPdu)value, ref offset);
-                MeasureRecordQueryRPduFields((RecordQueryRPdu)value, ref offset);
+                MeasureSimulationManagementWithReliabilityFamilyPduFields((RecordQueryReliablePdu)value, ref offset);
+                MeasureRecordQueryReliablePduFields((RecordQueryReliablePdu)value, ref offset);
                 break;
             case 66:
                 MeasureEntityInformationInteractionFamilyPduFields((CollisionElasticPdu)value, ref offset);
@@ -1226,10 +1227,10 @@ internal static partial class PduCodec
 
     private static void ApplyHeader(Pdu value, DisHeader header)
     {
-        value.ProtocolVersion = (byte)header.ProtocolVersion;
+        value.ProtocolVersion = header.ProtocolVersion;
         value.ExerciseId = header.ExerciseId;
-        value.PduType = (byte)header.PduType;
-        value.ProtocolFamily = (byte)header.ProtocolFamily;
+        value.PduType = header.PduType;
+        value.ProtocolFamily = header.ProtocolFamily;
         value.Timestamp = header.Timestamp;
         value.Length = header.Length;
         if (value is PduBase body)
@@ -1323,8 +1324,8 @@ internal static partial class PduCodec
 
     private static void ReadAcknowledgePduFields(ref DisBinaryReader reader, AcknowledgePdu value)
     {
-        value.AcknowledgeFlag = reader.ReadUInt16("acknowledgeFlag");
-        value.ResponseFlag = reader.ReadUInt16("responseFlag");
+        value.AcknowledgeFlag = (AcknowledgeAcknowledgeFlag)reader.ReadUInt16("acknowledgeFlag");
+        value.ResponseFlag = (AcknowledgeResponseFlag)reader.ReadUInt16("responseFlag");
         value.RequestId = reader.ReadUInt32("requestID");
     }
 
@@ -1334,8 +1335,8 @@ internal static partial class PduCodec
 
     private static void WriteAcknowledgePduFields(ref DisBinaryWriter writer, AcknowledgePdu value)
     {
-        writer.WriteUInt16(value.AcknowledgeFlag, "acknowledgeFlag");
-        writer.WriteUInt16(value.ResponseFlag, "responseFlag");
+        writer.WriteUInt16((ushort)value.AcknowledgeFlag, "acknowledgeFlag");
+        writer.WriteUInt16((ushort)value.ResponseFlag, "responseFlag");
         writer.WriteUInt32(value.RequestId, "requestID");
     }
 
@@ -1346,67 +1347,29 @@ internal static partial class PduCodec
         offset += 4;
     }
 
-    private static void ReadAcknowledgeRPduFields(ref DisBinaryReader reader, AcknowledgeRPdu value)
-    {
-        value.AcknowledgeFlag = reader.ReadUInt16("acknowledgeFlag");
-        value.ResponseFlag = reader.ReadUInt16("responseFlag");
-        value.RequestId = reader.ReadUInt32("requestID");
-    }
-
-    private static void PrepareAcknowledgeRPduFields(AcknowledgeRPdu value)
-    {
-    }
-
-    private static void WriteAcknowledgeRPduFields(ref DisBinaryWriter writer, AcknowledgeRPdu value)
-    {
-        writer.WriteUInt16(value.AcknowledgeFlag, "acknowledgeFlag");
-        writer.WriteUInt16(value.ResponseFlag, "responseFlag");
-        writer.WriteUInt32(value.RequestId, "requestID");
-    }
-
-    private static void MeasureAcknowledgeRPduFields(in AcknowledgeRPdu value, ref int offset)
-    {
-        offset += 2;
-        offset += 2;
-        offset += 4;
-    }
-
-    private static AcknowledgeReliablePdu ReadAcknowledgeReliablePdu(ref DisBinaryReader reader)
-    {
-        var value = new AcknowledgeReliablePdu();
-        ReadAcknowledgeReliablePduFields(ref reader, value);
-        return value;
-    }
-
     private static void ReadAcknowledgeReliablePduFields(ref DisBinaryReader reader, AcknowledgeReliablePdu value)
     {
-    }
-
-    private static void PrepareAcknowledgeReliablePdu(AcknowledgeReliablePdu value)
-    {
-        PrepareAcknowledgeReliablePduFields(value);
+        value.AcknowledgeFlag = (AcknowledgeAcknowledgeFlag)reader.ReadUInt16("acknowledgeFlag");
+        value.ResponseFlag = (AcknowledgeResponseFlag)reader.ReadUInt16("responseFlag");
+        value.RequestId = reader.ReadUInt32("requestID");
     }
 
     private static void PrepareAcknowledgeReliablePduFields(AcknowledgeReliablePdu value)
     {
     }
 
-    private static void WriteAcknowledgeReliablePdu(ref DisBinaryWriter writer, AcknowledgeReliablePdu value)
-    {
-        WriteAcknowledgeReliablePduFields(ref writer, value);
-    }
-
     private static void WriteAcknowledgeReliablePduFields(ref DisBinaryWriter writer, AcknowledgeReliablePdu value)
     {
-    }
-
-    private static void MeasureAcknowledgeReliablePdu(in AcknowledgeReliablePdu value, ref int offset)
-    {
-        MeasureAcknowledgeReliablePduFields(value, ref offset);
+        writer.WriteUInt16((ushort)value.AcknowledgeFlag, "acknowledgeFlag");
+        writer.WriteUInt16((ushort)value.ResponseFlag, "responseFlag");
+        writer.WriteUInt32(value.RequestId, "requestID");
     }
 
     private static void MeasureAcknowledgeReliablePduFields(in AcknowledgeReliablePdu value, ref int offset)
     {
+        offset += 2;
+        offset += 2;
+        offset += 4;
     }
 
     private static AcousticEmitter ReadAcousticEmitter(ref DisBinaryReader reader)
@@ -1418,8 +1381,8 @@ internal static partial class PduCodec
 
     private static void ReadAcousticEmitterFields(ref DisBinaryReader reader, AcousticEmitter value)
     {
-        value.AcousticSystemName = reader.ReadUInt16("acousticSystemName");
-        value.AcousticFunction = reader.ReadByte("acousticFunction");
+        value.AcousticSystemName = (UaAcousticSystemName)reader.ReadUInt16("acousticSystemName");
+        value.AcousticFunction = (UaAcousticEmitterSystemFunction)reader.ReadByte("acousticFunction");
         value.AcousticIdNumber = reader.ReadByte("acousticIDNumber");
     }
 
@@ -1439,8 +1402,8 @@ internal static partial class PduCodec
 
     private static void WriteAcousticEmitterFields(ref DisBinaryWriter writer, AcousticEmitter value)
     {
-        writer.WriteUInt16(value.AcousticSystemName, "acousticSystemName");
-        writer.WriteByte(value.AcousticFunction, "acousticFunction");
+        writer.WriteUInt16((ushort)value.AcousticSystemName, "acousticSystemName");
+        writer.WriteByte((byte)value.AcousticFunction, "acousticFunction");
         writer.WriteByte(value.AcousticIdNumber, "acousticIDNumber");
     }
 
@@ -1459,7 +1422,7 @@ internal static partial class PduCodec
     private static void ReadActionRequestPduFields(ref DisBinaryReader reader, ActionRequestPdu value)
     {
         value.RequestId = reader.ReadUInt32("requestID");
-        value.ActionId = reader.ReadUInt32("actionID");
+        value.ActionId = (ActionRequestActionId)reader.ReadUInt32("actionID");
         value.NumberOfFixedDatumRecords = reader.ReadUInt32("numberOfFixedDatumRecords");
         value.NumberOfVariableDatumRecords = reader.ReadUInt32("numberOfVariableDatumRecords");
         int FixedDatumsCount = CheckedCount(checked((int)value.NumberOfFixedDatumRecords), reader.Remaining, "fixedDatums");
@@ -1485,7 +1448,7 @@ internal static partial class PduCodec
     private static void WriteActionRequestPduFields(ref DisBinaryWriter writer, ActionRequestPdu value)
     {
         writer.WriteUInt32(value.RequestId, "requestID");
-        writer.WriteUInt32(value.ActionId, "actionID");
+        writer.WriteUInt32((uint)value.ActionId, "actionID");
         writer.WriteUInt32(value.NumberOfFixedDatumRecords, "numberOfFixedDatumRecords");
         writer.WriteUInt32(value.NumberOfVariableDatumRecords, "numberOfVariableDatumRecords");
         foreach (FixedDatum item in value.FixedDatums) WriteFixedDatum(ref writer, item);
@@ -1502,13 +1465,13 @@ internal static partial class PduCodec
         foreach (VariableDatum item in value.VariableDatums) MeasureVariableDatum(item, ref offset);
     }
 
-    private static void ReadActionRequestRPduFields(ref DisBinaryReader reader, ActionRequestRPdu value)
+    private static void ReadActionRequestReliablePduFields(ref DisBinaryReader reader, ActionRequestReliablePdu value)
     {
-        value.RequiredReliabilityService = reader.ReadByte("requiredReliabilityService");
+        value.RequiredReliabilityService = (RequiredReliabilityService)reader.ReadByte("requiredReliabilityService");
         value.Pad1 = reader.ReadByte("pad1");
         value.Pad2 = reader.ReadUInt16("pad2");
         value.RequestId = reader.ReadUInt32("requestID");
-        value.ActionId = reader.ReadUInt32("actionID");
+        value.ActionId = (ActionRequestActionId)reader.ReadUInt32("actionID");
         value.NumberOfFixedDatumRecords = reader.ReadUInt32("numberOfFixedDatumRecords");
         value.NumberOfVariableDatumRecords = reader.ReadUInt32("numberOfVariableDatumRecords");
         int FixedDatumRecordsCount = CheckedCount(checked((int)value.NumberOfFixedDatumRecords), reader.Remaining, "fixedDatumRecords");
@@ -1521,7 +1484,7 @@ internal static partial class PduCodec
             value.VariableDatumRecords.Add(ReadVariableDatum(ref reader));
     }
 
-    private static void PrepareActionRequestRPduFields(ActionRequestRPdu value)
+    private static void PrepareActionRequestReliablePduFields(ActionRequestReliablePdu value)
     {
         ArgumentNullException.ThrowIfNull(value.FixedDatumRecords);
         foreach (FixedDatum item in value.FixedDatumRecords) PrepareFixedDatum(item);
@@ -1531,20 +1494,20 @@ internal static partial class PduCodec
         value.NumberOfVariableDatumRecords = checked((uint)value.VariableDatumRecords.Count);
     }
 
-    private static void WriteActionRequestRPduFields(ref DisBinaryWriter writer, ActionRequestRPdu value)
+    private static void WriteActionRequestReliablePduFields(ref DisBinaryWriter writer, ActionRequestReliablePdu value)
     {
-        writer.WriteByte(value.RequiredReliabilityService, "requiredReliabilityService");
+        writer.WriteByte((byte)value.RequiredReliabilityService, "requiredReliabilityService");
         writer.WriteByte(value.Pad1, "pad1");
         writer.WriteUInt16(value.Pad2, "pad2");
         writer.WriteUInt32(value.RequestId, "requestID");
-        writer.WriteUInt32(value.ActionId, "actionID");
+        writer.WriteUInt32((uint)value.ActionId, "actionID");
         writer.WriteUInt32(value.NumberOfFixedDatumRecords, "numberOfFixedDatumRecords");
         writer.WriteUInt32(value.NumberOfVariableDatumRecords, "numberOfVariableDatumRecords");
         foreach (FixedDatum item in value.FixedDatumRecords) WriteFixedDatum(ref writer, item);
         foreach (VariableDatum item in value.VariableDatumRecords) WriteVariableDatum(ref writer, item);
     }
 
-    private static void MeasureActionRequestRPduFields(in ActionRequestRPdu value, ref int offset)
+    private static void MeasureActionRequestReliablePduFields(in ActionRequestReliablePdu value, ref int offset)
     {
         offset += 1;
         offset += 1;
@@ -1557,48 +1520,10 @@ internal static partial class PduCodec
         foreach (VariableDatum item in value.VariableDatumRecords) MeasureVariableDatum(item, ref offset);
     }
 
-    private static ActionRequestReliablePdu ReadActionRequestReliablePdu(ref DisBinaryReader reader)
-    {
-        var value = new ActionRequestReliablePdu();
-        ReadActionRequestReliablePduFields(ref reader, value);
-        return value;
-    }
-
-    private static void ReadActionRequestReliablePduFields(ref DisBinaryReader reader, ActionRequestReliablePdu value)
-    {
-    }
-
-    private static void PrepareActionRequestReliablePdu(ActionRequestReliablePdu value)
-    {
-        PrepareActionRequestReliablePduFields(value);
-    }
-
-    private static void PrepareActionRequestReliablePduFields(ActionRequestReliablePdu value)
-    {
-    }
-
-    private static void WriteActionRequestReliablePdu(ref DisBinaryWriter writer, ActionRequestReliablePdu value)
-    {
-        WriteActionRequestReliablePduFields(ref writer, value);
-    }
-
-    private static void WriteActionRequestReliablePduFields(ref DisBinaryWriter writer, ActionRequestReliablePdu value)
-    {
-    }
-
-    private static void MeasureActionRequestReliablePdu(in ActionRequestReliablePdu value, ref int offset)
-    {
-        MeasureActionRequestReliablePduFields(value, ref offset);
-    }
-
-    private static void MeasureActionRequestReliablePduFields(in ActionRequestReliablePdu value, ref int offset)
-    {
-    }
-
     private static void ReadActionResponsePduFields(ref DisBinaryReader reader, ActionResponsePdu value)
     {
         value.RequestId = reader.ReadUInt32("requestID");
-        value.RequestStatus = reader.ReadUInt32("requestStatus");
+        value.RequestStatus = (ActionResponseRequestStatus)reader.ReadUInt32("requestStatus");
         value.NumberOfFixedDatumRecords = reader.ReadUInt32("numberOfFixedDatumRecords");
         value.NumberOfVariableDatumRecords = reader.ReadUInt32("numberOfVariableDatumRecords");
         int FixedDatumsCount = CheckedCount(checked((int)value.NumberOfFixedDatumRecords), reader.Remaining, "fixedDatums");
@@ -1624,7 +1549,7 @@ internal static partial class PduCodec
     private static void WriteActionResponsePduFields(ref DisBinaryWriter writer, ActionResponsePdu value)
     {
         writer.WriteUInt32(value.RequestId, "requestID");
-        writer.WriteUInt32(value.RequestStatus, "requestStatus");
+        writer.WriteUInt32((uint)value.RequestStatus, "requestStatus");
         writer.WriteUInt32(value.NumberOfFixedDatumRecords, "numberOfFixedDatumRecords");
         writer.WriteUInt32(value.NumberOfVariableDatumRecords, "numberOfVariableDatumRecords");
         foreach (FixedDatum item in value.FixedDatums) WriteFixedDatum(ref writer, item);
@@ -1641,10 +1566,10 @@ internal static partial class PduCodec
         foreach (VariableDatum item in value.VariableDatums) MeasureVariableDatum(item, ref offset);
     }
 
-    private static void ReadActionResponseRPduFields(ref DisBinaryReader reader, ActionResponseRPdu value)
+    private static void ReadActionResponseReliablePduFields(ref DisBinaryReader reader, ActionResponseReliablePdu value)
     {
         value.RequestId = reader.ReadUInt32("requestID");
-        value.ResponseStatus = reader.ReadUInt32("responseStatus");
+        value.ResponseStatus = (ActionResponseRequestStatus)reader.ReadUInt32("responseStatus");
         value.NumberOfFixedDatumRecords = reader.ReadUInt32("numberOfFixedDatumRecords");
         value.NumberOfVariableDatumRecords = reader.ReadUInt32("numberOfVariableDatumRecords");
         int FixedDatumRecordsCount = CheckedCount(checked((int)value.NumberOfFixedDatumRecords), reader.Remaining, "fixedDatumRecords");
@@ -1657,7 +1582,7 @@ internal static partial class PduCodec
             value.VariableDatumRecords.Add(ReadVariableDatum(ref reader));
     }
 
-    private static void PrepareActionResponseRPduFields(ActionResponseRPdu value)
+    private static void PrepareActionResponseReliablePduFields(ActionResponseReliablePdu value)
     {
         ArgumentNullException.ThrowIfNull(value.FixedDatumRecords);
         foreach (FixedDatum item in value.FixedDatumRecords) PrepareFixedDatum(item);
@@ -1667,17 +1592,17 @@ internal static partial class PduCodec
         value.NumberOfVariableDatumRecords = checked((uint)value.VariableDatumRecords.Count);
     }
 
-    private static void WriteActionResponseRPduFields(ref DisBinaryWriter writer, ActionResponseRPdu value)
+    private static void WriteActionResponseReliablePduFields(ref DisBinaryWriter writer, ActionResponseReliablePdu value)
     {
         writer.WriteUInt32(value.RequestId, "requestID");
-        writer.WriteUInt32(value.ResponseStatus, "responseStatus");
+        writer.WriteUInt32((uint)value.ResponseStatus, "responseStatus");
         writer.WriteUInt32(value.NumberOfFixedDatumRecords, "numberOfFixedDatumRecords");
         writer.WriteUInt32(value.NumberOfVariableDatumRecords, "numberOfVariableDatumRecords");
         foreach (FixedDatum item in value.FixedDatumRecords) WriteFixedDatum(ref writer, item);
         foreach (VariableDatum item in value.VariableDatumRecords) WriteVariableDatum(ref writer, item);
     }
 
-    private static void MeasureActionResponseRPduFields(in ActionResponseRPdu value, ref int offset)
+    private static void MeasureActionResponseReliablePduFields(in ActionResponseReliablePdu value, ref int offset)
     {
         offset += 4;
         offset += 4;
@@ -1685,44 +1610,6 @@ internal static partial class PduCodec
         offset += 4;
         foreach (FixedDatum item in value.FixedDatumRecords) MeasureFixedDatum(item, ref offset);
         foreach (VariableDatum item in value.VariableDatumRecords) MeasureVariableDatum(item, ref offset);
-    }
-
-    private static ActionResponseReliablePdu ReadActionResponseReliablePdu(ref DisBinaryReader reader)
-    {
-        var value = new ActionResponseReliablePdu();
-        ReadActionResponseReliablePduFields(ref reader, value);
-        return value;
-    }
-
-    private static void ReadActionResponseReliablePduFields(ref DisBinaryReader reader, ActionResponseReliablePdu value)
-    {
-    }
-
-    private static void PrepareActionResponseReliablePdu(ActionResponseReliablePdu value)
-    {
-        PrepareActionResponseReliablePduFields(value);
-    }
-
-    private static void PrepareActionResponseReliablePduFields(ActionResponseReliablePdu value)
-    {
-    }
-
-    private static void WriteActionResponseReliablePdu(ref DisBinaryWriter writer, ActionResponseReliablePdu value)
-    {
-        WriteActionResponseReliablePduFields(ref writer, value);
-    }
-
-    private static void WriteActionResponseReliablePduFields(ref DisBinaryWriter writer, ActionResponseReliablePdu value)
-    {
-    }
-
-    private static void MeasureActionResponseReliablePdu(in ActionResponseReliablePdu value, ref int offset)
-    {
-        MeasureActionResponseReliablePduFields(value, ref offset);
-    }
-
-    private static void MeasureActionResponseReliablePduFields(in ActionResponseReliablePdu value, ref int offset)
-    {
     }
 
     private static AggregateIdentifier ReadAggregateIdentifier(ref DisBinaryReader reader)
@@ -1780,7 +1667,7 @@ internal static partial class PduCodec
 
     private static void ReadAggregateMarkingFields(ref DisBinaryReader reader, AggregateMarking value)
     {
-        value.CharacterSet = reader.ReadByte("characterSet");
+        value.CharacterSet = (EntityMarkingCharacterSet)reader.ReadByte("characterSet");
         int CharactersCount = CheckedCount(31, reader.Remaining, "characters");
         value.Characters = new byte[CharactersCount];
         for (int index = 0; index < CharactersCount; index++)
@@ -1804,7 +1691,7 @@ internal static partial class PduCodec
 
     private static void WriteAggregateMarkingFields(ref DisBinaryWriter writer, AggregateMarking value)
     {
-        writer.WriteByte(value.CharacterSet, "characterSet");
+        writer.WriteByte((byte)value.CharacterSet, "characterSet");
         foreach (byte item in value.Characters) writer.WriteByte(item, "characters");
     }
 
@@ -1822,10 +1709,10 @@ internal static partial class PduCodec
     private static void ReadAggregateStatePduFields(ref DisBinaryReader reader, AggregateStatePdu value)
     {
         value.AggregateId = ReadAggregateIdentifier(ref reader);
-        value.ForceId = reader.ReadByte("forceID");
-        value.AggregateState = reader.ReadByte("aggregateState");
+        value.ForceId = (ForceId)reader.ReadByte("forceID");
+        value.AggregateState = (AggregateStateAggregateState)reader.ReadByte("aggregateState");
         value.AggregateType = ReadAggregateType(ref reader);
-        value.Formation = reader.ReadUInt32("formation");
+        value.Formation = (AggregateStateFormation)reader.ReadUInt32("formation");
         value.AggregateMarking = ReadAggregateMarking(ref reader);
         value.Dimensions = ReadVector3Float(ref reader);
         value.Orientation = ReadVector3Float(ref reader);
@@ -1895,10 +1782,10 @@ internal static partial class PduCodec
     private static void WriteAggregateStatePduFields(ref DisBinaryWriter writer, AggregateStatePdu value)
     {
         WriteAggregateIdentifier(ref writer, value.AggregateId);
-        writer.WriteByte(value.ForceId, "forceID");
-        writer.WriteByte(value.AggregateState, "aggregateState");
+        writer.WriteByte((byte)value.ForceId, "forceID");
+        writer.WriteByte((byte)value.AggregateState, "aggregateState");
         WriteAggregateType(ref writer, value.AggregateType);
-        writer.WriteUInt32(value.Formation, "formation");
+        writer.WriteUInt32((uint)value.Formation, "formation");
         WriteAggregateMarking(ref writer, value.AggregateMarking);
         WriteVector3Float(ref writer, value.Dimensions);
         WriteVector3Float(ref writer, value.Orientation);
@@ -1951,12 +1838,12 @@ internal static partial class PduCodec
 
     private static void ReadAggregateTypeFields(ref DisBinaryReader reader, AggregateType value)
     {
-        value.AggregateKind = reader.ReadByte("aggregateKind");
-        value.Domain = reader.ReadByte("domain");
-        value.Country = reader.ReadUInt16("country");
+        value.AggregateKind = (AggregateStateAggregateKind)reader.ReadByte("aggregateKind");
+        value.Domain = (PlatformDomain)reader.ReadByte("domain");
+        value.Country = (Country)reader.ReadUInt16("country");
         value.Category = reader.ReadByte("category");
-        value.Subcategory = reader.ReadByte("subcategory");
-        value.SpecificInfo = reader.ReadByte("specificInfo");
+        value.Subcategory = (AggregateStateSubcategory)reader.ReadByte("subcategory");
+        value.SpecificInfo = (AggregateStateSpecific)reader.ReadByte("specificInfo");
         value.Extra = reader.ReadByte("extra");
     }
 
@@ -1976,12 +1863,12 @@ internal static partial class PduCodec
 
     private static void WriteAggregateTypeFields(ref DisBinaryWriter writer, AggregateType value)
     {
-        writer.WriteByte(value.AggregateKind, "aggregateKind");
-        writer.WriteByte(value.Domain, "domain");
-        writer.WriteUInt16(value.Country, "country");
+        writer.WriteByte((byte)value.AggregateKind, "aggregateKind");
+        writer.WriteByte((byte)value.Domain, "domain");
+        writer.WriteUInt16((ushort)value.Country, "country");
         writer.WriteByte(value.Category, "category");
-        writer.WriteByte(value.Subcategory, "subcategory");
-        writer.WriteByte(value.SpecificInfo, "specificInfo");
+        writer.WriteByte((byte)value.Subcategory, "subcategory");
+        writer.WriteByte((byte)value.SpecificInfo, "specificInfo");
         writer.WriteByte(value.Extra, "extra");
     }
 
@@ -2015,7 +1902,7 @@ internal static partial class PduCodec
         value.Padding = reader.ReadUInt16("padding");
         value.EmitterNumber = reader.ReadByte("emitterNumber");
         value.BeamNumber = reader.ReadByte("beamNumber");
-        value.StateIndicator = reader.ReadByte("stateIndicator");
+        value.StateIndicator = (EeAttributeStateIndicator)reader.ReadByte("stateIndicator");
         value.Padding2 = reader.ReadByte("padding2");
         value.AzimuthOffset = reader.ReadSingle("azimuthOffset");
         value.AzimuthWidth = reader.ReadSingle("azimuthWidth");
@@ -2049,7 +1936,7 @@ internal static partial class PduCodec
         writer.WriteUInt16(value.Padding, "padding");
         writer.WriteByte(value.EmitterNumber, "emitterNumber");
         writer.WriteByte(value.BeamNumber, "beamNumber");
-        writer.WriteByte(value.StateIndicator, "stateIndicator");
+        writer.WriteByte((byte)value.StateIndicator, "stateIndicator");
         writer.WriteByte(value.Padding2, "padding2");
         writer.WriteSingle(value.AzimuthOffset, "azimuthOffset");
         writer.WriteSingle(value.AzimuthWidth, "azimuthWidth");
@@ -2236,11 +2123,11 @@ internal static partial class PduCodec
     {
         value.LiveEntityId = ReadEntityId(ref reader);
         value.AppearanceFlags = reader.ReadUInt16("appearanceFlags");
-        value.ForceId = reader.ReadByte("forceId");
+        value.ForceId = (ForceId)reader.ReadByte("forceId");
         value.EntityType = ReadEntityType(ref reader);
         value.AlternateEntityType = ReadEntityType(ref reader);
         value.EntityMarking = ReadEntityMarking(ref reader);
-        value.Capabilities = reader.ReadUInt32("capabilities");
+        value.Capabilities = new EntityCapabilities(reader.ReadUInt32("capabilities"));
         value.AppearanceFields = ReadAppearance(ref reader);
     }
 
@@ -2262,11 +2149,11 @@ internal static partial class PduCodec
     {
         WriteEntityId(ref writer, value.LiveEntityId);
         writer.WriteUInt16(value.AppearanceFlags, "appearanceFlags");
-        writer.WriteByte(value.ForceId, "forceId");
+        writer.WriteByte((byte)value.ForceId, "forceId");
         WriteEntityType(ref writer, value.EntityType);
         WriteEntityType(ref writer, value.AlternateEntityType);
         WriteEntityMarking(ref writer, value.EntityMarking);
-        writer.WriteUInt32(value.Capabilities, "capabilities");
+        writer.WriteUInt32(value.Capabilities.Value, "capabilities");
         WriteAppearance(ref writer, value.AppearanceFields);
     }
 
@@ -2287,8 +2174,8 @@ internal static partial class PduCodec
         value.ObjectId = ReadObjectIdentifier(ref reader);
         value.ReferencedObjectId = ReadObjectIdentifier(ref reader);
         value.UpdateNumber = reader.ReadUInt16("updateNumber");
-        value.ForceId = reader.ReadByte("forceID");
-        value.Modifications = reader.ReadUInt16("modifications");
+        value.ForceId = (ForceId)reader.ReadByte("forceID");
+        value.Modifications = new ObjectStateModificationArealObject(reader.ReadUInt16("modifications"));
         value.ObjectType = ReadObjectType(ref reader);
         value.SpecificObjectAppearance = reader.ReadUInt32("specificObjectAppearance");
         value.GeneralObjectAppearance = reader.ReadUInt16("generalObjectAppearance");
@@ -2323,8 +2210,8 @@ internal static partial class PduCodec
         WriteObjectIdentifier(ref writer, value.ObjectId);
         WriteObjectIdentifier(ref writer, value.ReferencedObjectId);
         writer.WriteUInt16(value.UpdateNumber, "updateNumber");
-        writer.WriteByte(value.ForceId, "forceID");
-        writer.WriteUInt16(value.Modifications, "modifications");
+        writer.WriteByte((byte)value.ForceId, "forceID");
+        writer.WriteUInt16(value.Modifications.Value, "modifications");
         WriteObjectType(ref writer, value.ObjectType);
         writer.WriteUInt32(value.SpecificObjectAppearance, "specificObjectAppearance");
         writer.WriteUInt16(value.GeneralObjectAppearance, "generalObjectAppearance");
@@ -2359,7 +2246,7 @@ internal static partial class PduCodec
 
     private static void ReadArticulatedPartVPFields(ref DisBinaryReader reader, ArticulatedPartVP value)
     {
-        value.RecordType = reader.ReadByte("recordType");
+        value.RecordType = (VariableParameterRecordType)reader.ReadByte("recordType");
         value.ChangeIndicator = reader.ReadByte("changeIndicator");
         value.PartAttachedTo = reader.ReadUInt16("partAttachedTo");
         value.ParameterType = reader.ReadUInt32("parameterType");
@@ -2383,7 +2270,7 @@ internal static partial class PduCodec
 
     private static void WriteArticulatedPartVPFields(ref DisBinaryWriter writer, ArticulatedPartVP value)
     {
-        writer.WriteByte(value.RecordType, "recordType");
+        writer.WriteByte((byte)value.RecordType, "recordType");
         writer.WriteByte(value.ChangeIndicator, "changeIndicator");
         writer.WriteUInt16(value.PartAttachedTo, "partAttachedTo");
         writer.WriteUInt32(value.ParameterType, "parameterType");
@@ -2448,7 +2335,7 @@ internal static partial class PduCodec
 
     private static void ReadAssociationFields(ref DisBinaryReader reader, Association value)
     {
-        value.AssociationType = reader.ReadByte("associationType");
+        value.AssociationType = (EntityAssociationAssociationType)reader.ReadByte("associationType");
         value.Padding = reader.ReadByte("padding");
         value.AssociatedEntityId = ReadEntityIdentifier(ref reader);
         value.AssociatedLocation = ReadVector3Double(ref reader);
@@ -2474,7 +2361,7 @@ internal static partial class PduCodec
 
     private static void WriteAssociationFields(ref DisBinaryWriter writer, Association value)
     {
-        writer.WriteByte(value.AssociationType, "associationType");
+        writer.WriteByte((byte)value.AssociationType, "associationType");
         writer.WriteByte(value.Padding, "padding");
         WriteEntityIdentifier(ref writer, value.AssociatedEntityId);
         WriteVector3Double(ref writer, value.AssociatedLocation);
@@ -2502,10 +2389,10 @@ internal static partial class PduCodec
 
     private static void ReadAttachedPartVPFields(ref DisBinaryReader reader, AttachedPartVP value)
     {
-        value.RecordType = reader.ReadByte("recordType");
-        value.DetachedIndicator = reader.ReadByte("detachedIndicator");
+        value.RecordType = (VariableParameterRecordType)reader.ReadByte("recordType");
+        value.DetachedIndicator = (AttachedPartDetachedIndicator)reader.ReadByte("detachedIndicator");
         value.PartAttachedTo = reader.ReadUInt16("partAttachedTo");
-        value.ParameterType = reader.ReadUInt32("parameterType");
+        value.ParameterType = (AttachedParts)reader.ReadUInt32("parameterType");
         value.AttachedPartType = ReadEntityType(ref reader);
     }
 
@@ -2527,10 +2414,10 @@ internal static partial class PduCodec
 
     private static void WriteAttachedPartVPFields(ref DisBinaryWriter writer, AttachedPartVP value)
     {
-        writer.WriteByte(value.RecordType, "recordType");
-        writer.WriteByte(value.DetachedIndicator, "detachedIndicator");
+        writer.WriteByte((byte)value.RecordType, "recordType");
+        writer.WriteByte((byte)value.DetachedIndicator, "detachedIndicator");
         writer.WriteUInt16(value.PartAttachedTo, "partAttachedTo");
-        writer.WriteUInt32(value.ParameterType, "parameterType");
+        writer.WriteUInt32((uint)value.ParameterType, "parameterType");
         WriteEntityType(ref writer, value.AttachedPartType);
     }
 
@@ -2608,10 +2495,10 @@ internal static partial class PduCodec
         value.OriginatingSimulationAddress = ReadSimulationAddress(ref reader);
         value.Padding1 = reader.ReadInt32("padding1");
         value.Padding2 = reader.ReadInt16("padding2");
-        value.AttributeRecordPduType = reader.ReadByte("attributeRecordPduType");
-        value.AttributeRecordProtocolVersion = reader.ReadByte("attributeRecordProtocolVersion");
-        value.MasterAttributeRecordType = reader.ReadUInt32("masterAttributeRecordType");
-        value.ActionCode = reader.ReadByte("actionCode");
+        value.AttributeRecordPduType = (PduType)reader.ReadByte("attributeRecordPduType");
+        value.AttributeRecordProtocolVersion = (ProtocolFamily)reader.ReadByte("attributeRecordProtocolVersion");
+        value.MasterAttributeRecordType = (VariableRecordType)reader.ReadUInt32("masterAttributeRecordType");
+        value.ActionCode = (DisAttributeActionCode)reader.ReadByte("actionCode");
         value.Padding3 = reader.ReadByte("padding3");
         value.NumberAttributeRecordSet = reader.ReadUInt16("numberAttributeRecordSet");
         int AttributeRecordSetsCount = CheckedCount(checked((int)value.NumberAttributeRecordSet), reader.Remaining, "attributeRecordSets");
@@ -2634,10 +2521,10 @@ internal static partial class PduCodec
         WriteSimulationAddress(ref writer, value.OriginatingSimulationAddress);
         writer.WriteInt32(value.Padding1, "padding1");
         writer.WriteInt16(value.Padding2, "padding2");
-        writer.WriteByte(value.AttributeRecordPduType, "attributeRecordPduType");
-        writer.WriteByte(value.AttributeRecordProtocolVersion, "attributeRecordProtocolVersion");
-        writer.WriteUInt32(value.MasterAttributeRecordType, "masterAttributeRecordType");
-        writer.WriteByte(value.ActionCode, "actionCode");
+        writer.WriteByte((byte)value.AttributeRecordPduType, "attributeRecordPduType");
+        writer.WriteByte((byte)value.AttributeRecordProtocolVersion, "attributeRecordProtocolVersion");
+        writer.WriteUInt32((uint)value.MasterAttributeRecordType, "masterAttributeRecordType");
+        writer.WriteByte((byte)value.ActionCode, "actionCode");
         writer.WriteByte(value.Padding3, "padding3");
         writer.WriteUInt16(value.NumberAttributeRecordSet, "numberAttributeRecordSet");
         foreach (AttributeRecordSet item in value.AttributeRecordSets) WriteAttributeRecordSet(ref writer, item);
@@ -2724,7 +2611,7 @@ internal static partial class PduCodec
         value.BeamDirection = ReadEulerAngles(ref reader);
         value.AzimuthBeamwidth = reader.ReadSingle("azimuthBeamwidth");
         value.ElevationBeamwidth = reader.ReadSingle("elevationBeamwidth");
-        value.ReferenceSystem = reader.ReadByte("referenceSystem");
+        value.ReferenceSystem = (TransmitterAntennaPatternReferenceSystem)reader.ReadByte("referenceSystem");
         value.Padding1 = reader.ReadByte("padding1");
         value.Padding2 = reader.ReadUInt16("padding2");
         value.Ez = reader.ReadSingle("ez");
@@ -2754,7 +2641,7 @@ internal static partial class PduCodec
         WriteEulerAngles(ref writer, value.BeamDirection);
         writer.WriteSingle(value.AzimuthBeamwidth, "azimuthBeamwidth");
         writer.WriteSingle(value.ElevationBeamwidth, "elevationBeamwidth");
-        writer.WriteByte(value.ReferenceSystem, "referenceSystem");
+        writer.WriteByte((byte)value.ReferenceSystem, "referenceSystem");
         writer.WriteByte(value.Padding1, "padding1");
         writer.WriteUInt16(value.Padding2, "padding2");
         writer.WriteSingle(value.Ez, "ez");
@@ -2844,7 +2731,7 @@ internal static partial class PduCodec
 
     private static void ReadBeamStatusFields(ref DisBinaryReader reader, BeamStatus value)
     {
-        value.BeamState = reader.ReadByte("beamState");
+        value.BeamState = (BeamStatusBeamState)reader.ReadByte("beamState");
     }
 
     private static void PrepareBeamStatus(BeamStatus value)
@@ -2863,7 +2750,7 @@ internal static partial class PduCodec
 
     private static void WriteBeamStatusFields(ref DisBinaryWriter writer, BeamStatus value)
     {
-        writer.WriteByte(value.BeamState, "beamState");
+        writer.WriteByte((byte)value.BeamState, "beamState");
     }
 
     private static void MeasureBeamStatus(in BeamStatus value, ref int offset)
@@ -2890,7 +2777,7 @@ internal static partial class PduCodec
         value.Padding = reader.ReadUInt16("padding");
         value.EmitterNumber = reader.ReadByte("emitterNumber");
         value.BeamNumber = reader.ReadByte("beamNumber");
-        value.StateIndicator = reader.ReadByte("stateIndicator");
+        value.StateIndicator = (EeAttributeStateIndicator)reader.ReadByte("stateIndicator");
         value.Padding2 = reader.ReadByte("padding2");
         value.LeftAzimuth = reader.ReadSingle("leftAzimuth");
         value.RightAzimuth = reader.ReadSingle("rightAzimuth");
@@ -2921,7 +2808,7 @@ internal static partial class PduCodec
         writer.WriteUInt16(value.Padding, "padding");
         writer.WriteByte(value.EmitterNumber, "emitterNumber");
         writer.WriteByte(value.BeamNumber, "beamNumber");
-        writer.WriteByte(value.StateIndicator, "stateIndicator");
+        writer.WriteByte((byte)value.StateIndicator, "stateIndicator");
         writer.WriteByte(value.Padding2, "padding2");
         writer.WriteSingle(value.LeftAzimuth, "leftAzimuth");
         writer.WriteSingle(value.RightAzimuth, "rightAzimuth");
@@ -3116,7 +3003,7 @@ internal static partial class PduCodec
         value.IssuingEntityId = ReadEntityId(ref reader);
         value.CollidingEntityId = ReadEntityId(ref reader);
         value.EventId = ReadEventIdentifier(ref reader);
-        value.CollisionType = reader.ReadByte("collisionType");
+        value.CollisionType = (CollisionType)reader.ReadByte("collisionType");
         value.Pad = reader.ReadByte("pad");
         value.Velocity = ReadVector3Float(ref reader);
         value.Mass = reader.ReadSingle("mass");
@@ -3142,7 +3029,7 @@ internal static partial class PduCodec
         WriteEntityId(ref writer, value.IssuingEntityId);
         WriteEntityId(ref writer, value.CollidingEntityId);
         WriteEventIdentifier(ref writer, value.EventId);
-        writer.WriteByte(value.CollisionType, "collisionType");
+        writer.WriteByte((byte)value.CollisionType, "collisionType");
         writer.WriteByte(value.Pad, "pad");
         WriteVector3Float(ref writer, value.Velocity);
         writer.WriteSingle(value.Mass, "mass");
@@ -3192,7 +3079,7 @@ internal static partial class PduCodec
         foreach (VariableDatum item in value.VariableDatums) MeasureVariableDatum(item, ref offset);
     }
 
-    private static void ReadCommentRPduFields(ref DisBinaryReader reader, CommentRPdu value)
+    private static void ReadCommentReliablePduFields(ref DisBinaryReader reader, CommentReliablePdu value)
     {
         value.NumberOfFixedDatumRecords = reader.ReadUInt32("numberOfFixedDatumRecords");
         value.NumberOfVariableDatumRecords = reader.ReadUInt32("numberOfVariableDatumRecords");
@@ -3202,63 +3089,25 @@ internal static partial class PduCodec
             value.VariableDatumRecords.Add(ReadVariableDatum(ref reader));
     }
 
-    private static void PrepareCommentRPduFields(CommentRPdu value)
+    private static void PrepareCommentReliablePduFields(CommentReliablePdu value)
     {
         ArgumentNullException.ThrowIfNull(value.VariableDatumRecords);
         foreach (VariableDatum item in value.VariableDatumRecords) PrepareVariableDatum(item);
         value.NumberOfVariableDatumRecords = checked((uint)value.VariableDatumRecords.Count);
     }
 
-    private static void WriteCommentRPduFields(ref DisBinaryWriter writer, CommentRPdu value)
+    private static void WriteCommentReliablePduFields(ref DisBinaryWriter writer, CommentReliablePdu value)
     {
         writer.WriteUInt32(value.NumberOfFixedDatumRecords, "numberOfFixedDatumRecords");
         writer.WriteUInt32(value.NumberOfVariableDatumRecords, "numberOfVariableDatumRecords");
         foreach (VariableDatum item in value.VariableDatumRecords) WriteVariableDatum(ref writer, item);
     }
 
-    private static void MeasureCommentRPduFields(in CommentRPdu value, ref int offset)
+    private static void MeasureCommentReliablePduFields(in CommentReliablePdu value, ref int offset)
     {
         offset += 4;
         offset += 4;
         foreach (VariableDatum item in value.VariableDatumRecords) MeasureVariableDatum(item, ref offset);
-    }
-
-    private static CommentReliablePdu ReadCommentReliablePdu(ref DisBinaryReader reader)
-    {
-        var value = new CommentReliablePdu();
-        ReadCommentReliablePduFields(ref reader, value);
-        return value;
-    }
-
-    private static void ReadCommentReliablePduFields(ref DisBinaryReader reader, CommentReliablePdu value)
-    {
-    }
-
-    private static void PrepareCommentReliablePdu(CommentReliablePdu value)
-    {
-        PrepareCommentReliablePduFields(value);
-    }
-
-    private static void PrepareCommentReliablePduFields(CommentReliablePdu value)
-    {
-    }
-
-    private static void WriteCommentReliablePdu(ref DisBinaryWriter writer, CommentReliablePdu value)
-    {
-        WriteCommentReliablePduFields(ref writer, value);
-    }
-
-    private static void WriteCommentReliablePduFields(ref DisBinaryWriter writer, CommentReliablePdu value)
-    {
-    }
-
-    private static void MeasureCommentReliablePdu(in CommentReliablePdu value, ref int offset)
-    {
-        MeasureCommentReliablePduFields(value, ref offset);
-    }
-
-    private static void MeasureCommentReliablePduFields(in CommentReliablePdu value, ref int offset)
-    {
     }
 
     private static CommunicationsNodeID ReadCommunicationsNodeID(ref DisBinaryReader reader)
@@ -3326,70 +3175,32 @@ internal static partial class PduCodec
         offset += 4;
     }
 
-    private static void ReadCreateEntityRPduFields(ref DisBinaryReader reader, CreateEntityRPdu value)
+    private static void ReadCreateEntityReliablePduFields(ref DisBinaryReader reader, CreateEntityReliablePdu value)
     {
-        value.RequiredReliabilityService = reader.ReadByte("requiredReliabilityService");
+        value.RequiredReliabilityService = (RequiredReliabilityService)reader.ReadByte("requiredReliabilityService");
         value.Pad1 = reader.ReadByte("pad1");
         value.Pad2 = reader.ReadUInt16("pad2");
         value.RequestId = reader.ReadUInt32("requestID");
-    }
-
-    private static void PrepareCreateEntityRPduFields(CreateEntityRPdu value)
-    {
-    }
-
-    private static void WriteCreateEntityRPduFields(ref DisBinaryWriter writer, CreateEntityRPdu value)
-    {
-        writer.WriteByte(value.RequiredReliabilityService, "requiredReliabilityService");
-        writer.WriteByte(value.Pad1, "pad1");
-        writer.WriteUInt16(value.Pad2, "pad2");
-        writer.WriteUInt32(value.RequestId, "requestID");
-    }
-
-    private static void MeasureCreateEntityRPduFields(in CreateEntityRPdu value, ref int offset)
-    {
-        offset += 1;
-        offset += 1;
-        offset += 2;
-        offset += 4;
-    }
-
-    private static CreateEntityReliablePdu ReadCreateEntityReliablePdu(ref DisBinaryReader reader)
-    {
-        var value = new CreateEntityReliablePdu();
-        ReadCreateEntityReliablePduFields(ref reader, value);
-        return value;
-    }
-
-    private static void ReadCreateEntityReliablePduFields(ref DisBinaryReader reader, CreateEntityReliablePdu value)
-    {
-    }
-
-    private static void PrepareCreateEntityReliablePdu(CreateEntityReliablePdu value)
-    {
-        PrepareCreateEntityReliablePduFields(value);
     }
 
     private static void PrepareCreateEntityReliablePduFields(CreateEntityReliablePdu value)
     {
     }
 
-    private static void WriteCreateEntityReliablePdu(ref DisBinaryWriter writer, CreateEntityReliablePdu value)
-    {
-        WriteCreateEntityReliablePduFields(ref writer, value);
-    }
-
     private static void WriteCreateEntityReliablePduFields(ref DisBinaryWriter writer, CreateEntityReliablePdu value)
     {
-    }
-
-    private static void MeasureCreateEntityReliablePdu(in CreateEntityReliablePdu value, ref int offset)
-    {
-        MeasureCreateEntityReliablePduFields(value, ref offset);
+        writer.WriteByte((byte)value.RequiredReliabilityService, "requiredReliabilityService");
+        writer.WriteByte(value.Pad1, "pad1");
+        writer.WriteUInt16(value.Pad2, "pad2");
+        writer.WriteUInt32(value.RequestId, "requestID");
     }
 
     private static void MeasureCreateEntityReliablePduFields(in CreateEntityReliablePdu value, ref int offset)
     {
+        offset += 1;
+        offset += 1;
+        offset += 2;
+        offset += 4;
     }
 
     private static DataFilterRecord ReadDataFilterRecord(ref DisBinaryReader reader)
@@ -3587,9 +3398,9 @@ internal static partial class PduCodec
         foreach (VariableDatum item in value.VariableDatums) MeasureVariableDatum(item, ref offset);
     }
 
-    private static void ReadDataQueryRPduFields(ref DisBinaryReader reader, DataQueryRPdu value)
+    private static void ReadDataQueryReliablePduFields(ref DisBinaryReader reader, DataQueryReliablePdu value)
     {
-        value.RequiredReliabilityService = reader.ReadByte("requiredReliabilityService");
+        value.RequiredReliabilityService = (RequiredReliabilityService)reader.ReadByte("requiredReliabilityService");
         value.Pad1 = reader.ReadByte("pad1");
         value.Pad2 = reader.ReadUInt16("pad2");
         value.RequestId = reader.ReadUInt32("requestID");
@@ -3606,7 +3417,7 @@ internal static partial class PduCodec
             value.VariableDatumRecords.Add(ReadVariableDatum(ref reader));
     }
 
-    private static void PrepareDataQueryRPduFields(DataQueryRPdu value)
+    private static void PrepareDataQueryReliablePduFields(DataQueryReliablePdu value)
     {
         ArgumentNullException.ThrowIfNull(value.FixedDatumRecords);
         foreach (FixedDatum item in value.FixedDatumRecords) PrepareFixedDatum(item);
@@ -3616,9 +3427,9 @@ internal static partial class PduCodec
         value.NumberOfVariableDatumRecords = checked((uint)value.VariableDatumRecords.Count);
     }
 
-    private static void WriteDataQueryRPduFields(ref DisBinaryWriter writer, DataQueryRPdu value)
+    private static void WriteDataQueryReliablePduFields(ref DisBinaryWriter writer, DataQueryReliablePdu value)
     {
-        writer.WriteByte(value.RequiredReliabilityService, "requiredReliabilityService");
+        writer.WriteByte((byte)value.RequiredReliabilityService, "requiredReliabilityService");
         writer.WriteByte(value.Pad1, "pad1");
         writer.WriteUInt16(value.Pad2, "pad2");
         writer.WriteUInt32(value.RequestId, "requestID");
@@ -3629,7 +3440,7 @@ internal static partial class PduCodec
         foreach (VariableDatum item in value.VariableDatumRecords) WriteVariableDatum(ref writer, item);
     }
 
-    private static void MeasureDataQueryRPduFields(in DataQueryRPdu value, ref int offset)
+    private static void MeasureDataQueryReliablePduFields(in DataQueryReliablePdu value, ref int offset)
     {
         offset += 1;
         offset += 1;
@@ -3642,48 +3453,10 @@ internal static partial class PduCodec
         foreach (VariableDatum item in value.VariableDatumRecords) MeasureVariableDatum(item, ref offset);
     }
 
-    private static DataQueryReliablePdu ReadDataQueryReliablePdu(ref DisBinaryReader reader)
-    {
-        var value = new DataQueryReliablePdu();
-        ReadDataQueryReliablePduFields(ref reader, value);
-        return value;
-    }
-
-    private static void ReadDataQueryReliablePduFields(ref DisBinaryReader reader, DataQueryReliablePdu value)
-    {
-    }
-
-    private static void PrepareDataQueryReliablePdu(DataQueryReliablePdu value)
-    {
-        PrepareDataQueryReliablePduFields(value);
-    }
-
-    private static void PrepareDataQueryReliablePduFields(DataQueryReliablePdu value)
-    {
-    }
-
-    private static void WriteDataQueryReliablePdu(ref DisBinaryWriter writer, DataQueryReliablePdu value)
-    {
-        WriteDataQueryReliablePduFields(ref writer, value);
-    }
-
-    private static void WriteDataQueryReliablePduFields(ref DisBinaryWriter writer, DataQueryReliablePdu value)
-    {
-    }
-
-    private static void MeasureDataQueryReliablePdu(in DataQueryReliablePdu value, ref int offset)
-    {
-        MeasureDataQueryReliablePduFields(value, ref offset);
-    }
-
-    private static void MeasureDataQueryReliablePduFields(in DataQueryReliablePdu value, ref int offset)
-    {
-    }
-
-    private static void ReadDataRPduFields(ref DisBinaryReader reader, DataRPdu value)
+    private static void ReadDataReliablePduFields(ref DisBinaryReader reader, DataReliablePdu value)
     {
         value.RequestId = reader.ReadUInt32("requestID");
-        value.RequiredReliabilityService = reader.ReadByte("requiredReliabilityService");
+        value.RequiredReliabilityService = (RequiredReliabilityService)reader.ReadByte("requiredReliabilityService");
         value.Pad1 = reader.ReadByte("pad1");
         value.Pad2 = reader.ReadUInt16("pad2");
         value.NumberOfFixedDatumRecords = reader.ReadUInt32("numberOfFixedDatumRecords");
@@ -3698,7 +3471,7 @@ internal static partial class PduCodec
             value.VariableDatumRecords.Add(ReadVariableDatum(ref reader));
     }
 
-    private static void PrepareDataRPduFields(DataRPdu value)
+    private static void PrepareDataReliablePduFields(DataReliablePdu value)
     {
         ArgumentNullException.ThrowIfNull(value.FixedDatumRecords);
         foreach (FixedDatum item in value.FixedDatumRecords) PrepareFixedDatum(item);
@@ -3708,10 +3481,10 @@ internal static partial class PduCodec
         value.NumberOfVariableDatumRecords = checked((uint)value.VariableDatumRecords.Count);
     }
 
-    private static void WriteDataRPduFields(ref DisBinaryWriter writer, DataRPdu value)
+    private static void WriteDataReliablePduFields(ref DisBinaryWriter writer, DataReliablePdu value)
     {
         writer.WriteUInt32(value.RequestId, "requestID");
-        writer.WriteByte(value.RequiredReliabilityService, "requiredReliabilityService");
+        writer.WriteByte((byte)value.RequiredReliabilityService, "requiredReliabilityService");
         writer.WriteByte(value.Pad1, "pad1");
         writer.WriteUInt16(value.Pad2, "pad2");
         writer.WriteUInt32(value.NumberOfFixedDatumRecords, "numberOfFixedDatumRecords");
@@ -3720,7 +3493,7 @@ internal static partial class PduCodec
         foreach (VariableDatum item in value.VariableDatumRecords) WriteVariableDatum(ref writer, item);
     }
 
-    private static void MeasureDataRPduFields(in DataRPdu value, ref int offset)
+    private static void MeasureDataReliablePduFields(in DataReliablePdu value, ref int offset)
     {
         offset += 4;
         offset += 1;
@@ -3730,44 +3503,6 @@ internal static partial class PduCodec
         offset += 4;
         foreach (FixedDatum item in value.FixedDatumRecords) MeasureFixedDatum(item, ref offset);
         foreach (VariableDatum item in value.VariableDatumRecords) MeasureVariableDatum(item, ref offset);
-    }
-
-    private static DataReliablePdu ReadDataReliablePdu(ref DisBinaryReader reader)
-    {
-        var value = new DataReliablePdu();
-        ReadDataReliablePduFields(ref reader, value);
-        return value;
-    }
-
-    private static void ReadDataReliablePduFields(ref DisBinaryReader reader, DataReliablePdu value)
-    {
-    }
-
-    private static void PrepareDataReliablePdu(DataReliablePdu value)
-    {
-        PrepareDataReliablePduFields(value);
-    }
-
-    private static void PrepareDataReliablePduFields(DataReliablePdu value)
-    {
-    }
-
-    private static void WriteDataReliablePdu(ref DisBinaryWriter writer, DataReliablePdu value)
-    {
-        WriteDataReliablePduFields(ref writer, value);
-    }
-
-    private static void WriteDataReliablePduFields(ref DisBinaryWriter writer, DataReliablePdu value)
-    {
-    }
-
-    private static void MeasureDataReliablePdu(in DataReliablePdu value, ref int offset)
-    {
-        MeasureDataReliablePduFields(value, ref offset);
-    }
-
-    private static void MeasureDataReliablePduFields(in DataReliablePdu value, ref int offset)
-    {
     }
 
     private static DatumSpecification ReadDatumSpecification(ref DisBinaryReader reader)
@@ -3841,7 +3576,7 @@ internal static partial class PduCodec
 
     private static void ReadDeadReckoningParametersFields(ref DisBinaryReader reader, DeadReckoningParameters value)
     {
-        value.DeadReckoningAlgorithm = reader.ReadByte("deadReckoningAlgorithm");
+        value.DeadReckoningAlgorithm = (DeadReckoningAlgorithm)reader.ReadByte("deadReckoningAlgorithm");
         int ParametersCount = CheckedCount(15, reader.Remaining, "parameters");
         value.Parameters = new byte[ParametersCount];
         for (int index = 0; index < ParametersCount; index++)
@@ -3871,7 +3606,7 @@ internal static partial class PduCodec
 
     private static void WriteDeadReckoningParametersFields(ref DisBinaryWriter writer, DeadReckoningParameters value)
     {
-        writer.WriteByte(value.DeadReckoningAlgorithm, "deadReckoningAlgorithm");
+        writer.WriteByte((byte)value.DeadReckoningAlgorithm, "deadReckoningAlgorithm");
         foreach (byte item in value.Parameters) writer.WriteByte(item, "parameters");
         WriteVector3Float(ref writer, value.EntityLinearAcceleration);
         WriteVector3Float(ref writer, value.EntityAngularVelocity);
@@ -3893,14 +3628,14 @@ internal static partial class PduCodec
     private static void ReadDesignatorPduFields(ref DisBinaryReader reader, DesignatorPdu value)
     {
         value.DesignatingEntityId = ReadEntityId(ref reader);
-        value.CodeName = reader.ReadUInt16("codeName");
+        value.CodeName = (DesignatorSystemName)reader.ReadUInt16("codeName");
         value.DesignatedEntityId = ReadEntityId(ref reader);
-        value.DesignatorCode = reader.ReadUInt16("designatorCode");
+        value.DesignatorCode = (DesignatorDesignatorCode)reader.ReadUInt16("designatorCode");
         value.DesignatorPower = reader.ReadSingle("designatorPower");
         value.DesignatorWavelength = reader.ReadSingle("designatorWavelength");
         value.DesignatorSpotWrtDesignated = ReadVector3Float(ref reader);
         value.DesignatorSpotLocation = ReadVector3Double(ref reader);
-        value.DeadReckoningAlgorithm = reader.ReadByte("deadReckoningAlgorithm");
+        value.DeadReckoningAlgorithm = (DeadReckoningAlgorithm)reader.ReadByte("deadReckoningAlgorithm");
         value.Padding1 = reader.ReadByte("padding1");
         value.Padding2 = reader.ReadUInt16("padding2");
         value.EntityLinearAcceleration = ReadVector3Float(ref reader);
@@ -3923,14 +3658,14 @@ internal static partial class PduCodec
     private static void WriteDesignatorPduFields(ref DisBinaryWriter writer, DesignatorPdu value)
     {
         WriteEntityId(ref writer, value.DesignatingEntityId);
-        writer.WriteUInt16(value.CodeName, "codeName");
+        writer.WriteUInt16((ushort)value.CodeName, "codeName");
         WriteEntityId(ref writer, value.DesignatedEntityId);
-        writer.WriteUInt16(value.DesignatorCode, "designatorCode");
+        writer.WriteUInt16((ushort)value.DesignatorCode, "designatorCode");
         writer.WriteSingle(value.DesignatorPower, "designatorPower");
         writer.WriteSingle(value.DesignatorWavelength, "designatorWavelength");
         WriteVector3Float(ref writer, value.DesignatorSpotWrtDesignated);
         WriteVector3Double(ref writer, value.DesignatorSpotLocation);
-        writer.WriteByte(value.DeadReckoningAlgorithm, "deadReckoningAlgorithm");
+        writer.WriteByte((byte)value.DeadReckoningAlgorithm, "deadReckoningAlgorithm");
         writer.WriteByte(value.Padding1, "padding1");
         writer.WriteUInt16(value.Padding2, "padding2");
         WriteVector3Float(ref writer, value.EntityLinearAcceleration);
@@ -3962,7 +3697,7 @@ internal static partial class PduCodec
         value.LocationInWorldCoordinates = ReadVector3Double(ref reader);
         value.Descriptor = ReadMunitionDescriptor(ref reader);
         value.LocationOfEntityCoordinates = ReadVector3Float(ref reader);
-        value.DetonationResult = reader.ReadByte("detonationResult");
+        value.DetonationResult = (DetonationResult)reader.ReadByte("detonationResult");
         value.NumberOfVariableParameters = reader.ReadByte("numberOfVariableParameters");
         value.Pad = reader.ReadUInt16("pad");
         int VariableParametersCount = CheckedCount(checked((int)value.NumberOfVariableParameters), reader.Remaining, "variableParameters");
@@ -4004,7 +3739,7 @@ internal static partial class PduCodec
         WriteVector3Double(ref writer, value.LocationInWorldCoordinates);
         WriteMunitionDescriptor(ref writer, value.Descriptor);
         WriteVector3Float(ref writer, value.LocationOfEntityCoordinates);
-        writer.WriteByte(value.DetonationResult, "detonationResult");
+        writer.WriteByte((byte)value.DetonationResult, "detonationResult");
         writer.WriteByte(value.NumberOfVariableParameters, "numberOfVariableParameters");
         writer.WriteUInt16(value.Pad, "pad");
         foreach (VariableParameter item in value.VariableParameters) WriteVariableParameter(ref writer, item);
@@ -4115,10 +3850,10 @@ internal static partial class PduCodec
         value.DamageLocation = ReadVector3Float(ref reader);
         value.DamageDiameter = reader.ReadSingle("damageDiameter");
         value.Temperature = reader.ReadSingle("temperature");
-        value.ComponentIdentification = reader.ReadByte("componentIdentification");
-        value.ComponentDamageStatus = reader.ReadByte("componentDamageStatus");
-        value.ComponentVisualDamageStatus = reader.ReadByte("componentVisualDamageStatus");
-        value.ComponentVisualSmokeColor = reader.ReadByte("componentVisualSmokeColor");
+        value.ComponentIdentification = (EntityDamageStatusComponentIdentification)reader.ReadByte("componentIdentification");
+        value.ComponentDamageStatus = (DeDamageDescriptionComponentDamageStatus)reader.ReadByte("componentDamageStatus");
+        value.ComponentVisualDamageStatus = new DeDamageDescriptionComponentVisualDamageStatus(reader.ReadByte("componentVisualDamageStatus"));
+        value.ComponentVisualSmokeColor = (DeDamageDescriptionComponentVisualSmokeColor)reader.ReadByte("componentVisualSmokeColor");
         value.FireEventId = ReadEventIdentifier(ref reader);
         value.Padding2 = reader.ReadUInt16("padding2");
     }
@@ -4149,10 +3884,10 @@ internal static partial class PduCodec
         WriteVector3Float(ref writer, value.DamageLocation);
         writer.WriteSingle(value.DamageDiameter, "damageDiameter");
         writer.WriteSingle(value.Temperature, "temperature");
-        writer.WriteByte(value.ComponentIdentification, "componentIdentification");
-        writer.WriteByte(value.ComponentDamageStatus, "componentDamageStatus");
-        writer.WriteByte(value.ComponentVisualDamageStatus, "componentVisualDamageStatus");
-        writer.WriteByte(value.ComponentVisualSmokeColor, "componentVisualSmokeColor");
+        writer.WriteByte((byte)value.ComponentIdentification, "componentIdentification");
+        writer.WriteByte((byte)value.ComponentDamageStatus, "componentDamageStatus");
+        writer.WriteByte(value.ComponentVisualDamageStatus.Value, "componentVisualDamageStatus");
+        writer.WriteByte((byte)value.ComponentVisualSmokeColor, "componentVisualSmokeColor");
         WriteEventIdentifier(ref writer, value.FireEventId);
         writer.WriteUInt16(value.Padding2, "padding2");
     }
@@ -4191,8 +3926,8 @@ internal static partial class PduCodec
         value.Pad1 = reader.ReadUInt32("pad1");
         value.PulseRepititionFrequency = reader.ReadSingle("pulseRepititionFrequency");
         value.PulseWidth = reader.ReadSingle("pulseWidth");
-        value.Flags = reader.ReadUInt16("flags");
-        value.PulseShape = reader.ReadByte("pulseShape");
+        value.Flags = new DeFireFlags(reader.ReadUInt16("flags"));
+        value.PulseShape = (DeFirePulseShape)reader.ReadByte("pulseShape");
         value.Pad2 = reader.ReadByte("pad2");
         value.Pad3 = reader.ReadUInt32("pad3");
         value.Pad4 = reader.ReadUInt16("pad4");
@@ -4233,8 +3968,8 @@ internal static partial class PduCodec
         writer.WriteUInt32(value.Pad1, "pad1");
         writer.WriteSingle(value.PulseRepititionFrequency, "pulseRepititionFrequency");
         writer.WriteSingle(value.PulseWidth, "pulseWidth");
-        writer.WriteUInt16(value.Flags, "flags");
-        writer.WriteByte(value.PulseShape, "pulseShape");
+        writer.WriteUInt16(value.Flags.Value, "flags");
+        writer.WriteByte((byte)value.PulseShape, "pulseShape");
         writer.WriteByte(value.Pad2, "pad2");
         writer.WriteUInt32(value.Pad3, "pad3");
         writer.WriteUInt16(value.Pad4, "pad4");
@@ -4282,7 +4017,7 @@ internal static partial class PduCodec
         value.TargetSpotAcceleration = ReadVector3Float(ref reader);
         value.TargetEntityId = ReadEntityId(ref reader);
         value.TargetComponentId = reader.ReadByte("targetComponentID");
-        value.BeamSpotType = reader.ReadByte("beamSpotType");
+        value.BeamSpotType = (DePrecisionAimpointBeamSpotType)reader.ReadByte("beamSpotType");
         value.BeamSpotCrossSectionSemiMajorAxis = reader.ReadSingle("beamSpotCrossSectionSemiMajorAxis");
         value.BeamSpotCrossSectionSemiMinorAxis = reader.ReadSingle("beamSpotCrossSectionSemiMinorAxis");
         value.BeamSpotCrossSectionOrientationAngle = reader.ReadSingle("beamSpotCrossSectionOrientationAngle");
@@ -4325,7 +4060,7 @@ internal static partial class PduCodec
         WriteVector3Float(ref writer, value.TargetSpotAcceleration);
         WriteEntityId(ref writer, value.TargetEntityId);
         writer.WriteByte(value.TargetComponentId, "targetComponentID");
-        writer.WriteByte(value.BeamSpotType, "beamSpotType");
+        writer.WriteByte((byte)value.BeamSpotType, "beamSpotType");
         writer.WriteSingle(value.BeamSpotCrossSectionSemiMajorAxis, "beamSpotCrossSectionSemiMajorAxis");
         writer.WriteSingle(value.BeamSpotCrossSectionSemiMinorAxis, "beamSpotCrossSectionSemiMinorAxis");
         writer.WriteSingle(value.BeamSpotCrossSectionOrientationAngle, "beamSpotCrossSectionOrientationAngle");
@@ -4520,7 +4255,7 @@ internal static partial class PduCodec
     {
         value.EmittingEntityId = ReadEntityId(ref reader);
         value.EventId = ReadEventIdentifier(ref reader);
-        value.StateUpdateIndicator = reader.ReadByte("stateUpdateIndicator");
+        value.StateUpdateIndicator = (ElectromagneticEmissionStateUpdateIndicator)reader.ReadByte("stateUpdateIndicator");
         value.NumberOfSystems = reader.ReadByte("numberOfSystems");
         value.PaddingForEmissionsPdu = reader.ReadUInt16("paddingForEmissionsPdu");
         int SystemsCount = CheckedCount(checked((int)value.NumberOfSystems), reader.Remaining, "systems");
@@ -4544,7 +4279,7 @@ internal static partial class PduCodec
     {
         WriteEntityId(ref writer, value.EmittingEntityId);
         WriteEventIdentifier(ref writer, value.EventId);
-        writer.WriteByte(value.StateUpdateIndicator, "stateUpdateIndicator");
+        writer.WriteByte((byte)value.StateUpdateIndicator, "stateUpdateIndicator");
         writer.WriteByte(value.NumberOfSystems, "numberOfSystems");
         writer.WriteUInt16(value.PaddingForEmissionsPdu, "paddingForEmissionsPdu");
         foreach (ElectronicEmitter item in value.Systems) WriteElectronicEmitter(ref writer, item);
@@ -4640,9 +4375,9 @@ internal static partial class PduCodec
         value.BeamParameterIndex = reader.ReadUInt16("beamParameterIndex");
         value.FundamentalParameterData = ReadEEFundamentalParameterData(ref reader);
         value.BeamData = ReadBeamData(ref reader);
-        value.BeamFunction = reader.ReadByte("beamFunction");
+        value.BeamFunction = (ElectromagneticEmissionBeamFunction)reader.ReadByte("beamFunction");
         value.NumberOfTargets = reader.ReadByte("numberOfTargets");
-        value.HighDensityTrackJam = reader.ReadByte("highDensityTrackJam");
+        value.HighDensityTrackJam = (HighDensityTrackJam)reader.ReadByte("highDensityTrackJam");
         value.BeamStatus = ReadBeamStatus(ref reader);
         value.JammingTechnique = ReadJammingTechnique(ref reader);
         int TrackJamDataCount = CheckedCount(checked((int)value.NumberOfTargets), reader.Remaining, "trackJamData");
@@ -4683,9 +4418,9 @@ internal static partial class PduCodec
         writer.WriteUInt16(value.BeamParameterIndex, "beamParameterIndex");
         WriteEEFundamentalParameterData(ref writer, value.FundamentalParameterData);
         WriteBeamData(ref writer, value.BeamData);
-        writer.WriteByte(value.BeamFunction, "beamFunction");
+        writer.WriteByte((byte)value.BeamFunction, "beamFunction");
         writer.WriteByte(value.NumberOfTargets, "numberOfTargets");
-        writer.WriteByte(value.HighDensityTrackJam, "highDensityTrackJam");
+        writer.WriteByte((byte)value.HighDensityTrackJam, "highDensityTrackJam");
         WriteBeamStatus(ref writer, value.BeamStatus);
         WriteJammingTechnique(ref writer, value.JammingTechnique);
         foreach (TrackJamData item in value.TrackJamData) WriteTrackJamData(ref writer, item);
@@ -4720,8 +4455,8 @@ internal static partial class PduCodec
 
     private static void ReadEmitterSystemFields(ref DisBinaryReader reader, EmitterSystem value)
     {
-        value.EmitterName = reader.ReadUInt16("emitterName");
-        value.EmitterFunction = reader.ReadByte("emitterFunction");
+        value.EmitterName = (EmitterName)reader.ReadUInt16("emitterName");
+        value.EmitterFunction = (EmitterSystemFunction)reader.ReadByte("emitterFunction");
         value.EmitterIdNumber = reader.ReadByte("emitterIDNumber");
     }
 
@@ -4741,8 +4476,8 @@ internal static partial class PduCodec
 
     private static void WriteEmitterSystemFields(ref DisBinaryWriter writer, EmitterSystem value)
     {
-        writer.WriteUInt16(value.EmitterName, "emitterName");
-        writer.WriteByte(value.EmitterFunction, "emitterFunction");
+        writer.WriteUInt16((ushort)value.EmitterName, "emitterName");
+        writer.WriteByte((byte)value.EmitterFunction, "emitterFunction");
         writer.WriteByte(value.EmitterIdNumber, "emitterIDNumber");
     }
 
@@ -4768,9 +4503,9 @@ internal static partial class PduCodec
     private static void ReadEngineFuelFields(ref DisBinaryReader reader, EngineFuel value)
     {
         value.FuelQuantity = reader.ReadUInt32("fuelQuantity");
-        value.FuelMeasurementUnits = reader.ReadByte("fuelMeasurementUnits");
-        value.FuelType = reader.ReadByte("fuelType");
-        value.FuelLocation = reader.ReadByte("fuelLocation");
+        value.FuelMeasurementUnits = (FuelMeasurementUnits)reader.ReadByte("fuelMeasurementUnits");
+        value.FuelType = (SupplyFuelType)reader.ReadByte("fuelType");
+        value.FuelLocation = (FuelLocation)reader.ReadByte("fuelLocation");
         value.Padding = reader.ReadByte("padding");
     }
 
@@ -4791,9 +4526,9 @@ internal static partial class PduCodec
     private static void WriteEngineFuelFields(ref DisBinaryWriter writer, EngineFuel value)
     {
         writer.WriteUInt32(value.FuelQuantity, "fuelQuantity");
-        writer.WriteByte(value.FuelMeasurementUnits, "fuelMeasurementUnits");
-        writer.WriteByte(value.FuelType, "fuelType");
-        writer.WriteByte(value.FuelLocation, "fuelLocation");
+        writer.WriteByte((byte)value.FuelMeasurementUnits, "fuelMeasurementUnits");
+        writer.WriteByte((byte)value.FuelType, "fuelType");
+        writer.WriteByte((byte)value.FuelLocation, "fuelLocation");
         writer.WriteByte(value.Padding, "padding");
     }
 
@@ -4824,9 +4559,9 @@ internal static partial class PduCodec
         value.MaximumQuantity = reader.ReadUInt32("maximumQuantity");
         value.StandardQuantityReloadTime = reader.ReadUInt32("standardQuantityReloadTime");
         value.MaximumQuantityReloadTime = reader.ReadUInt32("maximumQuantityReloadTime");
-        value.FuelMeasurmentUnits = reader.ReadByte("fuelMeasurmentUnits");
-        value.FuelType = reader.ReadByte("fuelType");
-        value.FuelLocation = reader.ReadByte("fuelLocation");
+        value.FuelMeasurmentUnits = (FuelMeasurementUnits)reader.ReadByte("fuelMeasurmentUnits");
+        value.FuelType = (SupplyFuelType)reader.ReadByte("fuelType");
+        value.FuelLocation = (FuelLocation)reader.ReadByte("fuelLocation");
         value.Padding = reader.ReadByte("padding");
     }
 
@@ -4850,9 +4585,9 @@ internal static partial class PduCodec
         writer.WriteUInt32(value.MaximumQuantity, "maximumQuantity");
         writer.WriteUInt32(value.StandardQuantityReloadTime, "standardQuantityReloadTime");
         writer.WriteUInt32(value.MaximumQuantityReloadTime, "maximumQuantityReloadTime");
-        writer.WriteByte(value.FuelMeasurmentUnits, "fuelMeasurmentUnits");
-        writer.WriteByte(value.FuelType, "fuelType");
-        writer.WriteByte(value.FuelLocation, "fuelLocation");
+        writer.WriteByte((byte)value.FuelMeasurmentUnits, "fuelMeasurmentUnits");
+        writer.WriteByte((byte)value.FuelType, "fuelType");
+        writer.WriteByte((byte)value.FuelLocation, "fuelLocation");
         writer.WriteByte(value.Padding, "padding");
     }
 
@@ -4882,14 +4617,14 @@ internal static partial class PduCodec
 
     private static void ReadEntityAssociationVPFields(ref DisBinaryReader reader, EntityAssociationVP value)
     {
-        value.RecordType = reader.ReadByte("recordType");
-        value.ChangeIndicator = reader.ReadByte("changeIndicator");
-        value.AssociationStatus = reader.ReadByte("associationStatus");
-        value.AssociationType = reader.ReadByte("associationType");
+        value.RecordType = (VariableParameterRecordType)reader.ReadByte("recordType");
+        value.ChangeIndicator = (EntityVpRecordChangeIndicator)reader.ReadByte("changeIndicator");
+        value.AssociationStatus = (EntityAssociationAssociationType)reader.ReadByte("associationStatus");
+        value.AssociationType = (EntityAssociationPhysicalAssociationType)reader.ReadByte("associationType");
         value.EntityId = ReadEntityId(ref reader);
-        value.OwnStationLocation = reader.ReadUInt16("ownStationLocation");
-        value.PhysicalConnectionType = reader.ReadByte("physicalConnectionType");
-        value.GroupMemberType = reader.ReadByte("groupMemberType");
+        value.OwnStationLocation = (IsPartOfStationName)reader.ReadUInt16("ownStationLocation");
+        value.PhysicalConnectionType = (EntityAssociationPhysicalConnectionType)reader.ReadByte("physicalConnectionType");
+        value.GroupMemberType = (EntityAssociationGroupMemberType)reader.ReadByte("groupMemberType");
         value.GroupNumber = reader.ReadUInt16("groupNumber");
     }
 
@@ -4911,14 +4646,14 @@ internal static partial class PduCodec
 
     private static void WriteEntityAssociationVPFields(ref DisBinaryWriter writer, EntityAssociationVP value)
     {
-        writer.WriteByte(value.RecordType, "recordType");
-        writer.WriteByte(value.ChangeIndicator, "changeIndicator");
-        writer.WriteByte(value.AssociationStatus, "associationStatus");
-        writer.WriteByte(value.AssociationType, "associationType");
+        writer.WriteByte((byte)value.RecordType, "recordType");
+        writer.WriteByte((byte)value.ChangeIndicator, "changeIndicator");
+        writer.WriteByte((byte)value.AssociationStatus, "associationStatus");
+        writer.WriteByte((byte)value.AssociationType, "associationType");
         WriteEntityId(ref writer, value.EntityId);
-        writer.WriteUInt16(value.OwnStationLocation, "ownStationLocation");
-        writer.WriteByte(value.PhysicalConnectionType, "physicalConnectionType");
-        writer.WriteByte(value.GroupMemberType, "groupMemberType");
+        writer.WriteUInt16((ushort)value.OwnStationLocation, "ownStationLocation");
+        writer.WriteByte((byte)value.PhysicalConnectionType, "physicalConnectionType");
+        writer.WriteByte((byte)value.GroupMemberType, "groupMemberType");
         writer.WriteUInt16(value.GroupNumber, "groupNumber");
     }
 
@@ -5113,7 +4848,7 @@ internal static partial class PduCodec
 
     private static void ReadEntityMarkingFields(ref DisBinaryReader reader, EntityMarking value)
     {
-        value.CharacterSet = reader.ReadByte("characterSet");
+        value.CharacterSet = (EntityMarkingCharacterSet)reader.ReadByte("characterSet");
         int CharactersCount = CheckedCount(11, reader.Remaining, "characters");
         value.Characters = new byte[CharactersCount];
         for (int index = 0; index < CharactersCount; index++)
@@ -5137,7 +4872,7 @@ internal static partial class PduCodec
 
     private static void WriteEntityMarkingFields(ref DisBinaryWriter writer, EntityMarking value)
     {
-        writer.WriteByte(value.CharacterSet, "characterSet");
+        writer.WriteByte((byte)value.CharacterSet, "characterSet");
         foreach (byte item in value.Characters) writer.WriteByte(item, "characters");
     }
 
@@ -5155,7 +4890,7 @@ internal static partial class PduCodec
     private static void ReadEntityStatePduFields(ref DisBinaryReader reader, EntityStatePdu value)
     {
         value.EntityId = ReadEntityId(ref reader);
-        value.ForceId = reader.ReadByte("forceId");
+        value.ForceId = (ForceId)reader.ReadByte("forceId");
         value.NumberOfVariableParameters = reader.ReadByte("numberOfVariableParameters");
         value.EntityType = ReadEntityType(ref reader);
         value.AlternativeEntityType = ReadEntityType(ref reader);
@@ -5165,7 +4900,7 @@ internal static partial class PduCodec
         value.EntityAppearance = reader.ReadUInt32("entityAppearance");
         value.DeadReckoningParameters = ReadDeadReckoningParameters(ref reader);
         value.Marking = ReadEntityMarking(ref reader);
-        value.Capabilities = reader.ReadUInt32("capabilities");
+        value.Capabilities = new EntityCapabilities(reader.ReadUInt32("capabilities"));
         int VariableParametersCount = CheckedCount(checked((int)value.NumberOfVariableParameters), reader.Remaining, "variableParameters");
         value.VariableParameters = new List<VariableParameter>(VariableParametersCount);
         for (int index = 0; index < VariableParametersCount; index++)
@@ -5198,7 +4933,7 @@ internal static partial class PduCodec
     private static void WriteEntityStatePduFields(ref DisBinaryWriter writer, EntityStatePdu value)
     {
         WriteEntityId(ref writer, value.EntityId);
-        writer.WriteByte(value.ForceId, "forceId");
+        writer.WriteByte((byte)value.ForceId, "forceId");
         writer.WriteByte(value.NumberOfVariableParameters, "numberOfVariableParameters");
         WriteEntityType(ref writer, value.EntityType);
         WriteEntityType(ref writer, value.AlternativeEntityType);
@@ -5208,7 +4943,7 @@ internal static partial class PduCodec
         writer.WriteUInt32(value.EntityAppearance, "entityAppearance");
         WriteDeadReckoningParameters(ref writer, value.DeadReckoningParameters);
         WriteEntityMarking(ref writer, value.Marking);
-        writer.WriteUInt32(value.Capabilities, "capabilities");
+        writer.WriteUInt32(value.Capabilities.Value, "capabilities");
         foreach (VariableParameter item in value.VariableParameters) WriteVariableParameter(ref writer, item);
     }
 
@@ -5292,9 +5027,9 @@ internal static partial class PduCodec
 
     private static void ReadEntityTypeFields(ref DisBinaryReader reader, EntityType value)
     {
-        value.EntityKind = reader.ReadByte("entityKind");
+        value.EntityKind = (EntityKind)reader.ReadByte("entityKind");
         value.Domain = ReadDomain(ref reader);
-        value.Country = reader.ReadUInt16("country");
+        value.Country = (Country)reader.ReadUInt16("country");
         value.Category = reader.ReadByte("category");
         value.SubCategory = reader.ReadByte("subCategory");
         value.Specific = reader.ReadByte("specific");
@@ -5319,9 +5054,9 @@ internal static partial class PduCodec
 
     private static void WriteEntityTypeFields(ref DisBinaryWriter writer, EntityType value)
     {
-        writer.WriteByte(value.EntityKind, "entityKind");
+        writer.WriteByte((byte)value.EntityKind, "entityKind");
         WriteDomain(ref writer, value.Domain);
-        writer.WriteUInt16(value.Country, "country");
+        writer.WriteUInt16((ushort)value.Country, "country");
         writer.WriteByte(value.Category, "category");
         writer.WriteByte(value.SubCategory, "subCategory");
         writer.WriteByte(value.Specific, "specific");
@@ -5353,7 +5088,7 @@ internal static partial class PduCodec
 
     private static void ReadEntityTypeRawFields(ref DisBinaryReader reader, EntityTypeRaw value)
     {
-        value.EntityKind = reader.ReadByte("entityKind");
+        value.EntityKind = (EntityKind)reader.ReadByte("entityKind");
         value.Domain = reader.ReadByte("domain");
         value.Country = reader.ReadUInt16("country");
         value.Category = reader.ReadByte("category");
@@ -5378,7 +5113,7 @@ internal static partial class PduCodec
 
     private static void WriteEntityTypeRawFields(ref DisBinaryWriter writer, EntityTypeRaw value)
     {
-        writer.WriteByte(value.EntityKind, "entityKind");
+        writer.WriteByte((byte)value.EntityKind, "entityKind");
         writer.WriteByte(value.Domain, "domain");
         writer.WriteUInt16(value.Country, "country");
         writer.WriteByte(value.Category, "category");
@@ -5412,8 +5147,8 @@ internal static partial class PduCodec
 
     private static void ReadEntityTypeVPFields(ref DisBinaryReader reader, EntityTypeVP value)
     {
-        value.RecordType = reader.ReadByte("recordType");
-        value.ChangeIndicator = reader.ReadByte("changeIndicator");
+        value.RecordType = (VariableParameterRecordType)reader.ReadByte("recordType");
+        value.ChangeIndicator = (EntityVpRecordChangeIndicator)reader.ReadByte("changeIndicator");
         value.EntityType = ReadEntityType(ref reader);
         value.Padding = reader.ReadUInt16("padding");
         value.Padding1 = reader.ReadUInt32("padding1");
@@ -5437,8 +5172,8 @@ internal static partial class PduCodec
 
     private static void WriteEntityTypeVPFields(ref DisBinaryWriter writer, EntityTypeVP value)
     {
-        writer.WriteByte(value.RecordType, "recordType");
-        writer.WriteByte(value.ChangeIndicator, "changeIndicator");
+        writer.WriteByte((byte)value.RecordType, "recordType");
+        writer.WriteByte((byte)value.ChangeIndicator, "changeIndicator");
         WriteEntityType(ref writer, value.EntityType);
         writer.WriteUInt16(value.Padding, "padding");
         writer.WriteUInt32(value.Padding1, "padding1");
@@ -5467,7 +5202,7 @@ internal static partial class PduCodec
 
     private static void ReadEnvironmentFields(ref DisBinaryReader reader, Environment value)
     {
-        value.EnvironmentType = reader.ReadUInt32("environmentType");
+        value.EnvironmentType = (EnvironmentalProcessRecordType)reader.ReadUInt32("environmentType");
         value.Length = reader.ReadUInt16("length");
         value.Index = reader.ReadByte("index");
         value.Padding1 = reader.ReadByte("padding1");
@@ -5495,7 +5230,7 @@ internal static partial class PduCodec
 
     private static void WriteEnvironmentFields(ref DisBinaryWriter writer, Environment value)
     {
-        writer.WriteUInt32(value.EnvironmentType, "environmentType");
+        writer.WriteUInt32((uint)value.EnvironmentType, "environmentType");
         writer.WriteUInt16(value.Length, "length");
         writer.WriteByte(value.Index, "index");
         writer.WriteByte(value.Padding1, "padding1");
@@ -5522,8 +5257,8 @@ internal static partial class PduCodec
     {
         value.EnvironementalProcessId = ReadObjectIdentifier(ref reader);
         value.EnvironmentType = ReadEntityType(ref reader);
-        value.ModelType = reader.ReadByte("modelType");
-        value.EnvironmentStatus = reader.ReadByte("environmentStatus");
+        value.ModelType = (EnvironmentalProcessModelType)reader.ReadByte("modelType");
+        value.EnvironmentStatus = new EnvironmentalProcessEnvironmentStatus(reader.ReadByte("environmentStatus"));
         value.NumberOfEnvironmentRecords = reader.ReadUInt16("numberOfEnvironmentRecords");
         value.SequenceNumber = reader.ReadUInt16("sequenceNumber");
         int EnvironmentRecordsCount = CheckedCount(checked((int)value.NumberOfEnvironmentRecords), reader.Remaining, "environmentRecords");
@@ -5547,8 +5282,8 @@ internal static partial class PduCodec
     {
         WriteObjectIdentifier(ref writer, value.EnvironementalProcessId);
         WriteEntityType(ref writer, value.EnvironmentType);
-        writer.WriteByte(value.ModelType, "modelType");
-        writer.WriteByte(value.EnvironmentStatus, "environmentStatus");
+        writer.WriteByte((byte)value.ModelType, "modelType");
+        writer.WriteByte(value.EnvironmentStatus.Value, "environmentStatus");
         writer.WriteUInt16(value.NumberOfEnvironmentRecords, "numberOfEnvironmentRecords");
         writer.WriteUInt16(value.SequenceNumber, "sequenceNumber");
         foreach (Environment item in value.EnvironmentRecords) WriteEnvironment(ref writer, item);
@@ -5707,7 +5442,7 @@ internal static partial class PduCodec
 
     private static void ReadEventReportPduFields(ref DisBinaryReader reader, EventReportPdu value)
     {
-        value.EventType = reader.ReadUInt32("eventType");
+        value.EventType = (EventReportEventType)reader.ReadUInt32("eventType");
         value.Padding1 = reader.ReadUInt32("padding1");
         value.NumberOfFixedDatumRecords = reader.ReadUInt32("numberOfFixedDatumRecords");
         value.NumberOfVariableDatumRecords = reader.ReadUInt32("numberOfVariableDatumRecords");
@@ -5733,7 +5468,7 @@ internal static partial class PduCodec
 
     private static void WriteEventReportPduFields(ref DisBinaryWriter writer, EventReportPdu value)
     {
-        writer.WriteUInt32(value.EventType, "eventType");
+        writer.WriteUInt32((uint)value.EventType, "eventType");
         writer.WriteUInt32(value.Padding1, "padding1");
         writer.WriteUInt32(value.NumberOfFixedDatumRecords, "numberOfFixedDatumRecords");
         writer.WriteUInt32(value.NumberOfVariableDatumRecords, "numberOfVariableDatumRecords");
@@ -5751,9 +5486,9 @@ internal static partial class PduCodec
         foreach (VariableDatum item in value.VariableDatums) MeasureVariableDatum(item, ref offset);
     }
 
-    private static void ReadEventReportRPduFields(ref DisBinaryReader reader, EventReportRPdu value)
+    private static void ReadEventReportReliablePduFields(ref DisBinaryReader reader, EventReportReliablePdu value)
     {
-        value.EventType = reader.ReadUInt32("eventType");
+        value.EventType = (EventReportEventType)reader.ReadUInt32("eventType");
         value.Pad1 = reader.ReadUInt32("pad1");
         value.NumberOfFixedDatumRecords = reader.ReadUInt32("numberOfFixedDatumRecords");
         value.NumberOfVariableDatumRecords = reader.ReadUInt32("numberOfVariableDatumRecords");
@@ -5767,7 +5502,7 @@ internal static partial class PduCodec
             value.VariableDatumRecords.Add(ReadVariableDatum(ref reader));
     }
 
-    private static void PrepareEventReportRPduFields(EventReportRPdu value)
+    private static void PrepareEventReportReliablePduFields(EventReportReliablePdu value)
     {
         ArgumentNullException.ThrowIfNull(value.FixedDatumRecords);
         foreach (FixedDatum item in value.FixedDatumRecords) PrepareFixedDatum(item);
@@ -5777,9 +5512,9 @@ internal static partial class PduCodec
         value.NumberOfVariableDatumRecords = checked((uint)value.VariableDatumRecords.Count);
     }
 
-    private static void WriteEventReportRPduFields(ref DisBinaryWriter writer, EventReportRPdu value)
+    private static void WriteEventReportReliablePduFields(ref DisBinaryWriter writer, EventReportReliablePdu value)
     {
-        writer.WriteUInt32(value.EventType, "eventType");
+        writer.WriteUInt32((uint)value.EventType, "eventType");
         writer.WriteUInt32(value.Pad1, "pad1");
         writer.WriteUInt32(value.NumberOfFixedDatumRecords, "numberOfFixedDatumRecords");
         writer.WriteUInt32(value.NumberOfVariableDatumRecords, "numberOfVariableDatumRecords");
@@ -5787,7 +5522,7 @@ internal static partial class PduCodec
         foreach (VariableDatum item in value.VariableDatumRecords) WriteVariableDatum(ref writer, item);
     }
 
-    private static void MeasureEventReportRPduFields(in EventReportRPdu value, ref int offset)
+    private static void MeasureEventReportReliablePduFields(in EventReportReliablePdu value, ref int offset)
     {
         offset += 4;
         offset += 4;
@@ -5795,44 +5530,6 @@ internal static partial class PduCodec
         offset += 4;
         foreach (FixedDatum item in value.FixedDatumRecords) MeasureFixedDatum(item, ref offset);
         foreach (VariableDatum item in value.VariableDatumRecords) MeasureVariableDatum(item, ref offset);
-    }
-
-    private static EventReportReliablePdu ReadEventReportReliablePdu(ref DisBinaryReader reader)
-    {
-        var value = new EventReportReliablePdu();
-        ReadEventReportReliablePduFields(ref reader, value);
-        return value;
-    }
-
-    private static void ReadEventReportReliablePduFields(ref DisBinaryReader reader, EventReportReliablePdu value)
-    {
-    }
-
-    private static void PrepareEventReportReliablePdu(EventReportReliablePdu value)
-    {
-        PrepareEventReportReliablePduFields(value);
-    }
-
-    private static void PrepareEventReportReliablePduFields(EventReportReliablePdu value)
-    {
-    }
-
-    private static void WriteEventReportReliablePdu(ref DisBinaryWriter writer, EventReportReliablePdu value)
-    {
-        WriteEventReportReliablePduFields(ref writer, value);
-    }
-
-    private static void WriteEventReportReliablePduFields(ref DisBinaryWriter writer, EventReportReliablePdu value)
-    {
-    }
-
-    private static void MeasureEventReportReliablePdu(in EventReportReliablePdu value, ref int offset)
-    {
-        MeasureEventReportReliablePduFields(value, ref offset);
-    }
-
-    private static void MeasureEventReportReliablePduFields(in EventReportReliablePdu value, ref int offset)
-    {
     }
 
     private static Expendable ReadExpendable(ref DisBinaryReader reader)
@@ -5847,7 +5544,7 @@ internal static partial class PduCodec
         value.ExpendableValue = ReadEntityType(ref reader);
         value.Station = reader.ReadUInt32("station");
         value.Quantity = reader.ReadUInt16("quantity");
-        value.ExpendableStatus = reader.ReadByte("expendableStatus");
+        value.ExpendableStatus = (MunitionExpendableStatus)reader.ReadByte("expendableStatus");
         value.Padding = reader.ReadByte("padding");
     }
 
@@ -5872,7 +5569,7 @@ internal static partial class PduCodec
         WriteEntityType(ref writer, value.ExpendableValue);
         writer.WriteUInt32(value.Station, "station");
         writer.WriteUInt16(value.Quantity, "quantity");
-        writer.WriteByte(value.ExpendableStatus, "expendableStatus");
+        writer.WriteByte((byte)value.ExpendableStatus, "expendableStatus");
         writer.WriteByte(value.Padding, "padding");
     }
 
@@ -6004,7 +5701,7 @@ internal static partial class PduCodec
     private static void ReadExplosionDescriptorFields(ref DisBinaryReader reader, ExplosionDescriptor value)
     {
         value.ExplodingObject = ReadEntityType(ref reader);
-        value.ExplosiveMaterial = reader.ReadUInt16("explosiveMaterial");
+        value.ExplosiveMaterial = (ExplosiveMaterialCategories)reader.ReadUInt16("explosiveMaterial");
         value.Padding = reader.ReadUInt16("padding");
         value.ExplosiveForce = reader.ReadSingle("explosiveForce");
     }
@@ -6028,7 +5725,7 @@ internal static partial class PduCodec
     private static void WriteExplosionDescriptorFields(ref DisBinaryWriter writer, ExplosionDescriptor value)
     {
         WriteEntityType(ref writer, value.ExplodingObject);
-        writer.WriteUInt16(value.ExplosiveMaterial, "explosiveMaterial");
+        writer.WriteUInt16((ushort)value.ExplosiveMaterial, "explosiveMaterial");
         writer.WriteUInt16(value.Padding, "padding");
         writer.WriteSingle(value.ExplosiveForce, "explosiveForce");
     }
@@ -6060,7 +5757,7 @@ internal static partial class PduCodec
         value.Padding = reader.ReadUInt16("padding");
         value.EmitterNumber = reader.ReadByte("emitterNumber");
         value.BeamNumber = reader.ReadByte("beamNumber");
-        value.StateIndicator = reader.ReadByte("stateIndicator");
+        value.StateIndicator = (EeAttributeStateIndicator)reader.ReadByte("stateIndicator");
         value.Padding2 = reader.ReadByte("padding2");
         value.Padding3 = reader.ReadUInt16("padding3");
         value.FalseTargetCount = reader.ReadUInt16("falseTargetCount");
@@ -6093,7 +5790,7 @@ internal static partial class PduCodec
         writer.WriteUInt16(value.Padding, "padding");
         writer.WriteByte(value.EmitterNumber, "emitterNumber");
         writer.WriteByte(value.BeamNumber, "beamNumber");
-        writer.WriteByte(value.StateIndicator, "stateIndicator");
+        writer.WriteByte((byte)value.StateIndicator, "stateIndicator");
         writer.WriteByte(value.Padding2, "padding2");
         writer.WriteUInt16(value.Padding3, "padding3");
         writer.WriteUInt16(value.FalseTargetCount, "falseTargetCount");
@@ -6195,7 +5892,7 @@ internal static partial class PduCodec
 
     private static void ReadFixedDatumFields(ref DisBinaryReader reader, FixedDatum value)
     {
-        value.FixedDatumId = reader.ReadUInt32("fixedDatumID");
+        value.FixedDatumId = (VariableRecordType)reader.ReadUInt32("fixedDatumID");
         value.FixedDatumValue = reader.ReadUInt32("fixedDatumValue");
     }
 
@@ -6215,7 +5912,7 @@ internal static partial class PduCodec
 
     private static void WriteFixedDatumFields(ref DisBinaryWriter writer, FixedDatum value)
     {
-        writer.WriteUInt32(value.FixedDatumId, "fixedDatumID");
+        writer.WriteUInt32((uint)value.FixedDatumId, "fixedDatumID");
         writer.WriteUInt32(value.FixedDatumValue, "fixedDatumValue");
     }
 
@@ -6311,7 +6008,7 @@ internal static partial class PduCodec
         value.DomainFinalXi = reader.ReadDouble("domainFinalXi");
         value.DomainPointsXi = reader.ReadUInt16("domainPointsXi");
         value.InterleafFactor = reader.ReadByte("interleafFactor");
-        value.AxisType = reader.ReadByte("axisType");
+        value.AxisType = (GridAxisDescriptorAxisType)reader.ReadByte("axisType");
     }
 
     private static void PrepareGridAxisDescriptor(GridAxisDescriptor value)
@@ -6334,7 +6031,7 @@ internal static partial class PduCodec
         writer.WriteDouble(value.DomainFinalXi, "domainFinalXi");
         writer.WriteUInt16(value.DomainPointsXi, "domainPointsXi");
         writer.WriteByte(value.InterleafFactor, "interleafFactor");
-        writer.WriteByte(value.AxisType, "axisType");
+        writer.WriteByte((byte)value.AxisType, "axisType");
     }
 
     private static void MeasureGridAxisDescriptor(in GridAxisDescriptor value, ref int offset)
@@ -6472,8 +6169,8 @@ internal static partial class PduCodec
 
     private static void ReadGridDataFields(ref DisBinaryReader reader, GridData value)
     {
-        value.SampleType = reader.ReadUInt16("sampleType");
-        value.DataRepresentation = reader.ReadUInt16("dataRepresentation");
+        value.SampleType = (GriddedDataSampleType)reader.ReadUInt16("sampleType");
+        value.DataRepresentation = (GriddedDataDataRepresentation)reader.ReadUInt16("dataRepresentation");
     }
 
     private static void PrepareGridData(GridData value)
@@ -6492,8 +6189,8 @@ internal static partial class PduCodec
 
     private static void WriteGridDataFields(ref DisBinaryWriter writer, GridData value)
     {
-        writer.WriteUInt16(value.SampleType, "sampleType");
-        writer.WriteUInt16(value.DataRepresentation, "dataRepresentation");
+        writer.WriteUInt16((ushort)value.SampleType, "sampleType");
+        writer.WriteUInt16((ushort)value.DataRepresentation, "dataRepresentation");
     }
 
     private static void MeasureGridData(in GridData value, ref int offset)
@@ -6687,9 +6384,9 @@ internal static partial class PduCodec
         value.FieldNumber = reader.ReadUInt16("fieldNumber");
         value.PduNumber = reader.ReadUInt16("pduNumber");
         value.PduTotal = reader.ReadUInt16("pduTotal");
-        value.CoordinateSystem = reader.ReadUInt16("coordinateSystem");
+        value.CoordinateSystem = (GriddedDataCoordinateSystem)reader.ReadUInt16("coordinateSystem");
         value.NumberOfGridAxes = reader.ReadByte("numberOfGridAxes");
-        value.ConstantGrid = reader.ReadByte("constantGrid");
+        value.ConstantGrid = (GriddedDataConstantGrid)reader.ReadByte("constantGrid");
         value.EnvironmentType = ReadEntityType(ref reader);
         value.Orientation = ReadEulerAngles(ref reader);
         value.SampleTime = ReadClockTime(ref reader);
@@ -6731,9 +6428,9 @@ internal static partial class PduCodec
         writer.WriteUInt16(value.FieldNumber, "fieldNumber");
         writer.WriteUInt16(value.PduNumber, "pduNumber");
         writer.WriteUInt16(value.PduTotal, "pduTotal");
-        writer.WriteUInt16(value.CoordinateSystem, "coordinateSystem");
+        writer.WriteUInt16((ushort)value.CoordinateSystem, "coordinateSystem");
         writer.WriteByte(value.NumberOfGridAxes, "numberOfGridAxes");
-        writer.WriteByte(value.ConstantGrid, "constantGrid");
+        writer.WriteByte((byte)value.ConstantGrid, "constantGrid");
         WriteEntityType(ref writer, value.EnvironmentType);
         WriteEulerAngles(ref writer, value.Orientation);
         WriteClockTime(ref writer, value.SampleTime);
@@ -6820,7 +6517,7 @@ internal static partial class PduCodec
 
     private static void ReadIFFDataFields(ref DisBinaryReader reader, IFFData value)
     {
-        value.RecordType = reader.ReadUInt32("recordType");
+        value.RecordType = (VariableRecordType)reader.ReadUInt32("recordType");
         value.RecordLength = reader.ReadUInt16("recordLength");
         int RecordSpecificFieldsCount = CheckedCount(Math.Max(0, checked((int)value.RecordLength) - 4), reader.Remaining, "recordSpecificFields");
         value.RecordSpecificFields = new byte[RecordSpecificFieldsCount];
@@ -6846,7 +6543,7 @@ internal static partial class PduCodec
 
     private static void WriteIFFDataFields(ref DisBinaryWriter writer, IFFData value)
     {
-        writer.WriteUInt32(value.RecordType, "recordType");
+        writer.WriteUInt32((uint)value.RecordType, "recordType");
         writer.WriteUInt16(value.RecordLength, "recordLength");
         foreach (byte item in value.RecordSpecificFields) writer.WriteByte(item, "recordSpecificFields");
         writer.WriteZeros(Padding(writer.Offset, 4), "padding");
@@ -6929,7 +6626,7 @@ internal static partial class PduCodec
         value.Pgrf = reader.ReadSingle("pgrf");
         value.PulseWidth = reader.ReadSingle("pulseWidth");
         value.BurstLength = reader.ReadUInt32("burstLength");
-        value.ApplicableModes = reader.ReadByte("applicableModes");
+        value.ApplicableModes = (IffApplicableModes)reader.ReadByte("applicableModes");
         int SystemSpecificDataCount = CheckedCount(3, reader.Remaining, "systemSpecificData");
         value.SystemSpecificData = new byte[SystemSpecificDataCount];
         for (int index = 0; index < SystemSpecificDataCount; index++)
@@ -6958,7 +6655,7 @@ internal static partial class PduCodec
         writer.WriteSingle(value.Pgrf, "pgrf");
         writer.WriteSingle(value.PulseWidth, "pulseWidth");
         writer.WriteUInt32(value.BurstLength, "burstLength");
-        writer.WriteByte(value.ApplicableModes, "applicableModes");
+        writer.WriteByte((byte)value.ApplicableModes, "applicableModes");
         foreach (byte item in value.SystemSpecificData) writer.WriteByte(item, "systemSpecificData");
     }
 
@@ -6976,83 +6673,6 @@ internal static partial class PduCodec
         offset += 4;
         offset += 1;
         offset += checked(value.SystemSpecificData.Length * 1);
-    }
-
-    private static void ReadIFFPduFields(ref DisBinaryReader reader, IFFPdu value)
-    {
-        value.EmittingEntityId = ReadEntityId(ref reader);
-        value.EventId = ReadEventIdentifier(ref reader);
-        value.Location = ReadVector3Float(ref reader);
-        value.SystemId = ReadSystemIdentifier(ref reader);
-        value.SystemDesignator = reader.ReadByte("systemDesignator");
-        value.SystemSpecificData = reader.ReadByte("systemSpecificData");
-        value.FundamentalParameters = ReadFundamentalOperationalData(ref reader);
-        value.IFFPduLayer2Data = ReadIFFPduLayer2Data(ref reader);
-        value.IFFPduLayer3TransponderFormatData = ReadIFFPduLayer3TransponderFormatData(ref reader);
-        value.IFFPduLayer3InterrogatorFormatData = ReadIFFPduLayer3InterrogatorFormatData(ref reader);
-        value.IFFPduLayer4InterrogatorFormatData = ReadIFFPduLayer4InterrogatorFormatData(ref reader);
-        value.IFFPduLayer4TransponderFormatData = ReadIFFPduLayer4TransponderFormatData(ref reader);
-        value.IFFPduLayer5Data = ReadIFFPduLayer5Data(ref reader);
-    }
-
-    private static void PrepareIFFPduFields(IFFPdu value)
-    {
-        ArgumentNullException.ThrowIfNull(value.EmittingEntityId);
-        PrepareEntityId(value.EmittingEntityId);
-        ArgumentNullException.ThrowIfNull(value.EventId);
-        PrepareEventIdentifier(value.EventId);
-        ArgumentNullException.ThrowIfNull(value.Location);
-        PrepareVector3Float(value.Location);
-        ArgumentNullException.ThrowIfNull(value.SystemId);
-        PrepareSystemIdentifier(value.SystemId);
-        ArgumentNullException.ThrowIfNull(value.FundamentalParameters);
-        PrepareFundamentalOperationalData(value.FundamentalParameters);
-        ArgumentNullException.ThrowIfNull(value.IFFPduLayer2Data);
-        PrepareIFFPduLayer2Data(value.IFFPduLayer2Data);
-        ArgumentNullException.ThrowIfNull(value.IFFPduLayer3TransponderFormatData);
-        PrepareIFFPduLayer3TransponderFormatData(value.IFFPduLayer3TransponderFormatData);
-        ArgumentNullException.ThrowIfNull(value.IFFPduLayer3InterrogatorFormatData);
-        PrepareIFFPduLayer3InterrogatorFormatData(value.IFFPduLayer3InterrogatorFormatData);
-        ArgumentNullException.ThrowIfNull(value.IFFPduLayer4InterrogatorFormatData);
-        PrepareIFFPduLayer4InterrogatorFormatData(value.IFFPduLayer4InterrogatorFormatData);
-        ArgumentNullException.ThrowIfNull(value.IFFPduLayer4TransponderFormatData);
-        PrepareIFFPduLayer4TransponderFormatData(value.IFFPduLayer4TransponderFormatData);
-        ArgumentNullException.ThrowIfNull(value.IFFPduLayer5Data);
-        PrepareIFFPduLayer5Data(value.IFFPduLayer5Data);
-    }
-
-    private static void WriteIFFPduFields(ref DisBinaryWriter writer, IFFPdu value)
-    {
-        WriteEntityId(ref writer, value.EmittingEntityId);
-        WriteEventIdentifier(ref writer, value.EventId);
-        WriteVector3Float(ref writer, value.Location);
-        WriteSystemIdentifier(ref writer, value.SystemId);
-        writer.WriteByte(value.SystemDesignator, "systemDesignator");
-        writer.WriteByte(value.SystemSpecificData, "systemSpecificData");
-        WriteFundamentalOperationalData(ref writer, value.FundamentalParameters);
-        WriteIFFPduLayer2Data(ref writer, value.IFFPduLayer2Data);
-        WriteIFFPduLayer3TransponderFormatData(ref writer, value.IFFPduLayer3TransponderFormatData);
-        WriteIFFPduLayer3InterrogatorFormatData(ref writer, value.IFFPduLayer3InterrogatorFormatData);
-        WriteIFFPduLayer4InterrogatorFormatData(ref writer, value.IFFPduLayer4InterrogatorFormatData);
-        WriteIFFPduLayer4TransponderFormatData(ref writer, value.IFFPduLayer4TransponderFormatData);
-        WriteIFFPduLayer5Data(ref writer, value.IFFPduLayer5Data);
-    }
-
-    private static void MeasureIFFPduFields(in IFFPdu value, ref int offset)
-    {
-        MeasureEntityId(value.EmittingEntityId, ref offset);
-        MeasureEventIdentifier(value.EventId, ref offset);
-        MeasureVector3Float(value.Location, ref offset);
-        MeasureSystemIdentifier(value.SystemId, ref offset);
-        offset += 1;
-        offset += 1;
-        MeasureFundamentalOperationalData(value.FundamentalParameters, ref offset);
-        MeasureIFFPduLayer2Data(value.IFFPduLayer2Data, ref offset);
-        MeasureIFFPduLayer3TransponderFormatData(value.IFFPduLayer3TransponderFormatData, ref offset);
-        MeasureIFFPduLayer3InterrogatorFormatData(value.IFFPduLayer3InterrogatorFormatData, ref offset);
-        MeasureIFFPduLayer4InterrogatorFormatData(value.IFFPduLayer4InterrogatorFormatData, ref offset);
-        MeasureIFFPduLayer4TransponderFormatData(value.IFFPduLayer4TransponderFormatData, ref offset);
-        MeasureIFFPduLayer5Data(value.IFFPduLayer5Data, ref offset);
     }
 
     private static IFFPduLayer2Data ReadIFFPduLayer2Data(ref DisBinaryReader reader)
@@ -7432,7 +7052,7 @@ internal static partial class PduCodec
         value.ApplicationNumber = reader.ReadUInt16("applicationNumber");
         value.Padding = reader.ReadUInt16("padding");
         value.ApplicableLayers = reader.ReadByte("applicableLayers");
-        value.DataCategory = reader.ReadByte("dataCategory");
+        value.DataCategory = (DataCategory)reader.ReadByte("dataCategory");
         value.Padding2 = reader.ReadUInt16("padding2");
         value.NumberOfIFFFundamentalParameterDataRecordsParameters = reader.ReadUInt16("numberOfIFFFundamentalParameterDataRecordsParameters");
         int IFFFundamentalParameterDataRecordCount = CheckedCount(checked((int)value.NumberOfIFFFundamentalParameterDataRecordsParameters), reader.Remaining, "IFFFundamentalParameterDataRecord");
@@ -7469,7 +7089,7 @@ internal static partial class PduCodec
         writer.WriteUInt16(value.ApplicationNumber, "applicationNumber");
         writer.WriteUInt16(value.Padding, "padding");
         writer.WriteByte(value.ApplicableLayers, "applicableLayers");
-        writer.WriteByte(value.DataCategory, "dataCategory");
+        writer.WriteByte((byte)value.DataCategory, "dataCategory");
         writer.WriteUInt16(value.Padding2, "padding2");
         writer.WriteUInt16(value.NumberOfIFFFundamentalParameterDataRecordsParameters, "numberOfIFFFundamentalParameterDataRecordsParameters");
         foreach (IFFDataSpecification item in value.IFFFundamentalParameterDataRecord) WriteIFFDataSpecification(ref writer, item);
@@ -7504,9 +7124,9 @@ internal static partial class PduCodec
 
     private static void ReadIOCommsNodeRecordFields(ref DisBinaryReader reader, IOCommsNodeRecord value)
     {
-        value.RecordType = reader.ReadUInt32("recordType");
+        value.RecordType = (VariableRecordType)reader.ReadUInt32("recordType");
         value.RecordLength = reader.ReadUInt16("recordLength");
-        value.CommsNodeType = reader.ReadByte("commsNodeType");
+        value.CommsNodeType = (IoCommsNodeRecordCommsNodeType)reader.ReadByte("commsNodeType");
         value.Padding = reader.ReadByte("padding");
         value.CommsNodeId = ReadCommunicationsNodeID(ref reader);
     }
@@ -7531,9 +7151,9 @@ internal static partial class PduCodec
 
     private static void WriteIOCommsNodeRecordFields(ref DisBinaryWriter writer, IOCommsNodeRecord value)
     {
-        writer.WriteUInt32(value.RecordType, "recordType");
+        writer.WriteUInt32((uint)value.RecordType, "recordType");
         writer.WriteUInt16(value.RecordLength, "recordLength");
-        writer.WriteByte(value.CommsNodeType, "commsNodeType");
+        writer.WriteByte((byte)value.CommsNodeType, "commsNodeType");
         writer.WriteByte(value.Padding, "padding");
         WriteCommunicationsNodeID(ref writer, value.CommsNodeId);
     }
@@ -7563,14 +7183,14 @@ internal static partial class PduCodec
 
     private static void ReadIOEffectRecordFields(ref DisBinaryReader reader, IOEffectRecord value)
     {
-        value.RecordType = reader.ReadUInt32("recordType");
+        value.RecordType = (VariableRecordType)reader.ReadUInt32("recordType");
         value.RecordLength = reader.ReadUInt16("recordLength");
-        value.IoStatus = reader.ReadByte("ioStatus");
-        value.IoLinkType = reader.ReadByte("ioLinkType");
-        value.IoEffect = reader.ReadByte("ioEffect");
+        value.IoStatus = (IoEffectsRecordIoStatus)reader.ReadByte("ioStatus");
+        value.IoLinkType = (IoEffectsRecordIoLinkType)reader.ReadByte("ioLinkType");
+        value.IoEffect = (IoEffectsRecordIoEffect)reader.ReadByte("ioEffect");
         value.IoEffectDutyCycle = reader.ReadByte("ioEffectDutyCycle");
         value.IoEffectDuration = reader.ReadUInt16("ioEffectDuration");
-        value.IoProcess = reader.ReadUInt16("ioProcess");
+        value.IoProcess = (IoEffectsRecordIoProcess)reader.ReadUInt16("ioProcess");
         value.Padding = reader.ReadUInt16("padding");
     }
 
@@ -7592,14 +7212,14 @@ internal static partial class PduCodec
 
     private static void WriteIOEffectRecordFields(ref DisBinaryWriter writer, IOEffectRecord value)
     {
-        writer.WriteUInt32(value.RecordType, "recordType");
+        writer.WriteUInt32((uint)value.RecordType, "recordType");
         writer.WriteUInt16(value.RecordLength, "recordLength");
-        writer.WriteByte(value.IoStatus, "ioStatus");
-        writer.WriteByte(value.IoLinkType, "ioLinkType");
-        writer.WriteByte(value.IoEffect, "ioEffect");
+        writer.WriteByte((byte)value.IoStatus, "ioStatus");
+        writer.WriteByte((byte)value.IoLinkType, "ioLinkType");
+        writer.WriteByte((byte)value.IoEffect, "ioEffect");
         writer.WriteByte(value.IoEffectDutyCycle, "ioEffectDutyCycle");
         writer.WriteUInt16(value.IoEffectDuration, "ioEffectDuration");
-        writer.WriteUInt16(value.IoProcess, "ioProcess");
+        writer.WriteUInt16((ushort)value.IoProcess, "ioProcess");
         writer.WriteUInt16(value.Padding, "padding");
     }
 
@@ -7660,52 +7280,91 @@ internal static partial class PduCodec
     {
     }
 
-    private static IdentificationFriendOrFoePdu ReadIdentificationFriendOrFoePdu(ref DisBinaryReader reader)
-    {
-        var value = new IdentificationFriendOrFoePdu();
-        ReadIdentificationFriendOrFoePduFields(ref reader, value);
-        return value;
-    }
-
     private static void ReadIdentificationFriendOrFoePduFields(ref DisBinaryReader reader, IdentificationFriendOrFoePdu value)
     {
-    }
-
-    private static void PrepareIdentificationFriendOrFoePdu(IdentificationFriendOrFoePdu value)
-    {
-        PrepareIdentificationFriendOrFoePduFields(value);
+        value.EmittingEntityId = ReadEntityId(ref reader);
+        value.EventId = ReadEventIdentifier(ref reader);
+        value.Location = ReadVector3Float(ref reader);
+        value.SystemId = ReadSystemIdentifier(ref reader);
+        value.SystemDesignator = reader.ReadByte("systemDesignator");
+        value.SystemSpecificData = reader.ReadByte("systemSpecificData");
+        value.FundamentalParameters = ReadFundamentalOperationalData(ref reader);
+        value.IFFPduLayer2Data = ReadIFFPduLayer2Data(ref reader);
+        value.IFFPduLayer3TransponderFormatData = ReadIFFPduLayer3TransponderFormatData(ref reader);
+        value.IFFPduLayer3InterrogatorFormatData = ReadIFFPduLayer3InterrogatorFormatData(ref reader);
+        value.IFFPduLayer4InterrogatorFormatData = ReadIFFPduLayer4InterrogatorFormatData(ref reader);
+        value.IFFPduLayer4TransponderFormatData = ReadIFFPduLayer4TransponderFormatData(ref reader);
+        value.IFFPduLayer5Data = ReadIFFPduLayer5Data(ref reader);
     }
 
     private static void PrepareIdentificationFriendOrFoePduFields(IdentificationFriendOrFoePdu value)
     {
-    }
-
-    private static void WriteIdentificationFriendOrFoePdu(ref DisBinaryWriter writer, IdentificationFriendOrFoePdu value)
-    {
-        WriteIdentificationFriendOrFoePduFields(ref writer, value);
+        ArgumentNullException.ThrowIfNull(value.EmittingEntityId);
+        PrepareEntityId(value.EmittingEntityId);
+        ArgumentNullException.ThrowIfNull(value.EventId);
+        PrepareEventIdentifier(value.EventId);
+        ArgumentNullException.ThrowIfNull(value.Location);
+        PrepareVector3Float(value.Location);
+        ArgumentNullException.ThrowIfNull(value.SystemId);
+        PrepareSystemIdentifier(value.SystemId);
+        ArgumentNullException.ThrowIfNull(value.FundamentalParameters);
+        PrepareFundamentalOperationalData(value.FundamentalParameters);
+        ArgumentNullException.ThrowIfNull(value.IFFPduLayer2Data);
+        PrepareIFFPduLayer2Data(value.IFFPduLayer2Data);
+        ArgumentNullException.ThrowIfNull(value.IFFPduLayer3TransponderFormatData);
+        PrepareIFFPduLayer3TransponderFormatData(value.IFFPduLayer3TransponderFormatData);
+        ArgumentNullException.ThrowIfNull(value.IFFPduLayer3InterrogatorFormatData);
+        PrepareIFFPduLayer3InterrogatorFormatData(value.IFFPduLayer3InterrogatorFormatData);
+        ArgumentNullException.ThrowIfNull(value.IFFPduLayer4InterrogatorFormatData);
+        PrepareIFFPduLayer4InterrogatorFormatData(value.IFFPduLayer4InterrogatorFormatData);
+        ArgumentNullException.ThrowIfNull(value.IFFPduLayer4TransponderFormatData);
+        PrepareIFFPduLayer4TransponderFormatData(value.IFFPduLayer4TransponderFormatData);
+        ArgumentNullException.ThrowIfNull(value.IFFPduLayer5Data);
+        PrepareIFFPduLayer5Data(value.IFFPduLayer5Data);
     }
 
     private static void WriteIdentificationFriendOrFoePduFields(ref DisBinaryWriter writer, IdentificationFriendOrFoePdu value)
     {
-    }
-
-    private static void MeasureIdentificationFriendOrFoePdu(in IdentificationFriendOrFoePdu value, ref int offset)
-    {
-        MeasureIdentificationFriendOrFoePduFields(value, ref offset);
+        WriteEntityId(ref writer, value.EmittingEntityId);
+        WriteEventIdentifier(ref writer, value.EventId);
+        WriteVector3Float(ref writer, value.Location);
+        WriteSystemIdentifier(ref writer, value.SystemId);
+        writer.WriteByte(value.SystemDesignator, "systemDesignator");
+        writer.WriteByte(value.SystemSpecificData, "systemSpecificData");
+        WriteFundamentalOperationalData(ref writer, value.FundamentalParameters);
+        WriteIFFPduLayer2Data(ref writer, value.IFFPduLayer2Data);
+        WriteIFFPduLayer3TransponderFormatData(ref writer, value.IFFPduLayer3TransponderFormatData);
+        WriteIFFPduLayer3InterrogatorFormatData(ref writer, value.IFFPduLayer3InterrogatorFormatData);
+        WriteIFFPduLayer4InterrogatorFormatData(ref writer, value.IFFPduLayer4InterrogatorFormatData);
+        WriteIFFPduLayer4TransponderFormatData(ref writer, value.IFFPduLayer4TransponderFormatData);
+        WriteIFFPduLayer5Data(ref writer, value.IFFPduLayer5Data);
     }
 
     private static void MeasureIdentificationFriendOrFoePduFields(in IdentificationFriendOrFoePdu value, ref int offset)
     {
+        MeasureEntityId(value.EmittingEntityId, ref offset);
+        MeasureEventIdentifier(value.EventId, ref offset);
+        MeasureVector3Float(value.Location, ref offset);
+        MeasureSystemIdentifier(value.SystemId, ref offset);
+        offset += 1;
+        offset += 1;
+        MeasureFundamentalOperationalData(value.FundamentalParameters, ref offset);
+        MeasureIFFPduLayer2Data(value.IFFPduLayer2Data, ref offset);
+        MeasureIFFPduLayer3TransponderFormatData(value.IFFPduLayer3TransponderFormatData, ref offset);
+        MeasureIFFPduLayer3InterrogatorFormatData(value.IFFPduLayer3InterrogatorFormatData, ref offset);
+        MeasureIFFPduLayer4InterrogatorFormatData(value.IFFPduLayer4InterrogatorFormatData, ref offset);
+        MeasureIFFPduLayer4TransponderFormatData(value.IFFPduLayer4TransponderFormatData, ref offset);
+        MeasureIFFPduLayer5Data(value.IFFPduLayer5Data, ref offset);
     }
 
     private static void ReadInformationOperationsActionPduFields(ref DisBinaryReader reader, InformationOperationsActionPdu value)
     {
         value.ReceivingSimId = ReadEntityId(ref reader);
         value.RequestId = reader.ReadUInt32("requestID");
-        value.IOWarfareType = reader.ReadUInt16("IOWarfareType");
-        value.IOSimulationSource = reader.ReadUInt16("IOSimulationSource");
-        value.IOActionType = reader.ReadUInt16("IOActionType");
-        value.IOActionPhase = reader.ReadUInt16("IOActionPhase");
+        value.IOWarfareType = (IoActionIoWarfareType)reader.ReadUInt16("IOWarfareType");
+        value.IOSimulationSource = (IoActionIoSimulationSource)reader.ReadUInt16("IOSimulationSource");
+        value.IOActionType = (IoActionIoActionType)reader.ReadUInt16("IOActionType");
+        value.IOActionPhase = (IoActionIoActionPhase)reader.ReadUInt16("IOActionPhase");
         value.Padding1 = reader.ReadUInt32("padding1");
         value.IoAttackerId = ReadEntityId(ref reader);
         value.IoPrimaryTargetId = ReadEntityId(ref reader);
@@ -7734,10 +7393,10 @@ internal static partial class PduCodec
     {
         WriteEntityId(ref writer, value.ReceivingSimId);
         writer.WriteUInt32(value.RequestId, "requestID");
-        writer.WriteUInt16(value.IOWarfareType, "IOWarfareType");
-        writer.WriteUInt16(value.IOSimulationSource, "IOSimulationSource");
-        writer.WriteUInt16(value.IOActionType, "IOActionType");
-        writer.WriteUInt16(value.IOActionPhase, "IOActionPhase");
+        writer.WriteUInt16((ushort)value.IOWarfareType, "IOWarfareType");
+        writer.WriteUInt16((ushort)value.IOSimulationSource, "IOSimulationSource");
+        writer.WriteUInt16((ushort)value.IOActionType, "IOActionType");
+        writer.WriteUInt16((ushort)value.IOActionPhase, "IOActionPhase");
         writer.WriteUInt32(value.Padding1, "padding1");
         WriteEntityId(ref writer, value.IoAttackerId);
         WriteEntityId(ref writer, value.IoPrimaryTargetId);
@@ -7785,8 +7444,8 @@ internal static partial class PduCodec
 
     private static void ReadInformationOperationsReportPduFields(ref DisBinaryReader reader, InformationOperationsReportPdu value)
     {
-        value.IoSimSource = reader.ReadUInt16("ioSimSource");
-        value.IoReportType = reader.ReadByte("ioReportType");
+        value.IoSimSource = (IoActionIoSimulationSource)reader.ReadUInt16("ioSimSource");
+        value.IoReportType = (IoReportIoReportType)reader.ReadByte("ioReportType");
         value.Padding1 = reader.ReadByte("padding1");
         value.IoAttackerId = ReadEntityId(ref reader);
         value.IoPrimaryTargetId = ReadEntityId(ref reader);
@@ -7812,8 +7471,8 @@ internal static partial class PduCodec
 
     private static void WriteInformationOperationsReportPduFields(ref DisBinaryWriter writer, InformationOperationsReportPdu value)
     {
-        writer.WriteUInt16(value.IoSimSource, "ioSimSource");
-        writer.WriteByte(value.IoReportType, "ioReportType");
+        writer.WriteUInt16((ushort)value.IoSimSource, "ioSimSource");
+        writer.WriteByte((byte)value.IoReportType, "ioReportType");
         writer.WriteByte(value.Padding1, "padding1");
         WriteEntityId(ref writer, value.IoAttackerId);
         WriteEntityId(ref writer, value.IoPrimaryTargetId);
@@ -7845,7 +7504,7 @@ internal static partial class PduCodec
 
     private static void ReadIntercomCommunicationsParametersFields(ref DisBinaryReader reader, IntercomCommunicationsParameters value)
     {
-        value.RecordType = reader.ReadUInt16("recordType");
+        value.RecordType = (IntercomControlRecordType)reader.ReadUInt16("recordType");
         value.RecordLength = reader.ReadUInt16("recordLength");
         int RecordSpecificFieldCount = CheckedCount(Math.Max(0, checked((int)value.RecordLength) - 4), reader.Remaining, "recordSpecificField");
         value.RecordSpecificField = new byte[RecordSpecificFieldCount];
@@ -7871,7 +7530,7 @@ internal static partial class PduCodec
 
     private static void WriteIntercomCommunicationsParametersFields(ref DisBinaryWriter writer, IntercomCommunicationsParameters value)
     {
-        writer.WriteUInt16(value.RecordType, "recordType");
+        writer.WriteUInt16((ushort)value.RecordType, "recordType");
         writer.WriteUInt16(value.RecordLength, "recordLength");
         foreach (byte item in value.RecordSpecificField) writer.WriteByte(item, "recordSpecificField");
         writer.WriteZeros(Padding(writer.Offset, 4), "padding");
@@ -7892,14 +7551,14 @@ internal static partial class PduCodec
 
     private static void ReadIntercomControlPduFields(ref DisBinaryReader reader, IntercomControlPdu value)
     {
-        value.ControlType = reader.ReadByte("controlType");
+        value.ControlType = (IntercomControlControlType)reader.ReadByte("controlType");
         value.CommunicationsChannelType = reader.ReadByte("communicationsChannelType");
         value.SourceEntityId = ReadEntityId(ref reader);
         value.SourceIntercomNumber = reader.ReadUInt16("sourceIntercomNumber");
         value.SourceLineId = reader.ReadByte("sourceLineID");
         value.TransmitPriority = reader.ReadByte("transmitPriority");
-        value.TransmitLineState = reader.ReadByte("transmitLineState");
-        value.Command = reader.ReadByte("command");
+        value.TransmitLineState = (IntercomControlTransmitLineState)reader.ReadByte("transmitLineState");
+        value.Command = (IntercomControlCommand)reader.ReadByte("command");
         value.MasterIntercomReferenceId = ReadEntityId(ref reader);
         value.MasterIntercomNumber = reader.ReadUInt16("masterIntercomNumber");
         value.MasterChannelId = reader.ReadUInt16("masterChannelID");
@@ -7929,14 +7588,14 @@ internal static partial class PduCodec
 
     private static void WriteIntercomControlPduFields(ref DisBinaryWriter writer, IntercomControlPdu value)
     {
-        writer.WriteByte(value.ControlType, "controlType");
+        writer.WriteByte((byte)value.ControlType, "controlType");
         writer.WriteByte(value.CommunicationsChannelType, "communicationsChannelType");
         WriteEntityId(ref writer, value.SourceEntityId);
         writer.WriteUInt16(value.SourceIntercomNumber, "sourceIntercomNumber");
         writer.WriteByte(value.SourceLineId, "sourceLineID");
         writer.WriteByte(value.TransmitPriority, "transmitPriority");
-        writer.WriteByte(value.TransmitLineState, "transmitLineState");
-        writer.WriteByte(value.Command, "command");
+        writer.WriteByte((byte)value.TransmitLineState, "transmitLineState");
+        writer.WriteByte((byte)value.Command, "command");
         WriteEntityId(ref writer, value.MasterIntercomReferenceId);
         writer.WriteUInt16(value.MasterIntercomNumber, "masterIntercomNumber");
         writer.WriteUInt16(value.MasterChannelId, "masterChannelID");
@@ -8063,10 +7722,10 @@ internal static partial class PduCodec
         value.IntercomReferenceId = ReadIntercomReferenceID(ref reader);
         value.IntercomNumber = reader.ReadUInt16("intercomNumber");
         value.EncodingScheme = reader.ReadUInt16("encodingScheme");
-        value.TdlType = reader.ReadUInt16("tdlType");
+        value.TdlType = (SignalTdlType)reader.ReadUInt16("tdlType");
         value.SampleRate = reader.ReadUInt32("sampleRate");
         value.DataBitLength = reader.ReadUInt16("dataBitLength");
-        value.Samples = reader.ReadUInt16("samples");
+        value.SampleCount = reader.ReadUInt16("samples");
         int DataCount = CheckedCount((checked((int)value.DataBitLength) + 7) / 8, reader.Remaining, "data");
         value.Data = new byte[DataCount];
         for (int index = 0; index < DataCount; index++)
@@ -8090,10 +7749,10 @@ internal static partial class PduCodec
         WriteIntercomReferenceID(ref writer, value.IntercomReferenceId);
         writer.WriteUInt16(value.IntercomNumber, "intercomNumber");
         writer.WriteUInt16(value.EncodingScheme, "encodingScheme");
-        writer.WriteUInt16(value.TdlType, "tdlType");
+        writer.WriteUInt16((ushort)value.TdlType, "tdlType");
         writer.WriteUInt32(value.SampleRate, "sampleRate");
         writer.WriteUInt16(value.DataBitLength, "dataBitLength");
-        writer.WriteUInt16(value.Samples, "samples");
+        writer.WriteUInt16(value.SampleCount, "samples");
         foreach (byte item in value.Data) writer.WriteByte(item, "data");
         writer.WriteZeros(Padding(writer.Offset, 4), "padTo32");
     }
@@ -8114,7 +7773,7 @@ internal static partial class PduCodec
     private static void ReadIsGroupOfPduFields(ref DisBinaryReader reader, IsGroupOfPdu value)
     {
         value.GroupEntityId = ReadEntityId(ref reader);
-        value.GroupedEntityCategory = reader.ReadByte("groupedEntityCategory");
+        value.GroupedEntityCategory = (IsGroupOfGroupedEntityCategory)reader.ReadByte("groupedEntityCategory");
         value.NumberOfGroupedEntities = reader.ReadByte("numberOfGroupedEntities");
         value.Pad = reader.ReadUInt32("pad");
         value.Latitude = reader.ReadDouble("latitude");
@@ -8137,7 +7796,7 @@ internal static partial class PduCodec
     private static void WriteIsGroupOfPduFields(ref DisBinaryWriter writer, IsGroupOfPdu value)
     {
         WriteEntityId(ref writer, value.GroupEntityId);
-        writer.WriteByte(value.GroupedEntityCategory, "groupedEntityCategory");
+        writer.WriteByte((byte)value.GroupedEntityCategory, "groupedEntityCategory");
         writer.WriteByte(value.NumberOfGroupedEntities, "numberOfGroupedEntities");
         writer.WriteUInt32(value.Pad, "pad");
         writer.WriteDouble(value.Latitude, "latitude");
@@ -8250,133 +7909,6 @@ internal static partial class PduCodec
         offset += 1;
         offset += 1;
         offset += 1;
-    }
-
-    private static void ReadLEDetonationPduFields(ref DisBinaryReader reader, LEDetonationPdu value)
-    {
-        value.FiringLiveEntityId = ReadEntityId(ref reader);
-        value.DetonationFlag1 = reader.ReadByte("detonationFlag1");
-        value.DetonationFlag2 = reader.ReadByte("detonationFlag2");
-        value.TargetLiveEntityId = ReadEntityId(ref reader);
-        value.MunitionLiveEntityId = ReadEntityId(ref reader);
-        value.EventId = ReadEventIdentifier(ref reader);
-        value.WorldLocation = ReadLiveEntityRelativeWorldCoordinates(ref reader);
-        value.Velocity = ReadLiveEntityLinearVelocity(ref reader);
-        value.MunitionOrientation = ReadLiveEntityOrientation16(ref reader);
-        value.MunitionDescriptor = ReadMunitionDescriptor(ref reader);
-        value.EntityLocation = ReadLiveEntityLinearVelocity(ref reader);
-        value.DetonationResult = reader.ReadByte("detonationResult");
-    }
-
-    private static void PrepareLEDetonationPduFields(LEDetonationPdu value)
-    {
-        ArgumentNullException.ThrowIfNull(value.FiringLiveEntityId);
-        PrepareEntityId(value.FiringLiveEntityId);
-        ArgumentNullException.ThrowIfNull(value.TargetLiveEntityId);
-        PrepareEntityId(value.TargetLiveEntityId);
-        ArgumentNullException.ThrowIfNull(value.MunitionLiveEntityId);
-        PrepareEntityId(value.MunitionLiveEntityId);
-        ArgumentNullException.ThrowIfNull(value.EventId);
-        PrepareEventIdentifier(value.EventId);
-        ArgumentNullException.ThrowIfNull(value.WorldLocation);
-        PrepareLiveEntityRelativeWorldCoordinates(value.WorldLocation);
-        ArgumentNullException.ThrowIfNull(value.Velocity);
-        PrepareLiveEntityLinearVelocity(value.Velocity);
-        ArgumentNullException.ThrowIfNull(value.MunitionOrientation);
-        PrepareLiveEntityOrientation16(value.MunitionOrientation);
-        ArgumentNullException.ThrowIfNull(value.MunitionDescriptor);
-        PrepareMunitionDescriptor(value.MunitionDescriptor);
-        ArgumentNullException.ThrowIfNull(value.EntityLocation);
-        PrepareLiveEntityLinearVelocity(value.EntityLocation);
-    }
-
-    private static void WriteLEDetonationPduFields(ref DisBinaryWriter writer, LEDetonationPdu value)
-    {
-        WriteEntityId(ref writer, value.FiringLiveEntityId);
-        writer.WriteByte(value.DetonationFlag1, "detonationFlag1");
-        writer.WriteByte(value.DetonationFlag2, "detonationFlag2");
-        WriteEntityId(ref writer, value.TargetLiveEntityId);
-        WriteEntityId(ref writer, value.MunitionLiveEntityId);
-        WriteEventIdentifier(ref writer, value.EventId);
-        WriteLiveEntityRelativeWorldCoordinates(ref writer, value.WorldLocation);
-        WriteLiveEntityLinearVelocity(ref writer, value.Velocity);
-        WriteLiveEntityOrientation16(ref writer, value.MunitionOrientation);
-        WriteMunitionDescriptor(ref writer, value.MunitionDescriptor);
-        WriteLiveEntityLinearVelocity(ref writer, value.EntityLocation);
-        writer.WriteByte(value.DetonationResult, "detonationResult");
-    }
-
-    private static void MeasureLEDetonationPduFields(in LEDetonationPdu value, ref int offset)
-    {
-        MeasureEntityId(value.FiringLiveEntityId, ref offset);
-        offset += 1;
-        offset += 1;
-        MeasureEntityId(value.TargetLiveEntityId, ref offset);
-        MeasureEntityId(value.MunitionLiveEntityId, ref offset);
-        MeasureEventIdentifier(value.EventId, ref offset);
-        MeasureLiveEntityRelativeWorldCoordinates(value.WorldLocation, ref offset);
-        MeasureLiveEntityLinearVelocity(value.Velocity, ref offset);
-        MeasureLiveEntityOrientation16(value.MunitionOrientation, ref offset);
-        MeasureMunitionDescriptor(value.MunitionDescriptor, ref offset);
-        MeasureLiveEntityLinearVelocity(value.EntityLocation, ref offset);
-        offset += 1;
-    }
-
-    private static void ReadLEFirePduFields(ref DisBinaryReader reader, LEFirePdu value)
-    {
-        value.FiringLiveEntityId = ReadEntityId(ref reader);
-        value.Flags = reader.ReadByte("flags");
-        value.TargetLiveEntityId = ReadEntityId(ref reader);
-        value.MunitionLiveEntityId = ReadEntityId(ref reader);
-        value.EventId = ReadEventIdentifier(ref reader);
-        value.Location = ReadLiveEntityRelativeWorldCoordinates(ref reader);
-        value.MunitionDescriptor = ReadMunitionDescriptor(ref reader);
-        value.Velocity = ReadLiveEntityLinearVelocity(ref reader);
-        value.Range = reader.ReadUInt16("range");
-    }
-
-    private static void PrepareLEFirePduFields(LEFirePdu value)
-    {
-        ArgumentNullException.ThrowIfNull(value.FiringLiveEntityId);
-        PrepareEntityId(value.FiringLiveEntityId);
-        ArgumentNullException.ThrowIfNull(value.TargetLiveEntityId);
-        PrepareEntityId(value.TargetLiveEntityId);
-        ArgumentNullException.ThrowIfNull(value.MunitionLiveEntityId);
-        PrepareEntityId(value.MunitionLiveEntityId);
-        ArgumentNullException.ThrowIfNull(value.EventId);
-        PrepareEventIdentifier(value.EventId);
-        ArgumentNullException.ThrowIfNull(value.Location);
-        PrepareLiveEntityRelativeWorldCoordinates(value.Location);
-        ArgumentNullException.ThrowIfNull(value.MunitionDescriptor);
-        PrepareMunitionDescriptor(value.MunitionDescriptor);
-        ArgumentNullException.ThrowIfNull(value.Velocity);
-        PrepareLiveEntityLinearVelocity(value.Velocity);
-    }
-
-    private static void WriteLEFirePduFields(ref DisBinaryWriter writer, LEFirePdu value)
-    {
-        WriteEntityId(ref writer, value.FiringLiveEntityId);
-        writer.WriteByte(value.Flags, "flags");
-        WriteEntityId(ref writer, value.TargetLiveEntityId);
-        WriteEntityId(ref writer, value.MunitionLiveEntityId);
-        WriteEventIdentifier(ref writer, value.EventId);
-        WriteLiveEntityRelativeWorldCoordinates(ref writer, value.Location);
-        WriteMunitionDescriptor(ref writer, value.MunitionDescriptor);
-        WriteLiveEntityLinearVelocity(ref writer, value.Velocity);
-        writer.WriteUInt16(value.Range, "range");
-    }
-
-    private static void MeasureLEFirePduFields(in LEFirePdu value, ref int offset)
-    {
-        MeasureEntityId(value.FiringLiveEntityId, ref offset);
-        offset += 1;
-        MeasureEntityId(value.TargetLiveEntityId, ref offset);
-        MeasureEntityId(value.MunitionLiveEntityId, ref offset);
-        MeasureEventIdentifier(value.EventId, ref offset);
-        MeasureLiveEntityRelativeWorldCoordinates(value.Location, ref offset);
-        MeasureMunitionDescriptor(value.MunitionDescriptor, ref offset);
-        MeasureLiveEntityLinearVelocity(value.Velocity, ref offset);
-        offset += 2;
     }
 
     private static LEVector3FixedByte ReadLEVector3FixedByte(ref DisBinaryReader reader)
@@ -8545,7 +8077,7 @@ internal static partial class PduCodec
         value.ObjectId = ReadObjectIdentifier(ref reader);
         value.ReferencedObjectId = ReadObjectIdentifier(ref reader);
         value.UpdateNumber = reader.ReadUInt16("updateNumber");
-        value.ForceId = reader.ReadByte("forceID");
+        value.ForceId = (ForceId)reader.ReadByte("forceID");
         value.NumberOfLinearSegments = reader.ReadByte("numberOfLinearSegments");
         value.RequesterId = ReadSimulationAddress(ref reader);
         value.ReceivingId = ReadSimulationAddress(ref reader);
@@ -8578,7 +8110,7 @@ internal static partial class PduCodec
         WriteObjectIdentifier(ref writer, value.ObjectId);
         WriteObjectIdentifier(ref writer, value.ReferencedObjectId);
         writer.WriteUInt16(value.UpdateNumber, "updateNumber");
-        writer.WriteByte(value.ForceId, "forceID");
+        writer.WriteByte((byte)value.ForceId, "forceID");
         writer.WriteByte(value.NumberOfLinearSegments, "numberOfLinearSegments");
         WriteSimulationAddress(ref writer, value.RequesterId);
         WriteSimulationAddress(ref writer, value.ReceivingId);
@@ -8609,8 +8141,8 @@ internal static partial class PduCodec
     private static void ReadLinearSegmentParameterFields(ref DisBinaryReader reader, LinearSegmentParameter value)
     {
         value.SegmentNumber = reader.ReadByte("segmentNumber");
-        value.SegmentModification = reader.ReadUInt16("segmentModification");
-        value.GeneralSegmentAppearance = reader.ReadUInt16("generalSegmentAppearance");
+        value.SegmentModification = new ObjectStateModificationLinearObject(reader.ReadUInt16("segmentModification"));
+        value.GeneralSegmentAppearance = new ObjectStateAppearanceGeneral(reader.ReadUInt16("generalSegmentAppearance"));
         value.SpecificSegmentAppearance = reader.ReadUInt32("specificSegmentAppearance");
         value.SegmentLocation = ReadVector3Double(ref reader);
         value.SegmentOrientation = ReadEulerAngles(ref reader);
@@ -8642,8 +8174,8 @@ internal static partial class PduCodec
     private static void WriteLinearSegmentParameterFields(ref DisBinaryWriter writer, LinearSegmentParameter value)
     {
         writer.WriteByte(value.SegmentNumber, "segmentNumber");
-        writer.WriteUInt16(value.SegmentModification, "segmentModification");
-        writer.WriteUInt16(value.GeneralSegmentAppearance, "generalSegmentAppearance");
+        writer.WriteUInt16(value.SegmentModification.Value, "segmentModification");
+        writer.WriteUInt16(value.GeneralSegmentAppearance.Value, "generalSegmentAppearance");
         writer.WriteUInt32(value.SpecificSegmentAppearance, "specificSegmentAppearance");
         WriteVector3Double(ref writer, value.SegmentLocation);
         WriteEulerAngles(ref writer, value.SegmentOrientation);
@@ -8683,7 +8215,7 @@ internal static partial class PduCodec
 
     private static void ReadLiveDeadReckoningParametersFields(ref DisBinaryReader reader, LiveDeadReckoningParameters value)
     {
-        value.DeadReckoningAlgorithm = reader.ReadByte("deadReckoningAlgorithm");
+        value.DeadReckoningAlgorithm = (DeadReckoningAlgorithm)reader.ReadByte("deadReckoningAlgorithm");
         value.EntityLinearAcceleration = ReadLEVector3FixedByte(ref reader);
         value.EntityAngularVelocity = ReadLEVector3FixedByte(ref reader);
     }
@@ -8708,7 +8240,7 @@ internal static partial class PduCodec
 
     private static void WriteLiveDeadReckoningParametersFields(ref DisBinaryWriter writer, LiveDeadReckoningParameters value)
     {
-        writer.WriteByte(value.DeadReckoningAlgorithm, "deadReckoningAlgorithm");
+        writer.WriteByte((byte)value.DeadReckoningAlgorithm, "deadReckoningAlgorithm");
         WriteLEVector3FixedByte(ref writer, value.EntityLinearAcceleration);
         WriteLEVector3FixedByte(ref writer, value.EntityAngularVelocity);
     }
@@ -8725,42 +8257,74 @@ internal static partial class PduCodec
         MeasureLEVector3FixedByte(value.EntityAngularVelocity, ref offset);
     }
 
-    private static LiveEntityDetonationPdu ReadLiveEntityDetonationPdu(ref DisBinaryReader reader)
-    {
-        var value = new LiveEntityDetonationPdu();
-        ReadLiveEntityDetonationPduFields(ref reader, value);
-        return value;
-    }
-
     private static void ReadLiveEntityDetonationPduFields(ref DisBinaryReader reader, LiveEntityDetonationPdu value)
     {
-    }
-
-    private static void PrepareLiveEntityDetonationPdu(LiveEntityDetonationPdu value)
-    {
-        PrepareLiveEntityDetonationPduFields(value);
+        value.FiringLiveEntityId = ReadEntityId(ref reader);
+        value.DetonationFlag1 = reader.ReadByte("detonationFlag1");
+        value.DetonationFlag2 = reader.ReadByte("detonationFlag2");
+        value.TargetLiveEntityId = ReadEntityId(ref reader);
+        value.MunitionLiveEntityId = ReadEntityId(ref reader);
+        value.EventId = ReadEventIdentifier(ref reader);
+        value.WorldLocation = ReadLiveEntityRelativeWorldCoordinates(ref reader);
+        value.Velocity = ReadLiveEntityLinearVelocity(ref reader);
+        value.MunitionOrientation = ReadLiveEntityOrientation16(ref reader);
+        value.MunitionDescriptor = ReadMunitionDescriptor(ref reader);
+        value.EntityLocation = ReadLiveEntityLinearVelocity(ref reader);
+        value.DetonationResult = reader.ReadByte("detonationResult");
     }
 
     private static void PrepareLiveEntityDetonationPduFields(LiveEntityDetonationPdu value)
     {
-    }
-
-    private static void WriteLiveEntityDetonationPdu(ref DisBinaryWriter writer, LiveEntityDetonationPdu value)
-    {
-        WriteLiveEntityDetonationPduFields(ref writer, value);
+        ArgumentNullException.ThrowIfNull(value.FiringLiveEntityId);
+        PrepareEntityId(value.FiringLiveEntityId);
+        ArgumentNullException.ThrowIfNull(value.TargetLiveEntityId);
+        PrepareEntityId(value.TargetLiveEntityId);
+        ArgumentNullException.ThrowIfNull(value.MunitionLiveEntityId);
+        PrepareEntityId(value.MunitionLiveEntityId);
+        ArgumentNullException.ThrowIfNull(value.EventId);
+        PrepareEventIdentifier(value.EventId);
+        ArgumentNullException.ThrowIfNull(value.WorldLocation);
+        PrepareLiveEntityRelativeWorldCoordinates(value.WorldLocation);
+        ArgumentNullException.ThrowIfNull(value.Velocity);
+        PrepareLiveEntityLinearVelocity(value.Velocity);
+        ArgumentNullException.ThrowIfNull(value.MunitionOrientation);
+        PrepareLiveEntityOrientation16(value.MunitionOrientation);
+        ArgumentNullException.ThrowIfNull(value.MunitionDescriptor);
+        PrepareMunitionDescriptor(value.MunitionDescriptor);
+        ArgumentNullException.ThrowIfNull(value.EntityLocation);
+        PrepareLiveEntityLinearVelocity(value.EntityLocation);
     }
 
     private static void WriteLiveEntityDetonationPduFields(ref DisBinaryWriter writer, LiveEntityDetonationPdu value)
     {
-    }
-
-    private static void MeasureLiveEntityDetonationPdu(in LiveEntityDetonationPdu value, ref int offset)
-    {
-        MeasureLiveEntityDetonationPduFields(value, ref offset);
+        WriteEntityId(ref writer, value.FiringLiveEntityId);
+        writer.WriteByte(value.DetonationFlag1, "detonationFlag1");
+        writer.WriteByte(value.DetonationFlag2, "detonationFlag2");
+        WriteEntityId(ref writer, value.TargetLiveEntityId);
+        WriteEntityId(ref writer, value.MunitionLiveEntityId);
+        WriteEventIdentifier(ref writer, value.EventId);
+        WriteLiveEntityRelativeWorldCoordinates(ref writer, value.WorldLocation);
+        WriteLiveEntityLinearVelocity(ref writer, value.Velocity);
+        WriteLiveEntityOrientation16(ref writer, value.MunitionOrientation);
+        WriteMunitionDescriptor(ref writer, value.MunitionDescriptor);
+        WriteLiveEntityLinearVelocity(ref writer, value.EntityLocation);
+        writer.WriteByte(value.DetonationResult, "detonationResult");
     }
 
     private static void MeasureLiveEntityDetonationPduFields(in LiveEntityDetonationPdu value, ref int offset)
     {
+        MeasureEntityId(value.FiringLiveEntityId, ref offset);
+        offset += 1;
+        offset += 1;
+        MeasureEntityId(value.TargetLiveEntityId, ref offset);
+        MeasureEntityId(value.MunitionLiveEntityId, ref offset);
+        MeasureEventIdentifier(value.EventId, ref offset);
+        MeasureLiveEntityRelativeWorldCoordinates(value.WorldLocation, ref offset);
+        MeasureLiveEntityLinearVelocity(value.Velocity, ref offset);
+        MeasureLiveEntityOrientation16(value.MunitionOrientation, ref offset);
+        MeasureMunitionDescriptor(value.MunitionDescriptor, ref offset);
+        MeasureLiveEntityLinearVelocity(value.EntityLocation, ref offset);
+        offset += 1;
     }
 
     private static void ReadLiveEntityFamilyPduFields(ref DisBinaryReader reader, LiveEntityFamilyPdu value)
@@ -8779,42 +8343,61 @@ internal static partial class PduCodec
     {
     }
 
-    private static LiveEntityFirePdu ReadLiveEntityFirePdu(ref DisBinaryReader reader)
-    {
-        var value = new LiveEntityFirePdu();
-        ReadLiveEntityFirePduFields(ref reader, value);
-        return value;
-    }
-
     private static void ReadLiveEntityFirePduFields(ref DisBinaryReader reader, LiveEntityFirePdu value)
     {
-    }
-
-    private static void PrepareLiveEntityFirePdu(LiveEntityFirePdu value)
-    {
-        PrepareLiveEntityFirePduFields(value);
+        value.FiringLiveEntityId = ReadEntityId(ref reader);
+        value.Flags = reader.ReadByte("flags");
+        value.TargetLiveEntityId = ReadEntityId(ref reader);
+        value.MunitionLiveEntityId = ReadEntityId(ref reader);
+        value.EventId = ReadEventIdentifier(ref reader);
+        value.Location = ReadLiveEntityRelativeWorldCoordinates(ref reader);
+        value.MunitionDescriptor = ReadMunitionDescriptor(ref reader);
+        value.Velocity = ReadLiveEntityLinearVelocity(ref reader);
+        value.Range = reader.ReadUInt16("range");
     }
 
     private static void PrepareLiveEntityFirePduFields(LiveEntityFirePdu value)
     {
-    }
-
-    private static void WriteLiveEntityFirePdu(ref DisBinaryWriter writer, LiveEntityFirePdu value)
-    {
-        WriteLiveEntityFirePduFields(ref writer, value);
+        ArgumentNullException.ThrowIfNull(value.FiringLiveEntityId);
+        PrepareEntityId(value.FiringLiveEntityId);
+        ArgumentNullException.ThrowIfNull(value.TargetLiveEntityId);
+        PrepareEntityId(value.TargetLiveEntityId);
+        ArgumentNullException.ThrowIfNull(value.MunitionLiveEntityId);
+        PrepareEntityId(value.MunitionLiveEntityId);
+        ArgumentNullException.ThrowIfNull(value.EventId);
+        PrepareEventIdentifier(value.EventId);
+        ArgumentNullException.ThrowIfNull(value.Location);
+        PrepareLiveEntityRelativeWorldCoordinates(value.Location);
+        ArgumentNullException.ThrowIfNull(value.MunitionDescriptor);
+        PrepareMunitionDescriptor(value.MunitionDescriptor);
+        ArgumentNullException.ThrowIfNull(value.Velocity);
+        PrepareLiveEntityLinearVelocity(value.Velocity);
     }
 
     private static void WriteLiveEntityFirePduFields(ref DisBinaryWriter writer, LiveEntityFirePdu value)
     {
-    }
-
-    private static void MeasureLiveEntityFirePdu(in LiveEntityFirePdu value, ref int offset)
-    {
-        MeasureLiveEntityFirePduFields(value, ref offset);
+        WriteEntityId(ref writer, value.FiringLiveEntityId);
+        writer.WriteByte(value.Flags, "flags");
+        WriteEntityId(ref writer, value.TargetLiveEntityId);
+        WriteEntityId(ref writer, value.MunitionLiveEntityId);
+        WriteEventIdentifier(ref writer, value.EventId);
+        WriteLiveEntityRelativeWorldCoordinates(ref writer, value.Location);
+        WriteMunitionDescriptor(ref writer, value.MunitionDescriptor);
+        WriteLiveEntityLinearVelocity(ref writer, value.Velocity);
+        writer.WriteUInt16(value.Range, "range");
     }
 
     private static void MeasureLiveEntityFirePduFields(in LiveEntityFirePdu value, ref int offset)
     {
+        MeasureEntityId(value.FiringLiveEntityId, ref offset);
+        offset += 1;
+        MeasureEntityId(value.TargetLiveEntityId, ref offset);
+        MeasureEntityId(value.MunitionLiveEntityId, ref offset);
+        MeasureEventIdentifier(value.EventId, ref offset);
+        MeasureLiveEntityRelativeWorldCoordinates(value.Location, ref offset);
+        MeasureMunitionDescriptor(value.MunitionDescriptor, ref offset);
+        MeasureLiveEntityLinearVelocity(value.Velocity, ref offset);
+        offset += 2;
     }
 
     private static LiveEntityIdentifier ReadLiveEntityIdentifier(ref DisBinaryReader reader)
@@ -9373,9 +8956,9 @@ internal static partial class PduCodec
         if ((value.DataFilter.BitFlags & (1u << 8)) != 0)
         {
             int FusingCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "fusing");
-            value.Fusing = new List<ushort>(FusingCount);
+            value.Fusing = new List<MinefieldDataFusing>(FusingCount);
             for (int index = 0; index < FusingCount; index++)
-                value.Fusing.Add(reader.ReadUInt16("fusing"));
+                value.Fusing.Add(new MinefieldDataFusing(reader.ReadUInt16("fusing")));
         }
         if ((value.DataFilter.BitFlags & (1u << 9)) != 0)
         {
@@ -9387,9 +8970,9 @@ internal static partial class PduCodec
         if ((value.DataFilter.BitFlags & (1u << 10)) != 0)
         {
             int PaintSchemeCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "paintScheme");
-            value.PaintScheme = new List<byte>(PaintSchemeCount);
+            value.PaintScheme = new List<MinefieldDataPaintScheme>(PaintSchemeCount);
             for (int index = 0; index < PaintSchemeCount; index++)
-                value.PaintScheme.Add(reader.ReadByte("paintScheme"));
+                value.PaintScheme.Add(new MinefieldDataPaintScheme(reader.ReadByte("paintScheme")));
         }
         reader.Skip(Padding(reader.Offset, 4), "padTo32_2");
         if ((value.DataFilter.BitFlags & (1u << 7)) != 0)
@@ -9550,7 +9133,7 @@ internal static partial class PduCodec
         foreach (ushort item in value.MineEntityNumber) writer.WriteUInt16(item, "mineEntityNumber");
         if ((value.DataFilter.BitFlags & (1u << 8)) != 0)
         {
-            foreach (ushort item in value.Fusing) writer.WriteUInt16(item, "fusing");
+            foreach (MinefieldDataFusing item in value.Fusing) writer.WriteUInt16(item.Value, "fusing");
         }
         if ((value.DataFilter.BitFlags & (1u << 9)) != 0)
         {
@@ -9558,7 +9141,7 @@ internal static partial class PduCodec
         }
         if ((value.DataFilter.BitFlags & (1u << 10)) != 0)
         {
-            foreach (byte item in value.PaintScheme) writer.WriteByte(item, "paintScheme");
+            foreach (MinefieldDataPaintScheme item in value.PaintScheme) writer.WriteByte(item.Value, "paintScheme");
         }
         writer.WriteZeros(Padding(writer.Offset, 4), "padTo32_2");
         if ((value.DataFilter.BitFlags & (1u << 7)) != 0)
@@ -9854,13 +9437,13 @@ internal static partial class PduCodec
     {
         value.MinefieldId = ReadMinefieldIdentifier(ref reader);
         value.MinefieldSequence = reader.ReadUInt16("minefieldSequence");
-        value.ForceId = reader.ReadByte("forceID");
+        value.ForceId = (ForceId)reader.ReadByte("forceID");
         value.NumberOfPerimeterPoints = reader.ReadByte("numberOfPerimeterPoints");
         value.MinefieldType = ReadEntityType(ref reader);
         value.NumberOfMineTypes = reader.ReadUInt16("numberOfMineTypes");
         value.MinefieldLocation = ReadVector3Double(ref reader);
         value.MinefieldOrientation = ReadEulerAngles(ref reader);
-        value.Appearance = reader.ReadUInt16("appearance");
+        value.Appearance = new MinefieldStateAppearanceBitMap(reader.ReadUInt16("appearance"));
         value.ProtocolMode = ReadProtocolMode(ref reader);
         int PerimeterPointsCount = CheckedCount(checked((int)value.NumberOfPerimeterPoints), reader.Remaining, "perimeterPoints");
         value.PerimeterPoints = new List<Vector2Float>(PerimeterPointsCount);
@@ -9896,13 +9479,13 @@ internal static partial class PduCodec
     {
         WriteMinefieldIdentifier(ref writer, value.MinefieldId);
         writer.WriteUInt16(value.MinefieldSequence, "minefieldSequence");
-        writer.WriteByte(value.ForceId, "forceID");
+        writer.WriteByte((byte)value.ForceId, "forceID");
         writer.WriteByte(value.NumberOfPerimeterPoints, "numberOfPerimeterPoints");
         WriteEntityType(ref writer, value.MinefieldType);
         writer.WriteUInt16(value.NumberOfMineTypes, "numberOfMineTypes");
         WriteVector3Double(ref writer, value.MinefieldLocation);
         WriteEulerAngles(ref writer, value.MinefieldOrientation);
-        writer.WriteUInt16(value.Appearance, "appearance");
+        writer.WriteUInt16(value.Appearance.Value, "appearance");
         WriteProtocolMode(ref writer, value.ProtocolMode);
         foreach (Vector2Float item in value.PerimeterPoints) WriteVector2Float(ref writer, item);
         foreach (EntityType item in value.MineType) WriteEntityType(ref writer, item);
@@ -9997,7 +9580,7 @@ internal static partial class PduCodec
         value.EnhancedMode1 = reader.ReadUInt16("enhancedMode1");
         value.NationalOrigin = reader.ReadUInt16("nationalOrigin");
         value.SupplementalData = reader.ReadByte("supplementalData");
-        value.NavigationSource = reader.ReadByte("navigationSource");
+        value.NavigationSource = (NavigationSource)reader.ReadByte("navigationSource");
         value.FigureOfMerit = reader.ReadByte("figureOfMerit");
         value.Padding = reader.ReadByte("padding");
     }
@@ -10024,7 +9607,7 @@ internal static partial class PduCodec
         writer.WriteUInt16(value.EnhancedMode1, "enhancedMode1");
         writer.WriteUInt16(value.NationalOrigin, "nationalOrigin");
         writer.WriteByte(value.SupplementalData, "supplementalData");
-        writer.WriteByte(value.NavigationSource, "navigationSource");
+        writer.WriteByte((byte)value.NavigationSource, "navigationSource");
         writer.WriteByte(value.FigureOfMerit, "figureOfMerit");
         writer.WriteByte(value.Padding, "padding");
     }
@@ -10123,13 +9706,13 @@ internal static partial class PduCodec
     {
         value.ModeSTransponderStatus = reader.ReadUInt16("modeSTransponderStatus");
         value.ModeSLevelsPresent = reader.ReadByte("modeSLevelsPresent");
-        value.AircraftPresentDomain = reader.ReadByte("aircraftPresentDomain");
+        value.AircraftPresentDomain = (AircraftPresentDomain)reader.ReadByte("aircraftPresentDomain");
         value.AircraftIdentification = reader.ReadUInt64("aircraftIdentification");
         value.AircraftAddress = reader.ReadUInt32("aircraftAddress");
-        value.AircraftIdentificationType = reader.ReadByte("aircraftIdentificationType");
+        value.AircraftIdentificationType = (AircraftIdentificationType)reader.ReadByte("aircraftIdentificationType");
         value.DapSource = reader.ReadByte("dapSource");
         value.ModeSAltitude = reader.ReadUInt16("modeSAltitude");
-        value.CapabilityReport = reader.ReadByte("capabilityReport");
+        value.CapabilityReport = (CapabilityReport)reader.ReadByte("capabilityReport");
         value.Padding = reader.ReadByte("padding");
         value.Padding2 = reader.ReadUInt16("padding2");
     }
@@ -10152,13 +9735,13 @@ internal static partial class PduCodec
     {
         writer.WriteUInt16(value.ModeSTransponderStatus, "modeSTransponderStatus");
         writer.WriteByte(value.ModeSLevelsPresent, "modeSLevelsPresent");
-        writer.WriteByte(value.AircraftPresentDomain, "aircraftPresentDomain");
+        writer.WriteByte((byte)value.AircraftPresentDomain, "aircraftPresentDomain");
         writer.WriteUInt64(value.AircraftIdentification, "aircraftIdentification");
         writer.WriteUInt32(value.AircraftAddress, "aircraftAddress");
-        writer.WriteByte(value.AircraftIdentificationType, "aircraftIdentificationType");
+        writer.WriteByte((byte)value.AircraftIdentificationType, "aircraftIdentificationType");
         writer.WriteByte(value.DapSource, "dapSource");
         writer.WriteUInt16(value.ModeSAltitude, "modeSAltitude");
-        writer.WriteByte(value.CapabilityReport, "capabilityReport");
+        writer.WriteByte((byte)value.CapabilityReport, "capabilityReport");
         writer.WriteByte(value.Padding, "padding");
         writer.WriteUInt16(value.Padding2, "padding2");
     }
@@ -10241,9 +9824,9 @@ internal static partial class PduCodec
     private static void ReadModulationTypeFields(ref DisBinaryReader reader, ModulationType value)
     {
         value.SpreadSpectrum = reader.ReadUInt16("spreadSpectrum");
-        value.MajorModulation = reader.ReadUInt16("majorModulation");
+        value.MajorModulation = (TransmitterMajorModulation)reader.ReadUInt16("majorModulation");
         value.Detail = reader.ReadUInt16("detail");
-        value.RadioSystem = reader.ReadUInt16("radioSystem");
+        value.RadioSystem = (TransmitterModulationTypeSystem)reader.ReadUInt16("radioSystem");
     }
 
     private static void PrepareModulationType(ModulationType value)
@@ -10263,9 +9846,9 @@ internal static partial class PduCodec
     private static void WriteModulationTypeFields(ref DisBinaryWriter writer, ModulationType value)
     {
         writer.WriteUInt16(value.SpreadSpectrum, "spreadSpectrum");
-        writer.WriteUInt16(value.MajorModulation, "majorModulation");
+        writer.WriteUInt16((ushort)value.MajorModulation, "majorModulation");
         writer.WriteUInt16(value.Detail, "detail");
-        writer.WriteUInt16(value.RadioSystem, "radioSystem");
+        writer.WriteUInt16((ushort)value.RadioSystem, "radioSystem");
     }
 
     private static void MeasureModulationType(in ModulationType value, ref int offset)
@@ -10293,7 +9876,7 @@ internal static partial class PduCodec
         value.MunitionType = ReadEntityType(ref reader);
         value.Station = reader.ReadUInt32("station");
         value.Quantity = reader.ReadUInt16("quantity");
-        value.MunitionStatus = reader.ReadByte("munitionStatus");
+        value.MunitionStatus = (MunitionExpendableStatus)reader.ReadByte("munitionStatus");
         value.Padding = reader.ReadByte("padding");
     }
 
@@ -10318,7 +9901,7 @@ internal static partial class PduCodec
         WriteEntityType(ref writer, value.MunitionType);
         writer.WriteUInt32(value.Station, "station");
         writer.WriteUInt16(value.Quantity, "quantity");
-        writer.WriteByte(value.MunitionStatus, "munitionStatus");
+        writer.WriteByte((byte)value.MunitionStatus, "munitionStatus");
         writer.WriteByte(value.Padding, "padding");
     }
 
@@ -10346,8 +9929,8 @@ internal static partial class PduCodec
     private static void ReadMunitionDescriptorFields(ref DisBinaryReader reader, MunitionDescriptor value)
     {
         value.MunitionType = ReadEntityType(ref reader);
-        value.Warhead = reader.ReadUInt16("warhead");
-        value.Fuse = reader.ReadUInt16("fuse");
+        value.Warhead = (MunitionDescriptorWarhead)reader.ReadUInt16("warhead");
+        value.Fuse = (MunitionDescriptorFuse)reader.ReadUInt16("fuse");
         value.Quantity = reader.ReadUInt16("quantity");
         value.Rate = reader.ReadUInt16("rate");
     }
@@ -10371,8 +9954,8 @@ internal static partial class PduCodec
     private static void WriteMunitionDescriptorFields(ref DisBinaryWriter writer, MunitionDescriptor value)
     {
         WriteEntityType(ref writer, value.MunitionType);
-        writer.WriteUInt16(value.Warhead, "warhead");
-        writer.WriteUInt16(value.Fuse, "fuse");
+        writer.WriteUInt16((ushort)value.Warhead, "warhead");
+        writer.WriteUInt16((ushort)value.Fuse, "fuse");
         writer.WriteUInt16(value.Quantity, "quantity");
         writer.WriteUInt16(value.Rate, "rate");
     }
@@ -10458,7 +10041,7 @@ internal static partial class PduCodec
 
     private static void ReadNamedLocationIdentificationFields(ref DisBinaryReader reader, NamedLocationIdentification value)
     {
-        value.StationName = reader.ReadUInt16("stationName");
+        value.StationName = (IsPartOfStationName)reader.ReadUInt16("stationName");
         value.StationNumber = reader.ReadUInt16("stationNumber");
     }
 
@@ -10478,7 +10061,7 @@ internal static partial class PduCodec
 
     private static void WriteNamedLocationIdentificationFields(ref DisBinaryWriter writer, NamedLocationIdentification value)
     {
-        writer.WriteUInt16(value.StationName, "stationName");
+        writer.WriteUInt16((ushort)value.StationName, "stationName");
         writer.WriteUInt16(value.StationNumber, "stationNumber");
     }
 
@@ -10548,8 +10131,8 @@ internal static partial class PduCodec
 
     private static void ReadObjectTypeFields(ref DisBinaryReader reader, ObjectType value)
     {
-        value.Domain = reader.ReadByte("domain");
-        value.ObjectKind = reader.ReadByte("objectKind");
+        value.Domain = (PlatformDomain)reader.ReadByte("domain");
+        value.ObjectKind = (ObjectKind)reader.ReadByte("objectKind");
         value.Category = reader.ReadByte("category");
         value.SubCategory = reader.ReadByte("subCategory");
     }
@@ -10570,8 +10153,8 @@ internal static partial class PduCodec
 
     private static void WriteObjectTypeFields(ref DisBinaryWriter writer, ObjectType value)
     {
-        writer.WriteByte(value.Domain, "domain");
-        writer.WriteByte(value.ObjectKind, "objectKind");
+        writer.WriteByte((byte)value.Domain, "domain");
+        writer.WriteByte((byte)value.ObjectKind, "objectKind");
         writer.WriteByte(value.Category, "category");
         writer.WriteByte(value.SubCategory, "subCategory");
     }
@@ -10599,7 +10182,7 @@ internal static partial class PduCodec
     private static void ReadOwnershipStatusRecordFields(ref DisBinaryReader reader, OwnershipStatusRecord value)
     {
         value.EntityId = ReadEntityId(ref reader);
-        value.OwnershipStatus = reader.ReadByte("ownershipStatus");
+        value.OwnershipStatus = (OwnershipStatus)reader.ReadByte("ownershipStatus");
         value.Padding = reader.ReadByte("padding");
     }
 
@@ -10622,7 +10205,7 @@ internal static partial class PduCodec
     private static void WriteOwnershipStatusRecordFields(ref DisBinaryWriter writer, OwnershipStatusRecord value)
     {
         WriteEntityId(ref writer, value.EntityId);
-        writer.WriteByte(value.OwnershipStatus, "ownershipStatus");
+        writer.WriteByte((byte)value.OwnershipStatus, "ownershipStatus");
         writer.WriteByte(value.Padding, "padding");
     }
 
@@ -10640,10 +10223,10 @@ internal static partial class PduCodec
 
     private static void ReadPduFields(ref DisBinaryReader reader, Pdu value)
     {
-        value.ProtocolVersion = reader.ReadByte("protocolVersion");
+        value.ProtocolVersion = (DisProtocolVersion)reader.ReadByte("protocolVersion");
         value.ExerciseId = reader.ReadByte("exerciseID");
-        value.PduType = reader.ReadByte("pduType");
-        value.ProtocolFamily = reader.ReadByte("protocolFamily");
+        value.PduType = (PduType)reader.ReadByte("pduType");
+        value.ProtocolFamily = (ProtocolFamily)reader.ReadByte("protocolFamily");
         value.Timestamp = reader.ReadUInt32("timestamp");
         value.Length = reader.ReadUInt16("length");
     }
@@ -10654,10 +10237,10 @@ internal static partial class PduCodec
 
     private static void WritePduFields(ref DisBinaryWriter writer, Pdu value)
     {
-        writer.WriteByte(value.ProtocolVersion, "protocolVersion");
+        writer.WriteByte((byte)value.ProtocolVersion, "protocolVersion");
         writer.WriteByte(value.ExerciseId, "exerciseID");
-        writer.WriteByte(value.PduType, "pduType");
-        writer.WriteByte(value.ProtocolFamily, "protocolFamily");
+        writer.WriteByte((byte)value.PduType, "pduType");
+        writer.WriteByte((byte)value.ProtocolFamily, "protocolFamily");
         writer.WriteUInt32(value.Timestamp, "timestamp");
         writer.WriteUInt16(value.Length, "length");
     }
@@ -10742,13 +10325,13 @@ internal static partial class PduCodec
         value.ObjectId = ReadEntityId(ref reader);
         value.ReferencedObjectId = ReadObjectIdentifier(ref reader);
         value.UpdateNumber = reader.ReadUInt32("updateNumber");
-        value.ForceId = reader.ReadByte("forceID");
-        value.Modifications = reader.ReadUInt16("modifications");
+        value.ForceId = (ForceId)reader.ReadByte("forceID");
+        value.Modifications = new ObjectStateModificationPointObject(reader.ReadUInt16("modifications"));
         value.ObjectType = ReadObjectType(ref reader);
         value.ObjectLocation = ReadVector3Double(ref reader);
         value.ObjectOrientation = ReadEulerAngles(ref reader);
         value.SpecificObjectAppearance = reader.ReadUInt32("specificObjectAppearance");
-        value.GenerObjectAppearance = reader.ReadUInt16("generObjectAppearance");
+        value.GenerObjectAppearance = new ObjectStateAppearanceGeneral(reader.ReadUInt16("generObjectAppearance"));
         value.Padding1 = reader.ReadUInt16("padding1");
         value.RequesterId = ReadSimulationAddress(ref reader);
         value.ReceivingId = ReadSimulationAddress(ref reader);
@@ -10778,13 +10361,13 @@ internal static partial class PduCodec
         WriteEntityId(ref writer, value.ObjectId);
         WriteObjectIdentifier(ref writer, value.ReferencedObjectId);
         writer.WriteUInt32(value.UpdateNumber, "updateNumber");
-        writer.WriteByte(value.ForceId, "forceID");
-        writer.WriteUInt16(value.Modifications, "modifications");
+        writer.WriteByte((byte)value.ForceId, "forceID");
+        writer.WriteUInt16(value.Modifications.Value, "modifications");
         WriteObjectType(ref writer, value.ObjectType);
         WriteVector3Double(ref writer, value.ObjectLocation);
         WriteEulerAngles(ref writer, value.ObjectOrientation);
         writer.WriteUInt32(value.SpecificObjectAppearance, "specificObjectAppearance");
-        writer.WriteUInt16(value.GenerObjectAppearance, "generObjectAppearance");
+        writer.WriteUInt16(value.GenerObjectAppearance.Value, "generObjectAppearance");
         writer.WriteUInt16(value.Padding1, "padding1");
         WriteSimulationAddress(ref writer, value.RequesterId);
         WriteSimulationAddress(ref writer, value.ReceivingId);
@@ -11015,11 +10598,11 @@ internal static partial class PduCodec
 
     private static void ReadRadioTypeFields(ref DisBinaryReader reader, RadioType value)
     {
-        value.EntityKind = reader.ReadByte("entityKind");
+        value.EntityKind = (EntityKind)reader.ReadByte("entityKind");
         value.Domain = reader.ReadByte("domain");
-        value.Country = reader.ReadUInt16("country");
-        value.Category = reader.ReadByte("category");
-        value.Subcategory = reader.ReadByte("subcategory");
+        value.Country = (Country)reader.ReadUInt16("country");
+        value.Category = (RadioCategory)reader.ReadByte("category");
+        value.Subcategory = (RadioSubcategory)reader.ReadByte("subcategory");
         value.Specific = reader.ReadByte("specific");
         value.Extra = reader.ReadByte("extra");
     }
@@ -11040,11 +10623,11 @@ internal static partial class PduCodec
 
     private static void WriteRadioTypeFields(ref DisBinaryWriter writer, RadioType value)
     {
-        writer.WriteByte(value.EntityKind, "entityKind");
+        writer.WriteByte((byte)value.EntityKind, "entityKind");
         writer.WriteByte(value.Domain, "domain");
-        writer.WriteUInt16(value.Country, "country");
-        writer.WriteByte(value.Category, "category");
-        writer.WriteByte(value.Subcategory, "subcategory");
+        writer.WriteUInt16((ushort)value.Country, "country");
+        writer.WriteByte((byte)value.Category, "category");
+        writer.WriteByte((byte)value.Subcategory, "subcategory");
         writer.WriteByte(value.Specific, "specific");
         writer.WriteByte(value.Extra, "extra");
     }
@@ -11068,7 +10651,7 @@ internal static partial class PduCodec
     private static void ReadReceiverPduFields(ref DisBinaryReader reader, ReceiverPdu value)
     {
         value.RadioHeader = ReadRadioCommsHeader(ref reader);
-        value.ReceiverState = reader.ReadUInt16("receiverState");
+        value.ReceiverState = (ReceiverReceiverState)reader.ReadUInt16("receiverState");
         value.Padding1 = reader.ReadUInt16("padding1");
         value.ReceivedPower = reader.ReadSingle("receivedPower");
         value.TransmitterEntityId = ReadEntityId(ref reader);
@@ -11086,7 +10669,7 @@ internal static partial class PduCodec
     private static void WriteReceiverPduFields(ref DisBinaryWriter writer, ReceiverPdu value)
     {
         WriteRadioCommsHeader(ref writer, value.RadioHeader);
-        writer.WriteUInt16(value.ReceiverState, "receiverState");
+        writer.WriteUInt16((ushort)value.ReceiverState, "receiverState");
         writer.WriteUInt16(value.Padding1, "padding1");
         writer.WriteSingle(value.ReceivedPower, "receivedPower");
         WriteEntityId(ref writer, value.TransmitterEntityId);
@@ -11103,12 +10686,12 @@ internal static partial class PduCodec
         offset += 2;
     }
 
-    private static void ReadRecordQueryRPduFields(ref DisBinaryReader reader, RecordQueryRPdu value)
+    private static void ReadRecordQueryReliablePduFields(ref DisBinaryReader reader, RecordQueryReliablePdu value)
     {
         value.RequestId = reader.ReadUInt32("requestID");
-        value.RequiredReliabilityService = reader.ReadByte("requiredReliabilityService");
+        value.RequiredReliabilityService = (RequiredReliabilityService)reader.ReadByte("requiredReliabilityService");
         value.Pad1 = reader.ReadByte("pad1");
-        value.EventType = reader.ReadUInt16("eventType");
+        value.EventType = (RecordQueryREventType)reader.ReadUInt16("eventType");
         value.Time = reader.ReadUInt32("time");
         value.NumberOfRecords = reader.ReadUInt32("numberOfRecords");
         int RecordIdsCount = CheckedCount(checked((int)value.NumberOfRecords), reader.Remaining, "recordIDs");
@@ -11117,25 +10700,25 @@ internal static partial class PduCodec
             value.RecordIds.Add(ReadRecordQuerySpecification(ref reader));
     }
 
-    private static void PrepareRecordQueryRPduFields(RecordQueryRPdu value)
+    private static void PrepareRecordQueryReliablePduFields(RecordQueryReliablePdu value)
     {
         ArgumentNullException.ThrowIfNull(value.RecordIds);
         foreach (RecordQuerySpecification item in value.RecordIds) PrepareRecordQuerySpecification(item);
         value.NumberOfRecords = checked((uint)value.RecordIds.Count);
     }
 
-    private static void WriteRecordQueryRPduFields(ref DisBinaryWriter writer, RecordQueryRPdu value)
+    private static void WriteRecordQueryReliablePduFields(ref DisBinaryWriter writer, RecordQueryReliablePdu value)
     {
         writer.WriteUInt32(value.RequestId, "requestID");
-        writer.WriteByte(value.RequiredReliabilityService, "requiredReliabilityService");
+        writer.WriteByte((byte)value.RequiredReliabilityService, "requiredReliabilityService");
         writer.WriteByte(value.Pad1, "pad1");
-        writer.WriteUInt16(value.EventType, "eventType");
+        writer.WriteUInt16((ushort)value.EventType, "eventType");
         writer.WriteUInt32(value.Time, "time");
         writer.WriteUInt32(value.NumberOfRecords, "numberOfRecords");
         foreach (RecordQuerySpecification item in value.RecordIds) WriteRecordQuerySpecification(ref writer, item);
     }
 
-    private static void MeasureRecordQueryRPduFields(in RecordQueryRPdu value, ref int offset)
+    private static void MeasureRecordQueryReliablePduFields(in RecordQueryReliablePdu value, ref int offset)
     {
         offset += 4;
         offset += 1;
@@ -11144,44 +10727,6 @@ internal static partial class PduCodec
         offset += 4;
         offset += 4;
         foreach (RecordQuerySpecification item in value.RecordIds) MeasureRecordQuerySpecification(item, ref offset);
-    }
-
-    private static RecordQueryReliablePdu ReadRecordQueryReliablePdu(ref DisBinaryReader reader)
-    {
-        var value = new RecordQueryReliablePdu();
-        ReadRecordQueryReliablePduFields(ref reader, value);
-        return value;
-    }
-
-    private static void ReadRecordQueryReliablePduFields(ref DisBinaryReader reader, RecordQueryReliablePdu value)
-    {
-    }
-
-    private static void PrepareRecordQueryReliablePdu(RecordQueryReliablePdu value)
-    {
-        PrepareRecordQueryReliablePduFields(value);
-    }
-
-    private static void PrepareRecordQueryReliablePduFields(RecordQueryReliablePdu value)
-    {
-    }
-
-    private static void WriteRecordQueryReliablePdu(ref DisBinaryWriter writer, RecordQueryReliablePdu value)
-    {
-        WriteRecordQueryReliablePduFields(ref writer, value);
-    }
-
-    private static void WriteRecordQueryReliablePduFields(ref DisBinaryWriter writer, RecordQueryReliablePdu value)
-    {
-    }
-
-    private static void MeasureRecordQueryReliablePdu(in RecordQueryReliablePdu value, ref int offset)
-    {
-        MeasureRecordQueryReliablePduFields(value, ref offset);
-    }
-
-    private static void MeasureRecordQueryReliablePduFields(in RecordQueryReliablePdu value, ref int offset)
-    {
     }
 
     private static RecordQuerySpecification ReadRecordQuerySpecification(ref DisBinaryReader reader)
@@ -11195,9 +10740,9 @@ internal static partial class PduCodec
     {
         value.NumberOfRecords = reader.ReadUInt32("numberOfRecords");
         int RecordIdsCount = CheckedCount(checked((int)value.NumberOfRecords), reader.Remaining, "recordIDs");
-        value.RecordIds = new List<uint>(RecordIdsCount);
+        value.RecordIds = new List<VariableRecordType>(RecordIdsCount);
         for (int index = 0; index < RecordIdsCount; index++)
-            value.RecordIds.Add(reader.ReadUInt32("recordIDs"));
+            value.RecordIds.Add((VariableRecordType)reader.ReadUInt32("recordIDs"));
     }
 
     private static void PrepareRecordQuerySpecification(RecordQuerySpecification value)
@@ -11219,7 +10764,7 @@ internal static partial class PduCodec
     private static void WriteRecordQuerySpecificationFields(ref DisBinaryWriter writer, RecordQuerySpecification value)
     {
         writer.WriteUInt32(value.NumberOfRecords, "numberOfRecords");
-        foreach (uint item in value.RecordIds) writer.WriteUInt32(item, "recordIDs");
+        foreach (VariableRecordType item in value.RecordIds) writer.WriteUInt32((uint)item, "recordIDs");
     }
 
     private static void MeasureRecordQuerySpecification(in RecordQuerySpecification value, ref int offset)
@@ -11233,12 +10778,12 @@ internal static partial class PduCodec
         offset += checked(value.RecordIds.Count * 4);
     }
 
-    private static void ReadRecordRPduFields(ref DisBinaryReader reader, RecordRPdu value)
+    private static void ReadRecordReliablePduFields(ref DisBinaryReader reader, RecordReliablePdu value)
     {
         value.RequestId = reader.ReadUInt32("requestID");
-        value.RequiredReliabilityService = reader.ReadByte("requiredReliabilityService");
+        value.RequiredReliabilityService = (RequiredReliabilityService)reader.ReadByte("requiredReliabilityService");
         value.Pad1 = reader.ReadByte("pad1");
-        value.EventType = reader.ReadUInt16("eventType");
+        value.EventType = (RecordREventType)reader.ReadUInt16("eventType");
         value.NumberOfRecordSets = reader.ReadUInt32("numberOfRecordSets");
         int RecordSetsCount = CheckedCount(checked((int)value.NumberOfRecordSets), reader.Remaining, "recordSets");
         value.RecordSets = new List<RecordSpecification>(RecordSetsCount);
@@ -11246,24 +10791,24 @@ internal static partial class PduCodec
             value.RecordSets.Add(ReadRecordSpecification(ref reader));
     }
 
-    private static void PrepareRecordRPduFields(RecordRPdu value)
+    private static void PrepareRecordReliablePduFields(RecordReliablePdu value)
     {
         ArgumentNullException.ThrowIfNull(value.RecordSets);
         foreach (RecordSpecification item in value.RecordSets) PrepareRecordSpecification(item);
         value.NumberOfRecordSets = checked((uint)value.RecordSets.Count);
     }
 
-    private static void WriteRecordRPduFields(ref DisBinaryWriter writer, RecordRPdu value)
+    private static void WriteRecordReliablePduFields(ref DisBinaryWriter writer, RecordReliablePdu value)
     {
         writer.WriteUInt32(value.RequestId, "requestID");
-        writer.WriteByte(value.RequiredReliabilityService, "requiredReliabilityService");
+        writer.WriteByte((byte)value.RequiredReliabilityService, "requiredReliabilityService");
         writer.WriteByte(value.Pad1, "pad1");
-        writer.WriteUInt16(value.EventType, "eventType");
+        writer.WriteUInt16((ushort)value.EventType, "eventType");
         writer.WriteUInt32(value.NumberOfRecordSets, "numberOfRecordSets");
         foreach (RecordSpecification item in value.RecordSets) WriteRecordSpecification(ref writer, item);
     }
 
-    private static void MeasureRecordRPduFields(in RecordRPdu value, ref int offset)
+    private static void MeasureRecordReliablePduFields(in RecordReliablePdu value, ref int offset)
     {
         offset += 4;
         offset += 1;
@@ -11271,44 +10816,6 @@ internal static partial class PduCodec
         offset += 2;
         offset += 4;
         foreach (RecordSpecification item in value.RecordSets) MeasureRecordSpecification(item, ref offset);
-    }
-
-    private static RecordReliablePdu ReadRecordReliablePdu(ref DisBinaryReader reader)
-    {
-        var value = new RecordReliablePdu();
-        ReadRecordReliablePduFields(ref reader, value);
-        return value;
-    }
-
-    private static void ReadRecordReliablePduFields(ref DisBinaryReader reader, RecordReliablePdu value)
-    {
-    }
-
-    private static void PrepareRecordReliablePdu(RecordReliablePdu value)
-    {
-        PrepareRecordReliablePduFields(value);
-    }
-
-    private static void PrepareRecordReliablePduFields(RecordReliablePdu value)
-    {
-    }
-
-    private static void WriteRecordReliablePdu(ref DisBinaryWriter writer, RecordReliablePdu value)
-    {
-        WriteRecordReliablePduFields(ref writer, value);
-    }
-
-    private static void WriteRecordReliablePduFields(ref DisBinaryWriter writer, RecordReliablePdu value)
-    {
-    }
-
-    private static void MeasureRecordReliablePdu(in RecordReliablePdu value, ref int offset)
-    {
-        MeasureRecordReliablePduFields(value, ref offset);
-    }
-
-    private static void MeasureRecordReliablePduFields(in RecordReliablePdu value, ref int offset)
-    {
     }
 
     private static RecordSpecification ReadRecordSpecification(ref DisBinaryReader reader)
@@ -11370,7 +10877,7 @@ internal static partial class PduCodec
 
     private static void ReadRecordSpecificationElementFields(ref DisBinaryReader reader, RecordSpecificationElement value)
     {
-        value.RecordId = reader.ReadUInt32("recordID");
+        value.RecordId = (VariableRecordType)reader.ReadUInt32("recordID");
         value.RecordSetSerialNumber = reader.ReadUInt32("recordSetSerialNumber");
         value.Padding = reader.ReadUInt32("padding");
         value.RecordLength = reader.ReadUInt16("recordLength");
@@ -11403,7 +10910,7 @@ internal static partial class PduCodec
 
     private static void WriteRecordSpecificationElementFields(ref DisBinaryWriter writer, RecordSpecificationElement value)
     {
-        writer.WriteUInt32(value.RecordId, "recordID");
+        writer.WriteUInt32((uint)value.RecordId, "recordID");
         writer.WriteUInt32(value.RecordSetSerialNumber, "recordSetSerialNumber");
         writer.WriteUInt32(value.Padding, "padding");
         writer.WriteUInt16(value.RecordLength, "recordLength");
@@ -11437,8 +10944,8 @@ internal static partial class PduCodec
 
     private static void ReadRelationshipFields(ref DisBinaryReader reader, Relationship value)
     {
-        value.Nature = reader.ReadUInt16("nature");
-        value.Position = reader.ReadUInt16("position");
+        value.Nature = (IsPartOfNature)reader.ReadUInt16("nature");
+        value.Position = (IsPartOfPosition)reader.ReadUInt16("position");
     }
 
     private static void PrepareRelationship(Relationship value)
@@ -11457,8 +10964,8 @@ internal static partial class PduCodec
 
     private static void WriteRelationshipFields(ref DisBinaryWriter writer, Relationship value)
     {
-        writer.WriteUInt16(value.Nature, "nature");
-        writer.WriteUInt16(value.Position, "position");
+        writer.WriteUInt16((ushort)value.Nature, "nature");
+        writer.WriteUInt16((ushort)value.Position, "position");
     }
 
     private static void MeasureRelationship(in Relationship value, ref int offset)
@@ -11491,27 +10998,27 @@ internal static partial class PduCodec
         offset += 4;
     }
 
-    private static void ReadRemoveEntityRPduFields(ref DisBinaryReader reader, RemoveEntityRPdu value)
+    private static void ReadRemoveEntityReliablePduFields(ref DisBinaryReader reader, RemoveEntityReliablePdu value)
     {
-        value.RequiredReliabilityService = reader.ReadByte("requiredReliabilityService");
+        value.RequiredReliabilityService = (RequiredReliabilityService)reader.ReadByte("requiredReliabilityService");
         value.Pad1 = reader.ReadByte("pad1");
         value.Pad2 = reader.ReadUInt16("pad2");
         value.RequestId = reader.ReadUInt32("requestID");
     }
 
-    private static void PrepareRemoveEntityRPduFields(RemoveEntityRPdu value)
+    private static void PrepareRemoveEntityReliablePduFields(RemoveEntityReliablePdu value)
     {
     }
 
-    private static void WriteRemoveEntityRPduFields(ref DisBinaryWriter writer, RemoveEntityRPdu value)
+    private static void WriteRemoveEntityReliablePduFields(ref DisBinaryWriter writer, RemoveEntityReliablePdu value)
     {
-        writer.WriteByte(value.RequiredReliabilityService, "requiredReliabilityService");
+        writer.WriteByte((byte)value.RequiredReliabilityService, "requiredReliabilityService");
         writer.WriteByte(value.Pad1, "pad1");
         writer.WriteUInt16(value.Pad2, "pad2");
         writer.WriteUInt32(value.RequestId, "requestID");
     }
 
-    private static void MeasureRemoveEntityRPduFields(in RemoveEntityRPdu value, ref int offset)
+    private static void MeasureRemoveEntityReliablePduFields(in RemoveEntityReliablePdu value, ref int offset)
     {
         offset += 1;
         offset += 1;
@@ -11519,49 +11026,11 @@ internal static partial class PduCodec
         offset += 4;
     }
 
-    private static RemoveEntityReliablePdu ReadRemoveEntityReliablePdu(ref DisBinaryReader reader)
-    {
-        var value = new RemoveEntityReliablePdu();
-        ReadRemoveEntityReliablePduFields(ref reader, value);
-        return value;
-    }
-
-    private static void ReadRemoveEntityReliablePduFields(ref DisBinaryReader reader, RemoveEntityReliablePdu value)
-    {
-    }
-
-    private static void PrepareRemoveEntityReliablePdu(RemoveEntityReliablePdu value)
-    {
-        PrepareRemoveEntityReliablePduFields(value);
-    }
-
-    private static void PrepareRemoveEntityReliablePduFields(RemoveEntityReliablePdu value)
-    {
-    }
-
-    private static void WriteRemoveEntityReliablePdu(ref DisBinaryWriter writer, RemoveEntityReliablePdu value)
-    {
-        WriteRemoveEntityReliablePduFields(ref writer, value);
-    }
-
-    private static void WriteRemoveEntityReliablePduFields(ref DisBinaryWriter writer, RemoveEntityReliablePdu value)
-    {
-    }
-
-    private static void MeasureRemoveEntityReliablePdu(in RemoveEntityReliablePdu value, ref int offset)
-    {
-        MeasureRemoveEntityReliablePduFields(value, ref offset);
-    }
-
-    private static void MeasureRemoveEntityReliablePduFields(in RemoveEntityReliablePdu value, ref int offset)
-    {
-    }
-
     private static void ReadRepairCompletePduFields(ref DisBinaryReader reader, RepairCompletePdu value)
     {
         value.ReceivingEntityId = ReadEntityId(ref reader);
         value.RepairingEntityId = ReadEntityId(ref reader);
-        value.Repair = reader.ReadUInt16("repair");
+        value.Repair = (RepairCompleteRepair)reader.ReadUInt16("repair");
         value.Padding4 = reader.ReadUInt16("padding4");
     }
 
@@ -11577,7 +11046,7 @@ internal static partial class PduCodec
     {
         WriteEntityId(ref writer, value.ReceivingEntityId);
         WriteEntityId(ref writer, value.RepairingEntityId);
-        writer.WriteUInt16(value.Repair, "repair");
+        writer.WriteUInt16((ushort)value.Repair, "repair");
         writer.WriteUInt16(value.Padding4, "padding4");
     }
 
@@ -11593,7 +11062,7 @@ internal static partial class PduCodec
     {
         value.ReceivingEntityId = ReadEntityId(ref reader);
         value.RepairingEntityId = ReadEntityId(ref reader);
-        value.RepairResult = reader.ReadUInt16("repairResult");
+        value.RepairResult = (RepairResponseRepairResult)reader.ReadUInt16("repairResult");
         value.Padding1 = reader.ReadByte("padding1");
         value.Padding2 = reader.ReadUInt16("padding2");
     }
@@ -11610,7 +11079,7 @@ internal static partial class PduCodec
     {
         WriteEntityId(ref writer, value.ReceivingEntityId);
         WriteEntityId(ref writer, value.RepairingEntityId);
-        writer.WriteUInt16(value.RepairResult, "repairResult");
+        writer.WriteUInt16((ushort)value.RepairResult, "repairResult");
         writer.WriteByte(value.Padding1, "padding1");
         writer.WriteUInt16(value.Padding2, "padding2");
     }
@@ -11779,60 +11248,6 @@ internal static partial class PduCodec
         foreach (SupplyQuantity item in value.Supplies) MeasureSupplyQuantity(item, ref offset);
     }
 
-    private static void ReadSEESPduFields(ref DisBinaryReader reader, SEESPdu value)
-    {
-        value.OrginatingEntityId = ReadEntityId(ref reader);
-        value.InfraredSignatureRepresentationIndex = reader.ReadUInt16("infraredSignatureRepresentationIndex");
-        value.AcousticSignatureRepresentationIndex = reader.ReadUInt16("acousticSignatureRepresentationIndex");
-        value.RadarCrossSectionSignatureRepresentationIndex = reader.ReadUInt16("radarCrossSectionSignatureRepresentationIndex");
-        value.NumberOfPropulsionSystems = reader.ReadUInt16("numberOfPropulsionSystems");
-        value.NumberOfVectoringNozzleSystems = reader.ReadUInt16("numberOfVectoringNozzleSystems");
-        int PropulsionSystemDataCount = CheckedCount(checked((int)value.NumberOfPropulsionSystems), reader.Remaining, "propulsionSystemData");
-        value.PropulsionSystemData = new List<PropulsionSystemData>(PropulsionSystemDataCount);
-        for (int index = 0; index < PropulsionSystemDataCount; index++)
-            value.PropulsionSystemData.Add(ReadPropulsionSystemData(ref reader));
-        int VectoringSystemDataCount = CheckedCount(checked((int)value.NumberOfVectoringNozzleSystems), reader.Remaining, "vectoringSystemData");
-        value.VectoringSystemData = new List<VectoringNozzleSystem>(VectoringSystemDataCount);
-        for (int index = 0; index < VectoringSystemDataCount; index++)
-            value.VectoringSystemData.Add(ReadVectoringNozzleSystem(ref reader));
-    }
-
-    private static void PrepareSEESPduFields(SEESPdu value)
-    {
-        ArgumentNullException.ThrowIfNull(value.OrginatingEntityId);
-        PrepareEntityId(value.OrginatingEntityId);
-        ArgumentNullException.ThrowIfNull(value.PropulsionSystemData);
-        foreach (PropulsionSystemData item in value.PropulsionSystemData) PreparePropulsionSystemData(item);
-        value.NumberOfPropulsionSystems = checked((ushort)value.PropulsionSystemData.Count);
-        ArgumentNullException.ThrowIfNull(value.VectoringSystemData);
-        foreach (VectoringNozzleSystem item in value.VectoringSystemData) PrepareVectoringNozzleSystem(item);
-        value.NumberOfVectoringNozzleSystems = checked((ushort)value.VectoringSystemData.Count);
-    }
-
-    private static void WriteSEESPduFields(ref DisBinaryWriter writer, SEESPdu value)
-    {
-        WriteEntityId(ref writer, value.OrginatingEntityId);
-        writer.WriteUInt16(value.InfraredSignatureRepresentationIndex, "infraredSignatureRepresentationIndex");
-        writer.WriteUInt16(value.AcousticSignatureRepresentationIndex, "acousticSignatureRepresentationIndex");
-        writer.WriteUInt16(value.RadarCrossSectionSignatureRepresentationIndex, "radarCrossSectionSignatureRepresentationIndex");
-        writer.WriteUInt16(value.NumberOfPropulsionSystems, "numberOfPropulsionSystems");
-        writer.WriteUInt16(value.NumberOfVectoringNozzleSystems, "numberOfVectoringNozzleSystems");
-        foreach (PropulsionSystemData item in value.PropulsionSystemData) WritePropulsionSystemData(ref writer, item);
-        foreach (VectoringNozzleSystem item in value.VectoringSystemData) WriteVectoringNozzleSystem(ref writer, item);
-    }
-
-    private static void MeasureSEESPduFields(in SEESPdu value, ref int offset)
-    {
-        MeasureEntityId(value.OrginatingEntityId, ref offset);
-        offset += 2;
-        offset += 2;
-        offset += 2;
-        offset += 2;
-        offset += 2;
-        foreach (PropulsionSystemData item in value.PropulsionSystemData) MeasurePropulsionSystemData(item, ref offset);
-        foreach (VectoringNozzleSystem item in value.VectoringSystemData) MeasureVectoringNozzleSystem(item, ref offset);
-    }
-
     private static SecondaryOperationalData ReadSecondaryOperationalData(ref DisBinaryReader reader)
     {
         var value = new SecondaryOperationalData();
@@ -11889,8 +11304,8 @@ internal static partial class PduCodec
 
     private static void ReadSensorFields(ref DisBinaryReader reader, Sensor value)
     {
-        value.SensorTypeSource = reader.ReadByte("sensorTypeSource");
-        value.SensorOnOffStatus = reader.ReadByte("sensorOnOffStatus");
+        value.SensorTypeSource = (SensorTypeSource)reader.ReadByte("sensorTypeSource");
+        value.SensorOnOffStatus = (SensorOnOffStatus)reader.ReadByte("sensorOnOffStatus");
         value.SensorType = reader.ReadUInt16("sensorType");
         value.Station = reader.ReadUInt32("station");
         value.Quantity = reader.ReadUInt16("quantity");
@@ -11913,8 +11328,8 @@ internal static partial class PduCodec
 
     private static void WriteSensorFields(ref DisBinaryWriter writer, Sensor value)
     {
-        writer.WriteByte(value.SensorTypeSource, "sensorTypeSource");
-        writer.WriteByte(value.SensorOnOffStatus, "sensorOnOffStatus");
+        writer.WriteByte((byte)value.SensorTypeSource, "sensorTypeSource");
+        writer.WriteByte((byte)value.SensorOnOffStatus, "sensorOnOffStatus");
         writer.WriteUInt16(value.SensorType, "sensorType");
         writer.WriteUInt32(value.Station, "station");
         writer.WriteUInt16(value.Quantity, "quantity");
@@ -11945,9 +11360,9 @@ internal static partial class PduCodec
 
     private static void ReadSeparationVPFields(ref DisBinaryReader reader, SeparationVP value)
     {
-        value.RecordType = reader.ReadByte("recordType");
-        value.ReasonForSeparation = reader.ReadByte("reasonForSeparation");
-        value.PreEntityIndicator = reader.ReadByte("preEntityIndicator");
+        value.RecordType = (VariableParameterRecordType)reader.ReadByte("recordType");
+        value.ReasonForSeparation = (SeparationVpReasonforSeparation)reader.ReadByte("reasonForSeparation");
+        value.PreEntityIndicator = (SeparationVpPreEntityIndicator)reader.ReadByte("preEntityIndicator");
         value.Padding1 = reader.ReadByte("padding1");
         value.ParentEntityId = ReadEntityId(ref reader);
         value.Padding2 = reader.ReadUInt16("padding2");
@@ -11974,9 +11389,9 @@ internal static partial class PduCodec
 
     private static void WriteSeparationVPFields(ref DisBinaryWriter writer, SeparationVP value)
     {
-        writer.WriteByte(value.RecordType, "recordType");
-        writer.WriteByte(value.ReasonForSeparation, "reasonForSeparation");
-        writer.WriteByte(value.PreEntityIndicator, "preEntityIndicator");
+        writer.WriteByte((byte)value.RecordType, "recordType");
+        writer.WriteByte((byte)value.ReasonForSeparation, "reasonForSeparation");
+        writer.WriteByte((byte)value.PreEntityIndicator, "preEntityIndicator");
         writer.WriteByte(value.Padding1, "padding1");
         WriteEntityId(ref writer, value.ParentEntityId);
         writer.WriteUInt16(value.Padding2, "padding2");
@@ -12003,7 +11418,7 @@ internal static partial class PduCodec
     {
         value.RequestingEntityId = ReadEntityId(ref reader);
         value.ServicingEntityId = ReadEntityId(ref reader);
-        value.ServiceTypeRequested = reader.ReadByte("serviceTypeRequested");
+        value.ServiceTypeRequested = (ServiceRequestServiceTypeRequested)reader.ReadByte("serviceTypeRequested");
         value.NumberOfSupplyTypes = reader.ReadByte("numberOfSupplyTypes");
         value.Padding1 = reader.ReadUInt16("padding1");
         int SuppliesCount = CheckedCount(checked((int)value.NumberOfSupplyTypes), reader.Remaining, "supplies");
@@ -12027,7 +11442,7 @@ internal static partial class PduCodec
     {
         WriteEntityId(ref writer, value.RequestingEntityId);
         WriteEntityId(ref writer, value.ServicingEntityId);
-        writer.WriteByte(value.ServiceTypeRequested, "serviceTypeRequested");
+        writer.WriteByte((byte)value.ServiceTypeRequested, "serviceTypeRequested");
         writer.WriteByte(value.NumberOfSupplyTypes, "numberOfSupplyTypes");
         writer.WriteUInt16(value.Padding1, "padding1");
         foreach (SupplyQuantity item in value.Supplies) WriteSupplyQuantity(ref writer, item);
@@ -12089,9 +11504,9 @@ internal static partial class PduCodec
         foreach (VariableDatum item in value.VariableDatums) MeasureVariableDatum(item, ref offset);
     }
 
-    private static void ReadSetDataRPduFields(ref DisBinaryReader reader, SetDataRPdu value)
+    private static void ReadSetDataReliablePduFields(ref DisBinaryReader reader, SetDataReliablePdu value)
     {
-        value.RequiredReliabilityService = reader.ReadByte("requiredReliabilityService");
+        value.RequiredReliabilityService = (RequiredReliabilityService)reader.ReadByte("requiredReliabilityService");
         value.Pad1 = reader.ReadByte("pad1");
         value.Pad2 = reader.ReadUInt16("pad2");
         value.RequestId = reader.ReadUInt32("requestID");
@@ -12107,7 +11522,7 @@ internal static partial class PduCodec
             value.VariableDatumRecords.Add(ReadVariableDatum(ref reader));
     }
 
-    private static void PrepareSetDataRPduFields(SetDataRPdu value)
+    private static void PrepareSetDataReliablePduFields(SetDataReliablePdu value)
     {
         ArgumentNullException.ThrowIfNull(value.FixedDatumRecords);
         foreach (FixedDatum item in value.FixedDatumRecords) PrepareFixedDatum(item);
@@ -12117,9 +11532,9 @@ internal static partial class PduCodec
         value.NumberOfVariableDatumRecords = checked((uint)value.VariableDatumRecords.Count);
     }
 
-    private static void WriteSetDataRPduFields(ref DisBinaryWriter writer, SetDataRPdu value)
+    private static void WriteSetDataReliablePduFields(ref DisBinaryWriter writer, SetDataReliablePdu value)
     {
-        writer.WriteByte(value.RequiredReliabilityService, "requiredReliabilityService");
+        writer.WriteByte((byte)value.RequiredReliabilityService, "requiredReliabilityService");
         writer.WriteByte(value.Pad1, "pad1");
         writer.WriteUInt16(value.Pad2, "pad2");
         writer.WriteUInt32(value.RequestId, "requestID");
@@ -12129,7 +11544,7 @@ internal static partial class PduCodec
         foreach (VariableDatum item in value.VariableDatumRecords) WriteVariableDatum(ref writer, item);
     }
 
-    private static void MeasureSetDataRPduFields(in SetDataRPdu value, ref int offset)
+    private static void MeasureSetDataReliablePduFields(in SetDataReliablePdu value, ref int offset)
     {
         offset += 1;
         offset += 1;
@@ -12141,48 +11556,10 @@ internal static partial class PduCodec
         foreach (VariableDatum item in value.VariableDatumRecords) MeasureVariableDatum(item, ref offset);
     }
 
-    private static SetDataReliablePdu ReadSetDataReliablePdu(ref DisBinaryReader reader)
-    {
-        var value = new SetDataReliablePdu();
-        ReadSetDataReliablePduFields(ref reader, value);
-        return value;
-    }
-
-    private static void ReadSetDataReliablePduFields(ref DisBinaryReader reader, SetDataReliablePdu value)
-    {
-    }
-
-    private static void PrepareSetDataReliablePdu(SetDataReliablePdu value)
-    {
-        PrepareSetDataReliablePduFields(value);
-    }
-
-    private static void PrepareSetDataReliablePduFields(SetDataReliablePdu value)
-    {
-    }
-
-    private static void WriteSetDataReliablePdu(ref DisBinaryWriter writer, SetDataReliablePdu value)
-    {
-        WriteSetDataReliablePduFields(ref writer, value);
-    }
-
-    private static void WriteSetDataReliablePduFields(ref DisBinaryWriter writer, SetDataReliablePdu value)
-    {
-    }
-
-    private static void MeasureSetDataReliablePdu(in SetDataReliablePdu value, ref int offset)
-    {
-        MeasureSetDataReliablePduFields(value, ref offset);
-    }
-
-    private static void MeasureSetDataReliablePduFields(in SetDataReliablePdu value, ref int offset)
-    {
-    }
-
-    private static void ReadSetRecordRPduFields(ref DisBinaryReader reader, SetRecordRPdu value)
+    private static void ReadSetRecordReliablePduFields(ref DisBinaryReader reader, SetRecordReliablePdu value)
     {
         value.RequestId = reader.ReadUInt32("requestID");
-        value.RequiredReliabilityService = reader.ReadByte("requiredReliabilityService");
+        value.RequiredReliabilityService = (RequiredReliabilityService)reader.ReadByte("requiredReliabilityService");
         value.Pad1 = reader.ReadByte("pad1");
         value.Pad2 = reader.ReadUInt16("pad2");
         value.Pad3 = reader.ReadUInt32("pad3");
@@ -12193,17 +11570,17 @@ internal static partial class PduCodec
             value.RecordSets.Add(ReadRecordSpecification(ref reader));
     }
 
-    private static void PrepareSetRecordRPduFields(SetRecordRPdu value)
+    private static void PrepareSetRecordReliablePduFields(SetRecordReliablePdu value)
     {
         ArgumentNullException.ThrowIfNull(value.RecordSets);
         foreach (RecordSpecification item in value.RecordSets) PrepareRecordSpecification(item);
         value.NumberOfRecordSets = checked((uint)value.RecordSets.Count);
     }
 
-    private static void WriteSetRecordRPduFields(ref DisBinaryWriter writer, SetRecordRPdu value)
+    private static void WriteSetRecordReliablePduFields(ref DisBinaryWriter writer, SetRecordReliablePdu value)
     {
         writer.WriteUInt32(value.RequestId, "requestID");
-        writer.WriteByte(value.RequiredReliabilityService, "requiredReliabilityService");
+        writer.WriteByte((byte)value.RequiredReliabilityService, "requiredReliabilityService");
         writer.WriteByte(value.Pad1, "pad1");
         writer.WriteUInt16(value.Pad2, "pad2");
         writer.WriteUInt32(value.Pad3, "pad3");
@@ -12211,7 +11588,7 @@ internal static partial class PduCodec
         foreach (RecordSpecification item in value.RecordSets) WriteRecordSpecification(ref writer, item);
     }
 
-    private static void MeasureSetRecordRPduFields(in SetRecordRPdu value, ref int offset)
+    private static void MeasureSetRecordReliablePduFields(in SetRecordReliablePdu value, ref int offset)
     {
         offset += 4;
         offset += 1;
@@ -12220,44 +11597,6 @@ internal static partial class PduCodec
         offset += 4;
         offset += 4;
         foreach (RecordSpecification item in value.RecordSets) MeasureRecordSpecification(item, ref offset);
-    }
-
-    private static SetRecordReliablePdu ReadSetRecordReliablePdu(ref DisBinaryReader reader)
-    {
-        var value = new SetRecordReliablePdu();
-        ReadSetRecordReliablePduFields(ref reader, value);
-        return value;
-    }
-
-    private static void ReadSetRecordReliablePduFields(ref DisBinaryReader reader, SetRecordReliablePdu value)
-    {
-    }
-
-    private static void PrepareSetRecordReliablePdu(SetRecordReliablePdu value)
-    {
-        PrepareSetRecordReliablePduFields(value);
-    }
-
-    private static void PrepareSetRecordReliablePduFields(SetRecordReliablePdu value)
-    {
-    }
-
-    private static void WriteSetRecordReliablePdu(ref DisBinaryWriter writer, SetRecordReliablePdu value)
-    {
-        WriteSetRecordReliablePduFields(ref writer, value);
-    }
-
-    private static void WriteSetRecordReliablePduFields(ref DisBinaryWriter writer, SetRecordReliablePdu value)
-    {
-    }
-
-    private static void MeasureSetRecordReliablePdu(in SetRecordReliablePdu value, ref int offset)
-    {
-        MeasureSetRecordReliablePduFields(value, ref offset);
-    }
-
-    private static void MeasureSetRecordReliablePduFields(in SetRecordReliablePdu value, ref int offset)
-    {
     }
 
     private static ShaftRPM ReadShaftRPM(ref DisBinaryReader reader)
@@ -12311,10 +11650,10 @@ internal static partial class PduCodec
     {
         value.RadioHeader = ReadRadioCommsHeader(ref reader);
         value.EncodingScheme = reader.ReadUInt16("encodingScheme");
-        value.TdlType = reader.ReadUInt16("tdlType");
+        value.TdlType = (SignalTdlType)reader.ReadUInt16("tdlType");
         value.SampleRate = reader.ReadUInt32("sampleRate");
         value.DataBitLength = reader.ReadUInt16("dataBitLength");
-        value.Samples = reader.ReadUInt16("samples");
+        value.SampleCount = reader.ReadUInt16("samples");
         int DataCount = CheckedCount((checked((int)value.DataBitLength) + 7) / 8, reader.Remaining, "data");
         value.Data = new byte[DataCount];
         for (int index = 0; index < DataCount; index++)
@@ -12337,10 +11676,10 @@ internal static partial class PduCodec
     {
         WriteRadioCommsHeader(ref writer, value.RadioHeader);
         writer.WriteUInt16(value.EncodingScheme, "encodingScheme");
-        writer.WriteUInt16(value.TdlType, "tdlType");
+        writer.WriteUInt16((ushort)value.TdlType, "tdlType");
         writer.WriteUInt32(value.SampleRate, "sampleRate");
         writer.WriteUInt16(value.DataBitLength, "dataBitLength");
-        writer.WriteUInt16(value.Samples, "samples");
+        writer.WriteUInt16(value.SampleCount, "samples");
         foreach (byte item in value.Data) writer.WriteByte(item, "data");
         writer.WriteZeros(Padding(writer.Offset, 4), "padTo32");
     }
@@ -12565,7 +11904,7 @@ internal static partial class PduCodec
 
     private static void ReadStandardVariableRecordFields(ref DisBinaryReader reader, StandardVariableRecord value)
     {
-        value.RecordType = reader.ReadUInt32("recordType");
+        value.RecordType = (VariableRecordType)reader.ReadUInt32("recordType");
         value.RecordLength = reader.ReadUInt16("recordLength");
         int RecordSpecificFieldsCount = CheckedCount(checked((int)value.RecordLength), reader.Remaining, "recordSpecificFields");
         value.RecordSpecificFields = new byte[RecordSpecificFieldsCount];
@@ -12592,7 +11931,7 @@ internal static partial class PduCodec
 
     private static void WriteStandardVariableRecordFields(ref DisBinaryWriter writer, StandardVariableRecord value)
     {
-        writer.WriteUInt32(value.RecordType, "recordType");
+        writer.WriteUInt32((uint)value.RecordType, "recordType");
         writer.WriteUInt16(value.RecordLength, "recordLength");
         foreach (byte item in value.RecordSpecificFields) writer.WriteByte(item, "recordSpecificFields");
         writer.WriteZeros(Padding(writer.Offset, 8), "padding");
@@ -12690,17 +12029,17 @@ internal static partial class PduCodec
         offset += 4;
     }
 
-    private static void ReadStartResumeRPduFields(ref DisBinaryReader reader, StartResumeRPdu value)
+    private static void ReadStartResumeReliablePduFields(ref DisBinaryReader reader, StartResumeReliablePdu value)
     {
         value.RealWorldTime = ReadClockTime(ref reader);
         value.SimulationTime = ReadClockTime(ref reader);
-        value.RequiredReliabilityService = reader.ReadByte("requiredReliabilityService");
+        value.RequiredReliabilityService = (RequiredReliabilityService)reader.ReadByte("requiredReliabilityService");
         value.Pad1 = reader.ReadByte("pad1");
         value.Pad2 = reader.ReadUInt16("pad2");
         value.RequestId = reader.ReadUInt32("requestID");
     }
 
-    private static void PrepareStartResumeRPduFields(StartResumeRPdu value)
+    private static void PrepareStartResumeReliablePduFields(StartResumeReliablePdu value)
     {
         ArgumentNullException.ThrowIfNull(value.RealWorldTime);
         PrepareClockTime(value.RealWorldTime);
@@ -12708,17 +12047,17 @@ internal static partial class PduCodec
         PrepareClockTime(value.SimulationTime);
     }
 
-    private static void WriteStartResumeRPduFields(ref DisBinaryWriter writer, StartResumeRPdu value)
+    private static void WriteStartResumeReliablePduFields(ref DisBinaryWriter writer, StartResumeReliablePdu value)
     {
         WriteClockTime(ref writer, value.RealWorldTime);
         WriteClockTime(ref writer, value.SimulationTime);
-        writer.WriteByte(value.RequiredReliabilityService, "requiredReliabilityService");
+        writer.WriteByte((byte)value.RequiredReliabilityService, "requiredReliabilityService");
         writer.WriteByte(value.Pad1, "pad1");
         writer.WriteUInt16(value.Pad2, "pad2");
         writer.WriteUInt32(value.RequestId, "requestID");
     }
 
-    private static void MeasureStartResumeRPduFields(in StartResumeRPdu value, ref int offset)
+    private static void MeasureStartResumeReliablePduFields(in StartResumeReliablePdu value, ref int offset)
     {
         MeasureClockTime(value.RealWorldTime, ref offset);
         MeasureClockTime(value.SimulationTime, ref offset);
@@ -12728,49 +12067,11 @@ internal static partial class PduCodec
         offset += 4;
     }
 
-    private static StartResumeReliablePdu ReadStartResumeReliablePdu(ref DisBinaryReader reader)
-    {
-        var value = new StartResumeReliablePdu();
-        ReadStartResumeReliablePduFields(ref reader, value);
-        return value;
-    }
-
-    private static void ReadStartResumeReliablePduFields(ref DisBinaryReader reader, StartResumeReliablePdu value)
-    {
-    }
-
-    private static void PrepareStartResumeReliablePdu(StartResumeReliablePdu value)
-    {
-        PrepareStartResumeReliablePduFields(value);
-    }
-
-    private static void PrepareStartResumeReliablePduFields(StartResumeReliablePdu value)
-    {
-    }
-
-    private static void WriteStartResumeReliablePdu(ref DisBinaryWriter writer, StartResumeReliablePdu value)
-    {
-        WriteStartResumeReliablePduFields(ref writer, value);
-    }
-
-    private static void WriteStartResumeReliablePduFields(ref DisBinaryWriter writer, StartResumeReliablePdu value)
-    {
-    }
-
-    private static void MeasureStartResumeReliablePdu(in StartResumeReliablePdu value, ref int offset)
-    {
-        MeasureStartResumeReliablePduFields(value, ref offset);
-    }
-
-    private static void MeasureStartResumeReliablePduFields(in StartResumeReliablePdu value, ref int offset)
-    {
-    }
-
     private static void ReadStopFreezePduFields(ref DisBinaryReader reader, StopFreezePdu value)
     {
         value.RealWorldTime = ReadClockTime(ref reader);
-        value.Reason = reader.ReadByte("reason");
-        value.FrozenBehavior = reader.ReadByte("frozenBehavior");
+        value.Reason = (StopFreezeReason)reader.ReadByte("reason");
+        value.FrozenBehavior = new StopFreezeFrozenBehavior(reader.ReadByte("frozenBehavior"));
         value.Padding1 = reader.ReadUInt16("padding1");
         value.RequestId = reader.ReadUInt32("requestID");
     }
@@ -12784,8 +12085,8 @@ internal static partial class PduCodec
     private static void WriteStopFreezePduFields(ref DisBinaryWriter writer, StopFreezePdu value)
     {
         WriteClockTime(ref writer, value.RealWorldTime);
-        writer.WriteByte(value.Reason, "reason");
-        writer.WriteByte(value.FrozenBehavior, "frozenBehavior");
+        writer.WriteByte((byte)value.Reason, "reason");
+        writer.WriteByte(value.FrozenBehavior.Value, "frozenBehavior");
         writer.WriteUInt16(value.Padding1, "padding1");
         writer.WriteUInt32(value.RequestId, "requestID");
     }
@@ -12799,33 +12100,33 @@ internal static partial class PduCodec
         offset += 4;
     }
 
-    private static void ReadStopFreezeRPduFields(ref DisBinaryReader reader, StopFreezeRPdu value)
+    private static void ReadStopFreezeReliablePduFields(ref DisBinaryReader reader, StopFreezeReliablePdu value)
     {
         value.RealWorldTime = ReadClockTime(ref reader);
-        value.Reason = reader.ReadByte("reason");
-        value.FrozenBehavior = reader.ReadByte("frozenBehavior");
-        value.RequiredReliabilityService = reader.ReadByte("requiredReliabilityService");
+        value.Reason = (StopFreezeReason)reader.ReadByte("reason");
+        value.FrozenBehavior = new StopFreezeFrozenBehavior(reader.ReadByte("frozenBehavior"));
+        value.RequiredReliabilityService = (RequiredReliabilityService)reader.ReadByte("requiredReliabilityService");
         value.Pad1 = reader.ReadByte("pad1");
         value.RequestId = reader.ReadUInt32("requestID");
     }
 
-    private static void PrepareStopFreezeRPduFields(StopFreezeRPdu value)
+    private static void PrepareStopFreezeReliablePduFields(StopFreezeReliablePdu value)
     {
         ArgumentNullException.ThrowIfNull(value.RealWorldTime);
         PrepareClockTime(value.RealWorldTime);
     }
 
-    private static void WriteStopFreezeRPduFields(ref DisBinaryWriter writer, StopFreezeRPdu value)
+    private static void WriteStopFreezeReliablePduFields(ref DisBinaryWriter writer, StopFreezeReliablePdu value)
     {
         WriteClockTime(ref writer, value.RealWorldTime);
-        writer.WriteByte(value.Reason, "reason");
-        writer.WriteByte(value.FrozenBehavior, "frozenBehavior");
-        writer.WriteByte(value.RequiredReliabilityService, "requiredReliabilityService");
+        writer.WriteByte((byte)value.Reason, "reason");
+        writer.WriteByte(value.FrozenBehavior.Value, "frozenBehavior");
+        writer.WriteByte((byte)value.RequiredReliabilityService, "requiredReliabilityService");
         writer.WriteByte(value.Pad1, "pad1");
         writer.WriteUInt32(value.RequestId, "requestID");
     }
 
-    private static void MeasureStopFreezeRPduFields(in StopFreezeRPdu value, ref int offset)
+    private static void MeasureStopFreezeReliablePduFields(in StopFreezeReliablePdu value, ref int offset)
     {
         MeasureClockTime(value.RealWorldTime, ref offset);
         offset += 1;
@@ -12833,44 +12134,6 @@ internal static partial class PduCodec
         offset += 1;
         offset += 1;
         offset += 4;
-    }
-
-    private static StopFreezeReliablePdu ReadStopFreezeReliablePdu(ref DisBinaryReader reader)
-    {
-        var value = new StopFreezeReliablePdu();
-        ReadStopFreezeReliablePduFields(ref reader, value);
-        return value;
-    }
-
-    private static void ReadStopFreezeReliablePduFields(ref DisBinaryReader reader, StopFreezeReliablePdu value)
-    {
-    }
-
-    private static void PrepareStopFreezeReliablePdu(StopFreezeReliablePdu value)
-    {
-        PrepareStopFreezeReliablePduFields(value);
-    }
-
-    private static void PrepareStopFreezeReliablePduFields(StopFreezeReliablePdu value)
-    {
-    }
-
-    private static void WriteStopFreezeReliablePdu(ref DisBinaryWriter writer, StopFreezeReliablePdu value)
-    {
-        WriteStopFreezeReliablePduFields(ref writer, value);
-    }
-
-    private static void WriteStopFreezeReliablePduFields(ref DisBinaryWriter writer, StopFreezeReliablePdu value)
-    {
-    }
-
-    private static void MeasureStopFreezeReliablePdu(in StopFreezeReliablePdu value, ref int offset)
-    {
-        MeasureStopFreezeReliablePduFields(value, ref offset);
-    }
-
-    private static void MeasureStopFreezeReliablePduFields(in StopFreezeReliablePdu value, ref int offset)
-    {
     }
 
     private static StorageFuel ReadStorageFuel(ref DisBinaryReader reader)
@@ -12883,9 +12146,9 @@ internal static partial class PduCodec
     private static void ReadStorageFuelFields(ref DisBinaryReader reader, StorageFuel value)
     {
         value.FuelQuantity = reader.ReadUInt32("fuelQuantity");
-        value.FuelMeasurementUnits = reader.ReadByte("fuelMeasurementUnits");
-        value.FuelType = reader.ReadByte("fuelType");
-        value.FuelLocation = reader.ReadByte("fuelLocation");
+        value.FuelMeasurementUnits = (FuelMeasurementUnits)reader.ReadByte("fuelMeasurementUnits");
+        value.FuelType = (SupplyFuelType)reader.ReadByte("fuelType");
+        value.FuelLocation = (FuelLocation)reader.ReadByte("fuelLocation");
         value.Padding = reader.ReadByte("padding");
     }
 
@@ -12906,9 +12169,9 @@ internal static partial class PduCodec
     private static void WriteStorageFuelFields(ref DisBinaryWriter writer, StorageFuel value)
     {
         writer.WriteUInt32(value.FuelQuantity, "fuelQuantity");
-        writer.WriteByte(value.FuelMeasurementUnits, "fuelMeasurementUnits");
-        writer.WriteByte(value.FuelType, "fuelType");
-        writer.WriteByte(value.FuelLocation, "fuelLocation");
+        writer.WriteByte((byte)value.FuelMeasurementUnits, "fuelMeasurementUnits");
+        writer.WriteByte((byte)value.FuelType, "fuelType");
+        writer.WriteByte((byte)value.FuelLocation, "fuelLocation");
         writer.WriteByte(value.Padding, "padding");
     }
 
@@ -12939,9 +12202,9 @@ internal static partial class PduCodec
         value.MaximumQuantity = reader.ReadUInt32("maximumQuantity");
         value.StandardQuantityReloadTime = reader.ReadUInt32("standardQuantityReloadTime");
         value.MaximumQuantityReloadTime = reader.ReadUInt32("maximumQuantityReloadTime");
-        value.FuelMeasurementUnits = reader.ReadByte("fuelMeasurementUnits");
-        value.FuelType = reader.ReadByte("fuelType");
-        value.FuelLocation = reader.ReadByte("fuelLocation");
+        value.FuelMeasurementUnits = (FuelMeasurementUnits)reader.ReadByte("fuelMeasurementUnits");
+        value.FuelType = (SupplyFuelType)reader.ReadByte("fuelType");
+        value.FuelLocation = (FuelLocation)reader.ReadByte("fuelLocation");
         value.Padding = reader.ReadByte("padding");
     }
 
@@ -12965,9 +12228,9 @@ internal static partial class PduCodec
         writer.WriteUInt32(value.MaximumQuantity, "maximumQuantity");
         writer.WriteUInt32(value.StandardQuantityReloadTime, "standardQuantityReloadTime");
         writer.WriteUInt32(value.MaximumQuantityReloadTime, "maximumQuantityReloadTime");
-        writer.WriteByte(value.FuelMeasurementUnits, "fuelMeasurementUnits");
-        writer.WriteByte(value.FuelType, "fuelType");
-        writer.WriteByte(value.FuelLocation, "fuelLocation");
+        writer.WriteByte((byte)value.FuelMeasurementUnits, "fuelMeasurementUnits");
+        writer.WriteByte((byte)value.FuelType, "fuelType");
+        writer.WriteByte((byte)value.FuelLocation, "fuelLocation");
         writer.WriteByte(value.Padding, "padding");
     }
 
@@ -12988,42 +12251,58 @@ internal static partial class PduCodec
         offset += 1;
     }
 
-    private static SupplementalEmissionEntityStatePdu ReadSupplementalEmissionEntityStatePdu(ref DisBinaryReader reader)
-    {
-        var value = new SupplementalEmissionEntityStatePdu();
-        ReadSupplementalEmissionEntityStatePduFields(ref reader, value);
-        return value;
-    }
-
     private static void ReadSupplementalEmissionEntityStatePduFields(ref DisBinaryReader reader, SupplementalEmissionEntityStatePdu value)
     {
-    }
-
-    private static void PrepareSupplementalEmissionEntityStatePdu(SupplementalEmissionEntityStatePdu value)
-    {
-        PrepareSupplementalEmissionEntityStatePduFields(value);
+        value.OrginatingEntityId = ReadEntityId(ref reader);
+        value.InfraredSignatureRepresentationIndex = reader.ReadUInt16("infraredSignatureRepresentationIndex");
+        value.AcousticSignatureRepresentationIndex = reader.ReadUInt16("acousticSignatureRepresentationIndex");
+        value.RadarCrossSectionSignatureRepresentationIndex = reader.ReadUInt16("radarCrossSectionSignatureRepresentationIndex");
+        value.NumberOfPropulsionSystems = reader.ReadUInt16("numberOfPropulsionSystems");
+        value.NumberOfVectoringNozzleSystems = reader.ReadUInt16("numberOfVectoringNozzleSystems");
+        int PropulsionSystemDataCount = CheckedCount(checked((int)value.NumberOfPropulsionSystems), reader.Remaining, "propulsionSystemData");
+        value.PropulsionSystemData = new List<PropulsionSystemData>(PropulsionSystemDataCount);
+        for (int index = 0; index < PropulsionSystemDataCount; index++)
+            value.PropulsionSystemData.Add(ReadPropulsionSystemData(ref reader));
+        int VectoringSystemDataCount = CheckedCount(checked((int)value.NumberOfVectoringNozzleSystems), reader.Remaining, "vectoringSystemData");
+        value.VectoringSystemData = new List<VectoringNozzleSystem>(VectoringSystemDataCount);
+        for (int index = 0; index < VectoringSystemDataCount; index++)
+            value.VectoringSystemData.Add(ReadVectoringNozzleSystem(ref reader));
     }
 
     private static void PrepareSupplementalEmissionEntityStatePduFields(SupplementalEmissionEntityStatePdu value)
     {
-    }
-
-    private static void WriteSupplementalEmissionEntityStatePdu(ref DisBinaryWriter writer, SupplementalEmissionEntityStatePdu value)
-    {
-        WriteSupplementalEmissionEntityStatePduFields(ref writer, value);
+        ArgumentNullException.ThrowIfNull(value.OrginatingEntityId);
+        PrepareEntityId(value.OrginatingEntityId);
+        ArgumentNullException.ThrowIfNull(value.PropulsionSystemData);
+        foreach (PropulsionSystemData item in value.PropulsionSystemData) PreparePropulsionSystemData(item);
+        value.NumberOfPropulsionSystems = checked((ushort)value.PropulsionSystemData.Count);
+        ArgumentNullException.ThrowIfNull(value.VectoringSystemData);
+        foreach (VectoringNozzleSystem item in value.VectoringSystemData) PrepareVectoringNozzleSystem(item);
+        value.NumberOfVectoringNozzleSystems = checked((ushort)value.VectoringSystemData.Count);
     }
 
     private static void WriteSupplementalEmissionEntityStatePduFields(ref DisBinaryWriter writer, SupplementalEmissionEntityStatePdu value)
     {
-    }
-
-    private static void MeasureSupplementalEmissionEntityStatePdu(in SupplementalEmissionEntityStatePdu value, ref int offset)
-    {
-        MeasureSupplementalEmissionEntityStatePduFields(value, ref offset);
+        WriteEntityId(ref writer, value.OrginatingEntityId);
+        writer.WriteUInt16(value.InfraredSignatureRepresentationIndex, "infraredSignatureRepresentationIndex");
+        writer.WriteUInt16(value.AcousticSignatureRepresentationIndex, "acousticSignatureRepresentationIndex");
+        writer.WriteUInt16(value.RadarCrossSectionSignatureRepresentationIndex, "radarCrossSectionSignatureRepresentationIndex");
+        writer.WriteUInt16(value.NumberOfPropulsionSystems, "numberOfPropulsionSystems");
+        writer.WriteUInt16(value.NumberOfVectoringNozzleSystems, "numberOfVectoringNozzleSystems");
+        foreach (PropulsionSystemData item in value.PropulsionSystemData) WritePropulsionSystemData(ref writer, item);
+        foreach (VectoringNozzleSystem item in value.VectoringSystemData) WriteVectoringNozzleSystem(ref writer, item);
     }
 
     private static void MeasureSupplementalEmissionEntityStatePduFields(in SupplementalEmissionEntityStatePdu value, ref int offset)
     {
+        MeasureEntityId(value.OrginatingEntityId, ref offset);
+        offset += 2;
+        offset += 2;
+        offset += 2;
+        offset += 2;
+        offset += 2;
+        foreach (PropulsionSystemData item in value.PropulsionSystemData) MeasurePropulsionSystemData(item, ref offset);
+        foreach (VectoringNozzleSystem item in value.VectoringSystemData) MeasureVectoringNozzleSystem(item, ref offset);
     }
 
     private static SupplyQuantity ReadSupplyQuantity(ref DisBinaryReader reader)
@@ -13097,9 +12376,9 @@ internal static partial class PduCodec
 
     private static void ReadSystemIdentifierFields(ref DisBinaryReader reader, SystemIdentifier value)
     {
-        value.SystemType = reader.ReadUInt16("systemType");
-        value.SystemName = reader.ReadUInt16("systemName");
-        value.SystemMode = reader.ReadByte("systemMode");
+        value.SystemType = (IffSystemType)reader.ReadUInt16("systemType");
+        value.SystemName = (IffSystemName)reader.ReadUInt16("systemName");
+        value.SystemMode = (IffSystemMode)reader.ReadByte("systemMode");
         value.ChangeOptions = ReadChangeOptions(ref reader);
     }
 
@@ -13121,9 +12400,9 @@ internal static partial class PduCodec
 
     private static void WriteSystemIdentifierFields(ref DisBinaryWriter writer, SystemIdentifier value)
     {
-        writer.WriteUInt16(value.SystemType, "systemType");
-        writer.WriteUInt16(value.SystemName, "systemName");
-        writer.WriteByte(value.SystemMode, "systemMode");
+        writer.WriteUInt16((ushort)value.SystemType, "systemType");
+        writer.WriteUInt16((ushort)value.SystemName, "systemName");
+        writer.WriteByte((byte)value.SystemMode, "systemMode");
         WriteChangeOptions(ref writer, value.ChangeOptions);
     }
 
@@ -13140,7 +12419,7 @@ internal static partial class PduCodec
         MeasureChangeOptions(value.ChangeOptions, ref offset);
     }
 
-    private static void ReadTSPIPduFields(ref DisBinaryReader reader, TSPIPdu value)
+    private static void ReadTimeSpacePositionInformationPduFields(ref DisBinaryReader reader, TimeSpacePositionInformationPdu value)
     {
         value.LiveEntityId = ReadEntityId(ref reader);
         value.TSPIFlag = reader.ReadByte("TSPIFlag");
@@ -13158,7 +12437,7 @@ internal static partial class PduCodec
             value.SystemSpecificData[index] = reader.ReadByte("systemSpecificData");
     }
 
-    private static void PrepareTSPIPduFields(TSPIPdu value)
+    private static void PrepareTimeSpacePositionInformationPduFields(TimeSpacePositionInformationPdu value)
     {
         ArgumentNullException.ThrowIfNull(value.LiveEntityId);
         PrepareEntityId(value.LiveEntityId);
@@ -13178,7 +12457,7 @@ internal static partial class PduCodec
         value.SystemSpecificDataLength = checked((byte)value.SystemSpecificData.Length);
     }
 
-    private static void WriteTSPIPduFields(ref DisBinaryWriter writer, TSPIPdu value)
+    private static void WriteTimeSpacePositionInformationPduFields(ref DisBinaryWriter writer, TimeSpacePositionInformationPdu value)
     {
         WriteEntityId(ref writer, value.LiveEntityId);
         writer.WriteByte(value.TSPIFlag, "TSPIFlag");
@@ -13193,7 +12472,7 @@ internal static partial class PduCodec
         foreach (byte item in value.SystemSpecificData) writer.WriteByte(item, "systemSpecificData");
     }
 
-    private static void MeasureTSPIPduFields(in TSPIPdu value, ref int offset)
+    private static void MeasureTimeSpacePositionInformationPduFields(in TimeSpacePositionInformationPdu value, ref int offset)
     {
         MeasureEntityId(value.LiveEntityId, ref offset);
         offset += 1;
@@ -13206,44 +12485,6 @@ internal static partial class PduCodec
         offset += 2;
         offset += 1;
         offset += checked(value.SystemSpecificData.Length * 1);
-    }
-
-    private static TimeSpacePositionInformationPdu ReadTimeSpacePositionInformationPdu(ref DisBinaryReader reader)
-    {
-        var value = new TimeSpacePositionInformationPdu();
-        ReadTimeSpacePositionInformationPduFields(ref reader, value);
-        return value;
-    }
-
-    private static void ReadTimeSpacePositionInformationPduFields(ref DisBinaryReader reader, TimeSpacePositionInformationPdu value)
-    {
-    }
-
-    private static void PrepareTimeSpacePositionInformationPdu(TimeSpacePositionInformationPdu value)
-    {
-        PrepareTimeSpacePositionInformationPduFields(value);
-    }
-
-    private static void PrepareTimeSpacePositionInformationPduFields(TimeSpacePositionInformationPdu value)
-    {
-    }
-
-    private static void WriteTimeSpacePositionInformationPdu(ref DisBinaryWriter writer, TimeSpacePositionInformationPdu value)
-    {
-        WriteTimeSpacePositionInformationPduFields(ref writer, value);
-    }
-
-    private static void WriteTimeSpacePositionInformationPduFields(ref DisBinaryWriter writer, TimeSpacePositionInformationPdu value)
-    {
-    }
-
-    private static void MeasureTimeSpacePositionInformationPdu(in TimeSpacePositionInformationPdu value, ref int offset)
-    {
-        MeasureTimeSpacePositionInformationPduFields(value, ref offset);
-    }
-
-    private static void MeasureTimeSpacePositionInformationPduFields(in TimeSpacePositionInformationPdu value, ref int offset)
-    {
     }
 
     private static TotalRecordSets ReadTotalRecordSets(ref DisBinaryReader reader)
@@ -13344,8 +12585,8 @@ internal static partial class PduCodec
         value.OriginatingEntityId = ReadEntityId(ref reader);
         value.ReceivingEntityId = ReadEntityId(ref reader);
         value.RequestId = reader.ReadUInt32("requestID");
-        value.RequiredReliabilityService = reader.ReadByte("requiredReliabilityService");
-        value.TransferType = reader.ReadByte("transferType");
+        value.RequiredReliabilityService = (RequiredReliabilityService)reader.ReadByte("requiredReliabilityService");
+        value.TransferType = (TransferControlTransferType)reader.ReadByte("transferType");
         value.TransferEntityId = ReadEntityId(ref reader);
         value.RecordSets = ReadRecordSpecification(ref reader);
     }
@@ -13367,8 +12608,8 @@ internal static partial class PduCodec
         WriteEntityId(ref writer, value.OriginatingEntityId);
         WriteEntityId(ref writer, value.ReceivingEntityId);
         writer.WriteUInt32(value.RequestId, "requestID");
-        writer.WriteByte(value.RequiredReliabilityService, "requiredReliabilityService");
-        writer.WriteByte(value.TransferType, "transferType");
+        writer.WriteByte((byte)value.RequiredReliabilityService, "requiredReliabilityService");
+        writer.WriteByte((byte)value.TransferType, "transferType");
         WriteEntityId(ref writer, value.TransferEntityId);
         WriteRecordSpecification(ref writer, value.RecordSets);
     }
@@ -13388,18 +12629,18 @@ internal static partial class PduCodec
     {
         value.RadioHeader = ReadRadioCommsHeader(ref reader);
         value.RadioEntityType = ReadRadioType(ref reader);
-        value.TransmitState = reader.ReadByte("transmitState");
-        value.InputSource = reader.ReadByte("inputSource");
+        value.TransmitState = (TransmitterTransmitState)reader.ReadByte("transmitState");
+        value.InputSource = (TransmitterInputSource)reader.ReadByte("inputSource");
         value.VariableTransmitterParameterCount = reader.ReadUInt16("variableTransmitterParameterCount");
         value.AntennaLocation = ReadVector3Double(ref reader);
         value.RelativeAntennaLocation = ReadVector3Float(ref reader);
-        value.AntennaPatternType = reader.ReadUInt16("antennaPatternType");
+        value.AntennaPatternType = (TransmitterAntennaPatternType)reader.ReadUInt16("antennaPatternType");
         value.AntennaPatternCount = reader.ReadUInt16("antennaPatternCount");
         value.Frequency = reader.ReadUInt64("frequency");
         value.TransmitFrequencyBandwidth = reader.ReadSingle("transmitFrequencyBandwidth");
         value.Power = reader.ReadSingle("power");
         value.ModulationType = ReadModulationType(ref reader);
-        value.CryptoSystem = reader.ReadUInt16("cryptoSystem");
+        value.CryptoSystem = (TransmitterCryptoSystem)reader.ReadUInt16("cryptoSystem");
         value.CryptoKeyId = reader.ReadUInt16("cryptoKeyId");
         value.ModulationParameterCount = reader.ReadByte("modulationParameterCount");
         value.Padding1 = reader.ReadByte("padding1");
@@ -13443,18 +12684,18 @@ internal static partial class PduCodec
     {
         WriteRadioCommsHeader(ref writer, value.RadioHeader);
         WriteRadioType(ref writer, value.RadioEntityType);
-        writer.WriteByte(value.TransmitState, "transmitState");
-        writer.WriteByte(value.InputSource, "inputSource");
+        writer.WriteByte((byte)value.TransmitState, "transmitState");
+        writer.WriteByte((byte)value.InputSource, "inputSource");
         writer.WriteUInt16(value.VariableTransmitterParameterCount, "variableTransmitterParameterCount");
         WriteVector3Double(ref writer, value.AntennaLocation);
         WriteVector3Float(ref writer, value.RelativeAntennaLocation);
-        writer.WriteUInt16(value.AntennaPatternType, "antennaPatternType");
+        writer.WriteUInt16((ushort)value.AntennaPatternType, "antennaPatternType");
         writer.WriteUInt16(value.AntennaPatternCount, "antennaPatternCount");
         writer.WriteUInt64(value.Frequency, "frequency");
         writer.WriteSingle(value.TransmitFrequencyBandwidth, "transmitFrequencyBandwidth");
         writer.WriteSingle(value.Power, "power");
         WriteModulationType(ref writer, value.ModulationType);
-        writer.WriteUInt16(value.CryptoSystem, "cryptoSystem");
+        writer.WriteUInt16((ushort)value.CryptoSystem, "cryptoSystem");
         writer.WriteUInt16(value.CryptoKeyId, "cryptoKeyId");
         writer.WriteByte(value.ModulationParameterCount, "modulationParameterCount");
         writer.WriteByte(value.Padding1, "padding1");
@@ -13616,8 +12857,8 @@ internal static partial class PduCodec
 
     private static void ReadUAFundamentalParameterFields(ref DisBinaryReader reader, UAFundamentalParameter value)
     {
-        value.ActiveEmissionParameterIndex = reader.ReadUInt16("activeEmissionParameterIndex");
-        value.ScanPattern = reader.ReadUInt16("scanPattern");
+        value.ActiveEmissionParameterIndex = (UaActiveEmissionParameterIndex)reader.ReadUInt16("activeEmissionParameterIndex");
+        value.ScanPattern = (UaScanPattern)reader.ReadUInt16("scanPattern");
         value.BeamCenterAzimuthHorizontal = reader.ReadSingle("beamCenterAzimuthHorizontal");
         value.AzimuthalBeamwidthHorizontal = reader.ReadSingle("azimuthalBeamwidthHorizontal");
         value.BeamCenterDepressionElevation = reader.ReadSingle("beamCenterDepressionElevation");
@@ -13640,8 +12881,8 @@ internal static partial class PduCodec
 
     private static void WriteUAFundamentalParameterFields(ref DisBinaryWriter writer, UAFundamentalParameter value)
     {
-        writer.WriteUInt16(value.ActiveEmissionParameterIndex, "activeEmissionParameterIndex");
-        writer.WriteUInt16(value.ScanPattern, "scanPattern");
+        writer.WriteUInt16((ushort)value.ActiveEmissionParameterIndex, "activeEmissionParameterIndex");
+        writer.WriteUInt16((ushort)value.ScanPattern, "scanPattern");
         writer.WriteSingle(value.BeamCenterAzimuthHorizontal, "beamCenterAzimuthHorizontal");
         writer.WriteSingle(value.AzimuthalBeamwidthHorizontal, "azimuthalBeamwidthHorizontal");
         writer.WriteSingle(value.BeamCenterDepressionElevation, "beamCenterDepressionElevation");
@@ -13713,9 +12954,9 @@ internal static partial class PduCodec
     {
         value.EmittingEntityId = ReadEntityId(ref reader);
         value.EventId = ReadEventIdentifier(ref reader);
-        value.StateChangeIndicator = reader.ReadByte("stateChangeIndicator");
+        value.StateChangeIndicator = (UaStateChangeUpdateIndicator)reader.ReadByte("stateChangeIndicator");
         value.Pad = reader.ReadByte("pad");
-        value.PassiveParameterIndex = reader.ReadUInt16("passiveParameterIndex");
+        value.PassiveParameterIndex = (UaPassiveParameterIndex)reader.ReadUInt16("passiveParameterIndex");
         value.PropulsionPlantConfiguration = reader.ReadByte("propulsionPlantConfiguration");
         value.NumberOfShafts = reader.ReadByte("numberOfShafts");
         value.NumberOfAPAs = reader.ReadByte("numberOfAPAs");
@@ -13755,9 +12996,9 @@ internal static partial class PduCodec
     {
         WriteEntityId(ref writer, value.EmittingEntityId);
         WriteEventIdentifier(ref writer, value.EventId);
-        writer.WriteByte(value.StateChangeIndicator, "stateChangeIndicator");
+        writer.WriteByte((byte)value.StateChangeIndicator, "stateChangeIndicator");
         writer.WriteByte(value.Pad, "pad");
-        writer.WriteUInt16(value.PassiveParameterIndex, "passiveParameterIndex");
+        writer.WriteUInt16((ushort)value.PassiveParameterIndex, "passiveParameterIndex");
         writer.WriteByte(value.PropulsionPlantConfiguration, "propulsionPlantConfiguration");
         writer.WriteByte(value.NumberOfShafts, "numberOfShafts");
         writer.WriteByte(value.NumberOfAPAs, "numberOfAPAs");
@@ -13833,7 +13074,7 @@ internal static partial class PduCodec
 
     private static void ReadVariableDatumFields(ref DisBinaryReader reader, VariableDatum value)
     {
-        value.VariableDatumId = reader.ReadUInt32("variableDatumID");
+        value.VariableDatumId = (VariableRecordType)reader.ReadUInt32("variableDatumID");
         value.VariableDatumLength = reader.ReadUInt32("variableDatumLength");
         int VariableDatumValueCount = CheckedCount((checked((int)value.VariableDatumLength) + 7) / 8, reader.Remaining, "variableDatumValue");
         value.VariableDatumValue = new byte[VariableDatumValueCount];
@@ -13860,7 +13101,7 @@ internal static partial class PduCodec
 
     private static void WriteVariableDatumFields(ref DisBinaryWriter writer, VariableDatum value)
     {
-        writer.WriteUInt32(value.VariableDatumId, "variableDatumID");
+        writer.WriteUInt32((uint)value.VariableDatumId, "variableDatumID");
         writer.WriteUInt32(value.VariableDatumLength, "variableDatumLength");
         foreach (byte item in value.VariableDatumValue) writer.WriteByte(item, "variableDatumValue");
         writer.WriteZeros(Padding(writer.Offset, 8), "padding");
@@ -13888,7 +13129,7 @@ internal static partial class PduCodec
 
     private static void ReadVariableParameterFields(ref DisBinaryReader reader, VariableParameter value)
     {
-        value.RecordType = reader.ReadByte("recordType");
+        value.RecordType = (VariableParameterRecordType)reader.ReadByte("recordType");
         int RecordSpecificFieldsCount = CheckedCount(15, reader.Remaining, "recordSpecificFields");
         value.RecordSpecificFields = new byte[RecordSpecificFieldsCount];
         for (int index = 0; index < RecordSpecificFieldsCount; index++)
@@ -13912,7 +13153,7 @@ internal static partial class PduCodec
 
     private static void WriteVariableParameterFields(ref DisBinaryWriter writer, VariableParameter value)
     {
-        writer.WriteByte(value.RecordType, "recordType");
+        writer.WriteByte((byte)value.RecordType, "recordType");
         foreach (byte item in value.RecordSpecificFields) writer.WriteByte(item, "recordSpecificFields");
     }
 
@@ -13936,7 +13177,7 @@ internal static partial class PduCodec
 
     private static void ReadVariableTransmitterParametersFields(ref DisBinaryReader reader, VariableTransmitterParameters value)
     {
-        value.RecordType = reader.ReadUInt32("recordType");
+        value.RecordType = (VariableRecordType)reader.ReadUInt32("recordType");
         value.RecordLength = reader.ReadUInt16("recordLength");
         int RecordSpecificFieldsCount = CheckedCount(Math.Max(0, checked((int)value.RecordLength) - 4), reader.Remaining, "recordSpecificFields");
         value.RecordSpecificFields = new byte[RecordSpecificFieldsCount];
@@ -13962,7 +13203,7 @@ internal static partial class PduCodec
 
     private static void WriteVariableTransmitterParametersFields(ref DisBinaryWriter writer, VariableTransmitterParameters value)
     {
-        writer.WriteUInt32(value.RecordType, "recordType");
+        writer.WriteUInt32((uint)value.RecordType, "recordType");
         writer.WriteUInt16(value.RecordLength, "recordLength");
         foreach (byte item in value.RecordSpecificFields) writer.WriteByte(item, "recordSpecificFields");
         writer.WriteZeros(Padding(writer.Offset, 8), "padding");

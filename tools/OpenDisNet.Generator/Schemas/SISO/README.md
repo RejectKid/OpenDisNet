@@ -1,12 +1,13 @@
 # SISO wire metadata
 
-`referenced-types-v35.json` contains only the identifier and wire-width
-metadata needed for SISO enumeration and bit-field types referenced by the DIS
-v7 layout schema. It was mechanically derived from SISO-REF-010-2025 v35.
+`dis7-referenced-types.json` identifies the SISO types used by the DIS v7 layout,
+including the composite Signal encoding fields. `referenced-types-v36.json` is
+the compact, deterministic catalog generated from the official
+SISO-REF-010-2025 v36 machine-readable XML product data.
 
 “Reprinted with permission from SISO Inc.”
 
-SISO's public catalog now identifies v36 as current. This v35 metadata is an
-intermediate generator input and is not the final enumeration release target.
-The package conformance matrix must not mark current-enumeration generation
-complete until the v36 product data has been imported and verified.
+To reproduce an import, run the generator with
+`--import-siso-v36 <official-archive-or-xml>`. Passing `-` reads the XML from
+standard input. The importer verifies the v36 title, every UID, and every wire
+width before replacing the checked-in catalog.

@@ -1,24 +1,27 @@
 // DIS v7 protocol models reviewed from SimulationManagementWithReliabilityFamilyPdus.xml.
 #pragma warning disable CS0108
+using OpenDisNet.Enumerations;
+using OpenDisNet.Protocol;
+
 namespace OpenDisNet.Pdus;
 
 /// <summary>
 /// 5.12.4.6 Serves the same function as the Acknowledge PDU but is used to acknowledge the receipt of a Create Entity-R PDU, a Remove Entity-R PDU, a Start/Resume-R PDU, or a Stop/Freeze-R PDU.
 /// </summary>
-public partial class AcknowledgeRPdu : SimulationManagementWithReliabilityFamilyPdu
+public partial class AcknowledgeReliablePdu : SimulationManagementWithReliabilityFamilyPdu
 {
-    /// <summary>Creates a DIS v7 AcknowledgeRPdu with its wire discriminator fields initialized.</summary>
-    public AcknowledgeRPdu() => Initialize(55, 10);
+    /// <summary>Creates a DIS v7 AcknowledgeReliablePdu with its wire discriminator fields initialized.</summary>
+    public AcknowledgeReliablePdu() => Initialize(55, 10);
 
     /// <summary>
     /// ack flags
     /// </summary>
-    public ushort AcknowledgeFlag { get; set; }
+    public AcknowledgeAcknowledgeFlag AcknowledgeFlag { get; set; }
 
     /// <summary>
     /// response flags
     /// </summary>
-    public ushort ResponseFlag { get; set; }
+    public AcknowledgeResponseFlag ResponseFlag { get; set; }
 
     /// <summary>
     /// Request ID provides a unique identifier
@@ -28,24 +31,17 @@ public partial class AcknowledgeRPdu : SimulationManagementWithReliabilityFamily
 }
 
 /// <summary>
-/// Alias, more descriptive name for AcknowledgeRPdu.
-/// </summary>
-public partial class AcknowledgeReliablePdu
-{
-}
-
-/// <summary>
 /// 5.12.4.7 Serves the same function as the Action Request PDU but with the addition of reliability service levels.
 /// </summary>
-public partial class ActionRequestRPdu : SimulationManagementWithReliabilityFamilyPdu
+public partial class ActionRequestReliablePdu : SimulationManagementWithReliabilityFamilyPdu
 {
-    /// <summary>Creates a DIS v7 ActionRequestRPdu with its wire discriminator fields initialized.</summary>
-    public ActionRequestRPdu() => Initialize(56, 10);
+    /// <summary>Creates a DIS v7 ActionRequestReliablePdu with its wire discriminator fields initialized.</summary>
+    public ActionRequestReliablePdu() => Initialize(56, 10);
 
     /// <summary>
     /// level of reliability service used for this transaction
     /// </summary>
-    public byte RequiredReliabilityService { get; set; }
+    public RequiredReliabilityService RequiredReliabilityService { get; set; }
 
     /// <summary>
     /// padding
@@ -65,7 +61,7 @@ public partial class ActionRequestRPdu : SimulationManagementWithReliabilityFami
     /// <summary>
     /// request ID provides a unique identifier
     /// </summary>
-    public uint ActionId { get; set; }
+    public ActionRequestActionId ActionId { get; set; }
 
     /// <summary>
     /// Fixed datum record count
@@ -90,19 +86,12 @@ public partial class ActionRequestRPdu : SimulationManagementWithReliabilityFami
 }
 
 /// <summary>
-/// Alias, more descriptive name for ActionRequestRPdu.
-/// </summary>
-public partial class ActionRequestReliablePdu
-{
-}
-
-/// <summary>
 /// 5.12.4.8 Serves the same function as the Action Response PDU (see 5.6.5.8.1) but is used to acknowledge the receipt of an Action Request-R PDU.
 /// </summary>
-public partial class ActionResponseRPdu : SimulationManagementWithReliabilityFamilyPdu
+public partial class ActionResponseReliablePdu : SimulationManagementWithReliabilityFamilyPdu
 {
-    /// <summary>Creates a DIS v7 ActionResponseRPdu with its wire discriminator fields initialized.</summary>
-    public ActionResponseRPdu() => Initialize(57, 10);
+    /// <summary>Creates a DIS v7 ActionResponseReliablePdu with its wire discriminator fields initialized.</summary>
+    public ActionResponseReliablePdu() => Initialize(57, 10);
 
     /// <summary>
     /// request ID provides a unique identifier
@@ -112,7 +101,7 @@ public partial class ActionResponseRPdu : SimulationManagementWithReliabilityFam
     /// <summary>
     /// status of response
     /// </summary>
-    public uint ResponseStatus { get; set; }
+    public ActionResponseRequestStatus ResponseStatus { get; set; }
 
     /// <summary>
     /// Fixed datum record count
@@ -137,19 +126,12 @@ public partial class ActionResponseRPdu : SimulationManagementWithReliabilityFam
 }
 
 /// <summary>
-/// Alias, more descriptive name for ActionResponseRPdu.
-/// </summary>
-public partial class ActionResponseReliablePdu
-{
-}
-
-/// <summary>
 /// 5.12.4.13 Serves the same function as the Comment PDU.
 /// </summary>
-public partial class CommentRPdu : SimulationManagementWithReliabilityFamilyPdu
+public partial class CommentReliablePdu : SimulationManagementWithReliabilityFamilyPdu
 {
-    /// <summary>Creates a DIS v7 CommentRPdu with its wire discriminator fields initialized.</summary>
-    public CommentRPdu() => Initialize(62, 10);
+    /// <summary>Creates a DIS v7 CommentReliablePdu with its wire discriminator fields initialized.</summary>
+    public CommentReliablePdu() => Initialize(62, 10);
 
     /// <summary>
     /// Fixed datum record count, not used in this Pdu
@@ -169,24 +151,17 @@ public partial class CommentRPdu : SimulationManagementWithReliabilityFamilyPdu
 }
 
 /// <summary>
-/// Alias, more descriptive name for CommentRPdu.
-/// </summary>
-public partial class CommentReliablePdu
-{
-}
-
-/// <summary>
 /// 5.12.4.2 Serves the same function as the Create Entity PDU but with the addition of reliability service levels.
 /// </summary>
-public partial class CreateEntityRPdu : SimulationManagementWithReliabilityFamilyPdu
+public partial class CreateEntityReliablePdu : SimulationManagementWithReliabilityFamilyPdu
 {
-    /// <summary>Creates a DIS v7 CreateEntityRPdu with its wire discriminator fields initialized.</summary>
-    public CreateEntityRPdu() => Initialize(51, 10);
+    /// <summary>Creates a DIS v7 CreateEntityReliablePdu with its wire discriminator fields initialized.</summary>
+    public CreateEntityReliablePdu() => Initialize(51, 10);
 
     /// <summary>
     /// level of reliability service used for this transaction
     /// </summary>
-    public byte RequiredReliabilityService { get; set; }
+    public RequiredReliabilityService RequiredReliabilityService { get; set; }
 
     public byte Pad1 { get; set; }
 
@@ -200,24 +175,17 @@ public partial class CreateEntityRPdu : SimulationManagementWithReliabilityFamil
 }
 
 /// <summary>
-/// Alias, more descriptive name for CreateEntityRPdu.
-/// </summary>
-public partial class CreateEntityReliablePdu
-{
-}
-
-/// <summary>
 /// 5.12.4.9 Serves the same function as the Data Query PDU but with the addition of reliability service levels
 /// </summary>
-public partial class DataQueryRPdu : SimulationManagementWithReliabilityFamilyPdu
+public partial class DataQueryReliablePdu : SimulationManagementWithReliabilityFamilyPdu
 {
-    /// <summary>Creates a DIS v7 DataQueryRPdu with its wire discriminator fields initialized.</summary>
-    public DataQueryRPdu() => Initialize(58, 10);
+    /// <summary>Creates a DIS v7 DataQueryReliablePdu with its wire discriminator fields initialized.</summary>
+    public DataQueryReliablePdu() => Initialize(58, 10);
 
     /// <summary>
     /// level of reliability service used for this transaction
     /// </summary>
-    public byte RequiredReliabilityService { get; set; }
+    public RequiredReliabilityService RequiredReliabilityService { get; set; }
 
     /// <summary>
     /// padding
@@ -262,19 +230,12 @@ public partial class DataQueryRPdu : SimulationManagementWithReliabilityFamilyPd
 }
 
 /// <summary>
-/// Alias, more descriptive name for DataQueryRPdu.
-/// </summary>
-public partial class DataQueryReliablePdu
-{
-}
-
-/// <summary>
 /// 5.12.4.11 Serves the same function as the Data PDU but with the addition of reliability service levels and is used in response to a Data Query-R PDU, a Data-R PDU, or a Set Data-R PDU.
 /// </summary>
-public partial class DataRPdu : SimulationManagementWithReliabilityFamilyPdu
+public partial class DataReliablePdu : SimulationManagementWithReliabilityFamilyPdu
 {
-    /// <summary>Creates a DIS v7 DataRPdu with its wire discriminator fields initialized.</summary>
-    public DataRPdu() => Initialize(60, 10);
+    /// <summary>Creates a DIS v7 DataReliablePdu with its wire discriminator fields initialized.</summary>
+    public DataReliablePdu() => Initialize(60, 10);
 
     /// <summary>
     /// Request ID provides a unique identifier
@@ -284,7 +245,7 @@ public partial class DataRPdu : SimulationManagementWithReliabilityFamilyPdu
     /// <summary>
     /// level of reliability service used for this transaction
     /// </summary>
-    public byte RequiredReliabilityService { get; set; }
+    public RequiredReliabilityService RequiredReliabilityService { get; set; }
 
     /// <summary>
     /// padding
@@ -319,24 +280,17 @@ public partial class DataRPdu : SimulationManagementWithReliabilityFamilyPdu
 }
 
 /// <summary>
-/// Alias, more descriptive name for DataRPdu.
-/// </summary>
-public partial class DataReliablePdu
-{
-}
-
-/// <summary>
 /// 5.12.4.12 Contains the same information as found in the Event Report PDU.
 /// </summary>
-public partial class EventReportRPdu : SimulationManagementWithReliabilityFamilyPdu
+public partial class EventReportReliablePdu : SimulationManagementWithReliabilityFamilyPdu
 {
-    /// <summary>Creates a DIS v7 EventReportRPdu with its wire discriminator fields initialized.</summary>
-    public EventReportRPdu() => Initialize(61, 10);
+    /// <summary>Creates a DIS v7 EventReportReliablePdu with its wire discriminator fields initialized.</summary>
+    public EventReportReliablePdu() => Initialize(61, 10);
 
     /// <summary>
     /// Event type
     /// </summary>
-    public uint EventType { get; set; }
+    public EventReportEventType EventType { get; set; }
 
     /// <summary>
     /// padding
@@ -366,19 +320,12 @@ public partial class EventReportRPdu : SimulationManagementWithReliabilityFamily
 }
 
 /// <summary>
-/// Alias, more descriptive name for EventReportRPdu.
-/// </summary>
-public partial class EventReportReliablePdu
-{
-}
-
-/// <summary>
 /// 5.12.4.14 Used to communicate a request for data in record format.
 /// </summary>
-public partial class RecordQueryRPdu : SimulationManagementWithReliabilityFamilyPdu
+public partial class RecordQueryReliablePdu : SimulationManagementWithReliabilityFamilyPdu
 {
-    /// <summary>Creates a DIS v7 RecordQueryRPdu with its wire discriminator fields initialized.</summary>
-    public RecordQueryRPdu() => Initialize(65, 10);
+    /// <summary>Creates a DIS v7 RecordQueryReliablePdu with its wire discriminator fields initialized.</summary>
+    public RecordQueryReliablePdu() => Initialize(65, 10);
 
     /// <summary>
     /// request ID provides a unique identifier
@@ -388,7 +335,7 @@ public partial class RecordQueryRPdu : SimulationManagementWithReliabilityFamily
     /// <summary>
     /// level of reliability service used for this transaction
     /// </summary>
-    public byte RequiredReliabilityService { get; set; }
+    public RequiredReliabilityService RequiredReliabilityService { get; set; }
 
     /// <summary>
     /// padding
@@ -398,7 +345,7 @@ public partial class RecordQueryRPdu : SimulationManagementWithReliabilityFamily
     /// <summary>
     /// event type
     /// </summary>
-    public ushort EventType { get; set; }
+    public RecordQueryREventType EventType { get; set; }
 
     /// <summary>
     /// time
@@ -418,19 +365,12 @@ public partial class RecordQueryRPdu : SimulationManagementWithReliabilityFamily
 }
 
 /// <summary>
-/// Alias, more descriptive name for RecordQueryRPdu.
-/// </summary>
-public partial class RecordQueryReliablePdu
-{
-}
-
-/// <summary>
 /// 5.12.4.16 Used to respond to a Record Query-R PDU or a Set Record-R PDU. It is used to provide information requested in a Record Query-R PDU, to confirm the information received in a Set Record-R PDU, and to confirm the receipt of a periodic or unsolicited Record-R PDU when the acknowledged service level is used.
 /// </summary>
-public partial class RecordRPdu : SimulationManagementWithReliabilityFamilyPdu
+public partial class RecordReliablePdu : SimulationManagementWithReliabilityFamilyPdu
 {
-    /// <summary>Creates a DIS v7 RecordRPdu with its wire discriminator fields initialized.</summary>
-    public RecordRPdu() => Initialize(63, 10);
+    /// <summary>Creates a DIS v7 RecordReliablePdu with its wire discriminator fields initialized.</summary>
+    public RecordReliablePdu() => Initialize(63, 10);
 
     /// <summary>
     /// request ID provides a unique identifier
@@ -440,11 +380,11 @@ public partial class RecordRPdu : SimulationManagementWithReliabilityFamilyPdu
     /// <summary>
     /// level of reliability service used for this transaction
     /// </summary>
-    public byte RequiredReliabilityService { get; set; }
+    public RequiredReliabilityService RequiredReliabilityService { get; set; }
 
     public byte Pad1 { get; set; }
 
-    public ushort EventType { get; set; }
+    public RecordREventType EventType { get; set; }
 
     /// <summary>
     /// Number of record sets in list
@@ -459,24 +399,17 @@ public partial class RecordRPdu : SimulationManagementWithReliabilityFamilyPdu
 }
 
 /// <summary>
-/// Alias, more descriptive name for RecordRPdu.
-/// </summary>
-public partial class RecordReliablePdu
-{
-}
-
-/// <summary>
 /// 5.12.4.3 Contains the same information as found in the Remove Entity PDU with the addition of the level of reliability service to be used for the removal action being requested.
 /// </summary>
-public partial class RemoveEntityRPdu : SimulationManagementWithReliabilityFamilyPdu
+public partial class RemoveEntityReliablePdu : SimulationManagementWithReliabilityFamilyPdu
 {
-    /// <summary>Creates a DIS v7 RemoveEntityRPdu with its wire discriminator fields initialized.</summary>
-    public RemoveEntityRPdu() => Initialize(52, 10);
+    /// <summary>Creates a DIS v7 RemoveEntityReliablePdu with its wire discriminator fields initialized.</summary>
+    public RemoveEntityReliablePdu() => Initialize(52, 10);
 
     /// <summary>
     /// level of reliability service used for this transaction
     /// </summary>
-    public byte RequiredReliabilityService { get; set; }
+    public RequiredReliabilityService RequiredReliabilityService { get; set; }
 
     public byte Pad1 { get; set; }
 
@@ -490,24 +423,17 @@ public partial class RemoveEntityRPdu : SimulationManagementWithReliabilityFamil
 }
 
 /// <summary>
-/// Alias, more descriptive name for RemoveEntityRPdu.
-/// </summary>
-public partial class RemoveEntityReliablePdu
-{
-}
-
-/// <summary>
 /// 5.12.4.10 Serves the same function as the Set Data PDU but with the addition of reliability service levels.
 /// </summary>
-public partial class SetDataRPdu : SimulationManagementWithReliabilityFamilyPdu
+public partial class SetDataReliablePdu : SimulationManagementWithReliabilityFamilyPdu
 {
-    /// <summary>Creates a DIS v7 SetDataRPdu with its wire discriminator fields initialized.</summary>
-    public SetDataRPdu() => Initialize(59, 10);
+    /// <summary>Creates a DIS v7 SetDataReliablePdu with its wire discriminator fields initialized.</summary>
+    public SetDataReliablePdu() => Initialize(59, 10);
 
     /// <summary>
     /// level of reliability service used for this transaction
     /// </summary>
-    public byte RequiredReliabilityService { get; set; }
+    public RequiredReliabilityService RequiredReliabilityService { get; set; }
 
     /// <summary>
     /// padding
@@ -547,19 +473,12 @@ public partial class SetDataRPdu : SimulationManagementWithReliabilityFamilyPdu
 }
 
 /// <summary>
-/// Alias, more descriptive name for SetDataRPdu.
-/// </summary>
-public partial class SetDataReliablePdu
-{
-}
-
-/// <summary>
 /// 5.12.4.15 Used to set or change certain parameter values. These parameter values are contained within a record format as compared to the datum format used in the Set Data-R PDU.
 /// </summary>
-public partial class SetRecordRPdu : SimulationManagementWithReliabilityFamilyPdu
+public partial class SetRecordReliablePdu : SimulationManagementWithReliabilityFamilyPdu
 {
-    /// <summary>Creates a DIS v7 SetRecordRPdu with its wire discriminator fields initialized.</summary>
-    public SetRecordRPdu() => Initialize(64, 10);
+    /// <summary>Creates a DIS v7 SetRecordReliablePdu with its wire discriminator fields initialized.</summary>
+    public SetRecordReliablePdu() => Initialize(64, 10);
 
     /// <summary>
     /// request ID provides a unique identifier
@@ -569,7 +488,7 @@ public partial class SetRecordRPdu : SimulationManagementWithReliabilityFamilyPd
     /// <summary>
     /// level of reliability service used for this transaction
     /// </summary>
-    public byte RequiredReliabilityService { get; set; }
+    public RequiredReliabilityService RequiredReliabilityService { get; set; }
 
     public byte Pad1 { get; set; }
 
@@ -587,13 +506,6 @@ public partial class SetRecordRPdu : SimulationManagementWithReliabilityFamilyPd
     /// </summary>
     public List<RecordSpecification> RecordSets { get; set; } = [];
 
-}
-
-/// <summary>
-/// Alias, more descriptive name for SetRecordRPdu.
-/// </summary>
-public partial class SetRecordReliablePdu
-{
 }
 
 /// <summary>
@@ -616,10 +528,10 @@ public abstract partial class SimulationManagementWithReliabilityFamilyPdu : Pdu
 /// <summary>
 /// 5.12.4.4 Serves the same function as the Start/Resume PDU but with the addition of reliability service levels
 /// </summary>
-public partial class StartResumeRPdu : SimulationManagementWithReliabilityFamilyPdu
+public partial class StartResumeReliablePdu : SimulationManagementWithReliabilityFamilyPdu
 {
-    /// <summary>Creates a DIS v7 StartResumeRPdu with its wire discriminator fields initialized.</summary>
-    public StartResumeRPdu() => Initialize(53, 10);
+    /// <summary>Creates a DIS v7 StartResumeReliablePdu with its wire discriminator fields initialized.</summary>
+    public StartResumeReliablePdu() => Initialize(53, 10);
 
     /// <summary>
     /// time in real world for this operation to happen
@@ -634,7 +546,7 @@ public partial class StartResumeRPdu : SimulationManagementWithReliabilityFamily
     /// <summary>
     /// level of reliability service used for this transaction
     /// </summary>
-    public byte RequiredReliabilityService { get; set; }
+    public RequiredReliabilityService RequiredReliabilityService { get; set; }
 
     public byte Pad1 { get; set; }
 
@@ -648,19 +560,12 @@ public partial class StartResumeRPdu : SimulationManagementWithReliabilityFamily
 }
 
 /// <summary>
-/// Alias, more descriptive name for StartResumeRPdu.
-/// </summary>
-public partial class StartResumeReliablePdu
-{
-}
-
-/// <summary>
 /// 5.12.4.5 Serves the same function as the Stop/Freeze PDU (see 5.6.5.5.1) but with the addition of reliability service levels.
 /// </summary>
-public partial class StopFreezeRPdu : SimulationManagementWithReliabilityFamilyPdu
+public partial class StopFreezeReliablePdu : SimulationManagementWithReliabilityFamilyPdu
 {
-    /// <summary>Creates a DIS v7 StopFreezeRPdu with its wire discriminator fields initialized.</summary>
-    public StopFreezeRPdu() => Initialize(54, 10);
+    /// <summary>Creates a DIS v7 StopFreezeReliablePdu with its wire discriminator fields initialized.</summary>
+    public StopFreezeReliablePdu() => Initialize(54, 10);
 
     /// <summary>
     /// time in real world for this operation to happen
@@ -670,17 +575,17 @@ public partial class StopFreezeRPdu : SimulationManagementWithReliabilityFamilyP
     /// <summary>
     /// Reason for stopping/freezing simulation
     /// </summary>
-    public byte Reason { get; set; }
+    public StopFreezeReason Reason { get; set; }
 
     /// <summary>
     /// internal behvior of the simulation while frozen
     /// </summary>
-    public byte FrozenBehavior { get; set; }
+    public StopFreezeFrozenBehavior FrozenBehavior { get; set; }
 
     /// <summary>
     /// reliability level
     /// </summary>
-    public byte RequiredReliabilityService { get; set; }
+    public RequiredReliabilityService RequiredReliabilityService { get; set; }
 
     /// <summary>
     /// padding
@@ -692,12 +597,5 @@ public partial class StopFreezeRPdu : SimulationManagementWithReliabilityFamilyP
     /// </summary>
     public uint RequestId { get; set; }
 
-}
-
-/// <summary>
-/// Alias, more descriptive name for StopFreezeRPdu.
-/// </summary>
-public partial class StopFreezeReliablePdu
-{
 }
 

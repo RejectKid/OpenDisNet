@@ -1,3 +1,4 @@
+using OpenDisNet.Enumerations;
 using OpenDisNet.Pdus;
 using OpenDisNet.Protocol;
 
@@ -17,7 +18,7 @@ public sealed class PduCodecConformanceTests
         byte[] encoded = DisSerializer.Serialize(original);
         Pdu decoded = Assert.IsAssignableFrom<Pdu>(DisSerializer.Deserialize(encoded));
 
-        Assert.Equal(value, decoded.PduType);
+        Assert.Equal(value, (byte)decoded.PduType);
         Assert.Equal(encoded.Length, original.Length);
         Assert.Equal(encoded, DisSerializer.Serialize(decoded));
     }
@@ -27,10 +28,10 @@ public sealed class PduCodecConformanceTests
     {
         var original = (SignalPdu)PduFactory.Create(PduType.Signal, exerciseId: 9);
         original.EncodingScheme = 0x1234;
-        original.TdlType = 7;
+        original.TdlType = SignalTdlType.Link16LegacyFormatJtidsFdlTadilJ;
         original.SampleRate = 48_000;
         original.DataBitLength = 13;
-        original.Samples = 2;
+        original.SampleCount = 2;
         original.Data = [0xA5, 0xE0];
 
         byte[] encoded = DisSerializer.Serialize(original);
@@ -90,8 +91,8 @@ public sealed class PduCodecConformanceTests
         var original = (IntercomControlPdu)PduFactory.Create(PduType.IntercomControl);
         original.IntercomParameters =
         [
-            new() { RecordType = 1, RecordLength = 8, RecordSpecificField = [1, 2, 3, 4] },
-            new() { RecordType = 2, RecordLength = 8, RecordSpecificField = [5, 6, 7, 8] },
+            new() { RecordType = IntercomControlRecordType.SpecificDestinationRecord, RecordLength = 8, RecordSpecificField = [1, 2, 3, 4] },
+            new() { RecordType = IntercomControlRecordType.GroupDestinationRecord, RecordLength = 8, RecordSpecificField = [5, 6, 7, 8] },
         ];
 
         byte[] encoded = DisSerializer.Serialize(original);

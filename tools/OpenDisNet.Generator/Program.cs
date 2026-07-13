@@ -1,15 +1,25 @@
 using OpenDisNet.Generator;
 
 string repositoryRoot = FindRepositoryRoot(AppContext.BaseDirectory);
+string sisoCatalog = Path.Combine(repositoryRoot, "tools", "OpenDisNet.Generator", "Schemas", "SISO", "referenced-types-v36.json");
+int importIndex = Array.IndexOf(args, "--import-siso-v36");
+if (importIndex >= 0)
+{
+    if (importIndex + 1 >= args.Length) throw new ArgumentException("--import-siso-v36 requires the official SISO v36 ZIP/XML path, or '-' for XML on standard input.");
+    SisoReferenceImporter.Import(args[importIndex + 1], sisoCatalog);
+    return 0;
+}
 string catalogOutput = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Internal", "SchemaCatalog.cs");
 string factoryOutput = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Pdus", "PduFactory.cs");
 string codecOutput = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Internal", "PduCodec.cs");
+string enumerationsOutput = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Enumerations", "SisoEnumerations.cs");
 bool verify = args.Contains("--verify", StringComparer.Ordinal);
 
 DisSchema schema = DisSchemaLoader.Load();
 string generatedCatalog = ManifestWriter.Create(schema);
 string generatedFactory = FactoryWriter.Create(schema);
 string generatedCodec = CodecWriter.Create(schema);
+string generatedEnumerations = EnumerationWriter.Create(schema);
 Dictionary<string, string> modelOutputs = schema.SourceFiles.ToDictionary(
     sourceFile => ModelOutput(repositoryRoot, sourceFile),
     sourceFile => ModelWriter.Create(schema, sourceFile),
@@ -20,6 +30,7 @@ if (verify)
     bool stale = !Matches(catalogOutput, generatedCatalog)
         || !Matches(factoryOutput, generatedFactory)
         || !Matches(codecOutput, generatedCodec)
+        || !Matches(enumerationsOutput, generatedEnumerations)
         || modelOutputs.Any(x => !Matches(x.Key, x.Value));
     if (stale)
     {
@@ -33,6 +44,8 @@ else
     File.WriteAllText(catalogOutput, generatedCatalog);
     File.WriteAllText(factoryOutput, generatedFactory);
     File.WriteAllText(codecOutput, generatedCodec);
+    Directory.CreateDirectory(Path.GetDirectoryName(enumerationsOutput)!);
+    File.WriteAllText(enumerationsOutput, generatedEnumerations);
     foreach ((string path, string contents) in modelOutputs)
     {
         Directory.CreateDirectory(Path.GetDirectoryName(path)!);

@@ -1,5 +1,8 @@
 // DIS v7 protocol models reviewed from DIS_7_2012.xml.
 #pragma warning disable CS0108
+using OpenDisNet.Enumerations;
+using OpenDisNet.Protocol;
+
 namespace OpenDisNet.Pdus;
 
 /// <summary>
@@ -21,12 +24,12 @@ public partial class AcousticEmitter
     /// <summary>
     /// The system for a particular UA emitter, and an enumeration
     /// </summary>
-    public ushort AcousticSystemName { get; set; }
+    public UaAcousticSystemName AcousticSystemName { get; set; }
 
     /// <summary>
     /// The function of the acoustic system
     /// </summary>
-    public byte AcousticFunction { get; set; }
+    public UaAcousticEmitterSystemFunction AcousticFunction { get; set; }
 
     /// <summary>
     /// The UA emitter identification number relative to a specific system
@@ -60,7 +63,7 @@ public partial class AggregateMarking
     /// <summary>
     /// The character set
     /// </summary>
-    public byte CharacterSet { get; set; }
+    public EntityMarkingCharacterSet CharacterSet { get; set; }
 
     /// <summary>
     /// The characters
@@ -77,17 +80,17 @@ public partial class AggregateType
     /// <summary>
     /// Grouping criterion used to group the aggregate. Enumeration from EBV document
     /// </summary>
-    public byte AggregateKind { get; set; }
+    public AggregateStateAggregateKind AggregateKind { get; set; }
 
     /// <summary>
     /// Domain of entity (air, surface, subsurface, space, etc.) where zero means domain does not apply.
     /// </summary>
-    public byte Domain { get; set; }
+    public PlatformDomain Domain { get; set; }
 
     /// <summary>
     /// country to which the design of the entity is attributed
     /// </summary>
-    public ushort Country { get; set; }
+    public Country Country { get; set; }
 
     /// <summary>
     /// category of entity
@@ -97,12 +100,12 @@ public partial class AggregateType
     /// <summary>
     /// subcategory of entity
     /// </summary>
-    public byte Subcategory { get; set; }
+    public AggregateStateSubcategory Subcategory { get; set; }
 
     /// <summary>
     /// specific info based on subcategory field. specific is a reserved word in sql.
     /// </summary>
-    public byte SpecificInfo { get; set; }
+    public AggregateStateSpecific SpecificInfo { get; set; }
 
     public byte Extra { get; set; }
 
@@ -141,7 +144,7 @@ public partial class AngleDeception
     /// <summary>
     /// This field shall be used to indicate if angle deception data have changed since issuance of the last Angle Deception attribute record for this beam, if the Angle Deception attribute record is part of a heartbeat update to meet periodic update requirements or if the angle deception data for the beam has ceased.
     /// </summary>
-    public byte StateIndicator { get; set; }
+    public EeAttributeStateIndicator StateIndicator { get; set; }
 
     /// <summary>
     /// padding
@@ -254,7 +257,7 @@ public partial class ArticulatedPartVP
     /// <summary>
     /// The identification of the Variable Parameter record. Enumeration from EBV
     /// </summary>
-    public byte RecordType { get; set; }
+    public VariableParameterRecordType RecordType { get; set; }
 
     /// <summary>
     /// indicate the change of any parameter for any articulated part. Starts at zero, incremented for each change
@@ -291,7 +294,7 @@ public partial class Association
     /// <summary>
     /// This field shall indicate the type of association. It shall be represented by an 8-bit enumeration. Values for this field are found in Section 14 of SISO-REF-010
     /// </summary>
-    public byte AssociationType { get; set; }
+    public EntityAssociationAssociationType AssociationType { get; set; }
 
     /// <summary>
     /// zero-filled array of padding bits for byte alignment and consistent sizing of PDU data
@@ -318,12 +321,12 @@ public partial class AttachedPartVP
     /// <summary>
     /// The identification of the Variable Parameter record. Enumeration from EBV
     /// </summary>
-    public byte RecordType { get; set; }
+    public VariableParameterRecordType RecordType { get; set; }
 
     /// <summary>
     /// 0 = attached, 1 = detached. See I.2.3.1 for state transition diagram
     /// </summary>
-    public byte DetachedIndicator { get; set; }
+    public AttachedPartDetachedIndicator DetachedIndicator { get; set; }
 
     /// <summary>
     /// The identification of the articulated part to which this articulation parameter is attached. This field shall be specified by a 16-bit unsigned integer. This field shall contain the value zero if the articulated part is attached directly to the entity.
@@ -333,7 +336,7 @@ public partial class AttachedPartVP
     /// <summary>
     /// The location or station to which the part is attached
     /// </summary>
-    public uint ParameterType { get; set; }
+    public AttachedParts ParameterType { get; set; }
 
     /// <summary>
     /// The definition of the 64-bits shall be determined based on the type of parameter specified in the Parameter Type field
@@ -387,7 +390,7 @@ public partial class BeamAntennaPattern
     /// <summary>
     /// The reference coordinate system wrt which beam direction  is specified. This field should not change over the duration of an exercise. World coordindate systemis prefered for exercises. The entity coordinate system should be used only when highly directional antennas must be precisely modeled.
     /// </summary>
-    public byte ReferenceSystem { get; set; }
+    public TransmitterAntennaPatternReferenceSystem ReferenceSystem { get; set; }
 
     /// <summary>
     /// Padding
@@ -461,7 +464,7 @@ public partial class BeamStatus
     /// <summary>
     /// First bit zero means beam is active, first bit = 1 means deactivated. The rest is padding.
     /// </summary>
-    public byte BeamState { get; set; }
+    public BeamStatusBeamState BeamState { get; set; }
 
 }
 
@@ -498,7 +501,7 @@ public partial class BlankingSector
     /// <summary>
     /// indicate if blanking sector data have changed since issuance of the last Blanking Sector attribute record for this beam, if the Blanking Sector attribute record beam has ceased
     /// </summary>
-    public byte StateIndicator { get; set; }
+    public EeAttributeStateIndicator StateIndicator { get; set; }
 
     /// <summary>
     /// Padding
@@ -648,7 +651,7 @@ public partial class DeadReckoningParameters
     /// <summary>
     /// Algorithm to use in computing dead reckoning. See EBV doc.
     /// </summary>
-    public byte DeadReckoningAlgorithm { get; set; }
+    public DeadReckoningAlgorithm DeadReckoningAlgorithm { get; set; }
 
     /// <summary>
     /// Dead reckoning parameters. Contents depends on algorithm.
@@ -747,22 +750,22 @@ public partial class DirectedEnergyDamage
     /// <summary>
     /// enumeration
     /// </summary>
-    public byte ComponentIdentification { get; set; }
+    public EntityDamageStatusComponentIdentification ComponentIdentification { get; set; }
 
     /// <summary>
     /// enumeration
     /// </summary>
-    public byte ComponentDamageStatus { get; set; }
+    public DeDamageDescriptionComponentDamageStatus ComponentDamageStatus { get; set; }
 
     /// <summary>
     /// enumeration
     /// </summary>
-    public byte ComponentVisualDamageStatus { get; set; }
+    public DeDamageDescriptionComponentVisualDamageStatus ComponentVisualDamageStatus { get; set; }
 
     /// <summary>
     /// enumeration
     /// </summary>
-    public byte ComponentVisualSmokeColor { get; set; }
+    public DeDamageDescriptionComponentVisualSmokeColor ComponentVisualSmokeColor { get; set; }
 
     /// <summary>
     /// For any component damage resulting this field shall be set to the fire event ID from that PDU.
@@ -829,7 +832,7 @@ public partial class DirectedEnergyPrecisionAimpoint
     /// <summary>
     /// Spot Shape ENUM.
     /// </summary>
-    public byte BeamSpotType { get; set; }
+    public DePrecisionAimpointBeamSpotType BeamSpotType { get; set; }
 
     /// <summary>
     /// Beam Spot Cross Section Semi-Major Axis.
@@ -932,12 +935,12 @@ public partial class EmitterSystem
     /// <summary>
     /// Name of the emitter, 16-bit enumeration
     /// </summary>
-    public ushort EmitterName { get; set; }
+    public EmitterName EmitterName { get; set; }
 
     /// <summary>
     /// function of the emitter, 8-bit enumeration
     /// </summary>
-    public byte EmitterFunction { get; set; }
+    public EmitterSystemFunction EmitterFunction { get; set; }
 
     /// <summary>
     /// emitter ID, 8-bit enumeration
@@ -959,17 +962,17 @@ public partial class EngineFuel
     /// <summary>
     /// Units in which the fuel is measured
     /// </summary>
-    public byte FuelMeasurementUnits { get; set; }
+    public FuelMeasurementUnits FuelMeasurementUnits { get; set; }
 
     /// <summary>
     /// Type of fuel
     /// </summary>
-    public byte FuelType { get; set; }
+    public SupplyFuelType FuelType { get; set; }
 
     /// <summary>
     /// Location of fuel as related to entity. See section 14 of EBV document
     /// </summary>
-    public byte FuelLocation { get; set; }
+    public FuelLocation FuelLocation { get; set; }
 
     /// <summary>
     /// zero-filled array of padding bits for byte alignment and consistent sizing of PDU data
@@ -1006,14 +1009,14 @@ public partial class EngineFuelReload
     /// <summary>
     /// Units of measure
     /// </summary>
-    public byte FuelMeasurmentUnits { get; set; }
+    public FuelMeasurementUnits FuelMeasurmentUnits { get; set; }
 
-    public byte FuelType { get; set; }
+    public SupplyFuelType FuelType { get; set; }
 
     /// <summary>
     /// fuel  location as related to the entity
     /// </summary>
-    public byte FuelLocation { get; set; }
+    public FuelLocation FuelLocation { get; set; }
 
     /// <summary>
     /// zero-filled array of padding bits for byte alignment and consistent sizing of PDU data
@@ -1030,22 +1033,22 @@ public partial class EntityAssociationVP
     /// <summary>
     /// The identification of the Variable Parameter record. Enumeration from EBV
     /// </summary>
-    public byte RecordType { get; set; }
+    public VariableParameterRecordType RecordType { get; set; }
 
     /// <summary>
     /// Indicates if this VP has changed since last issuance
     /// </summary>
-    public byte ChangeIndicator { get; set; }
+    public EntityVpRecordChangeIndicator ChangeIndicator { get; set; }
 
     /// <summary>
     /// Indicates association status between two entities
     /// </summary>
-    public byte AssociationStatus { get; set; }
+    public EntityAssociationAssociationType AssociationStatus { get; set; }
 
     /// <summary>
     /// Type of association; 8-bit enum
     /// </summary>
-    public byte AssociationType { get; set; }
+    public EntityAssociationPhysicalAssociationType AssociationType { get; set; }
 
     /// <summary>
     /// Object ID of entity associated with this entity
@@ -1055,17 +1058,17 @@ public partial class EntityAssociationVP
     /// <summary>
     /// Station location on one's own entity
     /// </summary>
-    public ushort OwnStationLocation { get; set; }
+    public IsPartOfStationName OwnStationLocation { get; set; }
 
     /// <summary>
     /// Type of physical connection
     /// </summary>
-    public byte PhysicalConnectionType { get; set; }
+    public EntityAssociationPhysicalConnectionType PhysicalConnectionType { get; set; }
 
     /// <summary>
     /// Type of member the entity is within the group
     /// </summary>
-    public byte GroupMemberType { get; set; }
+    public EntityAssociationGroupMemberType GroupMemberType { get; set; }
 
     /// <summary>
     /// Group if any to which the entity belongs
@@ -1121,7 +1124,7 @@ public partial class EntityMarking
     /// <summary>
     /// The character set
     /// </summary>
-    public byte CharacterSet { get; set; }
+    public EntityMarkingCharacterSet CharacterSet { get; set; }
 
     /// <summary>
     /// The characters
@@ -1138,7 +1141,7 @@ public partial class EntityType
     /// <summary>
     /// Kind of entity
     /// </summary>
-    public byte EntityKind { get; set; }
+    public EntityKind EntityKind { get; set; }
 
     /// <summary>
     /// Domain of entity (air, surface, subsurface, space, etc.)
@@ -1148,7 +1151,7 @@ public partial class EntityType
     /// <summary>
     /// country to which the design of the entity is attributed
     /// </summary>
-    public ushort Country { get; set; }
+    public Country Country { get; set; }
 
     /// <summary>
     /// category of entity
@@ -1177,7 +1180,7 @@ public partial class EntityTypeRaw
     /// <summary>
     /// Kind of entity
     /// </summary>
-    public byte EntityKind { get; set; }
+    public EntityKind EntityKind { get; set; }
 
     /// <summary>
     /// Domain of entity (air, surface, subsurface, space, etc.)
@@ -1216,12 +1219,12 @@ public partial class EntityTypeVP
     /// <summary>
     /// The identification of the Variable Parameter record.
     /// </summary>
-    public byte RecordType { get; set; }
+    public VariableParameterRecordType RecordType { get; set; }
 
     /// <summary>
     /// Indicates if this VP has changed since last issuance
     /// </summary>
-    public byte ChangeIndicator { get; set; }
+    public EntityVpRecordChangeIndicator ChangeIndicator { get; set; }
 
     public EntityType EntityType { get; set; } = new EntityType();
 
@@ -1245,7 +1248,7 @@ public partial class Environment
     /// <summary>
     /// Record type
     /// </summary>
-    public uint EnvironmentType { get; set; }
+    public EnvironmentalProcessRecordType EnvironmentType { get; set; }
 
     /// <summary>
     /// length, in bits
@@ -1323,7 +1326,7 @@ public partial class Expendable
 
     public ushort Quantity { get; set; }
 
-    public byte ExpendableStatus { get; set; }
+    public MunitionExpendableStatus ExpendableStatus { get; set; }
 
     /// <summary>
     /// zero-filled array of padding bits for byte alignment and consistent sizing of PDU data
@@ -1384,7 +1387,7 @@ public partial class ExplosionDescriptor
     /// <summary>
     /// Material that exploded. Can be grain dust, tnt, gasoline, etc. Enumeration
     /// </summary>
-    public ushort ExplosiveMaterial { get; set; }
+    public ExplosiveMaterialCategories ExplosiveMaterial { get; set; }
 
     /// <summary>
     /// zero-filled array of padding bits for byte alignment and consistent sizing of PDU data
@@ -1431,7 +1434,7 @@ public partial class FalseTargetsAttribute
     /// <summary>
     /// This field shall be used to indicate if false target data have changed since issuance of the last False Targets attribute record for this beam, if the False Targets attribute record is part of a heartbeat update to meet periodic update requirements or if false target data for the beam has ceased.
     /// </summary>
-    public byte StateIndicator { get; set; }
+    public EeAttributeStateIndicator StateIndicator { get; set; }
 
     /// <summary>
     /// padding
@@ -1485,7 +1488,7 @@ public partial class FixedDatum
     /// <summary>
     /// ID of the fixed datum, an enumeration
     /// </summary>
-    public uint FixedDatumId { get; set; }
+    public VariableRecordType FixedDatumId { get; set; }
 
     /// <summary>
     /// Value for the fixed datum
@@ -1579,7 +1582,7 @@ public partial class GridAxisDescriptor
     /// <summary>
     /// type of grid axis
     /// </summary>
-    public byte AxisType { get; set; }
+    public GridAxisDescriptorAxisType AxisType { get; set; }
 
 }
 
@@ -1637,9 +1640,9 @@ public partial class GridAxisDescriptorVariable : GridAxisDescriptor
 /// </summary>
 public partial class GridData
 {
-    public ushort SampleType { get; set; }
+    public GriddedDataSampleType SampleType { get; set; }
 
-    public ushort DataRepresentation { get; set; }
+    public GriddedDataDataRepresentation DataRepresentation { get; set; }
 
 }
 
@@ -1710,7 +1713,7 @@ public partial class IFFData
     /// <summary>
     /// enumeration for type of record
     /// </summary>
-    public uint RecordType { get; set; }
+    public VariableRecordType RecordType { get; set; }
 
     /// <summary>
     /// length of record, including padding
@@ -1771,7 +1774,7 @@ public partial class IFFFundamentalParameterData
     /// <summary>
     /// Applicable modes enumeration
     /// </summary>
-    public byte ApplicableModes { get; set; }
+    public IffApplicableModes ApplicableModes { get; set; }
 
     /// <summary>
     /// System-specific data
@@ -1785,11 +1788,11 @@ public partial class IFFFundamentalParameterData
 /// </summary>
 public partial class IOCommsNodeRecord : IORecord
 {
-    public uint RecordType { get; set; }
+    public VariableRecordType RecordType { get; set; }
 
     public ushort RecordLength { get; set; }
 
-    public byte CommsNodeType { get; set; }
+    public IoCommsNodeRecordCommsNodeType CommsNodeType { get; set; }
 
     /// <summary>
     /// zero-filled array of padding bits for byte alignment and consistent sizing of PDU data
@@ -1805,21 +1808,21 @@ public partial class IOCommsNodeRecord : IORecord
 /// </summary>
 public partial class IOEffectRecord : IORecord
 {
-    public uint RecordType { get; set; }
+    public VariableRecordType RecordType { get; set; }
 
     public ushort RecordLength { get; set; }
 
-    public byte IoStatus { get; set; }
+    public IoEffectsRecordIoStatus IoStatus { get; set; }
 
-    public byte IoLinkType { get; set; }
+    public IoEffectsRecordIoLinkType IoLinkType { get; set; }
 
-    public byte IoEffect { get; set; }
+    public IoEffectsRecordIoEffect IoEffect { get; set; }
 
     public byte IoEffectDutyCycle { get; set; }
 
     public ushort IoEffectDuration { get; set; }
 
-    public ushort IoProcess { get; set; }
+    public IoEffectsRecordIoProcess IoProcess { get; set; }
 
     /// <summary>
     /// zero-filled array of padding bits for byte alignment and consistent sizing of PDU data
@@ -1843,7 +1846,7 @@ public partial class IntercomCommunicationsParameters
     /// <summary>
     /// Type of intercom parameters record
     /// </summary>
-    public ushort RecordType { get; set; }
+    public IntercomControlRecordType RecordType { get; set; }
 
     /// <summary>
     /// length of record
@@ -1965,12 +1968,12 @@ public partial class LinearSegmentParameter
     /// <summary>
     /// whether a modification has been made to the point object's location or orientation
     /// </summary>
-    public ushort SegmentModification { get; set; }
+    public ObjectStateModificationLinearObject SegmentModification { get; set; }
 
     /// <summary>
     /// general dynamic appearance attributes of the segment. This record shall be defined as a 16-bit record of enumerations. The values defined for this record are included in Section 12 of SISO-REF-010.
     /// </summary>
-    public ushort GeneralSegmentAppearance { get; set; }
+    public ObjectStateAppearanceGeneral GeneralSegmentAppearance { get; set; }
 
     /// <summary>
     /// This field shall specify specific dynamic appearance attributes of the segment. This record shall be defined as a 32-bit record of enumerations.
@@ -2019,7 +2022,7 @@ public partial class LinearSegmentParameter
 /// </summary>
 public partial class LiveDeadReckoningParameters
 {
-    public byte DeadReckoningAlgorithm { get; set; }
+    public DeadReckoningAlgorithm DeadReckoningAlgorithm { get; set; }
 
     public LEVector3FixedByte EntityLinearAcceleration { get; set; } = new LEVector3FixedByte();
 
@@ -2195,7 +2198,7 @@ public partial class ModulationType
     /// <summary>
     /// The major classification of the modulation type.
     /// </summary>
-    public ushort MajorModulation { get; set; }
+    public TransmitterMajorModulation MajorModulation { get; set; }
 
     /// <summary>
     /// provide certain detailed information depending upon the major modulation type, uid 156-162
@@ -2205,7 +2208,7 @@ public partial class ModulationType
     /// <summary>
     /// The radio system associated with this Transmitter PDU and shall be used as the basis to interpret other fields whose values depend on a specific radio system.
     /// </summary>
-    public ushort RadioSystem { get; set; }
+    public TransmitterModulationTypeSystem RadioSystem { get; set; }
 
 }
 
@@ -2232,7 +2235,7 @@ public partial class Munition
     /// <summary>
     /// the status of the munition. It shall be represented by an 8-bit enumeration.
     /// </summary>
-    public byte MunitionStatus { get; set; }
+    public MunitionExpendableStatus MunitionStatus { get; set; }
 
     /// <summary>
     /// zero-filled array of padding bits for byte alignment and consistent sizing of PDU data
@@ -2254,12 +2257,12 @@ public partial class MunitionDescriptor
     /// <summary>
     /// type of warhead enumeration
     /// </summary>
-    public ushort Warhead { get; set; }
+    public MunitionDescriptorWarhead Warhead { get; set; }
 
     /// <summary>
     /// type of fuse used enumeration
     /// </summary>
-    public ushort Fuse { get; set; }
+    public MunitionDescriptorFuse Fuse { get; set; }
 
     /// <summary>
     /// how many of the munition were fired
@@ -2318,7 +2321,7 @@ public partial class NamedLocationIdentification
     /// <summary>
     /// The station name within the host at which the part entity is located. If the part entity is On Station, this field shall specify the representation of the part's location data fields. This field shall be specified by a 16-bit enumeration
     /// </summary>
-    public ushort StationName { get; set; }
+    public IsPartOfStationName StationName { get; set; }
 
     /// <summary>
     /// The number of the particular wing station, cargo hold etc., at which the part is attached.
@@ -2352,12 +2355,12 @@ public partial class ObjectType
     /// <summary>
     /// Domain of entity (air, surface, subsurface, space, etc.)
     /// </summary>
-    public byte Domain { get; set; }
+    public PlatformDomain Domain { get; set; }
 
     /// <summary>
     /// country to which the design of the entity is attributed
     /// </summary>
-    public byte ObjectKind { get; set; }
+    public ObjectKind ObjectKind { get; set; }
 
     /// <summary>
     /// category of entity
@@ -2384,7 +2387,7 @@ public partial class OwnershipStatusRecord
     /// <summary>
     /// The ownership and/or ownership conflict status of the entity represented by the Entity ID field.
     /// </summary>
-    public byte OwnershipStatus { get; set; }
+    public OwnershipStatus OwnershipStatus { get; set; }
 
     /// <summary>
     /// zero-filled array of padding bits for byte alignment and consistent sizing of PDU data
@@ -2401,7 +2404,7 @@ public abstract partial class Pdu
     /// <summary>
     /// The version of the protocol. 5=DIS-1995, 6=DIS-1998, 7=DIS-2012
     /// </summary>
-    public byte ProtocolVersion { get; set; }
+    public DisProtocolVersion ProtocolVersion { get; set; }
 
     /// <summary>
     /// Exercise ID provides a unique identifier
@@ -2411,12 +2414,12 @@ public abstract partial class Pdu
     /// <summary>
     /// Type of pdu, unique for each PDU class
     /// </summary>
-    public byte PduType { get; set; }
+    public PduType PduType { get; set; }
 
     /// <summary>
     /// value that refers to the protocol family, eg SimulationManagement, et
     /// </summary>
-    public byte ProtocolFamily { get; set; }
+    public ProtocolFamily ProtocolFamily { get; set; }
 
     /// <summary>
     /// Timestamp value, int representing number of 1.675 microseconds as interval past hour
@@ -2523,7 +2526,7 @@ public partial class RadioType
     /// <summary>
     /// Kind of entity
     /// </summary>
-    public byte EntityKind { get; set; }
+    public EntityKind EntityKind { get; set; }
 
     /// <summary>
     /// Domain of entity (air, surface, subsurface, space, etc.)
@@ -2533,17 +2536,17 @@ public partial class RadioType
     /// <summary>
     /// country to which the design of the entity is attributed
     /// </summary>
-    public ushort Country { get; set; }
+    public Country Country { get; set; }
 
     /// <summary>
     /// category of entity
     /// </summary>
-    public byte Category { get; set; }
+    public RadioCategory Category { get; set; }
 
     /// <summary>
     /// specific info based on subcategory field
     /// </summary>
-    public byte Subcategory { get; set; }
+    public RadioSubcategory Subcategory { get; set; }
 
     public byte Specific { get; set; }
 
@@ -2561,7 +2564,7 @@ public partial class RecordQuerySpecification
     /// <summary>
     /// variable length list of 32-bit record types
     /// </summary>
-    public List<uint> RecordIds { get; set; } = [];
+    public List<VariableRecordType> RecordIds { get; set; } = [];
 
 }
 
@@ -2590,7 +2593,7 @@ public partial class RecordSpecificationElement
     /// <summary>
     /// The data structure used to convey the parameter values of the record for each record. 32-bit enumeration.
     /// </summary>
-    public uint RecordId { get; set; }
+    public VariableRecordType RecordId { get; set; }
 
     /// <summary>
     /// The serial number of the first record in the block of records
@@ -2632,12 +2635,12 @@ public partial class Relationship
     /// <summary>
     /// The nature or purpose for joining of the part entity to the host entity and shall be represented by a 16-bit enumeration
     /// </summary>
-    public ushort Nature { get; set; }
+    public IsPartOfNature Nature { get; set; }
 
     /// <summary>
     /// The position of the part entity with respect to the host entity and shall be represented by a 16-bit enumeration
     /// </summary>
-    public ushort Position { get; set; }
+    public IsPartOfPosition Position { get; set; }
 
 }
 
@@ -2683,12 +2686,12 @@ public partial class Sensor
     /// <summary>
     /// the source of the Sensor Type field
     /// </summary>
-    public byte SensorTypeSource { get; set; }
+    public SensorTypeSource SensorTypeSource { get; set; }
 
     /// <summary>
     /// The on/off status of the sensor
     /// </summary>
-    public byte SensorOnOffStatus { get; set; }
+    public SensorOnOffStatus SensorOnOffStatus { get; set; }
 
     /// <summary>
     /// for Source 'other':SensorRecordOtherActiveSensors/325,'em':EmitterName/75,'passive':SensorRecordSensorTypePassiveSensors/326,'mine':6.2.57,'ua':UAAcousticSystemName/144,'lasers':DesignatorSystemName/80
@@ -2720,17 +2723,17 @@ public partial class SeparationVP
     /// <summary>
     /// The identification of the Variable Parameter record. Enumeration from EBV
     /// </summary>
-    public byte RecordType { get; set; }
+    public VariableParameterRecordType RecordType { get; set; }
 
     /// <summary>
     /// Reason for separation. EBV
     /// </summary>
-    public byte ReasonForSeparation { get; set; }
+    public SeparationVpReasonforSeparation ReasonForSeparation { get; set; }
 
     /// <summary>
     /// Whether the entity existed prior to separation EBV
     /// </summary>
-    public byte PreEntityIndicator { get; set; }
+    public SeparationVpPreEntityIndicator PreEntityIndicator { get; set; }
 
     /// <summary>
     /// padding
@@ -2833,7 +2836,7 @@ public partial class SimulationIdentifier
 /// </summary>
 public partial class StandardVariableRecord
 {
-    public uint RecordType { get; set; }
+    public VariableRecordType RecordType { get; set; }
 
     internal ushort RecordLength { get; set; }
 
@@ -2871,17 +2874,17 @@ public partial class StorageFuel
     /// <summary>
     /// Units in which the fuel is measured
     /// </summary>
-    public byte FuelMeasurementUnits { get; set; }
+    public FuelMeasurementUnits FuelMeasurementUnits { get; set; }
 
     /// <summary>
     /// Type of fuel
     /// </summary>
-    public byte FuelType { get; set; }
+    public SupplyFuelType FuelType { get; set; }
 
     /// <summary>
     /// Location of fuel as related to entity. See section 14 of EBV document
     /// </summary>
-    public byte FuelLocation { get; set; }
+    public FuelLocation FuelLocation { get; set; }
 
     /// <summary>
     /// zero-filled array of padding bits for byte alignment and consistent sizing of PDU data
@@ -2918,17 +2921,17 @@ public partial class StorageFuelReload
     /// <summary>
     /// The fuel measurement units. Enumeration
     /// </summary>
-    public byte FuelMeasurementUnits { get; set; }
+    public FuelMeasurementUnits FuelMeasurementUnits { get; set; }
 
     /// <summary>
     /// Fuel type
     /// </summary>
-    public byte FuelType { get; set; }
+    public SupplyFuelType FuelType { get; set; }
 
     /// <summary>
     /// Location of fuel as related to entity. See section 14 of EBV document
     /// </summary>
-    public byte FuelLocation { get; set; }
+    public FuelLocation FuelLocation { get; set; }
 
     /// <summary>
     /// zero-filled array of padding bits for byte alignment and consistent sizing of PDU data
@@ -2962,17 +2965,17 @@ public partial class SystemIdentifier
     /// <summary>
     /// general type of emitting system, an enumeration
     /// </summary>
-    public ushort SystemType { get; set; }
+    public IffSystemType SystemType { get; set; }
 
     /// <summary>
     /// named type of system, an enumeration
     /// </summary>
-    public ushort SystemName { get; set; }
+    public IffSystemName SystemName { get; set; }
 
     /// <summary>
     /// mode of operation for the system, an enumeration
     /// </summary>
-    public byte SystemMode { get; set; }
+    public IffSystemMode SystemMode { get; set; }
 
     /// <summary>
     /// status of this PDU, see section 6.2.15
@@ -3028,12 +3031,12 @@ public partial class UAFundamentalParameter
     /// <summary>
     /// Which database record shall be used
     /// </summary>
-    public ushort ActiveEmissionParameterIndex { get; set; }
+    public UaActiveEmissionParameterIndex ActiveEmissionParameterIndex { get; set; }
 
     /// <summary>
     /// The type of scan pattern, If not used, zero
     /// </summary>
-    public ushort ScanPattern { get; set; }
+    public UaScanPattern ScanPattern { get; set; }
 
     /// <summary>
     /// center azimuth bearing of th emain beam. In radians.
@@ -3094,7 +3097,7 @@ public partial class VariableDatum
     /// <summary>
     /// Type of variable datum to be transmitted. 32-bit enumeration defined in EBV
     /// </summary>
-    public uint VariableDatumId { get; set; }
+    public VariableRecordType VariableDatumId { get; set; }
 
     /// <summary>
     /// Length, IN BITS, of the variable datum.
@@ -3116,7 +3119,7 @@ public partial class VariableParameter
     /// <summary>
     /// The identification of the Variable Parameter record. Enumeration from EBV
     /// </summary>
-    public byte RecordType { get; set; }
+    public VariableParameterRecordType RecordType { get; set; }
 
     /// <summary>
     /// 120 bits
@@ -3133,7 +3136,7 @@ public partial class VariableTransmitterParameters
     /// <summary>
     /// Type of VTP
     /// </summary>
-    public uint RecordType { get; set; }
+    public VariableRecordType RecordType { get; set; }
 
     /// <summary>
     /// Length, in bytes

@@ -1,5 +1,8 @@
 // DIS v7 protocol models reviewed from SyntheticEnvironmentFamilyPdus.xml.
 #pragma warning disable CS0108
+using OpenDisNet.Enumerations;
+using OpenDisNet.Protocol;
+
 namespace OpenDisNet.Pdus;
 
 /// <summary>
@@ -28,12 +31,12 @@ public partial class ArealObjectStatePdu : SyntheticEnvironmentFamilyPdu
     /// <summary>
     /// force ID provides a unique identifier
     /// </summary>
-    public byte ForceId { get; set; }
+    public ForceId ForceId { get; set; }
 
     /// <summary>
     /// modifications enumeration
     /// </summary>
-    public ushort Modifications { get; set; }
+    public ObjectStateModificationArealObject Modifications { get; set; }
 
     /// <summary>
     /// Object type
@@ -93,12 +96,12 @@ public partial class EnvironmentalProcessPdu : SyntheticEnvironmentFamilyPdu
     /// <summary>
     /// model type
     /// </summary>
-    public byte ModelType { get; set; }
+    public EnvironmentalProcessModelType ModelType { get; set; }
 
     /// <summary>
     /// Environment status
     /// </summary>
-    public byte EnvironmentStatus { get; set; }
+    public EnvironmentalProcessEnvironmentStatus EnvironmentStatus { get; set; }
 
     /// <summary>
     /// number of environment records
@@ -148,7 +151,7 @@ public partial class GriddedDataPdu : SyntheticEnvironmentFamilyPdu
     /// <summary>
     /// coordinate system of the grid
     /// </summary>
-    public ushort CoordinateSystem { get; set; }
+    public GriddedDataCoordinateSystem CoordinateSystem { get; set; }
 
     /// <summary>
     /// number of grid axes for the environmental data
@@ -158,7 +161,7 @@ public partial class GriddedDataPdu : SyntheticEnvironmentFamilyPdu
     /// <summary>
     /// are domain grid axes identidal to those of the priveious domain update?
     /// </summary>
-    public byte ConstantGrid { get; set; }
+    public GriddedDataConstantGrid ConstantGrid { get; set; }
 
     /// <summary>
     /// type of environment
@@ -227,7 +230,7 @@ public partial class LinearObjectStatePdu : SyntheticEnvironmentFamilyPdu
     /// <summary>
     /// force ID provides a unique identifier
     /// </summary>
-    public byte ForceId { get; set; }
+    public ForceId ForceId { get; set; }
 
     /// <summary>
     /// number of linear segment parameters
@@ -282,12 +285,12 @@ public partial class PointObjectStatePdu : SyntheticEnvironmentFamilyPdu
     /// <summary>
     /// force ID provides a unique identifier
     /// </summary>
-    public byte ForceId { get; set; }
+    public ForceId ForceId { get; set; }
 
     /// <summary>
     /// modifications
     /// </summary>
-    public ushort Modifications { get; set; }
+    public ObjectStateModificationPointObject Modifications { get; set; }
 
     /// <summary>
     /// Object type
@@ -312,7 +315,7 @@ public partial class PointObjectStatePdu : SyntheticEnvironmentFamilyPdu
     /// <summary>
     /// General object apperance
     /// </summary>
-    public ushort GenerObjectAppearance { get; set; }
+    public ObjectStateAppearanceGeneral GenerObjectAppearance { get; set; }
 
     public ushort Padding1 { get; set; }
 

@@ -1,5 +1,8 @@
 // DIS v7 protocol models reviewed from RadioCommunicationsFamilyPdus.xml.
 #pragma warning disable CS0108
+using OpenDisNet.Enumerations;
+using OpenDisNet.Protocol;
+
 namespace OpenDisNet.Pdus;
 
 /// <summary>
@@ -13,7 +16,7 @@ public partial class IntercomControlPdu : RadioCommunicationsFamilyPdu
     /// <summary>
     /// control type
     /// </summary>
-    public byte ControlType { get; set; }
+    public IntercomControlControlType ControlType { get; set; }
 
     /// <summary>
     /// control type
@@ -43,12 +46,12 @@ public partial class IntercomControlPdu : RadioCommunicationsFamilyPdu
     /// <summary>
     /// current transmit state of the line
     /// </summary>
-    public byte TransmitLineState { get; set; }
+    public IntercomControlTransmitLineState TransmitLineState { get; set; }
 
     /// <summary>
     /// detailed type requested.
     /// </summary>
-    public byte Command { get; set; }
+    public IntercomControlCommand Command { get; set; }
 
     /// <summary>
     /// eid of the entity that has created this intercom channel, same comments as sourceEntityId
@@ -105,12 +108,12 @@ public partial class IntercomSignalPdu : RadioCommunicationsFamilyPdu
     /// <summary>
     /// encoding scheme
     /// </summary>
-    public ushort EncodingScheme { get; set; }
+    public SignalEncodingScheme EncodingScheme { get; set; }
 
     /// <summary>
     /// tactical data link type
     /// </summary>
-    public ushort TdlType { get; set; }
+    public SignalTdlType TdlType { get; set; }
 
     /// <summary>
     /// sample rate
@@ -125,7 +128,7 @@ public partial class IntercomSignalPdu : RadioCommunicationsFamilyPdu
     /// <summary>
     /// samples
     /// </summary>
-    public ushort Samples { get; set; }
+    public ushort SampleCount { get; set; }
 
     /// <summary>
     /// data bytes
@@ -171,7 +174,7 @@ public partial class ReceiverPdu : RadioCommunicationsFamilyPdu
     /// <summary>
     /// encoding scheme used, and enumeration
     /// </summary>
-    public ushort ReceiverState { get; set; }
+    public ReceiverReceiverState ReceiverState { get; set; }
 
     public ushort Padding1 { get; set; }
 
@@ -205,12 +208,12 @@ public partial class SignalPdu : RadioCommunicationsFamilyPdu
     /// <summary>
     /// encoding scheme used, and enumeration
     /// </summary>
-    public ushort EncodingScheme { get; set; }
+    public SignalEncodingScheme EncodingScheme { get; set; }
 
     /// <summary>
     /// tdl type
     /// </summary>
-    public ushort TdlType { get; set; }
+    public SignalTdlType TdlType { get; set; }
 
     /// <summary>
     /// sample rate
@@ -225,7 +228,7 @@ public partial class SignalPdu : RadioCommunicationsFamilyPdu
     /// <summary>
     /// number of samples
     /// </summary>
-    public ushort Samples { get; set; }
+    public ushort SampleCount { get; set; }
 
     /// <summary>
     /// list of eight bit values
@@ -252,12 +255,12 @@ public partial class TransmitterPdu : RadioCommunicationsFamilyPdu
     /// <summary>
     /// transmit state
     /// </summary>
-    public byte TransmitState { get; set; }
+    public TransmitterTransmitState TransmitState { get; set; }
 
     /// <summary>
     /// input source
     /// </summary>
-    public byte InputSource { get; set; }
+    public TransmitterInputSource InputSource { get; set; }
 
     /// <summary>
     /// number of Variable Transmitter Parameter records
@@ -277,7 +280,7 @@ public partial class TransmitterPdu : RadioCommunicationsFamilyPdu
     /// <summary>
     /// antenna pattern type
     /// </summary>
-    public ushort AntennaPatternType { get; set; }
+    public TransmitterAntennaPatternType AntennaPatternType { get; set; }
 
     /// <summary>
     /// antenna pattern length in octets
@@ -307,7 +310,7 @@ public partial class TransmitterPdu : RadioCommunicationsFamilyPdu
     /// <summary>
     /// crypto system enumeration
     /// </summary>
-    public ushort CryptoSystem { get; set; }
+    public TransmitterCryptoSystem CryptoSystem { get; set; }
 
     /// <summary>
     /// crypto system key identifer
