@@ -42,6 +42,9 @@ Unknown and vendor-defined PDU bodies are retained rather than discarded.
 - Enumeration target: SISO-REF-010-2025 (version 36).
 - Reference baseline: NPS MOVES `open-dis/opendis7-java` and its source generator.
 
+See [the standards baseline](docs/standards.md) and
+[conformance matrix](docs/conformance.md) for exact, release-specific coverage.
+
 OpenDisNet is not affiliated with or endorsed by IEEE, SISO, NPS, or the U.S.
 Government. Users are responsible for obtaining standards needed for their own
 conformance review.

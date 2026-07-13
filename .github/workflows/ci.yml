@@ -26,7 +26,7 @@ jobs:
       - run: dotnet build --configuration Release --no-restore
       - run: dotnet test --configuration Release --no-build
       - run: dotnet pack src/OpenDisNet/OpenDisNet.csproj --configuration Release --no-build --output artifacts/packages
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: matrix.os == 'ubuntu-latest'
         with:
           name: packages
