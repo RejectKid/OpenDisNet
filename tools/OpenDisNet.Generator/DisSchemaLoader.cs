@@ -1,6 +1,7 @@
 using System.Collections.Immutable;
 using System.Globalization;
 using System.Reflection;
+using System.Text.Json;
 using System.Xml.Linq;
 
 namespace OpenDisNet.Generator;
@@ -25,6 +26,7 @@ internal static class DisSchemaLoader
 
     public static DisSchema Load()
     {
+        IReadOnlyDictionary<string, SisoWireType> sisoTypes = LoadSisoWireTypes();
         string[] files = ["DIS_7_2012.xml", .. FamilyFiles];
         var classes = ImmutableArray.CreateBuilder<ClassDefinition>();
         var pdus = ImmutableArray.CreateBuilder<PduDefinition>();
@@ -37,7 +39,7 @@ internal static class DisSchemaLoader
             XDocument document = XDocument.Load(stream, LoadOptions.SetLineInfo);
             foreach (XElement element in document.Root?.Elements("class") ?? [])
             {
-                ClassDefinition definition = ParseClass(element, file);
+                ClassDefinition definition = ParseClass(element, file, sisoTypes);
                 classes.Add(definition);
 
                 XElement? pduType = element.Elements("initialValue")
@@ -60,10 +62,10 @@ internal static class DisSchemaLoader
         return new(classes.ToImmutable(), pdus.OrderBy(x => x.Type).ToImmutableArray(), files.ToImmutableArray());
     }
 
-    private static ClassDefinition ParseClass(XElement element, string sourceFile)
+    private static ClassDefinition ParseClass(XElement element, string sourceFile, IReadOnlyDictionary<string, SisoWireType> sisoTypes)
     {
         string name = Required(element, "name");
-        var fields = element.Elements("attribute").Select(ParseField).ToImmutableArray();
+        var fields = element.Elements("attribute").Select(x => ParseField(x, sisoTypes)).ToImmutableArray();
         return new(
             name,
             (string?)element.Attribute("inheritsFrom") ?? "root",
@@ -73,7 +75,7 @@ internal static class DisSchemaLoader
             sourceFile);
     }
 
-    private static FieldDefinition ParseField(XElement attribute)
+    private static FieldDefinition ParseField(XElement attribute, IReadOnlyDictionary<string, SisoWireType> sisoTypes)
     {
         string name = Required(attribute, "name");
         XElement shape = attribute.Elements().SingleOrDefault()
@@ -83,24 +85,39 @@ internal static class DisSchemaLoader
         {
             "primitive" => Field(name, FieldKind.Primitive, Required(shape, "type")),
             "classRef" => Field(name, FieldKind.ClassReference, Required(shape, "name")),
-            "sisoenum" => Field(name, FieldKind.Enumeration, Required(shape, "type")),
-            "sisobitfield" => Field(name, FieldKind.BitField, Required(shape, "type")),
-            "objectlist" => ParseObjectList(name, shape),
-            "primitivelist" => new(name, FieldKind.PrimitiveList, Required(shape.Elements().Single(), "type"), null, OptionalInt(shape, "length"), Comment(attribute)),
+            "sisoenum" => SisoField(FieldKind.Enumeration),
+            "sisobitfield" => SisoField(FieldKind.BitField),
+            "objectlist" => ParseObjectList(name, shape, sisoTypes),
+            "primitivelist" => new(name, FieldKind.PrimitiveList, Required(shape.Elements().Single(), "type"), null, OptionalInt(shape, "length"), null, Comment(attribute)),
             "padtoboundary" => Field(name, FieldKind.PaddingBoundary, Required(shape, "length")),
             "staticivar" => Field(name, FieldKind.StaticIvar, (string?)shape.Attribute("type") ?? string.Empty),
             _ => throw new InvalidDataException($"Attribute '{name}' uses unsupported wire shape '{shape.Name.LocalName}'."),
         };
 
         FieldDefinition Field(string fieldName, FieldKind kind, string typeName) =>
-            new(fieldName, kind, typeName, null, null, Comment(attribute));
+            new(fieldName, kind, typeName, null, null, null, Comment(attribute));
+
+        FieldDefinition SisoField(FieldKind kind)
+        {
+            string typeName = Required(shape, "type");
+            if (!sisoTypes.TryGetValue(typeName, out SisoWireType? wireType))
+                throw new InvalidDataException($"Missing SISO wire metadata for '{typeName}'.");
+            return new(name, kind, typeName, null, null, wireType.Bits, Comment(attribute));
+        }
     }
 
-    private static FieldDefinition ParseObjectList(string name, XElement shape)
+    private static FieldDefinition ParseObjectList(string name, XElement shape, IReadOnlyDictionary<string, SisoWireType> sisoTypes)
     {
         XElement item = shape.Elements().Single();
         string type = item.Name.LocalName == "classRef" ? Required(item, "name") : Required(item, "type");
-        return new(name, FieldKind.ObjectList, type, (string?)shape.Attribute("countFieldName"), OptionalInt(shape, "length"), Comment(shape.Parent!));
+        int? bitSize = null;
+        if (item.Name.LocalName is "sisoenum" or "sisobitfield")
+        {
+            if (!sisoTypes.TryGetValue(type, out SisoWireType? wireType))
+                throw new InvalidDataException($"Missing SISO wire metadata for list item '{type}'.");
+            bitSize = wireType.Bits;
+        }
+        return new(name, FieldKind.ObjectList, type, (string?)shape.Attribute("countFieldName"), OptionalInt(shape, "length"), bitSize, Comment(shape.Parent!));
     }
 
     private static void Validate(ImmutableArray<ClassDefinition>.Builder classes, ImmutableArray<PduDefinition>.Builder pdus)
@@ -134,4 +151,18 @@ internal static class DisSchemaLoader
         int.TryParse((string?)element.Attribute(attribute), CultureInfo.InvariantCulture, out int value) ? value : null;
 
     private static string? Comment(XElement element) => (string?)element.Attribute("comment");
+
+    private static IReadOnlyDictionary<string, SisoWireType> LoadSisoWireTypes()
+    {
+        const string resourceName = "OpenDisNet.Generator.Schemas.SISO.referenced-types-v35.json";
+        using Stream stream = Assembly.GetExecutingAssembly().GetManifestResourceStream(resourceName)
+            ?? throw new InvalidDataException($"Missing embedded SISO metadata '{resourceName}'.");
+        SisoWireType[] values = JsonSerializer.Deserialize<SisoWireType[]>(stream, new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true,
+        }) ?? throw new InvalidDataException("SISO metadata is empty.");
+        return values.ToDictionary(x => x.Name, StringComparer.Ordinal);
+    }
+
+    private sealed record SisoWireType(string Name, int Uid, int Bits, string Kind);
 }

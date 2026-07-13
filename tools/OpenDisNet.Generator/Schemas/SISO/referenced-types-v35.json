@@ -1,0 +1,776 @@
+[
+  {
+    "name": "MinefieldDataFusing",
+    "uid": 192,
+    "bits": 16,
+    "kind": "sisobitfield"
+  },
+  {
+    "name": "StopFreezeFrozenBehavior",
+    "uid": 68,
+    "bits": 8,
+    "kind": "sisobitfield"
+  },
+  {
+    "name": "MunitionExpendableStatus",
+    "uid": 327,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "DEDamageDescriptionComponentDamageStatus",
+    "uid": 315,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "IOEffectsRecordIOLinkType",
+    "uid": 291,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "DEDamageDescriptionComponentVisualSmokeColor",
+    "uid": 316,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "IOEffectsRecordIOProcess",
+    "uid": 293,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "IOActionIOSimulationSource",
+    "uid": 286,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "AggregateStateAggregateState",
+    "uid": 204,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "AcknowledgeAcknowledgeFlag",
+    "uid": 69,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "IntercomControlCommand",
+    "uid": 182,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "AggregateStateAggregateKind",
+    "uid": 206,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "BeamStatusBeamState",
+    "uid": 318,
+    "bits": 1,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "TransferControlTransferType",
+    "uid": 224,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "EntityAssociationPhysicalAssociationType",
+    "uid": 323,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "ObjectStateAppearanceGeneral",
+    "uid": 229,
+    "bits": 16,
+    "kind": "sisobitfield"
+  },
+  {
+    "name": "EntityMarkingCharacterSet",
+    "uid": 45,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "UAPassiveParameterIndex",
+    "uid": 148,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "DetonationResult",
+    "uid": 62,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "DISProtocolFamily",
+    "uid": 5,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "GriddedDataConstantGrid",
+    "uid": 245,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "IntercomControlTransmitLineState",
+    "uid": 183,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "FuelLocation",
+    "uid": 329,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "DesignatorSystemName",
+    "uid": 80,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "TransmitterMajorModulation",
+    "uid": 155,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "ObjectStateModificationArealObject",
+    "uid": 242,
+    "bits": 16,
+    "kind": "sisobitfield"
+  },
+  {
+    "name": "IsPartOfNature",
+    "uid": 210,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "MunitionDescriptorWarhead",
+    "uid": 60,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "DEFirePulseShape",
+    "uid": 312,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "IFFSystemType",
+    "uid": 82,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "FuelMeasurementUnits",
+    "uid": 328,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "IFFSystemName",
+    "uid": 83,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "SupplyFuelType",
+    "uid": 413,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "VariableParameterRecordType",
+    "uid": 56,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "EEAttributeStateIndicator",
+    "uid": 300,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "RepairResponseRepairResult",
+    "uid": 64,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "TransmitterInputSource",
+    "uid": 165,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "ElectromagneticEmissionBeamFunction",
+    "uid": 78,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "RepairCompleteRepair",
+    "uid": 64,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "IsPartOfPosition",
+    "uid": 211,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "RadioSubcategory",
+    "uid": 23,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "EntityKind",
+    "uid": 7,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "AggregateStateSpecific",
+    "uid": 209,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "NavigationSource",
+    "uid": 359,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "SeparationVPReasonforSeparation",
+    "uid": 282,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "AggregateStateFormation",
+    "uid": 205,
+    "bits": 32,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "EntityAssociationPhysicalConnectionType",
+    "uid": 324,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "IntercomControlRecordType",
+    "uid": 185,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "AggregateStateSubcategory",
+    "uid": 208,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "ObjectStateModificationPointObject",
+    "uid": 240,
+    "bits": 16,
+    "kind": "sisobitfield"
+  },
+  {
+    "name": "GridAxisDescriptorAxisType",
+    "uid": 377,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "UAAcousticSystemName",
+    "uid": 144,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "ReceiverReceiverState",
+    "uid": 179,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "TransmitterAntennaPatternType",
+    "uid": 167,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "EnvironmentalProcessRecordType",
+    "uid": 250,
+    "bits": 32,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "HighDensityTrackJam",
+    "uid": 79,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "IsGroupOfGroupedEntityCategory",
+    "uid": 213,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "RecordQueryREventType",
+    "uid": 334,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "IOEffectsRecordIOEffect",
+    "uid": 292,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "ExplosiveMaterialCategories",
+    "uid": 310,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "EventReportEventType",
+    "uid": 73,
+    "bits": 32,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "IsPartOfStationName",
+    "uid": 212,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "IOActionIOWarfareType",
+    "uid": 285,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "UAActiveEmissionParameterIndex",
+    "uid": 146,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "GriddedDataSampleType",
+    "uid": 246,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "RecordREventType",
+    "uid": 333,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "TransmitterTransmitState",
+    "uid": 164,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "UAScanPattern",
+    "uid": 147,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "ForceID",
+    "uid": 6,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "ActionResponseRequestStatus",
+    "uid": 72,
+    "bits": 32,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "UAStateChangeUpdateIndicator",
+    "uid": 143,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "AircraftIdentificationType",
+    "uid": 357,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "AcknowledgeResponseFlag",
+    "uid": 70,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "UAAcousticEmitterSystemFunction",
+    "uid": 145,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "SensorOnOffStatus",
+    "uid": 331,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "DISAttributeActionCode",
+    "uid": 295,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "DISProtocolVersion",
+    "uid": 3,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "MinefieldStateAppearanceBitMap",
+    "uid": 190,
+    "bits": 16,
+    "kind": "sisobitfield"
+  },
+  {
+    "name": "CollisionType",
+    "uid": 189,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "EnvironmentalProcessEnvironmentStatus",
+    "uid": 249,
+    "bits": 8,
+    "kind": "sisobitfield"
+  },
+  {
+    "name": "EntityCapabilities",
+    "uid": 55,
+    "bits": 32,
+    "kind": "sisobitfield"
+  },
+  {
+    "name": "DisPduType",
+    "uid": 4,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "AttachedPartDetachedIndicator",
+    "uid": 415,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "MunitionDescriptorFuse",
+    "uid": 61,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "DEPrecisionAimpointBeamSpotType",
+    "uid": 311,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "RadioCategory",
+    "uid": 22,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "SignalTDLType",
+    "uid": 178,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "MinefieldDataPaintScheme",
+    "uid": 202,
+    "bits": 8,
+    "kind": "sisobitfield"
+  },
+  {
+    "name": "DataCategory",
+    "uid": 369,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "Country",
+    "uid": 29,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "PlatformDomain",
+    "uid": 8,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "GriddedDataCoordinateSystem",
+    "uid": 244,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "ElectromagneticEmissionStateUpdateIndicator",
+    "uid": 77,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "IOReportIOReportType",
+    "uid": 289,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "VariableRecordType",
+    "uid": 66,
+    "bits": 32,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "EmitterName",
+    "uid": 75,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "EntityAssociationGroupMemberType",
+    "uid": 321,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "EmitterSystemFunction",
+    "uid": 76,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "IFFSystemMode",
+    "uid": 84,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "ObjectStateModificationLinearObject",
+    "uid": 241,
+    "bits": 16,
+    "kind": "sisobitfield"
+  },
+  {
+    "name": "TransmitterAntennaPatternReferenceSystem",
+    "uid": 168,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "DesignatorDesignatorCode",
+    "uid": 81,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "DEDamageDescriptionComponentVisualDamageStatus",
+    "uid": 317,
+    "bits": 8,
+    "kind": "sisobitfield"
+  },
+  {
+    "name": "StopFreezeReason",
+    "uid": 67,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "EntityDamageStatusComponentIdentification",
+    "uid": 314,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "ObjectKind",
+    "uid": 225,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "IntercomControlControlType",
+    "uid": 180,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "TransmitterModulationTypeSystem",
+    "uid": 163,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "SensorTypeSource",
+    "uid": 414,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "EnvironmentalProcessModelType",
+    "uid": 248,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "DeadReckoningAlgorithm",
+    "uid": 44,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "IOActionIOActionPhase",
+    "uid": 288,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "AttachedParts",
+    "uid": 57,
+    "bits": 32,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "EntityAssociationAssociationType",
+    "uid": 319,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "IFFApplicableModes",
+    "uid": 339,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "GriddedDataDataRepresentation",
+    "uid": 247,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "OwnershipStatus",
+    "uid": 332,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "IOEffectsRecordIOStatus",
+    "uid": 290,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "ActionRequestActionID",
+    "uid": 71,
+    "bits": 32,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "AircraftPresentDomain",
+    "uid": 356,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "SeparationVPPreEntityIndicator",
+    "uid": 283,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "EntityVPRecordChangeIndicator",
+    "uid": 320,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "CapabilityReport",
+    "uid": 358,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "DEFireFlags",
+    "uid": 313,
+    "bits": 16,
+    "kind": "sisobitfield"
+  },
+  {
+    "name": "TransmitterCryptoSystem",
+    "uid": 166,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "RequiredReliabilityService",
+    "uid": 74,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "IOActionIOActionType",
+    "uid": 287,
+    "bits": 16,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "ServiceRequestServiceTypeRequested",
+    "uid": 63,
+    "bits": 8,
+    "kind": "sisoenum"
+  },
+  {
+    "name": "IOCommsNodeRecordCommsNodeType",
+    "uid": 294,
+    "bits": 8,
+    "kind": "sisoenum"
+  }
+]

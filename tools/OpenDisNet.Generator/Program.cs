@@ -2,14 +2,16 @@ using OpenDisNet.Generator;
 
 string repositoryRoot = FindRepositoryRoot(AppContext.BaseDirectory);
 string output = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Generated", "Dis7SchemaManifest.g.cs");
+string modelsOutput = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Generated", "Dis7Models.g.cs");
 bool verify = args.Contains("--verify", StringComparer.Ordinal);
 
 DisSchema schema = DisSchemaLoader.Load();
 string generated = ManifestWriter.Create(schema);
+string generatedModels = ModelWriter.Create(schema);
 
 if (verify)
 {
-    if (!File.Exists(output) || File.ReadAllText(output).ReplaceLineEndings("\n") != generated)
+    if (!Matches(output, generated) || !Matches(modelsOutput, generatedModels))
     {
         Console.Error.WriteLine($"Generated output is stale: {output}");
         return 1;
@@ -19,7 +21,11 @@ else
 {
     Directory.CreateDirectory(Path.GetDirectoryName(output)!);
     File.WriteAllText(output, generated);
+    File.WriteAllText(modelsOutput, generatedModels);
 }
+
+static bool Matches(string path, string expected) =>
+    File.Exists(path) && File.ReadAllText(path).ReplaceLineEndings("\n") == expected;
 
 Console.WriteLine($"Validated {schema.Classes.Length} classes and {schema.Pdus.Length} PDUs (types 1-72).");
 return 0;

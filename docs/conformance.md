@@ -10,6 +10,8 @@ input tests, and round-trip tests.
 - [x] Big-endian integer and IEEE-754 primitives
 - [x] Defensive length and version validation
 - [x] Unknown/future PDU preservation
+- [x] Generated public low-level models for all 253 DIS v7 schema classes
+- [x] Machine-verified catalog of all 72 standardized PDU model types
 - [ ] Typed DIS v7 PDU suite (3 of 72 standardized PDU types implemented)
 - [ ] SISO-REF-010-2025 v36 generated enumerations
 

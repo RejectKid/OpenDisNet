@@ -27,6 +27,7 @@ internal sealed record FieldDefinition(
     string TypeName,
     string? CountFieldName,
     int? FixedLength,
+    int? BitSize,
     string? Comment);
 
 internal enum FieldKind
