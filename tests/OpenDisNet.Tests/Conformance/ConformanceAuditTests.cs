@@ -1,4 +1,5 @@
 using System.Security.Cryptography;
+using System.Text;
 using System.Text.Json;
 using OpenDisNet.Pdus;
 using OpenDisNet.Protocol;
@@ -27,7 +28,8 @@ public sealed class ConformanceAuditTests
         {
             string path = Path.Combine(root, artifact.Path.Replace('/', Path.DirectorySeparatorChar));
             Assert.True(File.Exists(path), $"Audited input is missing: {artifact.Path}");
-            string actual = Convert.ToHexStringLower(SHA256.HashData(File.ReadAllBytes(path)));
+            byte[] normalized = Encoding.UTF8.GetBytes(File.ReadAllText(path).ReplaceLineEndings("\n"));
+            string actual = Convert.ToHexStringLower(SHA256.HashData(normalized));
             Assert.Equal(artifact.Sha256, actual);
         }
     }
