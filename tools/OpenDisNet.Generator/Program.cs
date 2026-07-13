@@ -4,16 +4,18 @@ string repositoryRoot = FindRepositoryRoot(AppContext.BaseDirectory);
 string output = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Generated", "Dis7SchemaManifest.g.cs");
 string modelsOutput = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Generated", "Dis7Models.g.cs");
 string factoryOutput = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Generated", "Dis7PduFactory.g.cs");
+string codecOutput = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Generated", "Dis7PduCodec.g.cs");
 bool verify = args.Contains("--verify", StringComparer.Ordinal);
 
 DisSchema schema = DisSchemaLoader.Load();
 string generated = ManifestWriter.Create(schema);
 string generatedModels = ModelWriter.Create(schema);
 string generatedFactory = FactoryWriter.Create(schema);
+string generatedCodec = CodecWriter.Create(schema);
 
 if (verify)
 {
-    if (!Matches(output, generated) || !Matches(modelsOutput, generatedModels) || !Matches(factoryOutput, generatedFactory))
+    if (!Matches(output, generated) || !Matches(modelsOutput, generatedModels) || !Matches(factoryOutput, generatedFactory) || !Matches(codecOutput, generatedCodec))
     {
         Console.Error.WriteLine($"Generated output is stale: {output}");
         return 1;
@@ -25,10 +27,16 @@ else
     File.WriteAllText(output, generated);
     File.WriteAllText(modelsOutput, generatedModels);
     File.WriteAllText(factoryOutput, generatedFactory);
+    File.WriteAllText(codecOutput, generatedCodec);
 }
 
-static bool Matches(string path, string expected) =>
-    File.Exists(path) && File.ReadAllText(path).ReplaceLineEndings("\n") == expected;
+static bool Matches(string path, string expected)
+{
+    if (!File.Exists(path)) return false;
+    using var stream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite | FileShare.Delete);
+    using var reader = new StreamReader(stream);
+    return reader.ReadToEnd().ReplaceLineEndings("\n") == expected;
+}
 
 Console.WriteLine($"Validated {schema.Classes.Length} classes and {schema.Pdus.Length} PDUs (types 1-72).");
 return 0;

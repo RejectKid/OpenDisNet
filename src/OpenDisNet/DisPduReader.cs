@@ -36,6 +36,14 @@ public static class DisPduReader
         {
             return Fail(DisParseErrorCode.InvalidField, exception.Message, exception.Offset, out error);
         }
+        catch (FormatException exception)
+        {
+            return Fail(DisParseErrorCode.InvalidField, exception.Message, DisHeader.Size, out error);
+        }
+        catch (OverflowException exception)
+        {
+            return Fail(DisParseErrorCode.InvalidField, exception.Message, DisHeader.Size, out error);
+        }
     }
 
     public static IDisPdu Parse(ReadOnlySpan<byte> datagram, DisParseOptions? options = null)

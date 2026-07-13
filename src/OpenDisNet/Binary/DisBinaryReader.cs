@@ -6,10 +6,15 @@ namespace OpenDisNet.Binary;
 public ref struct DisBinaryReader
 {
     private readonly ReadOnlySpan<byte> _source;
+    private readonly int _origin;
     private int _offset;
 
-    public DisBinaryReader(ReadOnlySpan<byte> source) => _source = source;
-    public readonly int Offset => _offset;
+    public DisBinaryReader(ReadOnlySpan<byte> source, int origin = 0)
+    {
+        _source = source;
+        _origin = origin;
+    }
+    public readonly int Offset => _origin + _offset;
     public readonly int Remaining => _source.Length - _offset;
 
     public byte ReadByte(string field = "value")

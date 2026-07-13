@@ -278,7 +278,7 @@ public partial class AggregateIdentifier
     /// <summary>
     /// Simulation address, i.e. site and application, the first two fields of the entity ID provides a unique identifier
     /// </summary>
-    public SimulationAddress SimulationAddress { get; set; } = null!;
+    public SimulationAddress SimulationAddress { get; set; } = new SimulationAddress();
 
     /// <summary>
     /// The aggregate ID provides a unique identifier
@@ -312,7 +312,7 @@ public partial class AggregateStatePdu : EntityManagementFamilyPdu
     /// <summary>
     /// ID of aggregated entities
     /// </summary>
-    public AggregateIdentifier AggregateID { get; set; } = null!;
+    public AggregateIdentifier AggregateID { get; set; } = new AggregateIdentifier();
 
     /// <summary>
     /// force ID provides a unique identifier
@@ -327,7 +327,7 @@ public partial class AggregateStatePdu : EntityManagementFamilyPdu
     /// <summary>
     /// entity type of the aggregated entities
     /// </summary>
-    public AggregateType AggregateType { get; set; } = null!;
+    public AggregateType AggregateType { get; set; } = new AggregateType();
 
     /// <summary>
     /// formation of aggregated entities
@@ -337,27 +337,27 @@ public partial class AggregateStatePdu : EntityManagementFamilyPdu
     /// <summary>
     /// marking for aggregate; first char is charset type, rest is char data
     /// </summary>
-    public AggregateMarking AggregateMarking { get; set; } = null!;
+    public AggregateMarking AggregateMarking { get; set; } = new AggregateMarking();
 
     /// <summary>
     /// dimensions of bounding box for the aggregated entities, origin at the center of mass
     /// </summary>
-    public Vector3Float Dimensions { get; set; } = null!;
+    public Vector3Float Dimensions { get; set; } = new Vector3Float();
 
     /// <summary>
     /// orientation of the bounding box
     /// </summary>
-    public Vector3Float Orientation { get; set; } = null!;
+    public Vector3Float Orientation { get; set; } = new Vector3Float();
 
     /// <summary>
     /// center of mass of the aggregation
     /// </summary>
-    public Vector3Double CenterOfMass { get; set; } = null!;
+    public Vector3Double CenterOfMass { get; set; } = new Vector3Double();
 
     /// <summary>
     /// velocity of aggregation
     /// </summary>
-    public Vector3Float Velocity { get; set; } = null!;
+    public Vector3Float Velocity { get; set; } = new Vector3Float();
 
     /// <summary>
     /// number of aggregates
@@ -564,12 +564,12 @@ public partial class AntennaLocation
     /// <summary>
     /// Location of the radiating portion of the antenna in world coordinates
     /// </summary>
-    public Vector3Double AntennaLocationValue { get; set; } = null!;
+    public Vector3Double AntennaLocationValue { get; set; } = new Vector3Double();
 
     /// <summary>
     /// Location of the radiating portion of the antenna in entity coordinates
     /// </summary>
-    public Vector3Float RelativeAntennaLocation { get; set; } = null!;
+    public Vector3Float RelativeAntennaLocation { get; set; } = new Vector3Float();
 
 }
 
@@ -593,7 +593,7 @@ public partial class Appearance
 /// </summary>
 public partial class AppearancePdu : LiveEntityFamilyPdu
 {
-    public EntityID LiveEntityId { get; set; } = null!;
+    public EntityID LiveEntityId { get; set; } = new EntityID();
 
     /// <summary>
     /// 16-bit bit field
@@ -602,15 +602,15 @@ public partial class AppearancePdu : LiveEntityFamilyPdu
 
     public byte ForceId { get; set; }
 
-    public EntityType EntityType { get; set; } = null!;
+    public EntityType EntityType { get; set; } = new EntityType();
 
-    public EntityType AlternateEntityType { get; set; } = null!;
+    public EntityType AlternateEntityType { get; set; } = new EntityType();
 
-    public EntityMarking EntityMarking { get; set; } = null!;
+    public EntityMarking EntityMarking { get; set; } = new EntityMarking();
 
     public uint Capabilities { get; set; }
 
-    public Appearance AppearanceFields { get; set; } = null!;
+    public Appearance AppearanceFields { get; set; } = new Appearance();
 
 }
 
@@ -622,12 +622,12 @@ public partial class ArealObjectStatePdu : SyntheticEnvironmentFamilyPdu
     /// <summary>
     /// Object in synthetic environment
     /// </summary>
-    public ObjectIdentifier ObjectID { get; set; } = null!;
+    public ObjectIdentifier ObjectID { get; set; } = new ObjectIdentifier();
 
     /// <summary>
     /// Object with which this point object is associated
     /// </summary>
-    public ObjectIdentifier ReferencedObjectID { get; set; } = null!;
+    public ObjectIdentifier ReferencedObjectID { get; set; } = new ObjectIdentifier();
 
     /// <summary>
     /// unique update number of each state transition of an object
@@ -647,7 +647,7 @@ public partial class ArealObjectStatePdu : SyntheticEnvironmentFamilyPdu
     /// <summary>
     /// Object type
     /// </summary>
-    public ObjectType ObjectType { get; set; } = null!;
+    public ObjectType ObjectType { get; set; } = new ObjectType();
 
     /// <summary>
     /// Object appearance
@@ -667,12 +667,12 @@ public partial class ArealObjectStatePdu : SyntheticEnvironmentFamilyPdu
     /// <summary>
     /// requesterID
     /// </summary>
-    public SimulationAddress RequesterID { get; set; } = null!;
+    public SimulationAddress RequesterID { get; set; } = new SimulationAddress();
 
     /// <summary>
     /// receiver ID provides a unique identifier
     /// </summary>
-    public SimulationAddress ReceivingID { get; set; } = null!;
+    public SimulationAddress ReceivingID { get; set; } = new SimulationAddress();
 
     /// <summary>
     /// location of object
@@ -723,7 +723,7 @@ public partial class ArticulatedPartVP
 /// </summary>
 public partial class ArticulatedPartsPdu : LiveEntityFamilyPdu
 {
-    public EntityID LiveEntityId { get; set; } = null!;
+    public EntityID LiveEntityId { get; set; } = new EntityID();
 
     public byte NumberOfParameterRecords { get; set; }
 
@@ -749,12 +749,12 @@ public partial class Association
     /// <summary>
     /// identity of associated entity. If none, NO_SPECIFIC_ENTITY
     /// </summary>
-    public EntityIdentifier AssociatedEntityID { get; set; } = null!;
+    public EntityIdentifier AssociatedEntityID { get; set; } = new EntityIdentifier();
 
     /// <summary>
     /// location, in world coordinates
     /// </summary>
-    public Vector3Double AssociatedLocation { get; set; } = null!;
+    public Vector3Double AssociatedLocation { get; set; } = new Vector3Double();
 
 }
 
@@ -786,7 +786,7 @@ public partial class AttachedPartVP
     /// <summary>
     /// The definition of the 64-bits shall be determined based on the type of parameter specified in the Parameter Type field
     /// </summary>
-    public EntityType AttachedPartType { get; set; } = null!;
+    public EntityType AttachedPartType { get; set; } = new EntityType();
 
 }
 
@@ -820,7 +820,7 @@ public partial class AttributePdu : EntityInformationInteractionFamilyPdu
     /// <summary>
     /// This field shall identify the simulation issuing the Attribute PDU. It shall be represented by a Simulation Address record (see 6.2.79).
     /// </summary>
-    public SimulationAddress OriginatingSimulationAddress { get; set; } = null!;
+    public SimulationAddress OriginatingSimulationAddress { get; set; } = new SimulationAddress();
 
     /// <summary>
     /// Padding
@@ -871,7 +871,7 @@ public partial class AttributePdu : EntityInformationInteractionFamilyPdu
 /// </summary>
 public partial class AttributeRecordSet
 {
-    public EntityID EntityId { get; set; } = null!;
+    public EntityID EntityId { get; set; } = new EntityID();
 
     public ushort NumberOfAttributeRecords { get; set; }
 
@@ -887,7 +887,7 @@ public partial class BeamAntennaPattern
     /// <summary>
     /// The rotation that transforms the reference coordinate sytem into the beam coordinate system. Either world coordinates or entity coordinates may be used as the reference coordinate system, as specified by the reference system field of the antenna pattern record.
     /// </summary>
-    public EulerAngles BeamDirection { get; set; } = null!;
+    public EulerAngles BeamDirection { get; set; } = new EulerAngles();
 
     /// <summary>
     /// Full width of the beam to the -3dB power density points in the x-y plane of the beam coordinnate system.  Elevation beamwidth is represented by a 32-bit floating point number in units of radians.
@@ -1086,17 +1086,17 @@ public partial class CollisionElasticPdu : EntityInformationInteractionFamilyPdu
     /// <summary>
     /// This field shall identify the entity that is issuing the PDU and shall be represented by an Entity Identifier record (see 6.2.28)
     /// </summary>
-    public EntityID IssuingEntityID { get; set; } = null!;
+    public EntityID IssuingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// This field shall identify the entity that has collided with the issuing entity. This field shall be a valid identifier of an entity or server capable of responding to the receipt of this Collision-Elastic PDU. This field shall be represented by an Entity Identifier record (see 6.2.28).
     /// </summary>
-    public EntityID CollidingEntityID { get; set; } = null!;
+    public EntityID CollidingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// This field shall contain an identification generated by the issuing simulation application to associate related collision events. This field shall be represented by an Event Identifier record (see 6.2.34).
     /// </summary>
-    public EventIdentifier CollisionEventID { get; set; } = null!;
+    public EventIdentifier CollisionEventID { get; set; } = new EventIdentifier();
 
     /// <summary>
     /// some padding
@@ -1106,7 +1106,7 @@ public partial class CollisionElasticPdu : EntityInformationInteractionFamilyPdu
     /// <summary>
     /// This field shall contain the velocity at the time the collision is detected at the point the collision is detected. The velocity shall be represented in world coordinates. This field shall be represented by the Linear Velocity Vector record [see 6.2.95 item c)]
     /// </summary>
-    public Vector3Float ContactVelocity { get; set; } = null!;
+    public Vector3Float ContactVelocity { get; set; } = new Vector3Float();
 
     /// <summary>
     /// This field shall contain the mass of the issuing entity and shall be represented by a 32-bit floating point number representing kilograms
@@ -1116,7 +1116,7 @@ public partial class CollisionElasticPdu : EntityInformationInteractionFamilyPdu
     /// <summary>
     /// This field shall specify the location of the collision with respect to the entity with which the issuing entity collided. This field shall be represented by an Entity Coordinate Vector record [see 6.2.95 item a)].
     /// </summary>
-    public Vector3Float LocationOfImpact { get; set; } = null!;
+    public Vector3Float LocationOfImpact { get; set; } = new Vector3Float();
 
     /// <summary>
     /// These six records represent the six independent components of a positive semi-definite matrix formed by pre-multiplying and post-multiplying the tensor of inertia, by the anti-symmetric matrix generated by the moment arm, and shall be represented by 32-bit floating point numbers (see 5.3.4.4)
@@ -1151,7 +1151,7 @@ public partial class CollisionElasticPdu : EntityInformationInteractionFamilyPdu
     /// <summary>
     /// This record shall represent the normal vector to the surface at the point of collision detection. The surface normal shall be represented in world coordinates. This field shall be represented by an Entity Coordinate Vector record [see 6.2.95 item a)].
     /// </summary>
-    public Vector3Float UnitSurfaceNormal { get; set; } = null!;
+    public Vector3Float UnitSurfaceNormal { get; set; } = new Vector3Float();
 
     /// <summary>
     /// This field shall represent the degree to which energy is conserved in a collision and shall be represented by a 32-bit floating point number. In addition, it represents a free parameter by which simulation application developers may "tune" their collision interactions.
@@ -1168,17 +1168,17 @@ public partial class CollisionPdu : EntityInformationInteractionFamilyPdu
     /// <summary>
     /// This field shall identify the entity that is issuing the PDU, and shall be represented by an Entity Identifier record (see 6.2.28).
     /// </summary>
-    public EntityID IssuingEntityID { get; set; } = null!;
+    public EntityID IssuingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// This field shall identify the entity that has collided with the issuing entity (see 5.3.3.4). This field shall be represented by an Entity Identifier record (see 6.2.28).
     /// </summary>
-    public EntityID CollidingEntityID { get; set; } = null!;
+    public EntityID CollidingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// This field shall contain an identification generated by the issuing simulation application to associate related collision events. This field shall be represented by an Event Identifier record (see 6.2.34).
     /// </summary>
-    public EventIdentifier EventID { get; set; } = null!;
+    public EventIdentifier EventID { get; set; } = new EventIdentifier();
 
     /// <summary>
     /// This field shall identify the type of collision. The Collision Type field shall be represented by an 8-bit record of enumerations
@@ -1193,7 +1193,7 @@ public partial class CollisionPdu : EntityInformationInteractionFamilyPdu
     /// <summary>
     /// This field shall contain the velocity (at the time the collision is detected) of the issuing entity. The velocity shall be represented in world coordinates. This field shall be represented by the Linear Velocity Vector record [see 6.2.95 item c)].
     /// </summary>
-    public Vector3Float Velocity { get; set; } = null!;
+    public Vector3Float Velocity { get; set; } = new Vector3Float();
 
     /// <summary>
     /// This field shall contain the mass of the issuing entity, and shall be represented by a 32-bit floating point number representing kilograms.
@@ -1203,7 +1203,7 @@ public partial class CollisionPdu : EntityInformationInteractionFamilyPdu
     /// <summary>
     /// This field shall specify the location of the collision with respect to the entity with which the issuing entity collided. The Location field shall be represented by an Entity Coordinate Vector record [see 6.2.95 item a)].
     /// </summary>
-    public Vector3Float Location { get; set; } = null!;
+    public Vector3Float Location { get; set; } = new Vector3Float();
 
 }
 
@@ -1263,7 +1263,7 @@ public partial class CommentReliablePdu
 /// </summary>
 public partial class CommunicationsNodeID
 {
-    public EntityID EntityID { get; set; } = null!;
+    public EntityID EntityID { get; set; } = new EntityID();
 
     public ushort ElementID { get; set; }
 
@@ -1580,12 +1580,12 @@ public partial class DeadReckoningParameters
     /// <summary>
     /// Linear acceleration of the entity
     /// </summary>
-    public Vector3Float EntityLinearAcceleration { get; set; } = null!;
+    public Vector3Float EntityLinearAcceleration { get; set; } = new Vector3Float();
 
     /// <summary>
     /// Angular velocity of the entity
     /// </summary>
-    public Vector3Float EntityAngularVelocity { get; set; } = null!;
+    public Vector3Float EntityAngularVelocity { get; set; } = new Vector3Float();
 
 }
 
@@ -1597,7 +1597,7 @@ public partial class DesignatorPdu : DistributedEmissionsRegenerationFamilyPdu
     /// <summary>
     /// ID of the entity designating
     /// </summary>
-    public EntityID DesignatingEntityID { get; set; } = null!;
+    public EntityID DesignatingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// This field shall specify a unique emitter database number assigned to  differentiate between otherwise similar or identical emitter beams within an emitter system.
@@ -1607,7 +1607,7 @@ public partial class DesignatorPdu : DistributedEmissionsRegenerationFamilyPdu
     /// <summary>
     /// ID of the entity being designated
     /// </summary>
-    public EntityID DesignatedEntityID { get; set; } = null!;
+    public EntityID DesignatedEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// This field shall identify the designator code being used by the designating entity
@@ -1627,12 +1627,12 @@ public partial class DesignatorPdu : DistributedEmissionsRegenerationFamilyPdu
     /// <summary>
     /// designtor spot wrt the designated entity
     /// </summary>
-    public Vector3Float DesignatorSpotWrtDesignated { get; set; } = null!;
+    public Vector3Float DesignatorSpotWrtDesignated { get; set; } = new Vector3Float();
 
     /// <summary>
     /// designtor spot wrt the designated entity
     /// </summary>
-    public Vector3Double DesignatorSpotLocation { get; set; } = null!;
+    public Vector3Double DesignatorSpotLocation { get; set; } = new Vector3Double();
 
     /// <summary>
     /// Dead reckoning algorithm
@@ -1652,7 +1652,7 @@ public partial class DesignatorPdu : DistributedEmissionsRegenerationFamilyPdu
     /// <summary>
     /// linear accelleration of entity
     /// </summary>
-    public Vector3Float EntityLinearAcceleration { get; set; } = null!;
+    public Vector3Float EntityLinearAcceleration { get; set; } = new Vector3Float();
 
 }
 
@@ -1664,42 +1664,42 @@ public partial class DetonationPdu : WarfareFamilyPdu
     /// <summary>
     /// ID of the entity that shot
     /// </summary>
-    public EntityID SourceEntityID { get; set; } = null!;
+    public EntityID SourceEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// ID of the entity that is being shot at
     /// </summary>
-    public EntityID TargetEntityID { get; set; } = null!;
+    public EntityID TargetEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// ID of the expendable entity, Section 7.3.3
     /// </summary>
-    public EntityID ExplodingEntityID { get; set; } = null!;
+    public EntityID ExplodingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// ID of event, Section 7.3.3
     /// </summary>
-    public EventIdentifier EventID { get; set; } = null!;
+    public EventIdentifier EventID { get; set; } = new EventIdentifier();
 
     /// <summary>
     /// velocity of the munition immediately before detonation/impact, Section 7.3.3
     /// </summary>
-    public Vector3Float Velocity { get; set; } = null!;
+    public Vector3Float Velocity { get; set; } = new Vector3Float();
 
     /// <summary>
     /// location of the munition detonation, the expendable detonation, Section 7.3.3
     /// </summary>
-    public Vector3Double LocationInWorldCoordinates { get; set; } = null!;
+    public Vector3Double LocationInWorldCoordinates { get; set; } = new Vector3Double();
 
     /// <summary>
     /// Describes the detonation represented, Section 7.3.3
     /// </summary>
-    public MunitionDescriptor Descriptor { get; set; } = null!;
+    public MunitionDescriptor Descriptor { get; set; } = new MunitionDescriptor();
 
     /// <summary>
     /// Velocity of the ammunition, Section 7.3.3
     /// </summary>
-    public Vector3Float LocationOfEntityCoordinates { get; set; } = null!;
+    public Vector3Float LocationOfEntityCoordinates { get; set; } = new Vector3Float();
 
     /// <summary>
     /// result of the detonation, Section 7.3.3
@@ -1788,7 +1788,7 @@ public partial class DirectedEnergyDamage
     /// <summary>
     /// location of damage, relative to center of entity
     /// </summary>
-    public Vector3Float DamageLocation { get; set; } = null!;
+    public Vector3Float DamageLocation { get; set; } = new Vector3Float();
 
     /// <summary>
     /// Size of damaged area, in meters
@@ -1823,7 +1823,7 @@ public partial class DirectedEnergyDamage
     /// <summary>
     /// For any component damage resulting this field shall be set to the fire event ID from that PDU.
     /// </summary>
-    public EventIdentifier FireEventID { get; set; } = null!;
+    public EventIdentifier FireEventID { get; set; } = new EventIdentifier();
 
     /// <summary>
     /// padding
@@ -1840,19 +1840,19 @@ public partial class DirectedEnergyFirePdu : WarfareFamilyPdu
     /// <summary>
     /// ID of the entity that shot
     /// </summary>
-    public EntityID FiringEntityID { get; set; } = null!;
+    public EntityID FiringEntityID { get; set; } = new EntityID();
 
-    public EventIdentifier EventID { get; set; } = null!;
+    public EventIdentifier EventID { get; set; } = new EventIdentifier();
 
     /// <summary>
     /// Field shall identify the munition type enumeration for the DE weapon beam, Section 7.3.4
     /// </summary>
-    public EntityType MunitionType { get; set; } = null!;
+    public EntityType MunitionType { get; set; } = new EntityType();
 
     /// <summary>
     /// Field shall indicate the simulation time at start of the shot, Section 7.3.4
     /// </summary>
-    public ClockTime ShotStartTime { get; set; } = null!;
+    public ClockTime ShotStartTime { get; set; } = new ClockTime();
 
     /// <summary>
     /// Field shall indicate the current cumulative duration of the shot, Section 7.3.4
@@ -1862,7 +1862,7 @@ public partial class DirectedEnergyFirePdu : WarfareFamilyPdu
     /// <summary>
     /// Field shall identify the location of the DE weapon aperture/emitter, Section 7.3.4
     /// </summary>
-    public Vector3Float ApertureEmitterLocation { get; set; } = null!;
+    public Vector3Float ApertureEmitterLocation { get; set; } = new Vector3Float();
 
     /// <summary>
     /// Field shall identify the beam diameter at the aperture/emitter, Section 7.3.4
@@ -1934,27 +1934,27 @@ public partial class DirectedEnergyPrecisionAimpoint
     /// <summary>
     /// Position of Target Spot in World Coordinates.
     /// </summary>
-    public Vector3Double TargetSpotLocation { get; set; } = null!;
+    public Vector3Double TargetSpotLocation { get; set; } = new Vector3Double();
 
     /// <summary>
     /// Position (meters) of Target Spot relative to Entity Position.
     /// </summary>
-    public Vector3Float TargetSpotEntityLocation { get; set; } = null!;
+    public Vector3Float TargetSpotEntityLocation { get; set; } = new Vector3Float();
 
     /// <summary>
     /// Velocity (meters/sec) of Target Spot.
     /// </summary>
-    public Vector3Float TargetSpotVelocity { get; set; } = null!;
+    public Vector3Float TargetSpotVelocity { get; set; } = new Vector3Float();
 
     /// <summary>
     /// Acceleration (meters/sec/sec) of Target Spot.
     /// </summary>
-    public Vector3Float TargetSpotAcceleration { get; set; } = null!;
+    public Vector3Float TargetSpotAcceleration { get; set; } = new Vector3Float();
 
     /// <summary>
     /// Unique ID of the target entity.
     /// </summary>
-    public EntityID TargetEntityID { get; set; } = null!;
+    public EntityID TargetEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// Target Component ID ENUM, same as in DamageDescriptionRecord.
@@ -2001,7 +2001,7 @@ public partial class DirectedEnergyTargetEnergyDeposition
     /// <summary>
     /// Unique ID of the target entity.
     /// </summary>
-    public EntityID TargetEntityID { get; set; } = null!;
+    public EntityID TargetEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// zero-filled array of padding bits for byte alignment and consistent sizing of PDU data
@@ -2074,12 +2074,12 @@ public partial class ElectromagneticEmissionPdu : DistributedEmissionsRegenerati
     /// <summary>
     /// ID of the entity emitting
     /// </summary>
-    public EntityID EmittingEntityID { get; set; } = null!;
+    public EntityID EmittingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// ID of event
     /// </summary>
-    public EventIdentifier EventID { get; set; } = null!;
+    public EventIdentifier EventID { get; set; } = new EventIdentifier();
 
     /// <summary>
     /// This field shall be used to indicate if the data in the PDU represents a state update or just data that has changed since issuance of the last Electromagnetic Emission PDU [relative to the identified entity and emission system(s)].
@@ -2126,12 +2126,12 @@ public partial class ElectronicEmitter
     /// <summary>
     /// information about a particular emitter system and shall be represented by an Emitter System record (see 6.2.23).
     /// </summary>
-    public EmitterSystem EmitterSystem { get; set; } = null!;
+    public EmitterSystem EmitterSystem { get; set; } = new EmitterSystem();
 
     /// <summary>
     /// the location of the antenna beam source with respect to the emitting entity's coordinate system. This location shall be the origin of the emitter coordinate system that shall have the same orientation as the entity coordinate system. This field shall be represented by an Entity Coordinate Vector record see 6.2.95
     /// </summary>
-    public Vector3Float Location { get; set; } = null!;
+    public Vector3Float Location { get; set; } = new Vector3Float();
 
     /// <summary>
     /// Electronic emission beams
@@ -2151,9 +2151,9 @@ public partial class EmitterBeam
 
     public ushort BeamParameterIndex { get; set; }
 
-    public EEFundamentalParameterData FundamentalParameterData { get; set; } = null!;
+    public EEFundamentalParameterData FundamentalParameterData { get; set; } = new EEFundamentalParameterData();
 
-    public BeamData BeamData { get; set; } = null!;
+    public BeamData BeamData { get; set; } = new BeamData();
 
     public byte BeamFunction { get; set; }
 
@@ -2161,9 +2161,9 @@ public partial class EmitterBeam
 
     public byte HighDensityTrackJam { get; set; }
 
-    public BeamStatus BeamStatus { get; set; } = null!;
+    public BeamStatus BeamStatus { get; set; } = new BeamStatus();
 
-    public JammingTechnique JammingTechnique { get; set; } = null!;
+    public JammingTechnique JammingTechnique { get; set; } = new JammingTechnique();
 
     public List<TrackJamData> TrackJamData { get; set; } = [];
 
@@ -2295,7 +2295,7 @@ public partial class EntityAssociationVP
     /// <summary>
     /// Object ID of entity associated with this entity
     /// </summary>
-    public EntityID EntityID { get; set; } = null!;
+    public EntityID EntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// Station location on one's own entity
@@ -2327,7 +2327,7 @@ public partial class EntityDamageStatusPdu : WarfareFamilyPdu
     /// <summary>
     /// Field shall identify the damaged entity (see 6.2.28), Section 7.3.4
     /// </summary>
-    public EntityID DamagedEntityID { get; set; } = null!;
+    public EntityID DamagedEntityID { get; set; } = new EntityID();
 
     public ushort Padding1 { get; set; }
 
@@ -2375,7 +2375,7 @@ public partial class EntityIdentifier
     /// <summary>
     /// Site and application IDs
     /// </summary>
-    public SimulationAddress SimulationAddress { get; set; } = null!;
+    public SimulationAddress SimulationAddress { get; set; } = new SimulationAddress();
 
     /// <summary>
     /// Entity number
@@ -2423,7 +2423,7 @@ public partial class EntityStatePdu : EntityInformationInteractionFamilyPdu
     /// <summary>
     /// Unique ID for an entity that is tied to this state information
     /// </summary>
-    public EntityID EntityID { get; set; } = null!;
+    public EntityID EntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// What force this entity is affiliated with, eg red, blue, neutral, etc
@@ -2438,24 +2438,24 @@ public partial class EntityStatePdu : EntityInformationInteractionFamilyPdu
     /// <summary>
     /// Describes the type of entity in the world
     /// </summary>
-    public EntityType EntityType { get; set; } = null!;
+    public EntityType EntityType { get; set; } = new EntityType();
 
-    public EntityType AlternativeEntityType { get; set; } = null!;
+    public EntityType AlternativeEntityType { get; set; } = new EntityType();
 
     /// <summary>
     /// Describes the speed of the entity in the world
     /// </summary>
-    public Vector3Float EntityLinearVelocity { get; set; } = null!;
+    public Vector3Float EntityLinearVelocity { get; set; } = new Vector3Float();
 
     /// <summary>
     /// describes the location of the entity in the world
     /// </summary>
-    public Vector3Double EntityLocation { get; set; } = null!;
+    public Vector3Double EntityLocation { get; set; } = new Vector3Double();
 
     /// <summary>
     /// describes the orientation of the entity, in euler angles with units of radians
     /// </summary>
-    public EulerAngles EntityOrientation { get; set; } = null!;
+    public EulerAngles EntityOrientation { get; set; } = new EulerAngles();
 
     /// <summary>
     /// a series of bit flags that are used to help draw the entity, such as smoking, on fire, etc.
@@ -2465,12 +2465,12 @@ public partial class EntityStatePdu : EntityInformationInteractionFamilyPdu
     /// <summary>
     /// parameters used for dead reckoning
     /// </summary>
-    public DeadReckoningParameters DeadReckoningParameters { get; set; } = null!;
+    public DeadReckoningParameters DeadReckoningParameters { get; set; } = new DeadReckoningParameters();
 
     /// <summary>
     /// 11 characters that can be used for entity identification, debugging, or to draw unique strings on the side of entities in the world
     /// </summary>
-    public EntityMarking Marking { get; set; } = null!;
+    public EntityMarking Marking { get; set; } = new EntityMarking();
 
     /// <summary>
     /// a series of bit flags
@@ -2492,7 +2492,7 @@ public partial class EntityStateUpdatePdu : EntityInformationInteractionFamilyPd
     /// <summary>
     /// This field shall identify the entity issuing the PDU, and shall be represented by an Entity Identifier record (see 6.2.28).
     /// </summary>
-    public EntityID EntityID { get; set; } = null!;
+    public EntityID EntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// Padding
@@ -2507,17 +2507,17 @@ public partial class EntityStateUpdatePdu : EntityInformationInteractionFamilyPd
     /// <summary>
     /// This field shall specify an entity's linear velocity. The coordinate system for an entity's linear velocity depends on the dead reckoning algorithm used. This field shall be represented by a Linear Velocity Vector record [see 6.2.95 item c)]).
     /// </summary>
-    public Vector3Float EntityLinearVelocity { get; set; } = null!;
+    public Vector3Float EntityLinearVelocity { get; set; } = new Vector3Float();
 
     /// <summary>
     /// This field shall specify an entity's physical location in the simulated world and shall be represented by a World Coordinates record (see 6.2.97).
     /// </summary>
-    public Vector3Double EntityLocation { get; set; } = null!;
+    public Vector3Double EntityLocation { get; set; } = new Vector3Double();
 
     /// <summary>
     /// This field shall specify an entity's orientation with units of radians and shall be represented by an Euler Angles record (see 6.2.33).
     /// </summary>
-    public EulerAngles EntityOrientation { get; set; } = null!;
+    public EulerAngles EntityOrientation { get; set; } = new EulerAngles();
 
     /// <summary>
     /// This field shall specify the dynamic changes to the entity's appearance attributes. This field shall be represented by an Entity Appearance record (see 6.2.26).
@@ -2544,7 +2544,7 @@ public partial class EntityType
     /// <summary>
     /// Domain of entity (air, surface, subsurface, space, etc.)
     /// </summary>
-    public Domain Domain { get; set; } = null!;
+    public Domain Domain { get; set; } = new Domain();
 
     /// <summary>
     /// country to which the design of the entity is attributed
@@ -2624,7 +2624,7 @@ public partial class EntityTypeVP
     /// </summary>
     public byte ChangeIndicator { get; set; }
 
-    public EntityType EntityType { get; set; } = null!;
+    public EntityType EntityType { get; set; } = new EntityType();
 
     /// <summary>
     /// zero-filled array of padding bits for byte alignment and consistent sizing of PDU data
@@ -2678,12 +2678,12 @@ public partial class EnvironmentalProcessPdu : SyntheticEnvironmentFamilyPdu
     /// <summary>
     /// Environmental process ID provides a unique identifier
     /// </summary>
-    public ObjectIdentifier EnvironementalProcessID { get; set; } = null!;
+    public ObjectIdentifier EnvironementalProcessID { get; set; } = new ObjectIdentifier();
 
     /// <summary>
     /// Environment type
     /// </summary>
-    public EntityType EnvironmentType { get; set; } = null!;
+    public EntityType EnvironmentType { get; set; } = new EntityType();
 
     /// <summary>
     /// model type
@@ -2733,7 +2733,7 @@ public partial class EventIdentifier
     /// <summary>
     /// Site and application IDs
     /// </summary>
-    public SimulationAddress SimulationAddress { get; set; } = null!;
+    public SimulationAddress SimulationAddress { get; set; } = new SimulationAddress();
 
     public ushort EventNumber { get; set; }
 
@@ -2841,7 +2841,7 @@ public partial class Expendable
     /// <summary>
     /// Type of expendable
     /// </summary>
-    public EntityType ExpendableValue { get; set; } = null!;
+    public EntityType ExpendableValue { get; set; } = new EntityType();
 
     public uint Station { get; set; }
 
@@ -2864,7 +2864,7 @@ public partial class ExpendableDescriptor
     /// <summary>
     /// Type of the object that exploded
     /// </summary>
-    public EntityType ExpendableType { get; set; } = null!;
+    public EntityType ExpendableType { get; set; } = new EntityType();
 
     /// <summary>
     /// zero-filled array of padding bits for byte alignment and consistent sizing of PDU data
@@ -2881,7 +2881,7 @@ public partial class ExpendableReload
     /// <summary>
     /// Type of expendable
     /// </summary>
-    public EntityType Expendable { get; set; } = null!;
+    public EntityType Expendable { get; set; } = new EntityType();
 
     public uint Station { get; set; }
 
@@ -2903,7 +2903,7 @@ public partial class ExplosionDescriptor
     /// <summary>
     /// Type of the object that exploded. See 6.2.30
     /// </summary>
-    public EntityType ExplodingObject { get; set; } = null!;
+    public EntityType ExplodingObject { get; set; } = new EntityType();
 
     /// <summary>
     /// Material that exploded. Can be grain dust, tnt, gasoline, etc. Enumeration
@@ -3009,22 +3009,22 @@ public partial class FirePdu : WarfareFamilyPdu
     /// <summary>
     /// ID of the entity that shot
     /// </summary>
-    public EntityID FiringEntityID { get; set; } = null!;
+    public EntityID FiringEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// ID of the entity that is being shot at
     /// </summary>
-    public EntityID TargetEntityID { get; set; } = null!;
+    public EntityID TargetEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// This field shall specify the entity identification of the fired munition or expendable. This field shall be represented by an Entity Identifier record (see 6.2.28).
     /// </summary>
-    public EntityID MunitionExpendibleID { get; set; } = null!;
+    public EntityID MunitionExpendibleID { get; set; } = new EntityID();
 
     /// <summary>
     /// This field shall contain an identification generated by the firing entity to associate related firing and detonation events. This field shall be represented by an Event Identifier record (see 6.2.34).
     /// </summary>
-    public EventIdentifier EventID { get; set; } = null!;
+    public EventIdentifier EventID { get; set; } = new EventIdentifier();
 
     /// <summary>
     /// This field shall identify the fire mission (see 5.4.3.3). This field shall be represented by a 32-bit unsigned integer.
@@ -3034,17 +3034,17 @@ public partial class FirePdu : WarfareFamilyPdu
     /// <summary>
     /// This field shall specify the location, in world coordinates, from which the munition was launched, and shall be represented by a World Coordinates record (see 6.2.97).
     /// </summary>
-    public Vector3Double LocationInWorldCoordinates { get; set; } = null!;
+    public Vector3Double LocationInWorldCoordinates { get; set; } = new Vector3Double();
 
     /// <summary>
     /// This field shall describe the firing or launch of a munition or expendable represented by one of the following types of Descriptor records: Munition Descriptor (6.2.20.2) or Expendable Descriptor (6.2.20.4).
     /// </summary>
-    public MunitionDescriptor Descriptor { get; set; } = null!;
+    public MunitionDescriptor Descriptor { get; set; } = new MunitionDescriptor();
 
     /// <summary>
     /// This field shall specify the velocity of the fired munition at the point when the issuing simulation application intends the externally visible effects of the launch (e.g. exhaust plume or muzzle blast) to first become apparent. The velocity shall be represented in world coordinates. This field shall be represented by a Linear Velocity Vector record [see 6.2.95 item c)].
     /// </summary>
-    public Vector3Float Velocity { get; set; } = null!;
+    public Vector3Float Velocity { get; set; } = new Vector3Float();
 
     /// <summary>
     /// This field shall specify the range that an entity's fire control system has assumed in computing the fire control solution. This field shall be represented by a 32-bit floating point number in meters. For systems where range is unknown or unavailable, this field shall contain a value of zero.
@@ -3269,7 +3269,7 @@ public partial class GriddedDataPdu : SyntheticEnvironmentFamilyPdu
     /// <summary>
     /// environmental simulation application ID provides a unique identifier
     /// </summary>
-    public SimulationIdentifier EnvironmentalSimulationApplicationID { get; set; } = null!;
+    public SimulationIdentifier EnvironmentalSimulationApplicationID { get; set; } = new SimulationIdentifier();
 
     /// <summary>
     /// unique identifier for each piece of environmental data
@@ -3304,17 +3304,17 @@ public partial class GriddedDataPdu : SyntheticEnvironmentFamilyPdu
     /// <summary>
     /// type of environment
     /// </summary>
-    public EntityType EnvironmentType { get; set; } = null!;
+    public EntityType EnvironmentType { get; set; } = new EntityType();
 
     /// <summary>
     /// orientation of the data grid
     /// </summary>
-    public EulerAngles Orientation { get; set; } = null!;
+    public EulerAngles Orientation { get; set; } = new EulerAngles();
 
     /// <summary>
     /// valid time of the enviormental data sample, 64-bit unsigned int
     /// </summary>
-    public ClockTime SampleTime { get; set; } = null!;
+    public ClockTime SampleTime { get; set; } = new ClockTime();
 
     /// <summary>
     /// total number of all data values for all pdus for an environmental sample
@@ -3350,7 +3350,7 @@ public partial class GroupID
     /// <summary>
     /// Simulation address (site and application number)
     /// </summary>
-    public SimulationAddress SimulationAddress { get; set; } = null!;
+    public SimulationAddress SimulationAddress { get; set; } = new SimulationAddress();
 
     /// <summary>
     /// group number
@@ -3445,22 +3445,22 @@ public partial class IFFPdu : DistributedEmissionsRegenerationFamilyPdu
     /// <summary>
     /// ID of the entity that is the source of the emissions. Part of Layer 1 basic system data 7.6.5.2.
     /// </summary>
-    public EntityID EmittingEntityId { get; set; } = null!;
+    public EntityID EmittingEntityId { get; set; } = new EntityID();
 
     /// <summary>
     /// Number generated by the issuing simulation to associate realted events. Part of Layer 1 basic system data 7.6.5.2.
     /// </summary>
-    public EventIdentifier EventID { get; set; } = null!;
+    public EventIdentifier EventID { get; set; } = new EventIdentifier();
 
     /// <summary>
     /// Location wrt entity. There is some ambiguity in the standard here, but this is the order it is listed in the table. Part of Layer 1 basic system data 7.6.5.2.
     /// </summary>
-    public Vector3Float Location { get; set; } = null!;
+    public Vector3Float Location { get; set; } = new Vector3Float();
 
     /// <summary>
     /// System ID information. Part of Layer 1 basic system data 7.6.5.2.
     /// </summary>
-    public SystemIdentifier SystemID { get; set; } = null!;
+    public SystemIdentifier SystemID { get; set; } = new SystemIdentifier();
 
     /// <summary>
     /// Part of Layer 1 basic system data 7.6.5.2.
@@ -3475,37 +3475,37 @@ public partial class IFFPdu : DistributedEmissionsRegenerationFamilyPdu
     /// <summary>
     /// Fundamental parameters. Part of Layer 1 basic system data 7.6.5.2.
     /// </summary>
-    public FundamentalOperationalData FundamentalParameters { get; set; } = null!;
+    public FundamentalOperationalData FundamentalParameters { get; set; } = new FundamentalOperationalData();
 
     /// <summary>
     /// IFF pdu layer 2 data
     /// </summary>
-    public IFFPduLayer2Data IFFPduLayer2Data { get; set; } = null!;
+    public IFFPduLayer2Data IFFPduLayer2Data { get; set; } = new IFFPduLayer2Data();
 
     /// <summary>
     /// IFF pdu layer 3 transponder format data
     /// </summary>
-    public IFFPduLayer3TransponderFormatData IFFPduLayer3TransponderFormatData { get; set; } = null!;
+    public IFFPduLayer3TransponderFormatData IFFPduLayer3TransponderFormatData { get; set; } = new IFFPduLayer3TransponderFormatData();
 
     /// <summary>
     /// IFF pdu layer 3 interrogator format data
     /// </summary>
-    public IFFPduLayer3InterrogatorFormatData IFFPduLayer3InterrogatorFormatData { get; set; } = null!;
+    public IFFPduLayer3InterrogatorFormatData IFFPduLayer3InterrogatorFormatData { get; set; } = new IFFPduLayer3InterrogatorFormatData();
 
     /// <summary>
     /// IFF pdu layer 4 interrogator format data
     /// </summary>
-    public IFFPduLayer4InterrogatorFormatData IFFPduLayer4InterrogatorFormatData { get; set; } = null!;
+    public IFFPduLayer4InterrogatorFormatData IFFPduLayer4InterrogatorFormatData { get; set; } = new IFFPduLayer4InterrogatorFormatData();
 
     /// <summary>
     /// IFF pdu layer 4 transponder format data
     /// </summary>
-    public IFFPduLayer4TransponderFormatData IFFPduLayer4TransponderFormatData { get; set; } = null!;
+    public IFFPduLayer4TransponderFormatData IFFPduLayer4TransponderFormatData { get; set; } = new IFFPduLayer4TransponderFormatData();
 
     /// <summary>
     /// IFF pdu layer 5 data communications
     /// </summary>
-    public IFFPduLayer5Data IFFPduLayer5Data { get; set; } = null!;
+    public IFFPduLayer5Data IFFPduLayer5Data { get; set; } = new IFFPduLayer5Data();
 
 }
 
@@ -3517,12 +3517,12 @@ public partial class IFFPduLayer2Data : AbstractIFFPduLayerData
     /// <summary>
     /// Layer header
     /// </summary>
-    public LayerHeader LayerHeader { get; set; } = null!;
+    public LayerHeader LayerHeader { get; set; } = new LayerHeader();
 
     /// <summary>
     /// Beam data
     /// </summary>
-    public BeamData BeamData { get; set; } = null!;
+    public BeamData BeamData { get; set; } = new BeamData();
 
     public byte SecondaryOpParameter1 { get; set; }
 
@@ -3545,7 +3545,7 @@ public partial class IFFPduLayer3InterrogatorFormatData : AbstractIFFPduLayerDat
     /// <summary>
     /// Layer header
     /// </summary>
-    public LayerHeader LayerHeader { get; set; } = null!;
+    public LayerHeader LayerHeader { get; set; } = new LayerHeader();
 
     /// <summary>
     /// 6.2.80 Site number, part of reporting simulation field
@@ -3560,7 +3560,7 @@ public partial class IFFPduLayer3InterrogatorFormatData : AbstractIFFPduLayerDat
     /// <summary>
     /// Mode 5 interrogator basic data
     /// </summary>
-    public Mode5InterrogatorBasicData Mode5InterrogatorBasicData { get; set; } = null!;
+    public Mode5InterrogatorBasicData Mode5InterrogatorBasicData { get; set; } = new Mode5InterrogatorBasicData();
 
     /// <summary>
     /// Padding
@@ -3584,7 +3584,7 @@ public partial class IFFPduLayer3TransponderFormatData : AbstractIFFPduLayerData
     /// <summary>
     /// Layer header
     /// </summary>
-    public LayerHeader LayerHeader { get; set; } = null!;
+    public LayerHeader LayerHeader { get; set; } = new LayerHeader();
 
     /// <summary>
     /// 6.2.80 Site number, part of reporting simulation field
@@ -3599,7 +3599,7 @@ public partial class IFFPduLayer3TransponderFormatData : AbstractIFFPduLayerData
     /// <summary>
     /// Mode 5 transponder basic data
     /// </summary>
-    public Mode5TransponderBasicData Mode5TransponderBasicData { get; set; } = null!;
+    public Mode5TransponderBasicData Mode5TransponderBasicData { get; set; } = new Mode5TransponderBasicData();
 
     /// <summary>
     /// Padding
@@ -3623,7 +3623,7 @@ public partial class IFFPduLayer4InterrogatorFormatData : AbstractIFFPduLayerDat
     /// <summary>
     /// Layer header
     /// </summary>
-    public LayerHeader LayerHeader { get; set; } = null!;
+    public LayerHeader LayerHeader { get; set; } = new LayerHeader();
 
     /// <summary>
     /// 6.2.80 Site number, part of reporting simulation field
@@ -3638,7 +3638,7 @@ public partial class IFFPduLayer4InterrogatorFormatData : AbstractIFFPduLayerDat
     /// <summary>
     /// Mode S interrogator basic data
     /// </summary>
-    public ModeSInterrogatorBasicData ModeSInterrogatorBasicData { get; set; } = null!;
+    public ModeSInterrogatorBasicData ModeSInterrogatorBasicData { get; set; } = new ModeSInterrogatorBasicData();
 
     /// <summary>
     /// Padding
@@ -3662,7 +3662,7 @@ public partial class IFFPduLayer4TransponderFormatData : AbstractIFFPduLayerData
     /// <summary>
     /// Layer header
     /// </summary>
-    public LayerHeader LayerHeader { get; set; } = null!;
+    public LayerHeader LayerHeader { get; set; } = new LayerHeader();
 
     /// <summary>
     /// 6.2.80 Site number, part of reporting simulation field
@@ -3677,7 +3677,7 @@ public partial class IFFPduLayer4TransponderFormatData : AbstractIFFPduLayerData
     /// <summary>
     /// Mode S transponder basic data
     /// </summary>
-    public ModeSTransponderBasicData ModeSTransponderBasicData { get; set; } = null!;
+    public ModeSTransponderBasicData ModeSTransponderBasicData { get; set; } = new ModeSTransponderBasicData();
 
     /// <summary>
     /// Padding
@@ -3701,7 +3701,7 @@ public partial class IFFPduLayer5Data : AbstractIFFPduLayerData
     /// <summary>
     /// Layer header
     /// </summary>
-    public LayerHeader LayerHeader { get; set; } = null!;
+    public LayerHeader LayerHeader { get; set; } = new LayerHeader();
 
     /// <summary>
     /// 6.2.80 Site number, part of reporting simulation field
@@ -3758,7 +3758,7 @@ public partial class IOCommsNodeRecord : IORecord
     /// </summary>
     public byte Padding { get; set; }
 
-    public CommunicationsNodeID CommsNodeId { get; set; } = null!;
+    public CommunicationsNodeID CommsNodeId { get; set; } = new CommunicationsNodeID();
 
 }
 
@@ -3812,7 +3812,7 @@ public partial class InformationOperationsActionPdu : InformationOperationsFamil
     /// <summary>
     /// the simulation to which this PDU is addressed
     /// </summary>
-    public EntityID ReceivingSimID { get; set; } = null!;
+    public EntityID ReceivingSimID { get; set; } = new EntityID();
 
     /// <summary>
     /// request ID provides a unique identifier
@@ -3829,9 +3829,9 @@ public partial class InformationOperationsActionPdu : InformationOperationsFamil
 
     public uint Padding1 { get; set; }
 
-    public EntityID IoAttackerID { get; set; } = null!;
+    public EntityID IoAttackerID { get; set; } = new EntityID();
 
-    public EntityID IoPrimaryTargetID { get; set; } = null!;
+    public EntityID IoPrimaryTargetID { get; set; } = new EntityID();
 
     public ushort Padding2 { get; set; }
 
@@ -3849,7 +3849,7 @@ public abstract partial class InformationOperationsFamilyPdu : PduBase
     /// <summary>
     /// Object originating the request
     /// </summary>
-    public EntityID OriginatingSimID { get; set; } = null!;
+    public EntityID OriginatingSimID { get; set; } = new EntityID();
 
 }
 
@@ -3867,9 +3867,9 @@ public partial class InformationOperationsReportPdu : InformationOperationsFamil
 
     public byte Padding1 { get; set; }
 
-    public EntityID IoAttackerID { get; set; } = null!;
+    public EntityID IoAttackerID { get; set; } = new EntityID();
 
-    public EntityID IoPrimaryTargetID { get; set; } = null!;
+    public EntityID IoPrimaryTargetID { get; set; } = new EntityID();
 
     public ushort Padding2 { get; set; }
 
@@ -3921,7 +3921,7 @@ public partial class IntercomControlPdu : RadioCommunicationsFamilyPdu
     /// <summary>
     /// Source entity ID, this can also be ObjectIdentifier or UnattachedIdentifier
     /// </summary>
-    public EntityID SourceEntityID { get; set; } = null!;
+    public EntityID SourceEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// The specific intercom device being simulated within an entity.
@@ -3951,7 +3951,7 @@ public partial class IntercomControlPdu : RadioCommunicationsFamilyPdu
     /// <summary>
     /// eid of the entity that has created this intercom channel, same comments as sourceEntityId
     /// </summary>
-    public EntityID MasterIntercomReferenceID { get; set; } = null!;
+    public EntityID MasterIntercomReferenceID { get; set; } = new EntityID();
 
     /// <summary>
     /// specific intercom device that has created this intercom channel
@@ -4005,7 +4005,7 @@ public partial class IntercomSignalPdu : RadioCommunicationsFamilyPdu
     /// <summary>
     /// The unique designation of an attached or unattached intercom in an event or exercise
     /// </summary>
-    public IntercomReferenceID IntercomReferenceID { get; set; } = null!;
+    public IntercomReferenceID IntercomReferenceID { get; set; } = new IntercomReferenceID();
 
     /// <summary>
     /// ID of communications device
@@ -4052,7 +4052,7 @@ public partial class IsGroupOfPdu : EntityManagementFamilyPdu
     /// <summary>
     /// ID of aggregated entities
     /// </summary>
-    public EntityID GroupEntityID { get; set; } = null!;
+    public EntityID GroupEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// type of entities constituting the group
@@ -4094,32 +4094,32 @@ public partial class IsPartOfPdu : EntityManagementFamilyPdu
     /// <summary>
     /// ID of entity originating PDU
     /// </summary>
-    public EntityID OrginatingEntityID { get; set; } = null!;
+    public EntityID OrginatingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// ID of entity receiving PDU
     /// </summary>
-    public EntityID ReceivingEntityID { get; set; } = null!;
+    public EntityID ReceivingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// relationship of joined parts
     /// </summary>
-    public Relationship Relationship { get; set; } = null!;
+    public Relationship Relationship { get; set; } = new Relationship();
 
     /// <summary>
     /// location of part; centroid of part in host's coordinate system. x=range, y=bearing, z=0
     /// </summary>
-    public Vector3Float PartLocation { get; set; } = null!;
+    public Vector3Float PartLocation { get; set; } = new Vector3Float();
 
     /// <summary>
     /// named location
     /// </summary>
-    public NamedLocationIdentification NamedLocationID { get; set; } = null!;
+    public NamedLocationIdentification NamedLocationID { get; set; } = new NamedLocationIdentification();
 
     /// <summary>
     /// entity type
     /// </summary>
-    public EntityType PartEntityType { get; set; } = null!;
+    public EntityType PartEntityType { get; set; } = new EntityType();
 
 }
 
@@ -4143,30 +4143,30 @@ public partial class JammingTechnique
 /// </summary>
 public partial class LEDetonationPdu : LiveEntityFamilyPdu
 {
-    public EntityID FiringLiveEntityId { get; set; } = null!;
+    public EntityID FiringLiveEntityId { get; set; } = new EntityID();
 
     public byte DetonationFlag1 { get; set; }
 
     public byte DetonationFlag2 { get; set; }
 
-    public EntityID TargetLiveEntityId { get; set; } = null!;
+    public EntityID TargetLiveEntityId { get; set; } = new EntityID();
 
-    public EntityID MunitionLiveEntityId { get; set; } = null!;
+    public EntityID MunitionLiveEntityId { get; set; } = new EntityID();
 
-    public EventIdentifier EventId { get; set; } = null!;
+    public EventIdentifier EventId { get; set; } = new EventIdentifier();
 
-    public LiveEntityRelativeWorldCoordinates WorldLocation { get; set; } = null!;
+    public LiveEntityRelativeWorldCoordinates WorldLocation { get; set; } = new LiveEntityRelativeWorldCoordinates();
 
-    public LiveEntityLinearVelocity Velocity { get; set; } = null!;
+    public LiveEntityLinearVelocity Velocity { get; set; } = new LiveEntityLinearVelocity();
 
     /// <summary>
     /// spec error? 16-bit fields vs. 8-bit in TspiPdu?
     /// </summary>
-    public LiveEntityOrientation16 MunitionOrientation { get; set; } = null!;
+    public LiveEntityOrientation16 MunitionOrientation { get; set; } = new LiveEntityOrientation16();
 
-    public MunitionDescriptor MunitionDescriptor { get; set; } = null!;
+    public MunitionDescriptor MunitionDescriptor { get; set; } = new MunitionDescriptor();
 
-    public LiveEntityLinearVelocity EntityLocation { get; set; } = null!;
+    public LiveEntityLinearVelocity EntityLocation { get; set; } = new LiveEntityLinearVelocity();
 
     public byte DetonationResult { get; set; }
 
@@ -4177,24 +4177,24 @@ public partial class LEDetonationPdu : LiveEntityFamilyPdu
 /// </summary>
 public partial class LEFirePdu : LiveEntityFamilyPdu
 {
-    public EntityID FiringLiveEntityId { get; set; } = null!;
+    public EntityID FiringLiveEntityId { get; set; } = new EntityID();
 
     /// <summary>
     /// Bits defined in IEEE Standard
     /// </summary>
     public byte Flags { get; set; }
 
-    public EntityID TargetLiveEntityId { get; set; } = null!;
+    public EntityID TargetLiveEntityId { get; set; } = new EntityID();
 
-    public EntityID MunitionLiveEntityId { get; set; } = null!;
+    public EntityID MunitionLiveEntityId { get; set; } = new EntityID();
 
-    public EventIdentifier EventId { get; set; } = null!;
+    public EventIdentifier EventId { get; set; } = new EventIdentifier();
 
-    public LiveEntityRelativeWorldCoordinates Location { get; set; } = null!;
+    public LiveEntityRelativeWorldCoordinates Location { get; set; } = new LiveEntityRelativeWorldCoordinates();
 
-    public MunitionDescriptor MunitionDescriptor { get; set; } = null!;
+    public MunitionDescriptor MunitionDescriptor { get; set; } = new MunitionDescriptor();
 
-    public LiveEntityLinearVelocity Velocity { get; set; } = null!;
+    public LiveEntityLinearVelocity Velocity { get; set; } = new LiveEntityLinearVelocity();
 
     public ushort Range { get; set; }
 
@@ -4227,22 +4227,22 @@ public partial class LEVector3FixedByte
 /// </summary>
 public partial class LaunchedMunitionRecord
 {
-    public EventIdentifier FireEventID { get; set; } = null!;
+    public EventIdentifier FireEventID { get; set; } = new EventIdentifier();
 
     /// <summary>
     /// zero-filled array of padding bits for byte alignment and consistent sizing of PDU data
     /// </summary>
     public ushort Padding { get; set; }
 
-    public EntityID FiringEntityID { get; set; } = null!;
+    public EntityID FiringEntityID { get; set; } = new EntityID();
 
     public ushort Padding2 { get; set; }
 
-    public EntityID TargetEntityID { get; set; } = null!;
+    public EntityID TargetEntityID { get; set; } = new EntityID();
 
     public ushort Padding3 { get; set; }
 
-    public Vector3Double TargetLocation { get; set; } = null!;
+    public Vector3Double TargetLocation { get; set; } = new Vector3Double();
 
 }
 
@@ -4273,12 +4273,12 @@ public partial class LinearObjectStatePdu : SyntheticEnvironmentFamilyPdu
     /// <summary>
     /// Object in synthetic environment
     /// </summary>
-    public ObjectIdentifier ObjectID { get; set; } = null!;
+    public ObjectIdentifier ObjectID { get; set; } = new ObjectIdentifier();
 
     /// <summary>
     /// Object with which this point object is associated
     /// </summary>
-    public ObjectIdentifier ReferencedObjectID { get; set; } = null!;
+    public ObjectIdentifier ReferencedObjectID { get; set; } = new ObjectIdentifier();
 
     /// <summary>
     /// unique update number of each state transition of an object
@@ -4298,17 +4298,17 @@ public partial class LinearObjectStatePdu : SyntheticEnvironmentFamilyPdu
     /// <summary>
     /// requesterID
     /// </summary>
-    public SimulationAddress RequesterID { get; set; } = null!;
+    public SimulationAddress RequesterID { get; set; } = new SimulationAddress();
 
     /// <summary>
     /// receiver ID provides a unique identifier
     /// </summary>
-    public SimulationAddress ReceivingID { get; set; } = null!;
+    public SimulationAddress ReceivingID { get; set; } = new SimulationAddress();
 
     /// <summary>
     /// Object type
     /// </summary>
-    public ObjectType ObjectType { get; set; } = null!;
+    public ObjectType ObjectType { get; set; } = new ObjectType();
 
     /// <summary>
     /// Linear segment parameters
@@ -4345,12 +4345,12 @@ public partial class LinearSegmentParameter
     /// <summary>
     /// This field shall specify the location of the linear segment in the simulated world and shall be represented by a World Coordinates record
     /// </summary>
-    public Vector3Double SegmentLocation { get; set; } = null!;
+    public Vector3Double SegmentLocation { get; set; } = new Vector3Double();
 
     /// <summary>
     /// orientation of the linear segment about the segment location and shall be represented by a Euler Angles record
     /// </summary>
-    public EulerAngles SegmentOrientation { get; set; } = null!;
+    public EulerAngles SegmentOrientation { get; set; } = new EulerAngles();
 
     /// <summary>
     /// length of the linear segment, in meters, extending in the positive X direction
@@ -4386,9 +4386,9 @@ public partial class LiveDeadReckoningParameters
 {
     public byte DeadReckoningAlgorithm { get; set; }
 
-    public LEVector3FixedByte EntityLinearAcceleration { get; set; } = null!;
+    public LEVector3FixedByte EntityLinearAcceleration { get; set; } = new LEVector3FixedByte();
 
-    public LEVector3FixedByte EntityAngularVelocity { get; set; } = null!;
+    public LEVector3FixedByte EntityAngularVelocity { get; set; } = new LEVector3FixedByte();
 
 }
 
@@ -4421,7 +4421,7 @@ public partial class LiveEntityIdentifier
     /// <summary>
     /// Live Simulation Address record (see 6.2.54)
     /// </summary>
-    public LiveSimulationAddress LiveSimulationAddress { get; set; } = null!;
+    public LiveSimulationAddress LiveSimulationAddress { get; set; } = new LiveSimulationAddress();
 
     /// <summary>
     /// Live entity number
@@ -4548,7 +4548,7 @@ public partial class MineEmplacementTime
 /// </summary>
 public partial class MineEntityIdentifier
 {
-    public SimulationAddress SimulationAddress { get; set; } = null!;
+    public SimulationAddress SimulationAddress { get; set; } = new SimulationAddress();
 
     public ushort MineEntityNumber { get; set; }
 
@@ -4562,12 +4562,12 @@ public partial class MinefieldDataPdu : MinefieldFamilyPdu
     /// <summary>
     /// Minefield ID provides a unique identifier
     /// </summary>
-    public MinefieldIdentifier MinefieldID { get; set; } = null!;
+    public MinefieldIdentifier MinefieldID { get; set; } = new MinefieldIdentifier();
 
     /// <summary>
     /// ID of entity making request
     /// </summary>
-    public SimulationIdentifier RequestingEntityID { get; set; } = null!;
+    public SimulationIdentifier RequestingEntityID { get; set; } = new SimulationIdentifier();
 
     /// <summary>
     /// Minefield sequence number
@@ -4607,12 +4607,12 @@ public partial class MinefieldDataPdu : MinefieldFamilyPdu
     /// <summary>
     /// 32 boolean field
     /// </summary>
-    public DataFilterRecord DataFilter { get; set; } = null!;
+    public DataFilterRecord DataFilter { get; set; } = new DataFilterRecord();
 
     /// <summary>
     /// Mine type
     /// </summary>
-    public EntityType MineType { get; set; } = null!;
+    public EntityType MineType { get; set; } = new EntityType();
 
     /// <summary>
     /// Sensor types, each 16-bits long
@@ -4664,7 +4664,7 @@ public abstract partial class MinefieldFamilyPdu : PduBase
 /// </summary>
 public partial class MinefieldIdentifier
 {
-    public SimulationAddress SimulationAddress { get; set; } = null!;
+    public SimulationAddress SimulationAddress { get; set; } = new SimulationAddress();
 
     public ushort MinefieldNumber { get; set; }
 
@@ -4678,12 +4678,12 @@ public partial class MinefieldQueryPdu : MinefieldFamilyPdu
     /// <summary>
     /// Minefield ID provides a unique identifier
     /// </summary>
-    public MinefieldIdentifier MinefieldID { get; set; } = null!;
+    public MinefieldIdentifier MinefieldID { get; set; } = new MinefieldIdentifier();
 
     /// <summary>
     /// EID of entity making the request
     /// </summary>
-    public EntityID RequestingEntityID { get; set; } = null!;
+    public EntityID RequestingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// request ID provides a unique identifier
@@ -4708,12 +4708,12 @@ public partial class MinefieldQueryPdu : MinefieldFamilyPdu
     /// <summary>
     /// data filter, 32 boolean fields
     /// </summary>
-    public DataFilterRecord DataFilter { get; set; } = null!;
+    public DataFilterRecord DataFilter { get; set; } = new DataFilterRecord();
 
     /// <summary>
     /// Entity type of mine being requested
     /// </summary>
-    public EntityType RequestedMineType { get; set; } = null!;
+    public EntityType RequestedMineType { get; set; } = new EntityType();
 
     /// <summary>
     /// perimeter points of request
@@ -4735,12 +4735,12 @@ public partial class MinefieldResponseNACKPdu : MinefieldFamilyPdu
     /// <summary>
     /// Minefield ID provides a unique identifier
     /// </summary>
-    public MinefieldIdentifier MinefieldID { get; set; } = null!;
+    public MinefieldIdentifier MinefieldID { get; set; } = new MinefieldIdentifier();
 
     /// <summary>
     /// entity ID making the request
     /// </summary>
-    public SimulationIdentifier RequestingEntityID { get; set; } = null!;
+    public SimulationIdentifier RequestingEntityID { get; set; } = new SimulationIdentifier();
 
     /// <summary>
     /// request ID provides a unique identifier
@@ -4779,7 +4779,7 @@ public partial class MinefieldStatePdu : MinefieldFamilyPdu
     /// <summary>
     /// Minefield ID provides a unique identifier
     /// </summary>
-    public MinefieldIdentifier MinefieldID { get; set; } = null!;
+    public MinefieldIdentifier MinefieldID { get; set; } = new MinefieldIdentifier();
 
     /// <summary>
     /// Minefield sequence number shall specify a change in state of a minefield as a result of a change in minefield information or a change in the state, in accordance with the rules specified in 5.10.2.3, of any of the mines contained therein
@@ -4799,7 +4799,7 @@ public partial class MinefieldStatePdu : MinefieldFamilyPdu
     /// <summary>
     /// type of minefield
     /// </summary>
-    public EntityType MinefieldType { get; set; } = null!;
+    public EntityType MinefieldType { get; set; } = new EntityType();
 
     /// <summary>
     /// the number of different mine types employed in the minefield
@@ -4809,12 +4809,12 @@ public partial class MinefieldStatePdu : MinefieldFamilyPdu
     /// <summary>
     /// location of center of minefield in world coordinates
     /// </summary>
-    public Vector3Double MinefieldLocation { get; set; } = null!;
+    public Vector3Double MinefieldLocation { get; set; } = new Vector3Double();
 
     /// <summary>
     /// orientation of minefield
     /// </summary>
-    public EulerAngles MinefieldOrientation { get; set; } = null!;
+    public EulerAngles MinefieldOrientation { get; set; } = new EulerAngles();
 
     /// <summary>
     /// appearance bitflags information needed for displaying the symbology of the minefield as a doctrinal minefield graphic
@@ -4824,7 +4824,7 @@ public partial class MinefieldStatePdu : MinefieldFamilyPdu
     /// <summary>
     /// protocolMode. First two bits are the protocol mode, 14 bits reserved.
     /// </summary>
-    public ProtocolMode ProtocolMode { get; set; } = null!;
+    public ProtocolMode ProtocolMode { get; set; } = new ProtocolMode();
 
     /// <summary>
     /// location of each perimeter point, relative to the Minefield Location field. Only the x and y coordinates of each perimeter point shall be specified.
@@ -4866,7 +4866,7 @@ public partial class Mode5InterrogatorBasicData
     /// <summary>
     /// Interrogated entity ID, part of Mode 5 interrogator basic data fields
     /// </summary>
-    public EntityID EntityID { get; set; } = null!;
+    public EntityID EntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// Padding, part of Mode 5 interrogator basic data fields
@@ -5085,7 +5085,7 @@ public partial class Munition
     /// <summary>
     /// This field shall identify the entity type of the munition. See section 6.2.30.
     /// </summary>
-    public EntityType MunitionType { get; set; } = null!;
+    public EntityType MunitionType { get; set; } = new EntityType();
 
     /// <summary>
     /// The station or launcher to which the munition is assigned. See Annex I
@@ -5117,7 +5117,7 @@ public partial class MunitionDescriptor
     /// <summary>
     /// What munition was used in the burst
     /// </summary>
-    public EntityType MunitionType { get; set; } = null!;
+    public EntityType MunitionType { get; set; } = new EntityType();
 
     /// <summary>
     /// type of warhead enumeration
@@ -5149,7 +5149,7 @@ public partial class MunitionReload
     /// <summary>
     /// This field shall identify the entity type of the munition. See section 6.2.30.
     /// </summary>
-    public EntityType MunitionType { get; set; } = null!;
+    public EntityType MunitionType { get; set; } = new EntityType();
 
     /// <summary>
     /// The station or launcher to which the munition is assigned. See Annex I
@@ -5203,7 +5203,7 @@ public partial class ObjectIdentifier
     /// <summary>
     /// Simulation Address
     /// </summary>
-    public SimulationAddress SimulationAddress { get; set; } = null!;
+    public SimulationAddress SimulationAddress { get; set; } = new SimulationAddress();
 
     /// <summary>
     /// object number
@@ -5247,7 +5247,7 @@ public partial class OwnershipStatusRecord
     /// <summary>
     /// EntityID
     /// </summary>
-    public EntityID EntityId { get; set; } = null!;
+    public EntityID EntityId { get; set; } = new EntityID();
 
     /// <summary>
     /// The ownership and/or ownership conflict status of the entity represented by the Entity ID field.
@@ -5306,7 +5306,7 @@ public abstract partial class PduBase : Pdu
     /// <summary>
     /// PDU Status Record. Described in 6.2.67. This field is not present in earlier DIS versions
     /// </summary>
-    public PduStatus PduStatus { get; set; } = null!;
+    public PduStatus PduStatus { get; set; } = new PduStatus();
 
     /// <summary>
     /// zero-filled array of padding bits for byte alignment and consistent sizing of PDU data
@@ -5335,12 +5335,12 @@ public partial class PointObjectStatePdu : SyntheticEnvironmentFamilyPdu
     /// <summary>
     /// Object in synthetic environment
     /// </summary>
-    public EntityID ObjectID { get; set; } = null!;
+    public EntityID ObjectID { get; set; } = new EntityID();
 
     /// <summary>
     /// Object with which this point object is associated
     /// </summary>
-    public ObjectIdentifier ReferencedObjectID { get; set; } = null!;
+    public ObjectIdentifier ReferencedObjectID { get; set; } = new ObjectIdentifier();
 
     /// <summary>
     /// unique update number of each state transition of an object
@@ -5360,17 +5360,17 @@ public partial class PointObjectStatePdu : SyntheticEnvironmentFamilyPdu
     /// <summary>
     /// Object type
     /// </summary>
-    public ObjectType ObjectType { get; set; } = null!;
+    public ObjectType ObjectType { get; set; } = new ObjectType();
 
     /// <summary>
     /// Object location
     /// </summary>
-    public Vector3Double ObjectLocation { get; set; } = null!;
+    public Vector3Double ObjectLocation { get; set; } = new Vector3Double();
 
     /// <summary>
     /// Object orientation
     /// </summary>
-    public EulerAngles ObjectOrientation { get; set; } = null!;
+    public EulerAngles ObjectOrientation { get; set; } = new EulerAngles();
 
     /// <summary>
     /// Specific object apperance
@@ -5387,12 +5387,12 @@ public partial class PointObjectStatePdu : SyntheticEnvironmentFamilyPdu
     /// <summary>
     /// requesterID
     /// </summary>
-    public SimulationAddress RequesterID { get; set; } = null!;
+    public SimulationAddress RequesterID { get; set; } = new SimulationAddress();
 
     /// <summary>
     /// receiver ID provides a unique identifier
     /// </summary>
-    public SimulationAddress ReceivingID { get; set; } = null!;
+    public SimulationAddress ReceivingID { get; set; } = new SimulationAddress();
 
     /// <summary>
     /// padding
@@ -5438,7 +5438,7 @@ public partial class RadioCommsHeader
     /// <summary>
     /// ID of the entitythat is the source of the communication
     /// </summary>
-    public EntityID RadioReferenceID { get; set; } = null!;
+    public EntityID RadioReferenceID { get; set; } = new EntityID();
 
     /// <summary>
     /// particular radio within an entity
@@ -5522,7 +5522,7 @@ public partial class RadioType
 /// </summary>
 public partial class ReceiverPdu : RadioCommunicationsFamilyPdu
 {
-    public RadioCommsHeader Header { get; set; } = null!;
+    public RadioCommsHeader Header { get; set; } = new RadioCommsHeader();
 
     /// <summary>
     /// encoding scheme used, and enumeration
@@ -5539,7 +5539,7 @@ public partial class ReceiverPdu : RadioCommunicationsFamilyPdu
     /// <summary>
     /// ID of transmitter
     /// </summary>
-    public EntityID TransmitterEntityId { get; set; } = null!;
+    public EntityID TransmitterEntityId { get; set; } = new EntityID();
 
     /// <summary>
     /// ID of transmitting radio
@@ -5773,12 +5773,12 @@ public partial class RepairCompletePdu : LogisticsFamilyPdu
     /// <summary>
     /// Entity that is receiving service.  See 6.2.28
     /// </summary>
-    public EntityID ReceivingEntityID { get; set; } = null!;
+    public EntityID ReceivingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// Entity that is supplying.  See 6.2.28
     /// </summary>
-    public EntityID RepairingEntityID { get; set; } = null!;
+    public EntityID RepairingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// Enumeration for type of repair.  See 6.2.74
@@ -5800,12 +5800,12 @@ public partial class RepairResponsePdu : LogisticsFamilyPdu
     /// <summary>
     /// Entity that requested repairs.  See 6.2.28
     /// </summary>
-    public EntityID ReceivingEntityID { get; set; } = null!;
+    public EntityID ReceivingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// Entity that is repairing.  See 6.2.28
     /// </summary>
-    public EntityID RepairingEntityID { get; set; } = null!;
+    public EntityID RepairingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// Result of repair operation
@@ -5844,12 +5844,12 @@ public partial class ResupplyCancelPdu : LogisticsFamilyPdu
     /// <summary>
     /// Requesting entity, Section 7.4.5
     /// </summary>
-    public EntityID ReceivingEntityID { get; set; } = null!;
+    public EntityID ReceivingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// Supplying entity, Section 7.4.5
     /// </summary>
-    public EntityID SupplyingEntityID { get; set; } = null!;
+    public EntityID SupplyingEntityID { get; set; } = new EntityID();
 
 }
 
@@ -5861,12 +5861,12 @@ public partial class ResupplyOfferPdu : LogisticsFamilyPdu
     /// <summary>
     /// Field identifies the Entity and respective Entity Record ID that is receiving service (see 6.2.28), Section 7.4.3
     /// </summary>
-    public EntityID ReceivingEntityID { get; set; } = null!;
+    public EntityID ReceivingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// Identifies the Entity and respective Entity ID Record that is supplying  (see 6.2.28), Section 7.4.3
     /// </summary>
-    public EntityID SupplyingEntityID { get; set; } = null!;
+    public EntityID SupplyingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// How many supplies types are being offered, Section 7.4.3
@@ -5898,12 +5898,12 @@ public partial class ResupplyReceivedPdu : LogisticsFamilyPdu
     /// <summary>
     /// Entity that is receiving service.  Shall be represented by Entity Identifier record (see 6.2.28)
     /// </summary>
-    public EntityID ReceivingEntityID { get; set; } = null!;
+    public EntityID ReceivingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// Entity that is supplying.  Shall be represented by Entity Identifier record (see 6.2.28)
     /// </summary>
-    public EntityID SupplyingEntityID { get; set; } = null!;
+    public EntityID SupplyingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// How many supplies are taken by receiving entity
@@ -5935,7 +5935,7 @@ public partial class SEESPdu : DistributedEmissionsRegenerationFamilyPdu
     /// <summary>
     /// Originating entity ID provides a unique identifier
     /// </summary>
-    public EntityID OrginatingEntityID { get; set; } = null!;
+    public EntityID OrginatingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// IR Signature representation index
@@ -6061,7 +6061,7 @@ public partial class SeparationVP
     /// <summary>
     /// ID of parent
     /// </summary>
-    public EntityID ParentEntityID { get; set; } = null!;
+    public EntityID ParentEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// padding
@@ -6071,7 +6071,7 @@ public partial class SeparationVP
     /// <summary>
     /// Station separated from
     /// </summary>
-    public NamedLocationIdentification StationLocation { get; set; } = null!;
+    public NamedLocationIdentification StationLocation { get; set; } = new NamedLocationIdentification();
 
 }
 
@@ -6083,12 +6083,12 @@ public partial class ServiceRequestPdu : LogisticsFamilyPdu
     /// <summary>
     /// Entity that is requesting service (see 6.2.28), Section 7.4.2
     /// </summary>
-    public EntityID RequestingEntityID { get; set; } = null!;
+    public EntityID RequestingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// Entity that is providing the service (see 6.2.28), Section 7.4.2
     /// </summary>
-    public EntityID ServicingEntityID { get; set; } = null!;
+    public EntityID ServicingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// Type of service requested, Section 7.4.2
@@ -6255,7 +6255,7 @@ public partial class ShaftRPM
 /// </summary>
 public partial class SignalPdu : RadioCommunicationsFamilyPdu
 {
-    public RadioCommsHeader Header { get; set; } = null!;
+    public RadioCommsHeader Header { get; set; } = new RadioCommsHeader();
 
     /// <summary>
     /// encoding scheme used, and enumeration
@@ -6307,7 +6307,7 @@ public partial class SilentEntitySystem
     /// <summary>
     /// Entity type
     /// </summary>
-    public EntityType EntityType { get; set; } = null!;
+    public EntityType EntityType { get; set; } = new EntityType();
 
     /// <summary>
     /// Variable length list of appearance records
@@ -6341,7 +6341,7 @@ public partial class SimulationIdentifier
     /// <summary>
     /// Simulation address
     /// </summary>
-    public SimulationAddress SimulationAddress { get; set; } = null!;
+    public SimulationAddress SimulationAddress { get; set; } = new SimulationAddress();
 
     /// <summary>
     /// This field shall be set to zero as there is no reference number associated with a Simulation Identifier.
@@ -6358,12 +6358,12 @@ public abstract partial class SimulationManagementFamilyPdu : PduBase
     /// <summary>
     /// IDs the simulation or entity, either a simulation or an entity. Either 6.2.80 or 6.2.28
     /// </summary>
-    public SimulationIdentifier OriginatingID { get; set; } = null!;
+    public SimulationIdentifier OriginatingID { get; set; } = new SimulationIdentifier();
 
     /// <summary>
     /// simulation, all simulations, a special ID, or an entity. See 5.6.5 and 5.12.4
     /// </summary>
-    public SimulationIdentifier ReceivingID { get; set; } = null!;
+    public SimulationIdentifier ReceivingID { get; set; } = new SimulationIdentifier();
 
 }
 
@@ -6375,12 +6375,12 @@ public abstract partial class SimulationManagementWithReliabilityFamilyPdu : Pdu
     /// <summary>
     /// IDs the simulation or entity, either a simulation or an entity. Either 6.2.80 or 6.2.28
     /// </summary>
-    public SimulationIdentifier OriginatingID { get; set; } = null!;
+    public SimulationIdentifier OriginatingID { get; set; } = new SimulationIdentifier();
 
     /// <summary>
     /// simulation, all simulations, a special ID, or an entity. See 5.6.5 and 5.12.4
     /// </summary>
-    public SimulationIdentifier ReceivingID { get; set; } = null!;
+    public SimulationIdentifier ReceivingID { get; set; } = new SimulationIdentifier();
 
 }
 
@@ -6422,12 +6422,12 @@ public partial class StartResumePdu : SimulationManagementFamilyPdu
     /// <summary>
     /// This field shall specify the real-world time (UTC) at which the entity is to start/resume in the exercise. This information shall be used by the participating simulation applications to start/resume an exercise synchronously. This field shall be represented by a Clock Time record (see 6.2.16).
     /// </summary>
-    public ClockTime RealWorldTime { get; set; } = null!;
+    public ClockTime RealWorldTime { get; set; } = new ClockTime();
 
     /// <summary>
     /// The reference time within a simulation exercise. This time is established in advance by simulation management and is common to all participants in a particular exercise. Simulation time may be either Absolute Time or Relative Time. This field shall be represented by a Clock Time record (see 6.2.16)
     /// </summary>
-    public ClockTime SimulationTime { get; set; } = null!;
+    public ClockTime SimulationTime { get; set; } = new ClockTime();
 
     /// <summary>
     /// Identifier for the specific and unique start/resume request
@@ -6444,12 +6444,12 @@ public partial class StartResumeRPdu : SimulationManagementWithReliabilityFamily
     /// <summary>
     /// time in real world for this operation to happen
     /// </summary>
-    public ClockTime RealWorldTime { get; set; } = null!;
+    public ClockTime RealWorldTime { get; set; } = new ClockTime();
 
     /// <summary>
     /// time in simulation for the simulation to resume
     /// </summary>
-    public ClockTime SimulationTime { get; set; } = null!;
+    public ClockTime SimulationTime { get; set; } = new ClockTime();
 
     /// <summary>
     /// level of reliability service used for this transaction
@@ -6482,7 +6482,7 @@ public partial class StopFreezePdu : SimulationManagementFamilyPdu
     /// <summary>
     /// real-world(UTC) time at which the entity shall stop or freeze in the exercise
     /// </summary>
-    public ClockTime RealWorldTime { get; set; } = null!;
+    public ClockTime RealWorldTime { get; set; } = new ClockTime();
 
     /// <summary>
     /// Reason the simulation was stopped or frozen (see section 7 of SISO-REF-010) represented by an 8-bit enumeration
@@ -6514,7 +6514,7 @@ public partial class StopFreezeRPdu : SimulationManagementWithReliabilityFamilyP
     /// <summary>
     /// time in real world for this operation to happen
     /// </summary>
-    public ClockTime RealWorldTime { get; set; } = null!;
+    public ClockTime RealWorldTime { get; set; } = new ClockTime();
 
     /// <summary>
     /// Reason for stopping/freezing simulation
@@ -6644,7 +6644,7 @@ public partial class SupplyQuantity
     /// <summary>
     /// Type of supply
     /// </summary>
-    public EntityType SupplyType { get; set; } = null!;
+    public EntityType SupplyType { get; set; } = new EntityType();
 
     /// <summary>
     /// The number of units of a supply type.
@@ -6683,7 +6683,7 @@ public partial class SystemIdentifier
     /// <summary>
     /// status of this PDU, see section 6.2.15
     /// </summary>
-    public ChangeOptions ChangeOptions { get; set; } = null!;
+    public ChangeOptions ChangeOptions { get; set; } = new ChangeOptions();
 
 }
 
@@ -6692,24 +6692,24 @@ public partial class SystemIdentifier
 /// </summary>
 public partial class TSPIPdu : LiveEntityFamilyPdu
 {
-    public EntityID LiveEntityId { get; set; } = null!;
+    public EntityID LiveEntityId { get; set; } = new EntityID();
 
     /// <summary>
     /// bit field
     /// </summary>
     public byte TSPIFlag { get; set; }
 
-    public LiveEntityRelativeWorldCoordinates EntityLocation { get; set; } = null!;
+    public LiveEntityRelativeWorldCoordinates EntityLocation { get; set; } = new LiveEntityRelativeWorldCoordinates();
 
-    public LiveEntityLinearVelocity EntityLinearVelocity { get; set; } = null!;
+    public LiveEntityLinearVelocity EntityLinearVelocity { get; set; } = new LiveEntityLinearVelocity();
 
-    public LiveEntityOrientation EntityOrientation { get; set; } = null!;
+    public LiveEntityOrientation EntityOrientation { get; set; } = new LiveEntityOrientation();
 
-    public LiveEntityPositionError PositionError { get; set; } = null!;
+    public LiveEntityPositionError PositionError { get; set; } = new LiveEntityPositionError();
 
-    public LiveEntityOrientationError OrientationError { get; set; } = null!;
+    public LiveEntityOrientationError OrientationError { get; set; } = new LiveEntityOrientationError();
 
-    public LiveDeadReckoningParameters DeadReckoningParameters { get; set; } = null!;
+    public LiveDeadReckoningParameters DeadReckoningParameters { get; set; } = new LiveDeadReckoningParameters();
 
     public ushort MeasuredSpeed { get; set; }
 
@@ -6751,7 +6751,7 @@ public partial class TrackJamData
     /// <summary>
     /// The entity tracked or illumated, or an emitter beam targeted with jamming
     /// </summary>
-    public EntityID EntityID { get; set; } = null!;
+    public EntityID EntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// Emitter system associated with the entity
@@ -6773,12 +6773,12 @@ public partial class TransferOwnershipPdu : EntityManagementFamilyPdu
     /// <summary>
     /// ID of entity originating request
     /// </summary>
-    public EntityID OriginatingEntityID { get; set; } = null!;
+    public EntityID OriginatingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// ID of entity receiving request
     /// </summary>
-    public EntityID ReceivingEntityID { get; set; } = null!;
+    public EntityID ReceivingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// ID of request
@@ -6798,9 +6798,9 @@ public partial class TransferOwnershipPdu : EntityManagementFamilyPdu
     /// <summary>
     /// The entity for which control is being requested to transfer
     /// </summary>
-    public EntityID TransferEntityID { get; set; } = null!;
+    public EntityID TransferEntityID { get; set; } = new EntityID();
 
-    public RecordSpecification RecordSets { get; set; } = null!;
+    public RecordSpecification RecordSets { get; set; } = new RecordSpecification();
 
 }
 
@@ -6809,12 +6809,12 @@ public partial class TransferOwnershipPdu : EntityManagementFamilyPdu
 /// </summary>
 public partial class TransmitterPdu : RadioCommunicationsFamilyPdu
 {
-    public RadioCommsHeader Header { get; set; } = null!;
+    public RadioCommsHeader Header { get; set; } = new RadioCommsHeader();
 
     /// <summary>
     /// Type of radio
     /// </summary>
-    public RadioType RadioEntityType { get; set; } = null!;
+    public RadioType RadioEntityType { get; set; } = new RadioType();
 
     /// <summary>
     /// transmit state
@@ -6834,12 +6834,12 @@ public partial class TransmitterPdu : RadioCommunicationsFamilyPdu
     /// <summary>
     /// Location of antenna
     /// </summary>
-    public Vector3Double AntennaLocation { get; set; } = null!;
+    public Vector3Double AntennaLocation { get; set; } = new Vector3Double();
 
     /// <summary>
     /// relative location of antenna
     /// </summary>
-    public Vector3Float RelativeAntennaLocation { get; set; } = null!;
+    public Vector3Float RelativeAntennaLocation { get; set; } = new Vector3Float();
 
     /// <summary>
     /// antenna pattern type
@@ -6869,7 +6869,7 @@ public partial class TransmitterPdu : RadioCommunicationsFamilyPdu
     /// <summary>
     /// modulation
     /// </summary>
-    public ModulationType ModulationType { get; set; } = null!;
+    public ModulationType ModulationType { get; set; } = new ModulationType();
 
     /// <summary>
     /// crypto system enumeration
@@ -6916,7 +6916,7 @@ public partial class UABeam
     /// </summary>
     public ushort Padding { get; set; }
 
-    public UAFundamentalParameter FundamentalParameterData { get; set; } = null!;
+    public UAFundamentalParameter FundamentalParameterData { get; set; } = new UAFundamentalParameter();
 
 }
 
@@ -6943,12 +6943,12 @@ public partial class UAEmitter
     /// <summary>
     /// TODO
     /// </summary>
-    public AcousticEmitter AcousticEmitter { get; set; } = null!;
+    public AcousticEmitter AcousticEmitter { get; set; } = new AcousticEmitter();
 
     /// <summary>
     /// the location of the antenna beam source with respect to the emitting entity's coordinate system. This location shall be the origin of the emitter coordinate system that shall have the same orientation as the entity coordinate system. This field shall be represented by an Entity Coordinate Vector record see 6.2.95
     /// </summary>
-    public Vector3Float Location { get; set; } = null!;
+    public Vector3Float Location { get; set; } = new Vector3Float();
 
     /// <summary>
     /// Electronic emission beams
@@ -7002,7 +7002,7 @@ public partial class UnattachedIdentifier
     /// <summary>
     /// See 6.2.79
     /// </summary>
-    public SimulationAddress SimulationAddress { get; set; } = null!;
+    public SimulationAddress SimulationAddress { get; set; } = new SimulationAddress();
 
     /// <summary>
     /// Reference number
@@ -7019,12 +7019,12 @@ public partial class UnderwaterAcousticPdu : DistributedEmissionsRegenerationFam
     /// <summary>
     /// ID of the entity that is the source of the emission
     /// </summary>
-    public EntityID EmittingEntityID { get; set; } = null!;
+    public EntityID EmittingEntityID { get; set; } = new EntityID();
 
     /// <summary>
     /// ID of event
     /// </summary>
-    public EventIdentifier EventID { get; set; } = null!;
+    public EventIdentifier EventID { get; set; } = new EventIdentifier();
 
     /// <summary>
     /// This field shall be used to indicate whether the data in the UA PDU represent a state update or data that have changed since issuance of the last UA PDU

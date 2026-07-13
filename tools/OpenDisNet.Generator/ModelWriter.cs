@@ -53,7 +53,7 @@ internal static class ModelWriter
 
     private static string Initializer(FieldDefinition field) => field.Kind switch
     {
-        FieldKind.ClassReference => " = null!;",
+        FieldKind.ClassReference => $" = new {field.TypeName}();",
         FieldKind.ObjectList => " = [];",
         FieldKind.PrimitiveList => field.FixedLength is int length ? $" = new {Primitive(field.TypeName)}[{length}];" : " = [];",
         _ => string.Empty,

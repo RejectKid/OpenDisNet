@@ -14,15 +14,18 @@ internal static class PduRegistry
             PduType.EntityState => ReadEntityState(header, ref reader),
             PduType.Fire => ReadFire(header, ref reader),
             PduType.Detonation => ReadDetonation(header, ref reader),
+            >= PduType.Collision and <= PduType.Attribute =>
+                OpenDisNet.Dis7.Dis7PduCodec.Read(header, body),
             _ => new UnknownPdu(header, body.ToArray()),
         };
-        if (pdu is not UnknownPdu && reader.Remaining != 0)
+        if (pdu is not UnknownPdu and not OpenDisNet.Dis7.Pdu && reader.Remaining != 0)
             throw new DisParseException(reader.Offset, "PDU body", reader.Remaining, 0);
         return pdu;
     }
 
     public static int GetLength(IDisPdu pdu) => pdu switch
     {
+        OpenDisNet.Dis7.Pdu x => OpenDisNet.Dis7.Dis7PduCodec.GetEncodedLength(x),
         EntityStatePdu x => 144 + CheckedVariableCount(x.VariableParameters) * VariableParameter.Size,
         FirePdu => 96,
         DetonationPdu x => 104 + CheckedVariableCount(x.VariableParameters) * VariableParameter.Size,
@@ -34,6 +37,8 @@ internal static class PduRegistry
     {
         switch (pdu)
         {
+            case OpenDisNet.Dis7.Pdu:
+                throw new InvalidOperationException("Generated DIS v7 PDUs are written by Dis7PduCodec.");
             case EntityStatePdu x: WriteEntityState(x, ref w); break;
             case FirePdu x: WriteFire(x, ref w); break;
             case DetonationPdu x: WriteDetonation(x, ref w); break;
