@@ -28,7 +28,7 @@ jobs:
       - run: dotnet test --configuration Release --no-build
       - run: dotnet pack src/OpenDisNet/OpenDisNet.csproj --configuration Release --no-build --output artifacts/packages -p:PackageVersion=0.0.0-ci.${{ github.run_id }}
       - name: Restore packed-package consumer
-        run: dotnet restore tests/OpenDisNet.PackageSmoke/OpenDisNet.PackageSmoke.csproj --source "${{ github.workspace }}/artifacts/packages" --source "https://api.nuget.org/v3/index.json" --force --no-cache -p:OpenDisNetPackageVersion=0.0.0-ci.${{ github.run_id }}
+        run: dotnet restore tests/OpenDisNet.PackageSmoke/OpenDisNet.PackageSmoke.csproj --source "${{ github.workspace }}/artifacts/packages" --force --no-cache -p:OpenDisNetPackageVersion=0.0.0-ci.${{ github.run_id }}
       - name: Run packed-package consumer on .NET 9
         run: dotnet run --project tests/OpenDisNet.PackageSmoke/OpenDisNet.PackageSmoke.csproj --configuration Release --framework net9.0 --no-restore -p:OpenDisNetPackageVersion=0.0.0-ci.${{ github.run_id }}
       - name: Run packed-package consumer on .NET 10
