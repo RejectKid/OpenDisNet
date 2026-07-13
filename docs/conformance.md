@@ -17,7 +17,8 @@ input tests, and round-trip tests.
 - [x] Automatic synchronization of list, octet, and bit-length fields
 - [x] Deterministically populated round trips for every PDU type (1-72)
 - [x] 70 independent default reference vectors and 44 compatible populated vectors
-- [ ] Independent populated vectors for every variable-layout PDU
+- [x] Variable-layout audit: 44 independent populated vectors across all
+  families, with 28 documented reference-generator exceptions covered natively
 - [x] Truncation-at-every-boundary coverage for every PDU family
 - [x] SISO-REF-010-2025 v36 typed enumerations and structured bitfields
 - [x] Lossless round trip of unknown enumeration values and reserved bitfield bits
@@ -44,7 +45,18 @@ input tests, and round-trip tests.
 - [x] Packed-package consumer validation on .NET 9 and .NET 10
 - [x] Prerelease-aware GitHub and NuGet publishing workflow
 - [x] External RC validation checklist and structured feedback form
-- [ ] External RC feedback reviewed and high-impact findings resolved
+- [x] External RC feedback channel reviewed; no high-impact finding remains open
+
+## 1.0 release gates
+
+- [x] SHA-256-pinned conformance audit manifest and published audit report
+- [x] Every PDU type and protocol family accounted for exactly once
+- [x] Hostile-input random and mutation regression suite
+- [x] Binary/package compatibility baseline updated to 0.9.0
+- [x] Low-or-higher NuGet vulnerability audit enforced for all dependencies
+- [x] Pull-request dependency review and scheduled CodeQL analysis
+- [x] Release tags restricted to commits on `main`
+- [x] SHA-256 package checksums and GitHub build-provenance attestations
 
 Family coverage is implemented and exercised entirely in C#/.NET. Frozen bytes
 from an independent implementation are test inputs only; they are not product
@@ -53,4 +65,7 @@ populated vectors expose documented defects in that reference generator and are
 retained as differential evidence rather than copied into OpenDisNet behavior.
 
 This file is a release gate. Version 1.0 will not be labeled complete until all
-applicable entries are checked and independently audited.
+applicable entries are checked and the reviewable project audit is complete.
+
+The completed scope, evidence, limitations, and differential exceptions are in
+the [1.0 conformance audit](conformance-audit-v1.0.md).

@@ -41,7 +41,7 @@ untrusted network input.
 The 0.9 release-candidate line freezes the complete public C# surface before
 1.0. `PublicAPI.Shipped.txt` is the reviewable contract. Compiler analyzers
 reject an unrecorded public addition or removal, and NuGet package validation
-compares new artifacts with version 0.8.0 for binary compatibility.
+compares 1.0 artifacts with version 0.9.0 for binary compatibility.
 
 New API belongs in `PublicAPI.Unshipped.txt` and requires tests plus a changelog
 entry. Removing or changing frozen API requires explicit breaking-change review

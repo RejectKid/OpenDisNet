@@ -2,6 +2,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <UseAppHost>false</UseAppHost>
+    <!-- The solution restore audits every external dependency; this project intentionally restores only the local artifact. -->
+    <NuGetAudit>false</NuGetAudit>
     <TargetFrameworks>net9.0;net10.0</TargetFrameworks>
     <OpenDisNetPackageVersion Condition="'$(OpenDisNetPackageVersion)' == ''">0.1.0</OpenDisNetPackageVersion>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>

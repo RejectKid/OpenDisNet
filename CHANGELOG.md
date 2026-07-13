@@ -5,6 +5,15 @@ Versioning after 1.0 and uses prerelease versions while conformance is incomplet
 
 ## Unreleased
 
+- Added the 1.0 conformance audit manifest and report, pinning DIS schemas, SISO
+  data, independent vector corpora, family mappings, and the public API by
+  SHA-256.
+- Added hostile-input security tests covering 10,000 deterministic random
+  datagrams and three byte mutations across every populated PDU encoding.
+- Updated package compatibility validation to the published 0.9.0 baseline and
+  enforced low-or-higher transitive NuGet vulnerability auditing.
+- Added pull-request dependency review, main-branch tag verification, package
+  checksums, and GitHub build-provenance attestations.
 - Froze the complete public C# surface with compiler-enforced API baselines and
   NuGet package compatibility validation against OpenDisNet 0.8.0.
 - Added an external-style smoke consumer that installs the packed artifact and

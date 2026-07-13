@@ -7,10 +7,10 @@
 OpenDisNet is a high-performance, type-safe .NET codec for Distributed
 Interactive Simulation (DIS) Protocol Version 7, defined by IEEE 1278.1-2012.
 
-> **Development status:** 0.9 release-candidate hardening. All 72 DIS v7 PDU
-> identifiers have typed native C# codecs, every family has populated and
-> boundary-truncation coverage, and the public API is frozen for external
-> validation. See the [`RC testing guide`](docs/release-candidate.md) and
+> **Development status:** 1.0 release audit. All 72 DIS v7 PDU identifiers have
+> typed native C# codecs, every family has populated, independent, malformed,
+> and hostile-input evidence, and the public API is compatibility-frozen. See
+> the [`1.0 audit`](docs/conformance-audit-v1.0.md) and
 > [`conformance matrix`](docs/conformance.md).
 
 ## Install
