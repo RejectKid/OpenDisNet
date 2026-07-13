@@ -3,7 +3,7 @@ using OpenDisNet.Protocol;
 
 namespace OpenDisNet.Generated;
 
-public static class Dis7SchemaManifest
+internal static class Dis7SchemaManifest
 {
     public const int ClassCount = 253;
     public const int PduCount = 72;

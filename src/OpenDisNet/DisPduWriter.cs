@@ -10,8 +10,8 @@ public static class DisPduWriter
 
     public static int Write(IDisPdu pdu, Span<byte> destination)
     {
-        if (pdu is OpenDisNet.Dis7.Pdu generated)
-            return OpenDisNet.Dis7.Dis7PduCodec.Write(generated, destination);
+        if (pdu is Pdu typed)
+            return PduCodec.Write(typed, destination);
 
         int length = GetEncodedLength(pdu);
         if (length > ushort.MaxValue) throw new ArgumentOutOfRangeException(nameof(pdu), "A DIS PDU cannot exceed 65,535 bytes.");

@@ -1,7 +1,6 @@
 using DISnet.DataStreamUtilities;
 using OpenDisNet.Pdus;
 using OpenDisNet.Protocol;
-using OpenDisNet.Records;
 using ReferenceFirePdu = DISnet.FirePdu;
 
 namespace OpenDisNet.Tests.Conformance;
@@ -11,20 +10,14 @@ public sealed class OpenDisReferenceTests
     [Fact]
     public void FirePduBytesAreAcceptedByIndependentReferenceImplementation()
     {
-        var header = new DisHeader(DisProtocolVersion.Ieee1278_1_2012, 7, PduType.Fire, ProtocolFamily.Warfare, 123, 0, 0, 0);
-        var expected = new FirePdu(
-            header,
-            new(1, 2, 3),
-            new(4, 5, 6),
-            new(7, 8, 9),
-            new(new(10, 11), 12),
-            13,
-            new(14, 15, 16),
-            new(new(2, 1, 225, 3, 4, 5, 6), 100, 200, 3, 4),
-            new(17, 18, 19),
-            20);
+        var expected = (FirePdu)PduFactory.Create(PduType.Fire, exerciseId: 7);
+        expected.Timestamp = 123;
+        expected.FiringEntityId = new() { SiteId = 1, ApplicationId = 2, EntityId = 3 };
+        expected.TargetEntityId = new() { SiteId = 4, ApplicationId = 5, EntityId = 6 };
+        expected.FireMissionIndex = 13;
+        expected.Range = 20;
 
-        byte[] bytes = DisPduWriter.Write(expected);
+        byte[] bytes = DisSerializer.Serialize(expected);
         var reference = new ReferenceFirePdu();
         reference.Unmarshal(new DataInputStream(bytes, Endian.Big));
 

@@ -7,7 +7,7 @@ cross-checks, not as API templates or source ports.
 
 - `IDisPdu` and the DIS v7 PDU classes are the protocol model.
 - `DisPduReader` and `DisPduWriter` are the stable datagram API.
-- `Dis7PduFactory` creates correctly initialized protocol-version-7 PDUs.
+- `PduFactory` creates correctly initialized protocol-version-7 PDUs.
 - Length, count, and bit-length fields are synchronized by the writer rather
   than requiring callers to maintain duplicate wire metadata.
 - Open-ended, system-specific records retain their raw octets so applications

@@ -1,13 +1,12 @@
-using OpenDisNet.Pdus;
 using OpenDisNet.Protocol;
 
-namespace OpenDisNet.Dis7;
+namespace OpenDisNet.Pdus;
 
 public abstract partial class Pdu : IDisPdu
 {
     public DisHeader Header => new(
         (DisProtocolVersion)ProtocolVersion,
-        ExerciseID,
+        ExerciseId,
         (PduType)PduType,
         (ProtocolFamily)ProtocolFamily,
         Timestamp,

@@ -12,7 +12,7 @@ internal static class ManifestWriter
         text.AppendLine();
         text.AppendLine("namespace OpenDisNet.Generated;");
         text.AppendLine();
-        text.AppendLine("public static class Dis7SchemaManifest");
+        text.AppendLine("internal static class Dis7SchemaManifest");
         text.AppendLine("{");
         text.AppendLine($"    public const int ClassCount = {schema.Classes.Length};");
         text.AppendLine($"    public const int PduCount = {schema.Pdus.Length};");

@@ -136,7 +136,7 @@
             <primitive type="uint32"/>
         </attribute>
   
-        <attribute name="dataLength" comment="length of data in bits">
+        <attribute name="dataBitLength" comment="meaningful length of data in bits; the final octet may contain padding bits">
             <primitive type="uint16"/>
         </attribute>
   
@@ -180,7 +180,7 @@
             <primitive type= "uint32"/>
         </attribute>
   
-        <attribute name="dataLength" hidden="true" comment="data length">
+        <attribute name="dataBitLength" comment="meaningful length of data in bits; the final octet may contain padding bits">
             <primitive type= "uint16"/>
         </attribute>
   
@@ -189,7 +189,7 @@
         </attribute>
  
         <attribute name="data" comment="data bytes">
-            <primitivelist length="0" countFieldName="dataLength">
+            <primitivelist length="0">
                 <primitive type="uint8"/>
             </primitivelist> 
         </attribute>

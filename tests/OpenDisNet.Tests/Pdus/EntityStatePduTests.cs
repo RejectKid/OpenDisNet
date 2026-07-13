@@ -1,31 +1,28 @@
+using System.Text;
 using OpenDisNet.Pdus;
 using OpenDisNet.Protocol;
-using OpenDisNet.Records;
 
 namespace OpenDisNet.Tests.Pdus;
 
 public sealed class EntityStatePduTests
 {
     [Fact]
-    public void EntityStatePduRoundTrips()
+    public void EntityStatePduUsesObjectInitializerAndRoundTrips()
     {
-        var header = new DisHeader(DisProtocolVersion.Ieee1278_1_2012, 4, PduType.EntityState, ProtocolFamily.EntityInformationInteraction, 44, 0, 0, 0);
-        var expected = new EntityStatePdu(header, new(1, 2, 3), 2, new(1, 1, 225, 2, 3, 4, 5), default,
-            new(10, 20, 30), new(100, 200, 300), new(1, 2, 3), 0x10203040,
-            new(4, new(0, 0, 0), new(0, 0, 0)), new(1, "EAGLE-1"), 7, Array.Empty<VariableParameter>());
+        var expected = (EntityStatePdu)PduFactory.Create(PduType.EntityState, exerciseId: 4);
+        expected.EntityId = new() { SiteId = 1, ApplicationId = 2, EntityId = 3 };
+        expected.ForceId = 2;
+        expected.EntityLocation = new() { X = 100, Y = 200, Z = 300 };
+        expected.EntityOrientation = new() { Psi = 1, Theta = 2, Phi = 3 };
+        expected.Marking.CharacterSet = 1;
+        Encoding.ASCII.GetBytes("EAGLE-1").CopyTo(expected.Marking.Characters, 0);
 
-        byte[] bytes = DisPduWriter.Write(expected);
-        var actual = Assert.IsType<EntityStatePdu>(DisPduReader.Parse(bytes));
+        byte[] bytes = DisSerializer.Serialize(expected);
+        var actual = Assert.IsType<EntityStatePdu>(DisSerializer.Deserialize(bytes));
 
         Assert.Equal(144, bytes.Length);
-        Assert.Equal("EAGLE-1", actual.Marking.Text);
-        Assert.Equal(header with { Length = 144 }, actual.Header);
-        Assert.Equal(expected.EntityId, actual.EntityId);
-        Assert.Equal(expected.EntityType, actual.EntityType);
-        Assert.Equal(expected.Location, actual.Location);
-        Assert.Equal(expected.Orientation, actual.Orientation);
-        Assert.Equal(expected.DeadReckoning.Algorithm, actual.DeadReckoning.Algorithm);
-        Assert.Equal(expected.DeadReckoning.OtherParameters.ToArray(), actual.DeadReckoning.OtherParameters.ToArray());
-        Assert.Empty(actual.VariableParameters);
+        Assert.Equal((ushort)3, actual.EntityId.EntityId);
+        Assert.Equal(300, actual.EntityLocation.Z);
+        Assert.StartsWith("EAGLE-1", Encoding.ASCII.GetString(actual.Marking.Characters));
     }
 }

@@ -13,9 +13,9 @@ internal static class CodecWriter
         text.AppendLine("using OpenDisNet.Binary;");
         text.AppendLine("using OpenDisNet.Protocol;");
         text.AppendLine();
-        text.AppendLine("namespace OpenDisNet.Dis7;");
+        text.AppendLine("namespace OpenDisNet.Pdus;");
         text.AppendLine();
-        text.AppendLine("public static partial class Dis7PduCodec");
+        text.AppendLine("internal static partial class PduCodec");
         text.AppendLine("{");
         WritePublicApi(text, schema, classes);
 
@@ -32,7 +32,7 @@ internal static class CodecWriter
     {
         text.AppendLine("    public static Pdu Read(DisHeader header, ReadOnlySpan<byte> body)");
         text.AppendLine("    {");
-        text.AppendLine("        Pdu value = Dis7PduFactory.Create(header.PduType, header.ExerciseId);");
+        text.AppendLine("        Pdu value = PduFactory.Create(header.PduType, header.ExerciseId);");
         text.AppendLine("        ApplyHeader(value, header);");
         text.AppendLine("        var reader = new DisBinaryReader(body, DisHeader.Size);");
         text.AppendLine("        switch ((byte)header.PduType)");
@@ -90,7 +90,7 @@ internal static class CodecWriter
         text.AppendLine("    private static void ApplyHeader(Pdu value, DisHeader header)");
         text.AppendLine("    {");
         text.AppendLine("        value.ProtocolVersion = (byte)header.ProtocolVersion;");
-        text.AppendLine("        value.ExerciseID = header.ExerciseId;");
+        text.AppendLine("        value.ExerciseId = header.ExerciseId;");
         text.AppendLine("        value.PduType = (byte)header.PduType;");
         text.AppendLine("        value.ProtocolFamily = (byte)header.ProtocolFamily;");
         text.AppendLine("        value.Timestamp = header.Timestamp;");
@@ -484,7 +484,8 @@ internal static class CodecWriter
         ("VariableTransmitterParameters", "recordSpecificFields") => "Math.Max(0, checked((int)value.RecordLength) - 4)",
         ("RecordSpecificationElement", "recordValues") => "(checked((int)value.RecordLength) * checked((int)value.RecordCount) + 7) / 8",
         ("RecordSpecificationElement", "padTo64") => "Padding(reader.Offset, 8)",
-        ("SignalPdu", "data") => "(checked((int)value.DataLength) + 7) / 8",
+        ("SignalPdu", "data") => "(checked((int)value.DataBitLength) + 7) / 8",
+        ("IntercomSignalPdu", "data") => "(checked((int)value.DataBitLength) + 7) / 8",
         ("ModulationParameters", "recordSpecificFields") => "0",
         _ => throw new InvalidDataException($"Variable primitive list '{owner}.{field}' needs an explicit length rule."),
     };
@@ -497,7 +498,8 @@ internal static class CodecWriter
 
     private static string PropertyName(string value, string owner)
     {
-        string property = char.ToUpperInvariant(value[0]) + value[1..];
+        string normalized = value.Replace("ID", "Id", StringComparison.Ordinal);
+        string property = char.ToUpperInvariant(normalized[0]) + normalized[1..];
         return string.Equals(property, owner, StringComparison.Ordinal) ? property + "Value" : property;
     }
 

@@ -1,4 +1,3 @@
-using OpenDisNet.Dis7;
 using OpenDisNet.Pdus;
 using OpenDisNet.Protocol;
 
@@ -11,7 +10,7 @@ public sealed class GeneratedPduFactoryTests
     {
         for (byte value = 1; value <= 72; value++)
         {
-            Pdu pdu = Dis7PduFactory.Create((PduType)value, exerciseId: 19);
+            Pdu pdu = PduFactory.Create((PduType)value, exerciseId: 19);
 
             Assert.IsAssignableFrom<IDisPdu>(pdu);
             Assert.Equal(value, (byte)pdu.Header.PduType);

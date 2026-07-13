@@ -1,6 +1,6 @@
-namespace OpenDisNet.Dis7;
+namespace OpenDisNet.Pdus;
 
-public static partial class Dis7PduCodec
+internal static partial class PduCodec
 {
     private static int CheckedCount(long count, int remaining, string field)
     {

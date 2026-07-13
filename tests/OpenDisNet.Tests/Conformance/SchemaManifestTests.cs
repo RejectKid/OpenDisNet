@@ -16,9 +16,10 @@ public sealed class SchemaManifestTests
     [Fact]
     public void EverySchemaClassHasAGeneratedPublicModel()
     {
-        Type[] models = typeof(OpenDisNet.Dis7.EntityStatePdu).Assembly
+        Type[] models = typeof(OpenDisNet.Pdus.EntityStatePdu).Assembly
             .GetExportedTypes()
-            .Where(x => x.Namespace == "OpenDisNet.Dis7")
+            .Where(x => x.Namespace == "OpenDisNet.Pdus")
+            .Where(x => x.IsClass && x.Name != "UnknownPdu")
             .Where(x => !(x.IsAbstract && x.IsSealed))
             .ToArray();
 

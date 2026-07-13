@@ -37,6 +37,24 @@ Unknown and vendor-defined PDU bodies are retained rather than discarded.
 Use `DisSerializer.Serialize(pdu)` for the reverse operation. See the
 [public API design](docs/api-design.md) for the supported design rules.
 
+## Create and serialize a PDU
+
+```csharp
+using OpenDisNet;
+using OpenDisNet.Pdus;
+using OpenDisNet.Protocol;
+
+var fire = (FirePdu)PduFactory.Create(PduType.Fire, exerciseId: 1);
+fire.FiringEntityId = new() { SiteId = 1, ApplicationId = 10, EntityId = 42 };
+fire.TargetEntityId = new() { SiteId = 1, ApplicationId = 10, EntityId = 99 };
+fire.Range = 2_500;
+
+byte[] datagram = DisSerializer.Serialize(fire);
+```
+
+Protocol version, family, PDU type, PDU length, collection counts, and padding
+are managed by the library.
+
 ## Standards and provenance
 
 - Wire format target: IEEE Std 1278.1-2012 (DIS v7).

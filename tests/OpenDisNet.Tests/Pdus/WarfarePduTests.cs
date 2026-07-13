@@ -1,6 +1,5 @@
 using OpenDisNet.Pdus;
 using OpenDisNet.Protocol;
-using OpenDisNet.Records;
 
 namespace OpenDisNet.Tests.Pdus;
 
@@ -9,30 +8,35 @@ public sealed class WarfarePduTests
     [Fact]
     public void FirePduRoundTrips()
     {
-        var header = new DisHeader(DisProtocolVersion.Ieee1278_1_2012, 1, PduType.Fire, ProtocolFamily.Warfare, 123, 0, 0, 0);
-        var descriptor = new MunitionDescriptor(new EntityType(2, 1, 225, 1, 2, 3, 0), 1000, 2000, 1, 0);
-        var expected = new FirePdu(header, new(1, 2, 3), new(1, 2, 4), new(1, 2, 5), new(new(1, 2), 99), 7,
-            new(10, 20, 30), descriptor, new(1, 2, 3), 5000);
+        var expected = (FirePdu)PduFactory.Create(PduType.Fire, exerciseId: 1);
+        expected.FiringEntityId = new() { SiteId = 1, ApplicationId = 2, EntityId = 3 };
+        expected.TargetEntityId = new() { SiteId = 1, ApplicationId = 2, EntityId = 4 };
+        expected.MunitionExpendibleId = new() { SiteId = 1, ApplicationId = 2, EntityId = 5 };
+        expected.FireMissionIndex = 7;
+        expected.Range = 5_000;
 
-        byte[] bytes = DisPduWriter.Write(expected);
-        var actual = Assert.IsType<FirePdu>(DisPduReader.Parse(bytes));
+        byte[] bytes = DisSerializer.Serialize(expected);
+        var actual = Assert.IsType<FirePdu>(DisSerializer.Deserialize(bytes));
 
         Assert.Equal(96, bytes.Length);
-        Assert.Equal(expected with { Header = expected.Header with { Length = 96 } }, actual);
+        Assert.Equal((ushort)3, actual.FiringEntityId.EntityId);
+        Assert.Equal(5_000, actual.Range);
     }
 
     [Fact]
     public void DetonationPduRoundTripsVariableParameters()
     {
-        var header = new DisHeader(DisProtocolVersion.Ieee1278_1_2012, 1, PduType.Detonation, ProtocolFamily.Warfare, 0, 0, 0, 0);
-        var parameter = new VariableParameter(Enumerable.Range(0, 16).Select(x => (byte)x).ToArray());
-        var expected = new DetonationPdu(header, new(1, 1, 1), new(1, 1, 2), new(1, 1, 3), new(new(1, 1), 1),
-            new(1, 2, 3), new(4, 5, 6), new(new(2, 1, 225, 1, 0, 0, 0), 0, 0, 1, 0), new(7, 8, 9), 1, [parameter]);
+        var expected = (DetonationPdu)PduFactory.Create(PduType.Detonation);
+        expected.VariableParameters.Add(new()
+        {
+            RecordType = 5,
+            RecordSpecificFields = Enumerable.Range(1, 15).Select(x => (byte)x).ToArray(),
+        });
 
-        byte[] bytes = DisPduWriter.Write(expected);
-        var actual = Assert.IsType<DetonationPdu>(DisPduReader.Parse(bytes));
+        byte[] bytes = DisSerializer.Serialize(expected);
+        var actual = Assert.IsType<DetonationPdu>(DisSerializer.Deserialize(bytes));
 
         Assert.Equal(120, bytes.Length);
-        Assert.Equal(parameter.Data.ToArray(), actual.VariableParameters[0].Data.ToArray());
+        Assert.Equal(expected.VariableParameters[0].RecordSpecificFields, actual.VariableParameters[0].RecordSpecificFields);
     }
 }
