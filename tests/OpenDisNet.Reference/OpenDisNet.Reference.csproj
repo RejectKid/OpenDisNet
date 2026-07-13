@@ -9,6 +9,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Utilities\ChunkConverters.cs" />
+    <Compile Update="Generated\**\*.cs" Generated="true" />
+    <Compile Update="Utilities\**\*.cs" Generated="true" />
   </ItemGroup>
 
 </Project>

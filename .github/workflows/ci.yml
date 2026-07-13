@@ -23,6 +23,7 @@ jobs:
             9.x
             10.x
       - run: dotnet restore --locked-mode
+      - run: dotnet run --project tools/OpenDisNet.Generator/OpenDisNet.Generator.csproj --configuration Release --no-restore -- --verify
       - run: dotnet build --configuration Release --no-restore
       - run: dotnet test --configuration Release --no-build
       - run: dotnet pack src/OpenDisNet/OpenDisNet.csproj --configuration Release --no-build --output artifacts/packages
@@ -40,4 +41,4 @@ jobs:
         with:
           dotnet-version: 10.x
       - run: dotnet restore --locked-mode
-      - run: dotnet format --verify-no-changes --no-restore
+      - run: dotnet format --verify-no-changes --no-restore --exclude tests/OpenDisNet.Reference

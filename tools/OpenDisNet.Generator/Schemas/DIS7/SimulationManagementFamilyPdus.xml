@@ -1,0 +1,325 @@
+ <classes>  
+      <class name="SimulationManagementFamilyPdu" id="5" abstract="true" inheritsFrom="PduBase"
+           comment="First part of a simulation management (SIMAN) PDU and SIMAN-Reliability (SIMAN-R) PDU. Sectionn 6.2.81">
+
+        <initialValue name="protocolFamily" value="DISProtocolFamily.SIMULATION_MANAGEMENT"/>
+
+        <attribute name="originatingID" comment="IDs the simulation or entity, either a simulation or an entity. Either 6.2.80 or 6.2.28">
+            <classRef name="SimulationIdentifier"/>
+        </attribute>
+
+        <attribute name="receivingID" comment="simulation, all simulations, a special ID, or an entity. See 5.6.5 and 5.12.4">
+            <classRef name="SimulationIdentifier"/>
+        </attribute>
+
+    </class>
+
+    <class name="CreateEntityPdu" id="11" inheritsFrom="SimulationManagementFamilyPdu" comment="Section 7.5.2. The creation of a new entity shall be communicated using a Create Entity PDU. See 5.6.5.2.">
+
+        <initialValue name="pduType" value="DisPduType.CREATE_ENTITY"/>
+
+        <attribute name="requestID" comment="Identifier for the request.  See 6.2.75">
+            <primitive type="uint32"/>
+        </attribute>
+
+    </class>
+
+    <class name="RemoveEntityPdu" id="12" inheritsFrom="SimulationManagementFamilyPdu" comment="Section 7.5.3 The removal of an entity from an exercise shall be communicated with a Remove Entity PDU. See 5.6.5.3.">
+
+        <initialValue name="pduType" value="DisPduType.REMOVE_ENTITY"/>
+
+        <attribute name="requestID" comment="This field shall identify the specific and unique start/resume request being made by the SM">
+            <primitive type="uint32"/>
+        </attribute>
+
+    </class>
+
+    <class name="StartResumePdu" id="13" inheritsFrom="SimulationManagementFamilyPdu" comment="Section 7.5.4. The Start/Resume of an entity/exercise shall be communicated using a Start/Resume PDU. See 5.6.5.4.">
+
+        <initialValue name="pduType" value="DisPduType.START_RESUME"/>
+
+        <attribute name="realWorldTime" comment="This field shall specify the real-world time (UTC) at which the entity is to start/resume in the exercise. This information shall be used by the participating simulation applications to start/resume an exercise synchronously. This field shall be represented by a Clock Time record (see 6.2.16).">
+            <classRef name="ClockTime"/>
+        </attribute>
+
+        <attribute name="simulationTime" comment="The reference time within a simulation exercise. This time is established in advance by simulation management and is common to all participants in a particular exercise. Simulation time may be either Absolute Time or Relative Time. This field shall be represented by a Clock Time record (see 6.2.16)">
+            <classRef name="ClockTime"/>
+        </attribute>
+
+        <attribute name="requestID" comment="Identifier for the specific and unique start/resume request">
+            <primitive type="uint32"/>
+        </attribute>
+
+    </class>
+
+    <class name="StopFreezePdu" id="14" inheritsFrom="SimulationManagementFamilyPdu" comment="Section 7.5.5. The stopping or freezing of an entity/exercise shall be communicated using a Stop/Freeze PDU. See 5.6.5.5">
+
+        <initialValue name="pduType" value="DisPduType.STOP_FREEZE"/>
+
+        <attribute name="realWorldTime" comment="real-world(UTC) time at which the entity shall stop or freeze in the exercise">
+            <classRef name="ClockTime"/>
+        </attribute>
+
+        <attribute name="reason" comment="Reason the simulation was stopped or frozen (see section 7 of SISO-REF-010) represented by an 8-bit enumeration">
+            <sisoenum type="StopFreezeReason" comment="uid 67"/>
+        </attribute>
+
+        <attribute name="frozenBehavior" comment="Internal behavior of the entity (or simulation) and its appearance while frozen to the other participants">
+            <sisobitfield type="StopFreezeFrozenBehavior" size="8" comment="uid 68"/>
+        </attribute>
+
+        <attribute name="padding1" comment="padding">
+            <primitive type="uint16" defaultValue="0"/>
+        </attribute>
+
+        <attribute name="requestID" comment="Request ID that is unique">
+            <primitive type="uint32"/>
+        </attribute>
+
+    </class>
+
+    <class name="AcknowledgePdu" id="15" inheritsFrom="SimulationManagementFamilyPdu" comment="7.5.6 Acknowledges the receipt of a Start/Resume PDU, Stop/Freeze PDU, Create Entity PDU, or Remove Entity PDU. See 5.6.5.6.">
+
+        <initialValue name="pduType" value="DisPduType.ACKNOWLEDGE"/>
+
+        <attribute name="acknowledgeFlag" comment="type of message being acknowledged">
+            <sisoenum type="AcknowledgeAcknowledgeFlag" comment="uid 69"/>
+        </attribute>
+
+        <attribute name="responseFlag" comment="Whether or not the receiving entity was able to comply with the request">
+            <sisoenum type="AcknowledgeResponseFlag" comment="uid 70"/>
+        </attribute>
+
+        <attribute name="requestID" comment="Request ID that is unique">
+            <primitive type="uint32"/>
+        </attribute>
+
+    </class>
+
+    <class name="ActionRequestPdu" id="16" inheritsFrom="SimulationManagementFamilyPdu" comment=" 7.5.7 A request from a Simulation Manager (SM) to a managed entity to perform a specified action. See 5.6.5.7">
+    
+        <initialValue name="pduType" value="DisPduType.ACTION_REQUEST"/>
+    
+        <attribute name="requestID" comment="identifies the request being made by the simulation manager">
+            <primitive type="uint32"/>
+        </attribute>
+    
+        <attribute name="actionID" comment="identifies the particular action being requested(see Section 7 of SISO-REF-010).">
+            <sisoenum type="ActionRequestActionID" comment="uid 71"/>
+        </attribute>
+    
+        <attribute name="numberOfFixedDatumRecords" hidden="true" comment="Number of fixed datum records">
+            <primitive type="uint32"/>
+        </attribute>
+    
+        <attribute name="numberOfVariableDatumRecords" hidden="true" comment="Number of variable datum records, handled automatically by marshaller at run time (and not modifiable by end-user programmers)">
+            <primitive type="uint32"/>
+        </attribute>
+    
+        <attribute name="fixedDatums" comment="variable length list of fixed datums">
+            <objectlist countFieldName="numberOfFixedDatumRecords">
+                <classRef name="FixedDatum"/>
+            </objectlist>
+        </attribute>
+    
+        <attribute name="variableDatums" comment="variable length list of variable length datums">
+            <objectlist countFieldName="numberOfVariableDatumRecords">
+                <classRef name="VariableDatum"/>
+            </objectlist>
+        </attribute>
+    
+    </class>
+    
+    <class name="ActionResponsePdu" id="17" inheritsFrom="SimulationManagementFamilyPdu" comment="Section 7.5.8. When an entity receives an Action Request PDU, that entity shall acknowledge the receipt of the Action Request PDU with an Action Response PDU. See 5.6.5.8.">
+    
+        <initialValue name="pduType" value="DisPduType.ACTION_RESPONSE"/>
+    
+        <attribute name="requestID" comment="Request ID that is unique">
+            <primitive type="uint32"/>
+        </attribute>
+    
+        <attribute name="requestStatus" comment="Status of response">
+            <sisoenum type="ActionResponseRequestStatus" comment="uid 72"/>
+        </attribute>
+    
+        <attribute name="numberOfFixedDatumRecords" hidden="true" comment="Number of fixed datum records">
+            <primitive type="uint32"/>
+        </attribute>
+    
+        <attribute name="numberOfVariableDatumRecords" hidden="true" comment="Number of variable datum records, handled automatically by marshaller at run time (and not modifiable by end-user programmers)">
+            <primitive type="uint32"/>
+        </attribute>
+    
+        <attribute name="fixedDatums" comment="fixed length list of fixed datums">
+            <objectlist countFieldName="numberOfFixedDatumRecords">
+                <classRef name="FixedDatum"/>
+            </objectlist>
+        </attribute>
+    
+        <attribute name="variableDatums" comment="variable length list of variable length datums">
+            <objectlist countFieldName="numberOfVariableDatumRecords">
+                <classRef name="VariableDatum"/>
+            </objectlist>
+        </attribute>
+    
+    </class>
+        
+    <class name="DataQueryPdu" id="18" inheritsFrom="SimulationManagementFamilyPdu" comment="Section 7.5.9. A request for data from an entity shall be communicated by issuing a Data Query PDU. See 5.6.5.9">
+    
+        <initialValue name="pduType" value="DisPduType.DATA_QUERY"/>
+    
+        <attribute name="requestID" comment="ID of request">
+            <primitive type="uint32"/>
+        </attribute>
+      
+        <attribute name="timeInterval" comment="time issues between issues of Data PDUs. Zero means send once only.">
+            <primitive type="uint32"/>
+        </attribute>
+      
+        <attribute name="numberOfFixedDatumRecords" hidden="true" comment="Number of fixed datum records">
+            <primitive type="uint32"/>
+        </attribute>
+      
+        <attribute name="numberOfVariableDatumRecords" hidden="true" comment="Number of variable datum records, handled automatically by marshaller at run time (and not modifiable by end-user programmers)">
+            <primitive type="uint32"/>
+        </attribute>
+      
+        <attribute name="fixedDatums" comment="variable length list of fixed datums">
+            <objectlist countFieldName="numberOfFixedDatumRecords">
+                <classRef name="FixedDatum"/>
+            </objectlist> 
+        </attribute>
+      
+        <attribute name="variableDatums" comment="variable length list of variable length datums">
+            <objectlist countFieldName="numberOfVariableDatumRecords">
+                <classRef name="VariableDatum"/>
+            </objectlist> 
+        </attribute>
+    
+    </class>
+    
+    <class name="SetDataPdu" id="19" inheritsFrom="SimulationManagementFamilyPdu" comment="Section 7.5.10. Initializing or changing internal state information shall be communicated using a Set Data PDU. See 5.6.5.10">
+    
+        <initialValue name="pduType" value="DisPduType.SET_DATA"/>
+    
+        <attribute name="requestID" comment="ID of request">
+            <primitive type="uint32"/>
+        </attribute>
+      
+        <attribute name="padding1" comment="padding">
+            <primitive type="uint32" defaultValue="0"/>
+        </attribute>
+      
+        <attribute name="numberOfFixedDatumRecords" hidden="true" comment="Number of fixed datum records">
+            <primitive type="uint32"/>
+        </attribute>
+      
+        <attribute name="numberOfVariableDatumRecords" hidden="true" comment="Number of variable datum records, handled automatically by marshaller at run time (and not modifiable by end-user programmers)">
+            <primitive type="uint32"/>
+        </attribute>
+      
+        <attribute name="fixedDatums" comment="variable length list of fixed datums">
+            <objectlist countFieldName="numberOfFixedDatumRecords">
+                <classRef name="FixedDatum"/>
+            </objectlist> 
+        </attribute>
+      
+        <attribute name="variableDatums" comment="variable length list of variable length datums">
+            <objectlist countFieldName="numberOfVariableDatumRecords">
+                <classRef name="VariableDatum"/>
+            </objectlist> 
+        </attribute>
+    
+    </class>
+    
+    <class name="DataPdu" id="20" inheritsFrom="SimulationManagementFamilyPdu" comment="7.5.11 Information issued in response to a Data Query PDU or Set Data PDU. Section 5.6.5.11">
+        
+        <initialValue name="pduType" value="DisPduType.DATA"/>
+      
+        <attribute name="requestID" comment="ID of request">
+            <primitive type="uint32"/>
+        </attribute>
+      
+        <attribute name="padding1" comment="padding">
+            <primitive type="uint32" defaultValue="0"/>
+        </attribute>
+      
+        <attribute name="numberOfFixedDatumRecords" hidden="true" comment="Number of fixed datum records">
+            <primitive type="uint32"/>
+        </attribute>
+      
+        <attribute name="numberOfVariableDatumRecords" hidden="true" comment="Number of variable datum records, handled automatically by marshaller at run time (and not modifiable by end-user programmers)">
+            <primitive type="uint32"/>
+        </attribute>
+      
+        <attribute name="fixedDatums" comment="variable length list of fixed datums">
+            <objectlist countFieldName="numberOfFixedDatumRecords">
+                <classRef name="FixedDatum"/>
+            </objectlist> 
+        </attribute>
+      
+        <attribute name="variableDatums" comment="variable length list of variable length datums">
+            <objectlist countFieldName="numberOfVariableDatumRecords">
+                <classRef name="VariableDatum"/>
+            </objectlist> 
+        </attribute>
+      
+    </class>
+    
+    
+    <class name="EventReportPdu" id="21" inheritsFrom="SimulationManagementFamilyPdu" comment="7.5.12 A managed entity shall report the occurrence of a significant event to the simulation manager (SM) using an Event Report PDU. See 5.6.5.12.">
+    
+        <initialValue name="pduType" value="DisPduType.EVENT_REPORT"/>
+    
+        <attribute name="eventType" comment="Type of event">
+            <sisoenum type="EventReportEventType" comment="uid 73"/>
+        </attribute>
+      
+        <attribute name="padding1" comment="padding">
+            <primitive type="uint32" defaultValue="0"/>
+        </attribute>
+      
+        <attribute name="numberOfFixedDatumRecords" hidden="true" comment="Number of fixed datum records">
+            <primitive type="uint32"/>
+        </attribute>
+      
+        <attribute name="numberOfVariableDatumRecords" hidden="true" comment="Number of variable datum records, handled automatically by marshaller at run time (and not modifiable by end-user programmers)">
+            <primitive type="uint32"/>
+        </attribute>
+      
+        <attribute name="fixedDatums" comment="variable length list of fixed datums">
+            <objectlist countFieldName="numberOfFixedDatumRecords">
+                <classRef name="FixedDatum"/>
+            </objectlist> 
+        </attribute>
+      
+        <attribute name="variableDatums" comment="variable length list of variable length datums">
+            <objectlist countFieldName="numberOfVariableDatumRecords">
+                <classRef name="VariableDatum"/>
+            </objectlist> 
+        </attribute>
+    
+    </class>
+    
+    
+    <class name="CommentPdu" id="22" inheritsFrom="SimulationManagementFamilyPdu" comment="7.5.13 Used to enter arbitrary messages (character strings, for example). See 5.6.5.13">
+    
+        <initialValue name="pduType" value="DisPduType.COMMENT"/>
+    
+        <attribute name="numberOfFixedDatumRecords" hidden="true" comment="Number of fixed datum records, not used in this Pdu">
+            <primitive type="uint32"/>
+        </attribute>
+        
+        <attribute name="numberOfVariableDatumRecords" hidden="true" comment="Number of variable datum records, handled automatically by marshaller at run time (and not modifiable by end-user programmers)">
+            <primitive type="uint32"/>
+        </attribute>
+      
+        <attribute name="variableDatums" comment="variable length list of variable length datums">
+            <objectlist countFieldName="numberOfVariableDatumRecords">
+                <classRef name="VariableDatum"/>
+            </objectlist> 
+        </attribute>
+    
+    </class>
+    
+</classes>
