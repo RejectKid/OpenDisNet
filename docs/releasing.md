@@ -2,6 +2,8 @@
 
 Releases are immutable and tag-driven. The `release.yml` workflow tests, packs,
 publishes to NuGet.org, and creates a GitHub release for tags such as `v0.2.0`.
+GitHub-generated notes are categorized using `.github/release.yml`, and package
+plus symbol artifacts are attached to the release shown on the repository page.
 
 ## One-time NuGet.org setup
 

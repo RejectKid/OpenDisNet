@@ -1,0 +1,34 @@
+changelog:
+  exclude:
+    labels:
+      - dependencies
+      - skip-changelog
+
+  categories:
+    - title: Breaking changes
+      labels:
+        - breaking-change
+
+    - title: New features
+      labels:
+        - enhancement
+        - feature
+
+    - title: Fixes
+      labels:
+        - bug
+        - fix
+
+    - title: Documentation
+      labels:
+        - documentation
+
+    - title: Maintenance
+      labels:
+        - maintenance
+        - refactor
+        - testing
+
+    - title: Other changes
+      labels:
+        - "*"
