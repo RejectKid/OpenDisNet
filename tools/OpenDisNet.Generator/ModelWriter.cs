@@ -46,7 +46,9 @@ internal static class ModelWriter
                 string type = definition.Name is "SignalPdu" or "IntercomSignalPdu" && propertyName == "EncodingScheme"
                     ? "SignalEncodingScheme"
                     : TypeName(field);
-                string initializer = Initializer(field);
+                bool optionalIffLayer = definition.Name == "IdentificationFriendOrFoePdu" && propertyName.StartsWith("IFFPduLayer", StringComparison.Ordinal);
+                if (optionalIffLayer) type += "?";
+                string initializer = optionalIffLayer ? string.Empty : Initializer(field);
                 string access = field.IsHidden ? "internal" : "public";
                 text.AppendLine($"    {access} {type} {propertyName} {{ get; set; }}{initializer}");
                 text.AppendLine();

@@ -474,32 +474,32 @@ public partial class IdentificationFriendOrFoePdu : DistributedEmissionsRegenera
     /// <summary>
     /// IFF pdu layer 2 data
     /// </summary>
-    public IFFPduLayer2Data IFFPduLayer2Data { get; set; } = new IFFPduLayer2Data();
+    public IFFPduLayer2Data? IFFPduLayer2Data { get; set; }
 
     /// <summary>
     /// IFF pdu layer 3 transponder format data
     /// </summary>
-    public IFFPduLayer3TransponderFormatData IFFPduLayer3TransponderFormatData { get; set; } = new IFFPduLayer3TransponderFormatData();
+    public IFFPduLayer3TransponderFormatData? IFFPduLayer3TransponderFormatData { get; set; }
 
     /// <summary>
     /// IFF pdu layer 3 interrogator format data
     /// </summary>
-    public IFFPduLayer3InterrogatorFormatData IFFPduLayer3InterrogatorFormatData { get; set; } = new IFFPduLayer3InterrogatorFormatData();
+    public IFFPduLayer3InterrogatorFormatData? IFFPduLayer3InterrogatorFormatData { get; set; }
 
     /// <summary>
     /// IFF pdu layer 4 interrogator format data
     /// </summary>
-    public IFFPduLayer4InterrogatorFormatData IFFPduLayer4InterrogatorFormatData { get; set; } = new IFFPduLayer4InterrogatorFormatData();
+    public IFFPduLayer4InterrogatorFormatData? IFFPduLayer4InterrogatorFormatData { get; set; }
 
     /// <summary>
     /// IFF pdu layer 4 transponder format data
     /// </summary>
-    public IFFPduLayer4TransponderFormatData IFFPduLayer4TransponderFormatData { get; set; } = new IFFPduLayer4TransponderFormatData();
+    public IFFPduLayer4TransponderFormatData? IFFPduLayer4TransponderFormatData { get; set; }
 
     /// <summary>
     /// IFF pdu layer 5 data communications
     /// </summary>
-    public IFFPduLayer5Data IFFPduLayer5Data { get; set; } = new IFFPduLayer5Data();
+    public IFFPduLayer5Data? IFFPduLayer5Data { get; set; }
 
 }
 

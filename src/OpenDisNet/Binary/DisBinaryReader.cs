@@ -43,6 +43,12 @@ public ref struct DisBinaryReader
         return value;
     }
 
+    public readonly uint PeekUInt32(string field = "value")
+    {
+        Ensure(4, field);
+        return BinaryPrimitives.ReadUInt32BigEndian(_source[_offset..]);
+    }
+
     public int ReadInt32(string field = "value") => unchecked((int)ReadUInt32(field));
 
     public ulong ReadUInt64(string field = "value")

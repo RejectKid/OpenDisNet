@@ -130,7 +130,8 @@ internal static class DisSchemaLoader
             string typeName = Required(shape, "type");
             if (!sisoTypes.TryGetValue(typeName, out SisoTypeDefinition? wireType))
                 throw new InvalidDataException($"Missing SISO wire metadata for '{typeName}'.");
-            return new(name, kind, PublicNames.SisoType(typeName, wireType.Uid), null, null, wireType.Bits, false, Hidden(attribute), Comment(attribute));
+            int bits = OptionalInt(shape, "size") ?? wireType.Bits;
+            return new(name, kind, PublicNames.SisoType(typeName, wireType.Uid), null, null, bits, false, Hidden(attribute), Comment(attribute));
         }
     }
 

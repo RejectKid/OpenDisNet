@@ -2620,11 +2620,6 @@ public partial class RecordSpecificationElement
     /// </summary>
     public byte[] RecordValues { get; set; } = new byte[0];
 
-    /// <summary>
-    /// used if required to make entire record size an even multiple of 8 bytes
-    /// </summary>
-    public byte[] PadTo64 { get; set; } = new byte[0];
-
 }
 
 /// <summary>
