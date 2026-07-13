@@ -1,33 +1,43 @@
 using OpenDisNet.Generator;
 
 string repositoryRoot = FindRepositoryRoot(AppContext.BaseDirectory);
-string output = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Internal", "SchemaManifest.g.cs");
-string modelsOutput = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Pdus", "PduModels.g.cs");
-string factoryOutput = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Pdus", "PduFactory.g.cs");
-string codecOutput = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Internal", "PduCodec.g.cs");
+string catalogOutput = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Internal", "SchemaCatalog.cs");
+string factoryOutput = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Pdus", "PduFactory.cs");
+string codecOutput = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Internal", "PduCodec.cs");
 bool verify = args.Contains("--verify", StringComparer.Ordinal);
 
 DisSchema schema = DisSchemaLoader.Load();
-string generated = ManifestWriter.Create(schema);
-string generatedModels = ModelWriter.Create(schema);
+string generatedCatalog = ManifestWriter.Create(schema);
 string generatedFactory = FactoryWriter.Create(schema);
 string generatedCodec = CodecWriter.Create(schema);
+Dictionary<string, string> modelOutputs = schema.SourceFiles.ToDictionary(
+    sourceFile => ModelOutput(repositoryRoot, sourceFile),
+    sourceFile => ModelWriter.Create(schema, sourceFile),
+    StringComparer.OrdinalIgnoreCase);
 
 if (verify)
 {
-    if (!Matches(output, generated) || !Matches(modelsOutput, generatedModels) || !Matches(factoryOutput, generatedFactory) || !Matches(codecOutput, generatedCodec))
+    bool stale = !Matches(catalogOutput, generatedCatalog)
+        || !Matches(factoryOutput, generatedFactory)
+        || !Matches(codecOutput, generatedCodec)
+        || modelOutputs.Any(x => !Matches(x.Key, x.Value));
+    if (stale)
     {
-        Console.Error.WriteLine($"Generated output is stale: {output}");
+        Console.Error.WriteLine("Checked-in DIS protocol source is stale. Run the protocol source tool.");
         return 1;
     }
 }
 else
 {
-    Directory.CreateDirectory(Path.GetDirectoryName(output)!);
-    File.WriteAllText(output, generated);
-    File.WriteAllText(modelsOutput, generatedModels);
+    Directory.CreateDirectory(Path.GetDirectoryName(catalogOutput)!);
+    File.WriteAllText(catalogOutput, generatedCatalog);
     File.WriteAllText(factoryOutput, generatedFactory);
     File.WriteAllText(codecOutput, generatedCodec);
+    foreach ((string path, string contents) in modelOutputs)
+    {
+        Directory.CreateDirectory(Path.GetDirectoryName(path)!);
+        File.WriteAllText(path, contents);
+    }
 }
 
 static bool Matches(string path, string expected)
@@ -40,6 +50,14 @@ static bool Matches(string path, string expected)
 
 Console.WriteLine($"Validated {schema.Classes.Length} classes and {schema.Pdus.Length} PDUs (types 1-72).");
 return 0;
+
+static string ModelOutput(string repositoryRoot, string sourceFile)
+{
+    string fileName = sourceFile == "DIS_7_2012.xml"
+        ? "Records.cs"
+        : sourceFile.Replace("FamilyPdus.xml", "Pdus.cs", StringComparison.Ordinal);
+    return Path.Combine(repositoryRoot, "src", "OpenDisNet", "Pdus", "Families", fileName);
+}
 
 static string FindRepositoryRoot(string start)
 {

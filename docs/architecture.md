@@ -35,3 +35,21 @@ Every PDU must pass construction and binary round-trip tests. Variable and
 conditional layouts additionally require populated vectors, malformed-input
 tests, and an independent implementation or packet-decoder comparison before
 the corresponding family is marked semantically conformant.
+
+## Source map
+
+The checked-in protocol implementation is intentionally visible:
+
+- `src/OpenDisNet/Pdus/Families/Records.cs` contains reusable DIS records.
+- `src/OpenDisNet/Pdus/Families/*Pdus.cs` contains the PDU classes grouped by
+  the 12 protocol families.
+- `src/OpenDisNet/Pdus/PduFactory.cs` lists construction routes for PDU types
+  1 through 72.
+- `src/OpenDisNet/Internal/PduCodec.cs` lists four complete 1-through-72
+  dispatch tables: read, prepare/validate, write, and encoded-size measurement.
+- `src/OpenDisNet/Binary` contains the bounds-checked big-endian primitive byte
+  reader and writer.
+
+The protocol source tool rewrites these ordinary `.cs` files deterministically
+from the reviewed repository schema. There are no monolithic `.g.cs` protocol
+sources in the package project.
