@@ -162,7 +162,7 @@
         </attribute>
 
         <attribute name="repairResult" comment="Result of repair operation">
-            <sisoenum type="RepairResponseRepairResult" comment="uid 64"/>
+            <sisoenum type="RepairResponseRepairResult" size="8" comment="uid 64"/>
         </attribute>
 
         <attribute name="padding1" comment="padding">

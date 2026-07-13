@@ -11,7 +11,7 @@ internal static partial class PduCodec
     {
         Pdu value = PduFactory.Create(header.PduType, header.ExerciseId);
         ApplyHeader(value, header);
-        var reader = new DisBinaryReader(body, DisHeader.Size);
+        var reader = new DisBinaryReader(body, header.EncodedSize);
         switch ((byte)header.PduType)
         {
             case 1:
@@ -312,7 +312,7 @@ internal static partial class PduCodec
     {
         ArgumentNullException.ThrowIfNull(value);
         Prepare(value);
-        int offset = DisHeader.Size;
+        int offset = value.Header.EncodedSize;
         MeasureBody(value, ref offset);
         return offset;
     }
@@ -1240,6 +1240,9 @@ internal static partial class PduCodec
         }
     }
 
+    private static bool IsIffTransponder(IffSystemType value) => (ushort)value is 1 or 3 or 5 or 9 or 10 or 11;
+    private static bool IsIffInterrogator(IffSystemType value) => (ushort)value is 2 or 4 or 6 or 7 or 8;
+
     private static APA ReadAPA(ref DisBinaryReader reader)
     {
         var value = new APA();
@@ -2153,7 +2156,7 @@ internal static partial class PduCodec
         WriteEntityType(ref writer, value.EntityType);
         WriteEntityType(ref writer, value.AlternateEntityType);
         WriteEntityMarking(ref writer, value.EntityMarking);
-        writer.WriteUInt32(value.Capabilities.Value, "capabilities");
+        writer.WriteUInt32((uint)value.Capabilities.Value, "capabilities");
         WriteAppearance(ref writer, value.AppearanceFields);
     }
 
@@ -2175,7 +2178,7 @@ internal static partial class PduCodec
         value.ReferencedObjectId = ReadObjectIdentifier(ref reader);
         value.UpdateNumber = reader.ReadUInt16("updateNumber");
         value.ForceId = (ForceId)reader.ReadByte("forceID");
-        value.Modifications = new ObjectStateModificationArealObject(reader.ReadUInt16("modifications"));
+        value.Modifications = new ObjectStateModificationArealObject(reader.ReadByte("modifications"));
         value.ObjectType = ReadObjectType(ref reader);
         value.SpecificObjectAppearance = reader.ReadUInt32("specificObjectAppearance");
         value.GeneralObjectAppearance = reader.ReadUInt16("generalObjectAppearance");
@@ -2211,7 +2214,7 @@ internal static partial class PduCodec
         WriteObjectIdentifier(ref writer, value.ReferencedObjectId);
         writer.WriteUInt16(value.UpdateNumber, "updateNumber");
         writer.WriteByte((byte)value.ForceId, "forceID");
-        writer.WriteUInt16(value.Modifications.Value, "modifications");
+        writer.WriteByte((byte)value.Modifications.Value, "modifications");
         WriteObjectType(ref writer, value.ObjectType);
         writer.WriteUInt32(value.SpecificObjectAppearance, "specificObjectAppearance");
         writer.WriteUInt16(value.GeneralObjectAppearance, "generalObjectAppearance");
@@ -2227,7 +2230,7 @@ internal static partial class PduCodec
         MeasureObjectIdentifier(value.ReferencedObjectId, ref offset);
         offset += 2;
         offset += 1;
-        offset += 2;
+        offset += 1;
         MeasureObjectType(value.ObjectType, ref offset);
         offset += 4;
         offset += 2;
@@ -3886,7 +3889,7 @@ internal static partial class PduCodec
         writer.WriteSingle(value.Temperature, "temperature");
         writer.WriteByte((byte)value.ComponentIdentification, "componentIdentification");
         writer.WriteByte((byte)value.ComponentDamageStatus, "componentDamageStatus");
-        writer.WriteByte(value.ComponentVisualDamageStatus.Value, "componentVisualDamageStatus");
+        writer.WriteByte((byte)value.ComponentVisualDamageStatus.Value, "componentVisualDamageStatus");
         writer.WriteByte((byte)value.ComponentVisualSmokeColor, "componentVisualSmokeColor");
         WriteEventIdentifier(ref writer, value.FireEventId);
         writer.WriteUInt16(value.Padding2, "padding2");
@@ -3968,7 +3971,7 @@ internal static partial class PduCodec
         writer.WriteUInt32(value.Pad1, "pad1");
         writer.WriteSingle(value.PulseRepititionFrequency, "pulseRepititionFrequency");
         writer.WriteSingle(value.PulseWidth, "pulseWidth");
-        writer.WriteUInt16(value.Flags.Value, "flags");
+        writer.WriteUInt16((ushort)value.Flags.Value, "flags");
         writer.WriteByte((byte)value.PulseShape, "pulseShape");
         writer.WriteByte(value.Pad2, "pad2");
         writer.WriteUInt32(value.Pad3, "pad3");
@@ -4943,7 +4946,7 @@ internal static partial class PduCodec
         writer.WriteUInt32(value.EntityAppearance, "entityAppearance");
         WriteDeadReckoningParameters(ref writer, value.DeadReckoningParameters);
         WriteEntityMarking(ref writer, value.Marking);
-        writer.WriteUInt32(value.Capabilities.Value, "capabilities");
+        writer.WriteUInt32((uint)value.Capabilities.Value, "capabilities");
         foreach (VariableParameter item in value.VariableParameters) WriteVariableParameter(ref writer, item);
     }
 
@@ -5206,7 +5209,7 @@ internal static partial class PduCodec
         value.Length = reader.ReadUInt16("length");
         value.Index = reader.ReadByte("index");
         value.Padding1 = reader.ReadByte("padding1");
-        int GeometryCount = CheckedCount(Math.Max(0, ((checked((int)value.Length) + 7) / 8) - 6), reader.Remaining, "geometry");
+        int GeometryCount = CheckedCount(Math.Max(0, ((checked((int)value.Length) + 7) / 8) - 8), reader.Remaining, "geometry");
         value.Geometry = new byte[GeometryCount];
         for (int index = 0; index < GeometryCount; index++)
             value.Geometry[index] = reader.ReadByte("geometry");
@@ -5220,6 +5223,7 @@ internal static partial class PduCodec
 
     private static void PrepareEnvironmentFields(Environment value)
     {
+        value.Length = checked((ushort)((8 + value.Geometry.Length) * 8));
         ArgumentNullException.ThrowIfNull(value.Geometry);
     }
 
@@ -5283,7 +5287,7 @@ internal static partial class PduCodec
         WriteObjectIdentifier(ref writer, value.EnvironementalProcessId);
         WriteEntityType(ref writer, value.EnvironmentType);
         writer.WriteByte((byte)value.ModelType, "modelType");
-        writer.WriteByte(value.EnvironmentStatus.Value, "environmentStatus");
+        writer.WriteByte((byte)value.EnvironmentStatus.Value, "environmentStatus");
         writer.WriteUInt16(value.NumberOfEnvironmentRecords, "numberOfEnvironmentRecords");
         writer.WriteUInt16(value.SequenceNumber, "sequenceNumber");
         foreach (Environment item in value.EnvironmentRecords) WriteEnvironment(ref writer, item);
@@ -6519,7 +6523,7 @@ internal static partial class PduCodec
     {
         value.RecordType = (VariableRecordType)reader.ReadUInt32("recordType");
         value.RecordLength = reader.ReadUInt16("recordLength");
-        int RecordSpecificFieldsCount = CheckedCount(Math.Max(0, checked((int)value.RecordLength) - 4), reader.Remaining, "recordSpecificFields");
+        int RecordSpecificFieldsCount = CheckedCount(Math.Max(0, checked((int)value.RecordLength) - 6), reader.Remaining, "recordSpecificFields");
         value.RecordSpecificFields = new byte[RecordSpecificFieldsCount];
         for (int index = 0; index < RecordSpecificFieldsCount; index++)
             value.RecordSpecificFields[index] = reader.ReadByte("recordSpecificFields");
@@ -6533,6 +6537,7 @@ internal static partial class PduCodec
 
     private static void PrepareIFFDataFields(IFFData value)
     {
+        value.RecordLength = checked((ushort)(6 + value.RecordSpecificFields.Length));
         ArgumentNullException.ThrowIfNull(value.RecordSpecificFields);
     }
 
@@ -6711,6 +6716,9 @@ internal static partial class PduCodec
         ArgumentNullException.ThrowIfNull(value.IFFFundamentalParameterDataRecord);
         foreach (IFFFundamentalParameterData item in value.IFFFundamentalParameterDataRecord) PrepareIFFFundamentalParameterData(item);
         value.NumberOfIFFFundamentalParameterDataRecordsParameters = checked((ushort)value.IFFFundamentalParameterDataRecord.Count);
+        int layerLength = 0;
+        MeasureIFFPduLayer2DataFields(value, ref layerLength);
+        value.LayerHeader.Length = checked((ushort)layerLength);
     }
 
     private static void WriteIFFPduLayer2Data(ref DisBinaryWriter writer, IFFPduLayer2Data value)
@@ -6782,6 +6790,9 @@ internal static partial class PduCodec
         ArgumentNullException.ThrowIfNull(value.IFFFundamentalParameterDataRecord);
         foreach (IFFDataSpecification item in value.IFFFundamentalParameterDataRecord) PrepareIFFDataSpecification(item);
         value.NumberOfIFFFundamentalParameterDataRecordsParameters = checked((ushort)value.IFFFundamentalParameterDataRecord.Count);
+        int layerLength = 0;
+        MeasureIFFPduLayer3InterrogatorFormatDataFields(value, ref layerLength);
+        value.LayerHeader.Length = checked((ushort)layerLength);
     }
 
     private static void WriteIFFPduLayer3InterrogatorFormatData(ref DisBinaryWriter writer, IFFPduLayer3InterrogatorFormatData value)
@@ -6855,6 +6866,9 @@ internal static partial class PduCodec
         ArgumentNullException.ThrowIfNull(value.IFFFundamentalParameterDataRecord);
         foreach (IFFDataSpecification item in value.IFFFundamentalParameterDataRecord) PrepareIFFDataSpecification(item);
         value.NumberOfIFFFundamentalParameterDataRecordsParameters = checked((ushort)value.IFFFundamentalParameterDataRecord.Count);
+        int layerLength = 0;
+        MeasureIFFPduLayer3TransponderFormatDataFields(value, ref layerLength);
+        value.LayerHeader.Length = checked((ushort)layerLength);
     }
 
     private static void WriteIFFPduLayer3TransponderFormatData(ref DisBinaryWriter writer, IFFPduLayer3TransponderFormatData value)
@@ -6928,6 +6942,9 @@ internal static partial class PduCodec
         ArgumentNullException.ThrowIfNull(value.IFFFundamentalParameterDataRecord);
         foreach (IFFDataSpecification item in value.IFFFundamentalParameterDataRecord) PrepareIFFDataSpecification(item);
         value.NumberOfIFFFundamentalParameterDataRecordsParameters = checked((ushort)value.IFFFundamentalParameterDataRecord.Count);
+        int layerLength = 0;
+        MeasureIFFPduLayer4InterrogatorFormatDataFields(value, ref layerLength);
+        value.LayerHeader.Length = checked((ushort)layerLength);
     }
 
     private static void WriteIFFPduLayer4InterrogatorFormatData(ref DisBinaryWriter writer, IFFPduLayer4InterrogatorFormatData value)
@@ -7001,6 +7018,9 @@ internal static partial class PduCodec
         ArgumentNullException.ThrowIfNull(value.IFFFundamentalParameterDataRecord);
         foreach (IFFDataSpecification item in value.IFFFundamentalParameterDataRecord) PrepareIFFDataSpecification(item);
         value.NumberOfIFFFundamentalParameterDataRecordsParameters = checked((ushort)value.IFFFundamentalParameterDataRecord.Count);
+        int layerLength = 0;
+        MeasureIFFPduLayer4TransponderFormatDataFields(value, ref layerLength);
+        value.LayerHeader.Length = checked((ushort)layerLength);
     }
 
     private static void WriteIFFPduLayer4TransponderFormatData(ref DisBinaryWriter writer, IFFPduLayer4TransponderFormatData value)
@@ -7074,6 +7094,9 @@ internal static partial class PduCodec
         ArgumentNullException.ThrowIfNull(value.IFFFundamentalParameterDataRecord);
         foreach (IFFDataSpecification item in value.IFFFundamentalParameterDataRecord) PrepareIFFDataSpecification(item);
         value.NumberOfIFFFundamentalParameterDataRecordsParameters = checked((ushort)value.IFFFundamentalParameterDataRecord.Count);
+        int layerLength = 0;
+        MeasureIFFPduLayer5DataFields(value, ref layerLength);
+        value.LayerHeader.Length = checked((ushort)layerLength);
     }
 
     private static void WriteIFFPduLayer5Data(ref DisBinaryWriter writer, IFFPduLayer5Data value)
@@ -7244,9 +7267,12 @@ internal static partial class PduCodec
 
     private static IORecord ReadIORecord(ref DisBinaryReader reader)
     {
-        var value = new IORecord();
-        ReadIORecordFields(ref reader, value);
-        return value;
+        return (VariableRecordType)reader.PeekUInt32("recordType") switch
+        {
+            VariableRecordType.IoEffect => ReadIOEffectRecord(ref reader),
+            VariableRecordType.IoCommunicationsNode => ReadIOCommsNodeRecord(ref reader),
+            var recordType => throw new FormatException($"Unsupported Information Operations record type {(uint)recordType}."),
+        };
     }
 
     private static void ReadIORecordFields(ref DisBinaryReader reader, IORecord value)
@@ -7255,7 +7281,12 @@ internal static partial class PduCodec
 
     private static void PrepareIORecord(IORecord value)
     {
-        PrepareIORecordFields(value);
+        switch (value)
+        {
+            case IOEffectRecord effect: PrepareIOEffectRecord(effect); break;
+            case IOCommsNodeRecord node: PrepareIOCommsNodeRecord(node); break;
+            default: throw new ArgumentException($"Unsupported Information Operations record model {value.GetType().Name}.", nameof(value));
+        }
     }
 
     private static void PrepareIORecordFields(IORecord value)
@@ -7264,7 +7295,12 @@ internal static partial class PduCodec
 
     private static void WriteIORecord(ref DisBinaryWriter writer, IORecord value)
     {
-        WriteIORecordFields(ref writer, value);
+        switch (value)
+        {
+            case IOEffectRecord effect: WriteIOEffectRecord(ref writer, effect); break;
+            case IOCommsNodeRecord node: WriteIOCommsNodeRecord(ref writer, node); break;
+            default: throw new ArgumentException($"Unsupported Information Operations record model {value.GetType().Name}.", nameof(value));
+        }
     }
 
     private static void WriteIORecordFields(ref DisBinaryWriter writer, IORecord value)
@@ -7273,7 +7309,12 @@ internal static partial class PduCodec
 
     private static void MeasureIORecord(in IORecord value, ref int offset)
     {
-        MeasureIORecordFields(value, ref offset);
+        switch (value)
+        {
+            case IOEffectRecord effect: MeasureIOEffectRecord(effect, ref offset); break;
+            case IOCommsNodeRecord node: MeasureIOCommsNodeRecord(node, ref offset); break;
+            default: throw new ArgumentException($"Unsupported Information Operations record model {value.GetType().Name}.", nameof(value));
+        }
     }
 
     private static void MeasureIORecordFields(in IORecord value, ref int offset)
@@ -7289,16 +7330,42 @@ internal static partial class PduCodec
         value.SystemDesignator = reader.ReadByte("systemDesignator");
         value.SystemSpecificData = reader.ReadByte("systemSpecificData");
         value.FundamentalParameters = ReadFundamentalOperationalData(ref reader);
-        value.IFFPduLayer2Data = ReadIFFPduLayer2Data(ref reader);
-        value.IFFPduLayer3TransponderFormatData = ReadIFFPduLayer3TransponderFormatData(ref reader);
-        value.IFFPduLayer3InterrogatorFormatData = ReadIFFPduLayer3InterrogatorFormatData(ref reader);
-        value.IFFPduLayer4InterrogatorFormatData = ReadIFFPduLayer4InterrogatorFormatData(ref reader);
-        value.IFFPduLayer4TransponderFormatData = ReadIFFPduLayer4TransponderFormatData(ref reader);
-        value.IFFPduLayer5Data = ReadIFFPduLayer5Data(ref reader);
+        if ((value.FundamentalParameters.InformationLayers & (1 << 2)) != 0)
+        {
+            value.IFFPduLayer2Data = ReadIFFPduLayer2Data(ref reader);
+        }
+        if ((value.FundamentalParameters.InformationLayers & (1 << 3)) != 0 && IsIffTransponder(value.SystemId.SystemType))
+        {
+            value.IFFPduLayer3TransponderFormatData = ReadIFFPduLayer3TransponderFormatData(ref reader);
+        }
+        if ((value.FundamentalParameters.InformationLayers & (1 << 3)) != 0 && IsIffInterrogator(value.SystemId.SystemType))
+        {
+            value.IFFPduLayer3InterrogatorFormatData = ReadIFFPduLayer3InterrogatorFormatData(ref reader);
+        }
+        if ((value.FundamentalParameters.InformationLayers & (1 << 4)) != 0 && IsIffInterrogator(value.SystemId.SystemType))
+        {
+            value.IFFPduLayer4InterrogatorFormatData = ReadIFFPduLayer4InterrogatorFormatData(ref reader);
+        }
+        if ((value.FundamentalParameters.InformationLayers & (1 << 4)) != 0 && IsIffTransponder(value.SystemId.SystemType))
+        {
+            value.IFFPduLayer4TransponderFormatData = ReadIFFPduLayer4TransponderFormatData(ref reader);
+        }
+        if ((value.FundamentalParameters.InformationLayers & (1 << 5)) != 0)
+        {
+            value.IFFPduLayer5Data = ReadIFFPduLayer5Data(ref reader);
+        }
     }
 
     private static void PrepareIdentificationFriendOrFoePduFields(IdentificationFriendOrFoePdu value)
     {
+        byte layers = (byte)(value.FundamentalParameters.InformationLayers & 0b1100_0011);
+        if (value.IFFPduLayer2Data is not null) layers |= 1 << 2;
+        if (value.IFFPduLayer3TransponderFormatData is not null || value.IFFPduLayer3InterrogatorFormatData is not null) layers |= 1 << 3;
+        if (value.IFFPduLayer4TransponderFormatData is not null || value.IFFPduLayer4InterrogatorFormatData is not null) layers |= 1 << 4;
+        if (value.IFFPduLayer5Data is not null) layers |= 1 << 5;
+        if (value.IFFPduLayer3TransponderFormatData is not null && value.IFFPduLayer3InterrogatorFormatData is not null) throw new ArgumentException("IFF layer 3 cannot contain both transponder and interrogator formats.", nameof(value));
+        if (value.IFFPduLayer4TransponderFormatData is not null && value.IFFPduLayer4InterrogatorFormatData is not null) throw new ArgumentException("IFF layer 4 cannot contain both transponder and interrogator formats.", nameof(value));
+        value.FundamentalParameters.InformationLayers = layers;
         ArgumentNullException.ThrowIfNull(value.EmittingEntityId);
         PrepareEntityId(value.EmittingEntityId);
         ArgumentNullException.ThrowIfNull(value.EventId);
@@ -7309,18 +7376,36 @@ internal static partial class PduCodec
         PrepareSystemIdentifier(value.SystemId);
         ArgumentNullException.ThrowIfNull(value.FundamentalParameters);
         PrepareFundamentalOperationalData(value.FundamentalParameters);
-        ArgumentNullException.ThrowIfNull(value.IFFPduLayer2Data);
-        PrepareIFFPduLayer2Data(value.IFFPduLayer2Data);
-        ArgumentNullException.ThrowIfNull(value.IFFPduLayer3TransponderFormatData);
-        PrepareIFFPduLayer3TransponderFormatData(value.IFFPduLayer3TransponderFormatData);
-        ArgumentNullException.ThrowIfNull(value.IFFPduLayer3InterrogatorFormatData);
-        PrepareIFFPduLayer3InterrogatorFormatData(value.IFFPduLayer3InterrogatorFormatData);
-        ArgumentNullException.ThrowIfNull(value.IFFPduLayer4InterrogatorFormatData);
-        PrepareIFFPduLayer4InterrogatorFormatData(value.IFFPduLayer4InterrogatorFormatData);
-        ArgumentNullException.ThrowIfNull(value.IFFPduLayer4TransponderFormatData);
-        PrepareIFFPduLayer4TransponderFormatData(value.IFFPduLayer4TransponderFormatData);
-        ArgumentNullException.ThrowIfNull(value.IFFPduLayer5Data);
-        PrepareIFFPduLayer5Data(value.IFFPduLayer5Data);
+        if ((value.FundamentalParameters.InformationLayers & (1 << 2)) != 0)
+        {
+            ArgumentNullException.ThrowIfNull(value.IFFPduLayer2Data);
+            PrepareIFFPduLayer2Data(value.IFFPduLayer2Data!);
+        }
+        if ((value.FundamentalParameters.InformationLayers & (1 << 3)) != 0 && IsIffTransponder(value.SystemId.SystemType))
+        {
+            ArgumentNullException.ThrowIfNull(value.IFFPduLayer3TransponderFormatData);
+            PrepareIFFPduLayer3TransponderFormatData(value.IFFPduLayer3TransponderFormatData!);
+        }
+        if ((value.FundamentalParameters.InformationLayers & (1 << 3)) != 0 && IsIffInterrogator(value.SystemId.SystemType))
+        {
+            ArgumentNullException.ThrowIfNull(value.IFFPduLayer3InterrogatorFormatData);
+            PrepareIFFPduLayer3InterrogatorFormatData(value.IFFPduLayer3InterrogatorFormatData!);
+        }
+        if ((value.FundamentalParameters.InformationLayers & (1 << 4)) != 0 && IsIffInterrogator(value.SystemId.SystemType))
+        {
+            ArgumentNullException.ThrowIfNull(value.IFFPduLayer4InterrogatorFormatData);
+            PrepareIFFPduLayer4InterrogatorFormatData(value.IFFPduLayer4InterrogatorFormatData!);
+        }
+        if ((value.FundamentalParameters.InformationLayers & (1 << 4)) != 0 && IsIffTransponder(value.SystemId.SystemType))
+        {
+            ArgumentNullException.ThrowIfNull(value.IFFPduLayer4TransponderFormatData);
+            PrepareIFFPduLayer4TransponderFormatData(value.IFFPduLayer4TransponderFormatData!);
+        }
+        if ((value.FundamentalParameters.InformationLayers & (1 << 5)) != 0)
+        {
+            ArgumentNullException.ThrowIfNull(value.IFFPduLayer5Data);
+            PrepareIFFPduLayer5Data(value.IFFPduLayer5Data!);
+        }
     }
 
     private static void WriteIdentificationFriendOrFoePduFields(ref DisBinaryWriter writer, IdentificationFriendOrFoePdu value)
@@ -7332,12 +7417,30 @@ internal static partial class PduCodec
         writer.WriteByte(value.SystemDesignator, "systemDesignator");
         writer.WriteByte(value.SystemSpecificData, "systemSpecificData");
         WriteFundamentalOperationalData(ref writer, value.FundamentalParameters);
-        WriteIFFPduLayer2Data(ref writer, value.IFFPduLayer2Data);
-        WriteIFFPduLayer3TransponderFormatData(ref writer, value.IFFPduLayer3TransponderFormatData);
-        WriteIFFPduLayer3InterrogatorFormatData(ref writer, value.IFFPduLayer3InterrogatorFormatData);
-        WriteIFFPduLayer4InterrogatorFormatData(ref writer, value.IFFPduLayer4InterrogatorFormatData);
-        WriteIFFPduLayer4TransponderFormatData(ref writer, value.IFFPduLayer4TransponderFormatData);
-        WriteIFFPduLayer5Data(ref writer, value.IFFPduLayer5Data);
+        if ((value.FundamentalParameters.InformationLayers & (1 << 2)) != 0)
+        {
+            WriteIFFPduLayer2Data(ref writer, value.IFFPduLayer2Data!);
+        }
+        if ((value.FundamentalParameters.InformationLayers & (1 << 3)) != 0 && IsIffTransponder(value.SystemId.SystemType))
+        {
+            WriteIFFPduLayer3TransponderFormatData(ref writer, value.IFFPduLayer3TransponderFormatData!);
+        }
+        if ((value.FundamentalParameters.InformationLayers & (1 << 3)) != 0 && IsIffInterrogator(value.SystemId.SystemType))
+        {
+            WriteIFFPduLayer3InterrogatorFormatData(ref writer, value.IFFPduLayer3InterrogatorFormatData!);
+        }
+        if ((value.FundamentalParameters.InformationLayers & (1 << 4)) != 0 && IsIffInterrogator(value.SystemId.SystemType))
+        {
+            WriteIFFPduLayer4InterrogatorFormatData(ref writer, value.IFFPduLayer4InterrogatorFormatData!);
+        }
+        if ((value.FundamentalParameters.InformationLayers & (1 << 4)) != 0 && IsIffTransponder(value.SystemId.SystemType))
+        {
+            WriteIFFPduLayer4TransponderFormatData(ref writer, value.IFFPduLayer4TransponderFormatData!);
+        }
+        if ((value.FundamentalParameters.InformationLayers & (1 << 5)) != 0)
+        {
+            WriteIFFPduLayer5Data(ref writer, value.IFFPduLayer5Data!);
+        }
     }
 
     private static void MeasureIdentificationFriendOrFoePduFields(in IdentificationFriendOrFoePdu value, ref int offset)
@@ -7349,12 +7452,30 @@ internal static partial class PduCodec
         offset += 1;
         offset += 1;
         MeasureFundamentalOperationalData(value.FundamentalParameters, ref offset);
-        MeasureIFFPduLayer2Data(value.IFFPduLayer2Data, ref offset);
-        MeasureIFFPduLayer3TransponderFormatData(value.IFFPduLayer3TransponderFormatData, ref offset);
-        MeasureIFFPduLayer3InterrogatorFormatData(value.IFFPduLayer3InterrogatorFormatData, ref offset);
-        MeasureIFFPduLayer4InterrogatorFormatData(value.IFFPduLayer4InterrogatorFormatData, ref offset);
-        MeasureIFFPduLayer4TransponderFormatData(value.IFFPduLayer4TransponderFormatData, ref offset);
-        MeasureIFFPduLayer5Data(value.IFFPduLayer5Data, ref offset);
+        if ((value.FundamentalParameters.InformationLayers & (1 << 2)) != 0)
+        {
+            MeasureIFFPduLayer2Data(value.IFFPduLayer2Data!, ref offset);
+        }
+        if ((value.FundamentalParameters.InformationLayers & (1 << 3)) != 0 && IsIffTransponder(value.SystemId.SystemType))
+        {
+            MeasureIFFPduLayer3TransponderFormatData(value.IFFPduLayer3TransponderFormatData!, ref offset);
+        }
+        if ((value.FundamentalParameters.InformationLayers & (1 << 3)) != 0 && IsIffInterrogator(value.SystemId.SystemType))
+        {
+            MeasureIFFPduLayer3InterrogatorFormatData(value.IFFPduLayer3InterrogatorFormatData!, ref offset);
+        }
+        if ((value.FundamentalParameters.InformationLayers & (1 << 4)) != 0 && IsIffInterrogator(value.SystemId.SystemType))
+        {
+            MeasureIFFPduLayer4InterrogatorFormatData(value.IFFPduLayer4InterrogatorFormatData!, ref offset);
+        }
+        if ((value.FundamentalParameters.InformationLayers & (1 << 4)) != 0 && IsIffTransponder(value.SystemId.SystemType))
+        {
+            MeasureIFFPduLayer4TransponderFormatData(value.IFFPduLayer4TransponderFormatData!, ref offset);
+        }
+        if ((value.FundamentalParameters.InformationLayers & (1 << 5)) != 0)
+        {
+            MeasureIFFPduLayer5Data(value.IFFPduLayer5Data!, ref offset);
+        }
     }
 
     private static void ReadInformationOperationsActionPduFields(ref DisBinaryReader reader, InformationOperationsActionPdu value)
@@ -7506,7 +7627,7 @@ internal static partial class PduCodec
     {
         value.RecordType = (IntercomControlRecordType)reader.ReadUInt16("recordType");
         value.RecordLength = reader.ReadUInt16("recordLength");
-        int RecordSpecificFieldCount = CheckedCount(Math.Max(0, checked((int)value.RecordLength) - 4), reader.Remaining, "recordSpecificField");
+        int RecordSpecificFieldCount = CheckedCount(Math.Max(0, checked((int)value.RecordLength) - 6), reader.Remaining, "recordSpecificField");
         value.RecordSpecificField = new byte[RecordSpecificFieldCount];
         for (int index = 0; index < RecordSpecificFieldCount; index++)
             value.RecordSpecificField[index] = reader.ReadByte("recordSpecificField");
@@ -7520,6 +7641,7 @@ internal static partial class PduCodec
 
     private static void PrepareIntercomCommunicationsParametersFields(IntercomCommunicationsParameters value)
     {
+        value.RecordLength = checked((ushort)(6 + value.RecordSpecificField.Length));
         ArgumentNullException.ThrowIfNull(value.RecordSpecificField);
     }
 
@@ -8141,7 +8263,7 @@ internal static partial class PduCodec
     private static void ReadLinearSegmentParameterFields(ref DisBinaryReader reader, LinearSegmentParameter value)
     {
         value.SegmentNumber = reader.ReadByte("segmentNumber");
-        value.SegmentModification = new ObjectStateModificationLinearObject(reader.ReadUInt16("segmentModification"));
+        value.SegmentModification = new ObjectStateModificationLinearObject(reader.ReadByte("segmentModification"));
         value.GeneralSegmentAppearance = new ObjectStateAppearanceGeneral(reader.ReadUInt16("generalSegmentAppearance"));
         value.SpecificSegmentAppearance = reader.ReadUInt32("specificSegmentAppearance");
         value.SegmentLocation = ReadVector3Double(ref reader);
@@ -8174,8 +8296,8 @@ internal static partial class PduCodec
     private static void WriteLinearSegmentParameterFields(ref DisBinaryWriter writer, LinearSegmentParameter value)
     {
         writer.WriteByte(value.SegmentNumber, "segmentNumber");
-        writer.WriteUInt16(value.SegmentModification.Value, "segmentModification");
-        writer.WriteUInt16(value.GeneralSegmentAppearance.Value, "generalSegmentAppearance");
+        writer.WriteByte((byte)value.SegmentModification.Value, "segmentModification");
+        writer.WriteUInt16((ushort)value.GeneralSegmentAppearance.Value, "generalSegmentAppearance");
         writer.WriteUInt32(value.SpecificSegmentAppearance, "specificSegmentAppearance");
         WriteVector3Double(ref writer, value.SegmentLocation);
         WriteEulerAngles(ref writer, value.SegmentOrientation);
@@ -8194,7 +8316,7 @@ internal static partial class PduCodec
     private static void MeasureLinearSegmentParameterFields(in LinearSegmentParameter value, ref int offset)
     {
         offset += 1;
-        offset += 2;
+        offset += 1;
         offset += 2;
         offset += 4;
         MeasureVector3Double(value.SegmentLocation, ref offset);
@@ -9485,7 +9607,7 @@ internal static partial class PduCodec
         writer.WriteUInt16(value.NumberOfMineTypes, "numberOfMineTypes");
         WriteVector3Double(ref writer, value.MinefieldLocation);
         WriteEulerAngles(ref writer, value.MinefieldOrientation);
-        writer.WriteUInt16(value.Appearance.Value, "appearance");
+        writer.WriteUInt16((ushort)value.Appearance.Value, "appearance");
         WriteProtocolMode(ref writer, value.ProtocolMode);
         foreach (Vector2Float item in value.PerimeterPoints) WriteVector2Float(ref writer, item);
         foreach (EntityType item in value.MineType) WriteEntityType(ref writer, item);
@@ -10326,7 +10448,7 @@ internal static partial class PduCodec
         value.ReferencedObjectId = ReadObjectIdentifier(ref reader);
         value.UpdateNumber = reader.ReadUInt32("updateNumber");
         value.ForceId = (ForceId)reader.ReadByte("forceID");
-        value.Modifications = new ObjectStateModificationPointObject(reader.ReadUInt16("modifications"));
+        value.Modifications = new ObjectStateModificationPointObject(reader.ReadByte("modifications"));
         value.ObjectType = ReadObjectType(ref reader);
         value.ObjectLocation = ReadVector3Double(ref reader);
         value.ObjectOrientation = ReadEulerAngles(ref reader);
@@ -10362,12 +10484,12 @@ internal static partial class PduCodec
         WriteObjectIdentifier(ref writer, value.ReferencedObjectId);
         writer.WriteUInt32(value.UpdateNumber, "updateNumber");
         writer.WriteByte((byte)value.ForceId, "forceID");
-        writer.WriteUInt16(value.Modifications.Value, "modifications");
+        writer.WriteByte((byte)value.Modifications.Value, "modifications");
         WriteObjectType(ref writer, value.ObjectType);
         WriteVector3Double(ref writer, value.ObjectLocation);
         WriteEulerAngles(ref writer, value.ObjectOrientation);
         writer.WriteUInt32(value.SpecificObjectAppearance, "specificObjectAppearance");
-        writer.WriteUInt16(value.GenerObjectAppearance.Value, "generObjectAppearance");
+        writer.WriteUInt16((ushort)value.GenerObjectAppearance.Value, "generObjectAppearance");
         writer.WriteUInt16(value.Padding1, "padding1");
         WriteSimulationAddress(ref writer, value.RequesterId);
         WriteSimulationAddress(ref writer, value.ReceivingId);
@@ -10380,7 +10502,7 @@ internal static partial class PduCodec
         MeasureObjectIdentifier(value.ReferencedObjectId, ref offset);
         offset += 4;
         offset += 1;
-        offset += 2;
+        offset += 1;
         MeasureObjectType(value.ObjectType, ref offset);
         MeasureVector3Double(value.ObjectLocation, ref offset);
         MeasureEulerAngles(value.ObjectOrientation, ref offset);
@@ -10886,10 +11008,7 @@ internal static partial class PduCodec
         value.RecordValues = new byte[RecordValuesCount];
         for (int index = 0; index < RecordValuesCount; index++)
             value.RecordValues[index] = reader.ReadByte("recordValues");
-        int PadTo64Count = CheckedCount(Padding(reader.Offset, 8), reader.Remaining, "padTo64");
-        value.PadTo64 = new byte[PadTo64Count];
-        for (int index = 0; index < PadTo64Count; index++)
-            value.PadTo64[index] = reader.ReadByte("padTo64");
+        reader.Skip(Padding(reader.Offset, 8), "padTo64");
     }
 
     private static void PrepareRecordSpecificationElement(RecordSpecificationElement value)
@@ -10899,8 +11018,11 @@ internal static partial class PduCodec
 
     private static void PrepareRecordSpecificationElementFields(RecordSpecificationElement value)
     {
+        if (value.RecordCount == 0) value.RecordCount = 1;
+        int recordValueBits = checked(value.RecordValues.Length * 8);
+        if (recordValueBits % value.RecordCount != 0) throw new ArgumentException("RecordValues must contain an integral number of equal-length records.", nameof(value));
+        value.RecordLength = checked((ushort)(recordValueBits / value.RecordCount));
         ArgumentNullException.ThrowIfNull(value.RecordValues);
-        ArgumentNullException.ThrowIfNull(value.PadTo64);
     }
 
     private static void WriteRecordSpecificationElement(ref DisBinaryWriter writer, RecordSpecificationElement value)
@@ -10916,7 +11038,7 @@ internal static partial class PduCodec
         writer.WriteUInt16(value.RecordLength, "recordLength");
         writer.WriteUInt16(value.RecordCount, "recordCount");
         foreach (byte item in value.RecordValues) writer.WriteByte(item, "recordValues");
-        foreach (byte item in value.PadTo64) writer.WriteByte(item, "padTo64");
+        writer.WriteZeros(Padding(writer.Offset, 8), "padTo64");
     }
 
     private static void MeasureRecordSpecificationElement(in RecordSpecificationElement value, ref int offset)
@@ -10932,7 +11054,7 @@ internal static partial class PduCodec
         offset += 2;
         offset += 2;
         offset += checked(value.RecordValues.Length * 1);
-        offset += checked(value.PadTo64.Length * 1);
+        offset += Padding(offset, 8);
     }
 
     private static Relationship ReadRelationship(ref DisBinaryReader reader)
@@ -11062,7 +11184,7 @@ internal static partial class PduCodec
     {
         value.ReceivingEntityId = ReadEntityId(ref reader);
         value.RepairingEntityId = ReadEntityId(ref reader);
-        value.RepairResult = (RepairResponseRepairResult)reader.ReadUInt16("repairResult");
+        value.RepairResult = (RepairResponseRepairResult)reader.ReadByte("repairResult");
         value.Padding1 = reader.ReadByte("padding1");
         value.Padding2 = reader.ReadUInt16("padding2");
     }
@@ -11079,7 +11201,7 @@ internal static partial class PduCodec
     {
         WriteEntityId(ref writer, value.ReceivingEntityId);
         WriteEntityId(ref writer, value.RepairingEntityId);
-        writer.WriteUInt16((ushort)value.RepairResult, "repairResult");
+        writer.WriteByte((byte)value.RepairResult, "repairResult");
         writer.WriteByte(value.Padding1, "padding1");
         writer.WriteUInt16(value.Padding2, "padding2");
     }
@@ -11088,7 +11210,7 @@ internal static partial class PduCodec
     {
         MeasureEntityId(value.ReceivingEntityId, ref offset);
         MeasureEntityId(value.RepairingEntityId, ref offset);
-        offset += 2;
+        offset += 1;
         offset += 1;
         offset += 2;
     }
@@ -12086,7 +12208,7 @@ internal static partial class PduCodec
     {
         WriteClockTime(ref writer, value.RealWorldTime);
         writer.WriteByte((byte)value.Reason, "reason");
-        writer.WriteByte(value.FrozenBehavior.Value, "frozenBehavior");
+        writer.WriteByte((byte)value.FrozenBehavior.Value, "frozenBehavior");
         writer.WriteUInt16(value.Padding1, "padding1");
         writer.WriteUInt32(value.RequestId, "requestID");
     }
@@ -12120,7 +12242,7 @@ internal static partial class PduCodec
     {
         WriteClockTime(ref writer, value.RealWorldTime);
         writer.WriteByte((byte)value.Reason, "reason");
-        writer.WriteByte(value.FrozenBehavior.Value, "frozenBehavior");
+        writer.WriteByte((byte)value.FrozenBehavior.Value, "frozenBehavior");
         writer.WriteByte((byte)value.RequiredReliabilityService, "requiredReliabilityService");
         writer.WriteByte(value.Pad1, "pad1");
         writer.WriteUInt32(value.RequestId, "requestID");
@@ -13179,7 +13301,7 @@ internal static partial class PduCodec
     {
         value.RecordType = (VariableRecordType)reader.ReadUInt32("recordType");
         value.RecordLength = reader.ReadUInt16("recordLength");
-        int RecordSpecificFieldsCount = CheckedCount(Math.Max(0, checked((int)value.RecordLength) - 4), reader.Remaining, "recordSpecificFields");
+        int RecordSpecificFieldsCount = CheckedCount(Math.Max(0, checked((int)value.RecordLength) - 6), reader.Remaining, "recordSpecificFields");
         value.RecordSpecificFields = new byte[RecordSpecificFieldsCount];
         for (int index = 0; index < RecordSpecificFieldsCount; index++)
             value.RecordSpecificFields[index] = reader.ReadByte("recordSpecificFields");
@@ -13193,6 +13315,7 @@ internal static partial class PduCodec
 
     private static void PrepareVariableTransmitterParametersFields(VariableTransmitterParameters value)
     {
+        value.RecordLength = checked((ushort)(6 + value.RecordSpecificFields.Length));
         ArgumentNullException.ThrowIfNull(value.RecordSpecificFields);
     }
 

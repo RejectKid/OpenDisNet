@@ -13,7 +13,7 @@ internal static class PduRegistry
     public static int GetLength(IDisPdu pdu) => pdu switch
     {
         Pdu typed => PduCodec.GetEncodedLength(typed),
-        UnknownPdu unknown => DisHeader.Size + unknown.Body.Length,
+        UnknownPdu unknown => unknown.Header.EncodedSize + unknown.Body.Length,
         _ => throw new NotSupportedException($"No DIS writer is registered for {pdu.GetType().FullName}."),
     };
 

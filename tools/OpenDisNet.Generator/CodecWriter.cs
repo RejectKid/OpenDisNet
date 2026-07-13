@@ -35,7 +35,7 @@ internal static class CodecWriter
         text.AppendLine("    {");
         text.AppendLine("        Pdu value = PduFactory.Create(header.PduType, header.ExerciseId);");
         text.AppendLine("        ApplyHeader(value, header);");
-        text.AppendLine("        var reader = new DisBinaryReader(body, DisHeader.Size);");
+        text.AppendLine("        var reader = new DisBinaryReader(body, header.EncodedSize);");
         text.AppendLine("        switch ((byte)header.PduType)");
         text.AppendLine("        {");
         foreach (PduDefinition pdu in schema.Pdus)
@@ -56,7 +56,7 @@ internal static class CodecWriter
         text.AppendLine("    {");
         text.AppendLine("        ArgumentNullException.ThrowIfNull(value);");
         text.AppendLine("        Prepare(value);");
-        text.AppendLine("        int offset = DisHeader.Size;");
+        text.AppendLine("        int offset = value.Header.EncodedSize;");
         text.AppendLine("        MeasureBody(value, ref offset);");
         text.AppendLine("        return offset;");
         text.AppendLine("    }");
@@ -103,6 +103,9 @@ internal static class CodecWriter
         text.AppendLine("        }");
         text.AppendLine("    }");
         text.AppendLine();
+        text.AppendLine("    private static bool IsIffTransponder(IffSystemType value) => (ushort)value is 1 or 3 or 5 or 9 or 10 or 11;");
+        text.AppendLine("    private static bool IsIffInterrogator(IffSystemType value) => (ushort)value is 2 or 4 or 6 or 7 or 8;");
+        text.AppendLine();
     }
 
     private static void WritePduSwitchMethod(
@@ -137,6 +140,18 @@ internal static class CodecWriter
         {
             text.AppendLine($"    private static {definition.Name} Read{definition.Name}(ref DisBinaryReader reader)");
             text.AppendLine("    {");
+            if (definition.Name == "IORecord")
+            {
+                text.AppendLine("        return (VariableRecordType)reader.PeekUInt32(\"recordType\") switch");
+                text.AppendLine("        {");
+                text.AppendLine("            VariableRecordType.IoEffect => ReadIOEffectRecord(ref reader),");
+                text.AppendLine("            VariableRecordType.IoCommunicationsNode => ReadIOCommsNodeRecord(ref reader),");
+                text.AppendLine("            var recordType => throw new FormatException($\"Unsupported Information Operations record type {(uint)recordType}.\"),");
+                text.AppendLine("        };");
+                text.AppendLine("    }");
+                text.AppendLine();
+                goto ReadFields;
+            }
             text.AppendLine($"        var value = new {definition.Name}();");
             if (definition.BaseName != "root")
                 text.AppendLine($"        Read{definition.BaseName}Fields(ref reader, value);");
@@ -146,6 +161,7 @@ internal static class CodecWriter
             text.AppendLine();
         }
 
+    ReadFields:
         text.AppendLine($"    private static void Read{definition.Name}Fields(ref DisBinaryReader reader, {definition.Name} value)");
         text.AppendLine("    {");
         foreach (FieldDefinition field in definition.Fields)
@@ -157,9 +173,21 @@ internal static class CodecWriter
         {
             text.AppendLine($"    private static void Prepare{definition.Name}({definition.Name} value)");
             text.AppendLine("    {");
-            if (definition.BaseName != "root")
-                text.AppendLine($"        Prepare{definition.BaseName}Fields(value);");
-            text.AppendLine($"        Prepare{definition.Name}Fields(value);");
+            if (definition.Name == "IORecord")
+            {
+                text.AppendLine("        switch (value)");
+                text.AppendLine("        {");
+                text.AppendLine("            case IOEffectRecord effect: PrepareIOEffectRecord(effect); break;");
+                text.AppendLine("            case IOCommsNodeRecord node: PrepareIOCommsNodeRecord(node); break;");
+                text.AppendLine("            default: throw new ArgumentException($\"Unsupported Information Operations record model {value.GetType().Name}.\", nameof(value));");
+                text.AppendLine("        }");
+            }
+            else
+            {
+                if (definition.BaseName != "root")
+                    text.AppendLine($"        Prepare{definition.BaseName}Fields(value);");
+                text.AppendLine($"        Prepare{definition.Name}Fields(value);");
+            }
             text.AppendLine("    }");
             text.AppendLine();
         }
@@ -173,9 +201,39 @@ internal static class CodecWriter
             text.AppendLine("        if ((value.DataBitLength + 7) / 8 != value.Data.Length)");
             text.AppendLine("            throw new ArgumentException(\"DataBitLength must match Data, allowing only unused bits in the final octet.\", nameof(value));");
         }
+        if (definition.Name == "Environment")
+            text.AppendLine("        value.Length = checked((ushort)((8 + value.Geometry.Length) * 8));");
+        if (definition.Name is "VariableTransmitterParameters" or "IFFData")
+            text.AppendLine("        value.RecordLength = checked((ushort)(6 + value.RecordSpecificFields.Length));");
+        if (definition.Name == "IntercomCommunicationsParameters")
+            text.AppendLine("        value.RecordLength = checked((ushort)(6 + value.RecordSpecificField.Length));");
+        if (definition.Name == "RecordSpecificationElement")
+        {
+            text.AppendLine("        if (value.RecordCount == 0) value.RecordCount = 1;");
+            text.AppendLine("        int recordValueBits = checked(value.RecordValues.Length * 8);");
+            text.AppendLine("        if (recordValueBits % value.RecordCount != 0) throw new ArgumentException(\"RecordValues must contain an integral number of equal-length records.\", nameof(value));");
+            text.AppendLine("        value.RecordLength = checked((ushort)(recordValueBits / value.RecordCount));");
+        }
+        if (definition.Name == "IdentificationFriendOrFoePdu")
+        {
+            text.AppendLine("        byte layers = (byte)(value.FundamentalParameters.InformationLayers & 0b1100_0011);");
+            text.AppendLine("        if (value.IFFPduLayer2Data is not null) layers |= 1 << 2;");
+            text.AppendLine("        if (value.IFFPduLayer3TransponderFormatData is not null || value.IFFPduLayer3InterrogatorFormatData is not null) layers |= 1 << 3;");
+            text.AppendLine("        if (value.IFFPduLayer4TransponderFormatData is not null || value.IFFPduLayer4InterrogatorFormatData is not null) layers |= 1 << 4;");
+            text.AppendLine("        if (value.IFFPduLayer5Data is not null) layers |= 1 << 5;");
+            text.AppendLine("        if (value.IFFPduLayer3TransponderFormatData is not null && value.IFFPduLayer3InterrogatorFormatData is not null) throw new ArgumentException(\"IFF layer 3 cannot contain both transponder and interrogator formats.\", nameof(value));");
+            text.AppendLine("        if (value.IFFPduLayer4TransponderFormatData is not null && value.IFFPduLayer4InterrogatorFormatData is not null) throw new ArgumentException(\"IFF layer 4 cannot contain both transponder and interrogator formats.\", nameof(value));");
+            text.AppendLine("        value.FundamentalParameters.InformationLayers = layers;");
+        }
         var countOwners = new HashSet<string>(StringComparer.Ordinal);
         foreach (FieldDefinition field in definition.Fields)
             WritePrepareField(text, field, definition, countOwners);
+        if (definition.Name.StartsWith("IFFPduLayer", StringComparison.Ordinal))
+        {
+            text.AppendLine("        int layerLength = 0;");
+            text.AppendLine($"        Measure{definition.Name}Fields(value, ref layerLength);");
+            text.AppendLine("        value.LayerHeader.Length = checked((ushort)layerLength);");
+        }
         text.AppendLine("    }");
         text.AppendLine();
 
@@ -183,9 +241,21 @@ internal static class CodecWriter
         {
             text.AppendLine($"    private static void Write{definition.Name}(ref DisBinaryWriter writer, {definition.Name} value)");
             text.AppendLine("    {");
-            if (definition.BaseName != "root")
-                text.AppendLine($"        Write{definition.BaseName}Fields(ref writer, value);");
-            text.AppendLine($"        Write{definition.Name}Fields(ref writer, value);");
+            if (definition.Name == "IORecord")
+            {
+                text.AppendLine("        switch (value)");
+                text.AppendLine("        {");
+                text.AppendLine("            case IOEffectRecord effect: WriteIOEffectRecord(ref writer, effect); break;");
+                text.AppendLine("            case IOCommsNodeRecord node: WriteIOCommsNodeRecord(ref writer, node); break;");
+                text.AppendLine("            default: throw new ArgumentException($\"Unsupported Information Operations record model {value.GetType().Name}.\", nameof(value));");
+                text.AppendLine("        }");
+            }
+            else
+            {
+                if (definition.BaseName != "root")
+                    text.AppendLine($"        Write{definition.BaseName}Fields(ref writer, value);");
+                text.AppendLine($"        Write{definition.Name}Fields(ref writer, value);");
+            }
             text.AppendLine("    }");
             text.AppendLine();
         }
@@ -201,9 +271,21 @@ internal static class CodecWriter
         {
             text.AppendLine($"    private static void Measure{definition.Name}(in {definition.Name} value, ref int offset)");
             text.AppendLine("    {");
-            if (definition.BaseName != "root")
-                text.AppendLine($"        Measure{definition.BaseName}Fields(value, ref offset);");
-            text.AppendLine($"        Measure{definition.Name}Fields(value, ref offset);");
+            if (definition.Name == "IORecord")
+            {
+                text.AppendLine("        switch (value)");
+                text.AppendLine("        {");
+                text.AppendLine("            case IOEffectRecord effect: MeasureIOEffectRecord(effect, ref offset); break;");
+                text.AppendLine("            case IOCommsNodeRecord node: MeasureIOCommsNodeRecord(node, ref offset); break;");
+                text.AppendLine("            default: throw new ArgumentException($\"Unsupported Information Operations record model {value.GetType().Name}.\", nameof(value));");
+                text.AppendLine("        }");
+            }
+            else
+            {
+                if (definition.BaseName != "root")
+                    text.AppendLine($"        Measure{definition.BaseName}Fields(value, ref offset);");
+                text.AppendLine($"        Measure{definition.Name}Fields(value, ref offset);");
+            }
             text.AppendLine("    }");
             text.AppendLine();
         }
@@ -290,9 +372,9 @@ internal static class CodecWriter
     private static void WriteReadPrimitiveList(StringBuilder text, FieldDefinition field, string property, string owner)
     {
         string count = field.IsDynamicLength
-            ? "Math.Max(0, checked((int)value.RecordLength) - 4)"
+            ? "Math.Max(0, checked((int)value.RecordLength) - 6)"
             : owner == "Environment" && field.Name == "geometry"
-                ? "Math.Max(0, ((checked((int)value.Length) + 7) / 8) - 6)"
+                ? "Math.Max(0, ((checked((int)value.Length) + 7) / 8) - 8)"
                 : field.FixedLength == 0 && field.CountFieldName is null
                     ? VariableCountExpression(owner, field.Name)
                     : CountExpression(field, "value");
@@ -310,8 +392,11 @@ internal static class CodecWriter
         string? condition = ConditionalFieldExpression(owner, field.Name);
         if (condition is not null)
         {
-            string collectionCount = field.Kind == FieldKind.PrimitiveList ? $"value.{property}.Length" : $"value.{property}.Count";
-            text.AppendLine($"        if ({collectionCount} != 0) value.DataFilter.BitFlags |= 1u << {MinefieldDataBit(field.Name)};");
+            if (owner == "MinefieldDataPdu")
+            {
+                string collectionCount = field.Kind == FieldKind.PrimitiveList ? $"value.{property}.Length" : $"value.{property}.Count";
+                text.AppendLine($"        if ({collectionCount} != 0) value.DataFilter.BitFlags |= 1u << {MinefieldDataBit(field.Name)};");
+            }
             text.AppendLine($"        if ({condition})");
             text.AppendLine("        {");
         }
@@ -319,7 +404,7 @@ internal static class CodecWriter
         if (field.Kind == FieldKind.ClassReference)
         {
             text.AppendLine($"        ArgumentNullException.ThrowIfNull(value.{property});");
-            text.AppendLine($"        Prepare{field.TypeName}(value.{property});");
+            text.AppendLine($"        Prepare{field.TypeName}({PropertyAccess(owner, field.Name, property)});");
         }
         else if (field.Kind is FieldKind.ObjectList or FieldKind.PrimitiveList)
         {
@@ -371,13 +456,13 @@ internal static class CodecWriter
                 text.AppendLine($"        writer.{WriteMethod(field.TypeName)}(value.{property}, \"{field.Name}\");");
                 break;
             case FieldKind.ClassReference:
-                text.AppendLine($"        Write{field.TypeName}(ref writer, value.{property});");
+                text.AppendLine($"        Write{field.TypeName}(ref writer, {PropertyAccess(owner, field.Name, property)});");
                 break;
             case FieldKind.Enumeration:
                 text.AppendLine($"        writer.{WriteBits(field.BitSize)}(({UnsignedBits(field.BitSize)})value.{property}, \"{field.Name}\");");
                 break;
             case FieldKind.BitField:
-                text.AppendLine($"        writer.{WriteBits(field.BitSize)}(value.{property}.Value, \"{field.Name}\");");
+                text.AppendLine($"        writer.{WriteBits(field.BitSize)}(({UnsignedBits(field.BitSize)})value.{property}.Value, \"{field.Name}\");");
                 break;
             case FieldKind.ObjectList:
                 if (field.BitSize is null)
@@ -420,7 +505,7 @@ internal static class CodecWriter
                 text.AppendLine($"        offset += {PrimitiveSize(field.TypeName)};");
                 break;
             case FieldKind.ClassReference:
-                text.AppendLine($"        Measure{field.TypeName}(value.{property}, ref offset);");
+                text.AppendLine($"        Measure{field.TypeName}({PropertyAccess(owner, field.Name, property)}, ref offset);");
                 break;
             case FieldKind.Enumeration:
             case FieldKind.BitField:
@@ -501,10 +586,17 @@ internal static class CodecWriter
     private static bool IsByteLengthObjectList(string owner, string field) =>
         (owner, field) is ("IntercomControlPdu", "intercomParameters");
 
-    private static string? ConditionalFieldExpression(string owner, string field) =>
-        owner == "MinefieldDataPdu" && MinefieldDataBit(field) >= 0
-            ? $"(value.DataFilter.BitFlags & (1u << {MinefieldDataBit(field)})) != 0"
-            : null;
+    private static string? ConditionalFieldExpression(string owner, string field) => (owner, field) switch
+    {
+        ("MinefieldDataPdu", _) when MinefieldDataBit(field) >= 0 => $"(value.DataFilter.BitFlags & (1u << {MinefieldDataBit(field)})) != 0",
+        ("IdentificationFriendOrFoePdu", "iFFPduLayer2Data") => "(value.FundamentalParameters.InformationLayers & (1 << 2)) != 0",
+        ("IdentificationFriendOrFoePdu", "iFFPduLayer3TransponderFormatData") => "(value.FundamentalParameters.InformationLayers & (1 << 3)) != 0 && IsIffTransponder(value.SystemId.SystemType)",
+        ("IdentificationFriendOrFoePdu", "iFFPduLayer3InterrogatorFormatData") => "(value.FundamentalParameters.InformationLayers & (1 << 3)) != 0 && IsIffInterrogator(value.SystemId.SystemType)",
+        ("IdentificationFriendOrFoePdu", "iFFPduLayer4InterrogatorFormatData") => "(value.FundamentalParameters.InformationLayers & (1 << 4)) != 0 && IsIffInterrogator(value.SystemId.SystemType)",
+        ("IdentificationFriendOrFoePdu", "iFFPduLayer4TransponderFormatData") => "(value.FundamentalParameters.InformationLayers & (1 << 4)) != 0 && IsIffTransponder(value.SystemId.SystemType)",
+        ("IdentificationFriendOrFoePdu", "iFFPduLayer5Data") => "(value.FundamentalParameters.InformationLayers & (1 << 5)) != 0",
+        _ => null,
+    };
 
     private static int MinefieldDataBit(string field) => field switch
     {
@@ -522,11 +614,16 @@ internal static class CodecWriter
         _ => -1,
     };
 
+    private static string PropertyAccess(string owner, string field, string property) =>
+        owner == "IdentificationFriendOrFoePdu" && field.StartsWith("iFFPduLayer", StringComparison.Ordinal)
+            ? $"value.{property}!"
+            : $"value.{property}";
+
     private static string VariableCountExpression(string owner, string field) => (owner, field) switch
     {
         ("GridAxisDescriptorVariable", "xiValues") => "checked((int)value.NumberOfPointsOnXiAxis)",
-        ("IntercomCommunicationsParameters", "recordSpecificField") => "Math.Max(0, checked((int)value.RecordLength) - 4)",
-        ("VariableTransmitterParameters", "recordSpecificFields") => "Math.Max(0, checked((int)value.RecordLength) - 4)",
+        ("IntercomCommunicationsParameters", "recordSpecificField") => "Math.Max(0, checked((int)value.RecordLength) - 6)",
+        ("VariableTransmitterParameters", "recordSpecificFields") => "Math.Max(0, checked((int)value.RecordLength) - 6)",
         ("RecordSpecificationElement", "recordValues") => "(checked((int)value.RecordLength) * checked((int)value.RecordCount) + 7) / 8",
         ("RecordSpecificationElement", "padTo64") => "Padding(reader.Offset, 8)",
         ("SignalPdu", "data") => "(checked((int)value.DataBitLength) + 7) / 8",

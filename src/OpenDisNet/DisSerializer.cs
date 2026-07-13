@@ -51,24 +51,31 @@ public static class DisSerializer
         pdu = null;
         error = default;
 
-        if (datagram.Length < DisHeader.Size)
-            return Fail(DisParseErrorCode.TruncatedHeader, "A DIS header requires 12 bytes.", datagram.Length, out error);
+        if (datagram.Length < 4)
+            return Fail(DisParseErrorCode.TruncatedHeader, "A DIS header requires at least 4 bytes to identify its layout.", datagram.Length, out error);
+
+        int requiredHeaderSize = datagram[3] == (byte)ProtocolFamily.LiveEntity
+            ? DisHeader.MinimumSize
+            : DisHeader.Size;
+        if (datagram.Length < requiredHeaderSize)
+            return Fail(DisParseErrorCode.TruncatedHeader, $"This DIS header requires {requiredHeaderSize} bytes.", datagram.Length, out error);
 
         try
         {
             var reader = new DisBinaryReader(datagram);
             DisHeader header = DisHeaderCodec.Read(ref reader);
+            int headerSize = header.EncodedSize;
 
             if (options.RequireVersion7 && header.ProtocolVersion != DisProtocolVersion.Ieee1278_1_2012)
                 return Fail(DisParseErrorCode.UnsupportedProtocolVersion, $"Expected DIS protocol version 7; received {(byte)header.ProtocolVersion}.", 0, out error);
-            if (header.Length < DisHeader.Size || header.Length > options.MaximumPduLength)
+            if (header.Length < headerSize || header.Length > options.MaximumPduLength)
                 return Fail(DisParseErrorCode.InvalidLength, $"Invalid PDU length {header.Length}.", 8, out error);
             if (header.Length > datagram.Length)
                 return Fail(DisParseErrorCode.TruncatedPdu, $"The header declares {header.Length} bytes; only {datagram.Length} were received.", datagram.Length, out error);
             if (options.RequireExactDatagramLength && header.Length != datagram.Length)
                 return Fail(DisParseErrorCode.TrailingData, $"The datagram contains {datagram.Length - header.Length} trailing bytes.", header.Length, out error);
 
-            pdu = PduRegistry.Parse(header, datagram.Slice(DisHeader.Size, header.Length - DisHeader.Size));
+            pdu = PduRegistry.Parse(header, datagram.Slice(headerSize, header.Length - headerSize));
             return true;
         }
         catch (DisParseException exception)
@@ -77,11 +84,11 @@ public static class DisSerializer
         }
         catch (FormatException exception)
         {
-            return Fail(DisParseErrorCode.InvalidField, exception.Message, DisHeader.Size, out error);
+            return Fail(DisParseErrorCode.InvalidField, exception.Message, DisHeader.MinimumSize, out error);
         }
         catch (OverflowException exception)
         {
-            return Fail(DisParseErrorCode.InvalidField, exception.Message, DisHeader.Size, out error);
+            return Fail(DisParseErrorCode.InvalidField, exception.Message, DisHeader.MinimumSize, out error);
         }
     }
 

@@ -5,6 +5,14 @@ Versioning after 1.0 and uses prerelease versions while conformance is incomplet
 
 ## Unreleased
 
+- Added deterministic populated conformance cases for all 72 DIS v7 PDU types,
+  independent byte vectors, and truncation checks at every byte boundary across
+  all 12 protocol families planned for versions 0.3 through 0.8.
+- Corrected the 10-byte Live Entity header layout, offset-aware 64-bit padding,
+  per-field enumeration/bitfield widths, and synchronization of variable record
+  lengths and counts.
+- Added conditional IFF information layers and polymorphic Information
+  Operations effect/communications records to the native C# codec.
 - Added strongly typed SISO-REF-010-2025 v36 enumerations for every DIS v7
   schema reference, with .NET-style public names.
 - Added structured bitfield value types with validated accessors, immutable

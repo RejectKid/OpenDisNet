@@ -23,4 +23,8 @@
     <ProjectReference Include="..\OpenDisNet.Reference\OpenDisNet.Reference.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Include="Conformance\Vectors\*.json" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>
