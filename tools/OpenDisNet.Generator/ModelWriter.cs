@@ -30,7 +30,8 @@ internal static class ModelWriter
                     propertyName += "Value";
                 string type = TypeName(field);
                 string initializer = Initializer(field);
-                text.AppendLine($"    public {type} {propertyName} {{ get; set; }}{initializer}");
+                string access = field.IsHidden ? "internal" : "public";
+                text.AppendLine($"    {access} {type} {propertyName} {{ get; set; }}{initializer}");
                 text.AppendLine();
             }
 

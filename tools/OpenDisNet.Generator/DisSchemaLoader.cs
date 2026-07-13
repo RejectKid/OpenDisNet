@@ -96,6 +96,7 @@ internal static class DisSchemaLoader
                 OptionalInt(shape, "length"),
                 null,
                 string.Equals((string?)shape.Attribute("isDynamicListLengthField"), "true", StringComparison.OrdinalIgnoreCase),
+                Hidden(attribute),
                 Comment(attribute)),
             "padtoboundary" => Field(name, FieldKind.PaddingBoundary, Required(shape, "length")),
             "staticivar" => Field(name, FieldKind.StaticIvar, (string?)shape.Attribute("type") ?? string.Empty),
@@ -103,14 +104,14 @@ internal static class DisSchemaLoader
         };
 
         FieldDefinition Field(string fieldName, FieldKind kind, string typeName) =>
-            new(fieldName, kind, typeName, null, null, null, false, Comment(attribute));
+            new(fieldName, kind, typeName, null, null, null, false, Hidden(attribute), Comment(attribute));
 
         FieldDefinition SisoField(FieldKind kind)
         {
             string typeName = Required(shape, "type");
             if (!sisoTypes.TryGetValue(typeName, out SisoWireType? wireType))
                 throw new InvalidDataException($"Missing SISO wire metadata for '{typeName}'.");
-            return new(name, kind, typeName, null, null, wireType.Bits, false, Comment(attribute));
+            return new(name, kind, typeName, null, null, wireType.Bits, false, Hidden(attribute), Comment(attribute));
         }
     }
 
@@ -125,7 +126,7 @@ internal static class DisSchemaLoader
                 throw new InvalidDataException($"Missing SISO wire metadata for list item '{type}'.");
             bitSize = wireType.Bits;
         }
-        return new(name, FieldKind.ObjectList, type, (string?)shape.Attribute("countFieldName"), OptionalInt(shape, "length"), bitSize, false, Comment(shape.Parent!));
+        return new(name, FieldKind.ObjectList, type, (string?)shape.Attribute("countFieldName"), OptionalInt(shape, "length"), bitSize, false, Hidden(shape.Parent!), Comment(shape.Parent!));
     }
 
     private static void Validate(ImmutableArray<ClassDefinition>.Builder classes, ImmutableArray<PduDefinition>.Builder pdus)
@@ -159,6 +160,9 @@ internal static class DisSchemaLoader
         int.TryParse((string?)element.Attribute(attribute), CultureInfo.InvariantCulture, out int value) ? value : null;
 
     private static string? Comment(XElement element) => (string?)element.Attribute("comment");
+
+    private static bool Hidden(XElement element) =>
+        string.Equals((string?)element.Attribute("hidden"), "true", StringComparison.OrdinalIgnoreCase);
 
     private static IReadOnlyDictionary<string, SisoWireType> LoadSisoWireTypes()
     {

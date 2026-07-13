@@ -43,6 +43,18 @@ public sealed class GeneratedCodecSmokeTests
     }
 
     [Fact]
+    public void SerializerFacadeHidesCodecImplementation()
+    {
+        Pdu original = Dis7PduFactory.Create(PduType.Acknowledge, exerciseId: 3);
+
+        byte[] encoded = DisSerializer.Serialize(original);
+        global::OpenDisNet.Pdus.IDisPdu decoded = DisSerializer.Deserialize(encoded);
+
+        Assert.Equal(PduType.Acknowledge, decoded.Header.PduType);
+        Assert.Equal(encoded, DisSerializer.Serialize(decoded));
+    }
+
+    [Fact]
     public void GeneratedCodecRejectsDeclaredListThatExceedsBody()
     {
         var original = (SignalPdu)Dis7PduFactory.Create(PduType.Signal);
@@ -55,5 +67,65 @@ public sealed class GeneratedCodecSmokeTests
 
         Assert.False(DisPduReader.TryParse(truncated, out _, out DisParseError error));
         Assert.Equal(DisParseErrorCode.InvalidField, error.Code);
+    }
+
+    [Fact]
+    public void TransmitterUsesOctetLengthsAndSynchronizesThemAutomatically()
+    {
+        var original = (TransmitterPdu)Dis7PduFactory.Create(PduType.Transmitter);
+        original.ModulationParameters = [1, 2, 3, 4, 0, 0, 0, 0];
+        original.AntennaPatternParameters = Enumerable.Range(0, 40).Select(x => (byte)x).ToArray();
+
+        byte[] encoded = Dis7PduCodec.Write(original);
+        var decoded = Assert.IsType<TransmitterPdu>(
+            Dis7PduCodec.Read(original.Header, encoded.AsSpan(DisHeader.Size)));
+
+        Assert.Equal(original.ModulationParameters, decoded.ModulationParameters);
+        Assert.Equal(original.AntennaPatternParameters, decoded.AntennaPatternParameters);
+        Assert.Equal(encoded, Dis7PduCodec.Write(decoded));
+    }
+
+    [Fact]
+    public void IntercomParameterByteLengthFramesMultipleRecords()
+    {
+        var original = (IntercomControlPdu)Dis7PduFactory.Create(PduType.IntercomControl);
+        original.IntercomParameters =
+        [
+            new() { RecordType = 1, RecordLength = 8, RecordSpecificField = [1, 2, 3, 4] },
+            new() { RecordType = 2, RecordLength = 8, RecordSpecificField = [5, 6, 7, 8] },
+        ];
+
+        byte[] encoded = Dis7PduCodec.Write(original);
+        var decoded = Assert.IsType<IntercomControlPdu>(
+            Dis7PduCodec.Read(original.Header, encoded.AsSpan(DisHeader.Size)));
+
+        Assert.Equal(2, decoded.IntercomParameters.Count);
+        Assert.Equal([1, 2, 3, 4], decoded.IntercomParameters[0].RecordSpecificField);
+        Assert.Equal([5, 6, 7, 8], decoded.IntercomParameters[1].RecordSpecificField);
+        Assert.Equal(encoded, Dis7PduCodec.Write(decoded));
+    }
+
+    [Fact]
+    public void MinefieldDataFilterControlsOptionalPerMineFields()
+    {
+        var original = (MinefieldDataPdu)Dis7PduFactory.Create(PduType.MinefieldData);
+        original.SensorTypes = [new() { SensorType = 12 }];
+        original.MineLocation =
+        [
+            new() { X = 1, Y = 2, Z = 3 },
+            new() { X = 4, Y = 5, Z = 6 },
+        ];
+        original.GroundBurialDepthOffset = [0.25f, 0.5f];
+        original.MineEntityNumber = [101, 102];
+
+        byte[] encoded = Dis7PduCodec.Write(original);
+        var decoded = Assert.IsType<MinefieldDataPdu>(
+            Dis7PduCodec.Read(original.Header, encoded.AsSpan(DisHeader.Size)));
+
+        Assert.Equal(1u, original.DataFilter.BitFlags);
+        Assert.Equal(original.GroundBurialDepthOffset, decoded.GroundBurialDepthOffset);
+        Assert.Empty(decoded.WaterBurialDepthOffset);
+        Assert.Equal(original.MineEntityNumber, decoded.MineEntityNumber);
+        Assert.Equal(encoded, Dis7PduCodec.Write(decoded));
     }
 }

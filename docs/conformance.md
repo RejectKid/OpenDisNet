@@ -10,9 +10,14 @@ input tests, and round-trip tests.
 - [x] Big-endian integer and IEEE-754 primitives
 - [x] Defensive length and version validation
 - [x] Unknown/future PDU preservation
-- [x] Generated public low-level models for all 253 DIS v7 schema classes
+- [x] Public protocol models for all 253 reviewed DIS v7 schema classes
 - [x] Machine-verified catalog of all 72 standardized PDU model types
-- [ ] Typed DIS v7 PDU suite (3 of 72 standardized PDU types implemented)
+- [x] Binary dispatch, parsing, and serialization for PDU types 1-72
+- [x] Default construction and byte-identical round trip for PDU types 1-72
+- [x] Automatic synchronization of list, octet, and bit-length fields
+- [x] Populated Signal, Transmitter, Intercom Control, and Minefield Data cases
+- [ ] Independent populated vectors for every variable-layout PDU
+- [ ] Truncation-at-every-boundary and mutation coverage for every PDU family
 - [ ] SISO-REF-010-2025 v36 generated enumerations
 
 ## PDU families
@@ -22,9 +27,9 @@ input tests, and round-trip tests.
 - [ ] Logistics
 - [ ] Simulation Management
 - [ ] Distributed Emission Regeneration
-- [ ] Radio Communications
+- [ ] Radio Communications (populated Signal, Transmitter, and Intercom Control exercised)
 - [ ] Entity Management
-- [ ] Minefield
+- [ ] Minefield (conditional Minefield Data fields exercised)
 - [ ] Synthetic Environment
 - [ ] Simulation Management with Reliability
 - [ ] Live Entity

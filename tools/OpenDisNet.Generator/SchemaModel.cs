@@ -29,6 +29,7 @@ internal sealed record FieldDefinition(
     int? FixedLength,
     int? BitSize,
     bool IsDynamicLength,
+    bool IsHidden,
     string? Comment);
 
 internal enum FieldKind

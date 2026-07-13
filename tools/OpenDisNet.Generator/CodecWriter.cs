@@ -167,7 +167,7 @@ internal static class CodecWriter
         text.AppendLine("    {");
         var countOwners = new HashSet<string>(StringComparer.Ordinal);
         foreach (FieldDefinition field in definition.Fields)
-            WritePrepareField(text, field, definition.Name, countOwners);
+            WritePrepareField(text, field, definition, countOwners);
         text.AppendLine("    }");
         text.AppendLine();
 
@@ -211,6 +211,12 @@ internal static class CodecWriter
     private static void WriteReadField(StringBuilder text, FieldDefinition field, string owner)
     {
         string property = PropertyName(field, owner);
+        string? condition = ConditionalFieldExpression(owner, field.Name);
+        if (condition is not null)
+        {
+            text.AppendLine($"        if ({condition})");
+            text.AppendLine("        {");
+        }
         switch (field.Kind)
         {
             case FieldKind.Primitive:
@@ -224,7 +230,7 @@ internal static class CodecWriter
                 text.AppendLine($"        value.{property} = reader.{ReadBits(field.BitSize)}(\"{field.Name}\");");
                 break;
             case FieldKind.ObjectList:
-                WriteReadList(text, field, property);
+                WriteReadList(text, field, property, owner);
                 break;
             case FieldKind.PrimitiveList:
                 WriteReadPrimitiveList(text, field, property, owner);
@@ -235,13 +241,28 @@ internal static class CodecWriter
             case FieldKind.StaticIvar:
                 break;
         }
+        if (condition is not null)
+            text.AppendLine("        }");
     }
 
-    private static void WriteReadList(StringBuilder text, FieldDefinition field, string property)
+    private static void WriteReadList(StringBuilder text, FieldDefinition field, string property, string owner)
     {
         string count = CountExpression(field, "value");
         string itemType = field.BitSize is null ? field.TypeName : UnsignedBits(field.BitSize);
         text.AppendLine($"        int {property}Count = CheckedCount({count}, reader.Remaining, \"{field.Name}\");");
+
+        if (IsByteLengthObjectList(owner, field.Name))
+        {
+            text.AppendLine($"        int {property}End = checked(reader.Offset + {property}Count);");
+            text.AppendLine($"        value.{property} = [];");
+            text.AppendLine($"        while (reader.Offset < {property}End)");
+            text.AppendLine("        {");
+            text.AppendLine($"            value.{property}.Add(Read{itemType}(ref reader));");
+            text.AppendLine($"            if (reader.Offset > {property}End) throw new FormatException(\"A {field.Name} record exceeds its declared byte length.\");");
+            text.AppendLine("        }");
+            return;
+        }
+
         text.AppendLine($"        value.{property} = new List<{itemType}>({property}Count);");
         text.AppendLine($"        for (int index = 0; index < {property}Count; index++)");
         string read = field.BitSize is null ? $"Read{field.TypeName}(ref reader)" : $"reader.{ReadBits(field.BitSize)}(\"{field.Name}\")";
@@ -264,9 +285,18 @@ internal static class CodecWriter
         text.AppendLine($"            value.{property}[index] = reader.{ReadMethod(field.TypeName)}(\"{field.Name}\");");
     }
 
-    private static void WritePrepareField(StringBuilder text, FieldDefinition field, string owner, HashSet<string> countOwners)
+    private static void WritePrepareField(StringBuilder text, FieldDefinition field, ClassDefinition definition, HashSet<string> countOwners)
     {
+        string owner = definition.Name;
         string property = PropertyName(field, owner);
+        string? condition = ConditionalFieldExpression(owner, field.Name);
+        if (condition is not null)
+        {
+            string collectionCount = field.Kind == FieldKind.PrimitiveList ? $"value.{property}.Length" : $"value.{property}.Count";
+            text.AppendLine($"        if ({collectionCount} != 0) value.DataFilter.BitFlags |= 1u << {MinefieldDataBit(field.Name)};");
+            text.AppendLine($"        if ({condition})");
+            text.AppendLine("        {");
+        }
         if (field.Kind == FieldKind.ClassReference)
         {
             text.AppendLine($"        ArgumentNullException.ThrowIfNull(value.{property});");
@@ -280,18 +310,38 @@ internal static class CodecWriter
             if (field.CountFieldName is not null)
             {
                 string countProperty = PropertyName(field.CountFieldName, owner);
+                if (IsByteLengthObjectList(owner, field.Name))
+                {
+                    text.AppendLine($"        int {property}ByteLength = 0;");
+                    text.AppendLine($"        foreach ({field.TypeName} item in value.{property}) Measure{field.TypeName}(item, ref {property}ByteLength);");
+                    text.AppendLine($"        value.{countProperty} = checked((uint){property}ByteLength);");
+                    countOwners.Add(field.CountFieldName);
+                    return;
+                }
                 string countValue = IsBitCount(field) ? $"checked(value.{property}.Length * 8)" : $"value.{property}.Count";
                 if (field.Kind == FieldKind.PrimitiveList)
                     countValue = IsBitCount(field) ? $"checked(value.{property}.Length * 8)" : $"value.{property}.Length";
-                text.AppendLine($"        if (Convert.ToInt64(value.{countProperty}) != {countValue}) throw new InvalidOperationException(\"Field '{field.CountFieldName}' must match the encoded length of '{field.Name}'.\");");
-                countOwners.Add(field.CountFieldName);
+                FieldDefinition countField = definition.Fields.Single(x => x.Name == field.CountFieldName);
+                string countType = Primitive(countField.TypeName);
+                if (countOwners.Add(field.CountFieldName))
+                    text.AppendLine($"        value.{countProperty} = checked(({countType}){countValue});");
+                else
+                    text.AppendLine($"        if (Convert.ToInt64(value.{countProperty}) != {countValue}) throw new InvalidOperationException(\"Field '{field.CountFieldName}' must match the encoded length of '{field.Name}'.\");");
             }
         }
+        if (condition is not null)
+            text.AppendLine("        }");
     }
 
     private static void WriteWriteField(StringBuilder text, FieldDefinition field, string owner)
     {
         string property = PropertyName(field, owner);
+        string? condition = ConditionalFieldExpression(owner, field.Name);
+        if (condition is not null)
+        {
+            text.AppendLine($"        if ({condition})");
+            text.AppendLine("        {");
+        }
         switch (field.Kind)
         {
             case FieldKind.Primitive:
@@ -319,11 +369,19 @@ internal static class CodecWriter
             case FieldKind.StaticIvar:
                 break;
         }
+        if (condition is not null)
+            text.AppendLine("        }");
     }
 
     private static void WriteMeasureField(StringBuilder text, FieldDefinition field, string owner)
     {
         string property = PropertyName(field, owner);
+        string? condition = ConditionalFieldExpression(owner, field.Name);
+        if (condition is not null)
+        {
+            text.AppendLine($"        if ({condition})");
+            text.AppendLine("        {");
+        }
         switch (field.Kind)
         {
             case FieldKind.Primitive:
@@ -351,6 +409,8 @@ internal static class CodecWriter
             case FieldKind.StaticIvar:
                 break;
         }
+        if (condition is not null)
+            text.AppendLine("        }");
     }
 
     private static IReadOnlyList<ClassDefinition> Linearized(string name, IReadOnlyDictionary<string, ClassDefinition> classes)
@@ -392,6 +452,30 @@ internal static class CodecWriter
     private static bool IsBitCount(FieldDefinition field) =>
         field.Kind == FieldKind.PrimitiveList &&
         string.Equals(field.Name, "variableDatumValue", StringComparison.Ordinal);
+
+    private static bool IsByteLengthObjectList(string owner, string field) =>
+        (owner, field) is ("IntercomControlPdu", "intercomParameters");
+
+    private static string? ConditionalFieldExpression(string owner, string field) =>
+        owner == "MinefieldDataPdu" && MinefieldDataBit(field) >= 0
+            ? $"(value.DataFilter.BitFlags & (1u << {MinefieldDataBit(field)})) != 0"
+            : null;
+
+    private static int MinefieldDataBit(string field) => field switch
+    {
+        "groundBurialDepthOffset" => 0,
+        "waterBurialDepthOffset" => 1,
+        "snowBurialDepthOffset" => 2,
+        "mineOrientation" => 3,
+        "thermalContrast" => 4,
+        "reflectance" => 5,
+        "mineEmplacementTime" => 6,
+        "numberOfTripDetonationWires" or "numberOfVertices" => 7,
+        "fusing" => 8,
+        "scalarDetectionCoefficient" => 9,
+        "paintScheme" => 10,
+        _ => -1,
+    };
 
     private static string VariableCountExpression(string owner, string field) => (owner, field) switch
     {

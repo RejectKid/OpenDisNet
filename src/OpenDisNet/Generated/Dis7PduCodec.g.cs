@@ -1476,10 +1476,10 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.FixedDatums);
         foreach (FixedDatum item in value.FixedDatums) PrepareFixedDatum(item);
-        if (Convert.ToInt64(value.NumberOfFixedDatumRecords) != value.FixedDatums.Count) throw new InvalidOperationException("Field 'numberOfFixedDatumRecords' must match the encoded length of 'fixedDatums'.");
+        value.NumberOfFixedDatumRecords = checked((uint)value.FixedDatums.Count);
         ArgumentNullException.ThrowIfNull(value.VariableDatums);
         foreach (VariableDatum item in value.VariableDatums) PrepareVariableDatum(item);
-        if (Convert.ToInt64(value.NumberOfVariableDatumRecords) != value.VariableDatums.Count) throw new InvalidOperationException("Field 'numberOfVariableDatumRecords' must match the encoded length of 'variableDatums'.");
+        value.NumberOfVariableDatumRecords = checked((uint)value.VariableDatums.Count);
     }
 
     private static void WriteActionRequestPduFields(ref DisBinaryWriter writer, ActionRequestPdu value)
@@ -1525,10 +1525,10 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.FixedDatumRecords);
         foreach (FixedDatum item in value.FixedDatumRecords) PrepareFixedDatum(item);
-        if (Convert.ToInt64(value.NumberOfFixedDatumRecords) != value.FixedDatumRecords.Count) throw new InvalidOperationException("Field 'numberOfFixedDatumRecords' must match the encoded length of 'fixedDatumRecords'.");
+        value.NumberOfFixedDatumRecords = checked((uint)value.FixedDatumRecords.Count);
         ArgumentNullException.ThrowIfNull(value.VariableDatumRecords);
         foreach (VariableDatum item in value.VariableDatumRecords) PrepareVariableDatum(item);
-        if (Convert.ToInt64(value.NumberOfVariableDatumRecords) != value.VariableDatumRecords.Count) throw new InvalidOperationException("Field 'numberOfVariableDatumRecords' must match the encoded length of 'variableDatumRecords'.");
+        value.NumberOfVariableDatumRecords = checked((uint)value.VariableDatumRecords.Count);
     }
 
     private static void WriteActionRequestRPduFields(ref DisBinaryWriter writer, ActionRequestRPdu value)
@@ -1615,10 +1615,10 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.FixedDatums);
         foreach (FixedDatum item in value.FixedDatums) PrepareFixedDatum(item);
-        if (Convert.ToInt64(value.NumberOfFixedDatumRecords) != value.FixedDatums.Count) throw new InvalidOperationException("Field 'numberOfFixedDatumRecords' must match the encoded length of 'fixedDatums'.");
+        value.NumberOfFixedDatumRecords = checked((uint)value.FixedDatums.Count);
         ArgumentNullException.ThrowIfNull(value.VariableDatums);
         foreach (VariableDatum item in value.VariableDatums) PrepareVariableDatum(item);
-        if (Convert.ToInt64(value.NumberOfVariableDatumRecords) != value.VariableDatums.Count) throw new InvalidOperationException("Field 'numberOfVariableDatumRecords' must match the encoded length of 'variableDatums'.");
+        value.NumberOfVariableDatumRecords = checked((uint)value.VariableDatums.Count);
     }
 
     private static void WriteActionResponsePduFields(ref DisBinaryWriter writer, ActionResponsePdu value)
@@ -1661,10 +1661,10 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.FixedDatumRecords);
         foreach (FixedDatum item in value.FixedDatumRecords) PrepareFixedDatum(item);
-        if (Convert.ToInt64(value.NumberOfFixedDatumRecords) != value.FixedDatumRecords.Count) throw new InvalidOperationException("Field 'numberOfFixedDatumRecords' must match the encoded length of 'fixedDatumRecords'.");
+        value.NumberOfFixedDatumRecords = checked((uint)value.FixedDatumRecords.Count);
         ArgumentNullException.ThrowIfNull(value.VariableDatumRecords);
         foreach (VariableDatum item in value.VariableDatumRecords) PrepareVariableDatum(item);
-        if (Convert.ToInt64(value.NumberOfVariableDatumRecords) != value.VariableDatumRecords.Count) throw new InvalidOperationException("Field 'numberOfVariableDatumRecords' must match the encoded length of 'variableDatumRecords'.");
+        value.NumberOfVariableDatumRecords = checked((uint)value.VariableDatumRecords.Count);
     }
 
     private static void WriteActionResponseRPduFields(ref DisBinaryWriter writer, ActionResponseRPdu value)
@@ -1877,19 +1877,19 @@ public static partial class Dis7PduCodec
         PrepareVector3Float(value.Velocity);
         ArgumentNullException.ThrowIfNull(value.AggregateIDList);
         foreach (AggregateIdentifier item in value.AggregateIDList) PrepareAggregateIdentifier(item);
-        if (Convert.ToInt64(value.NumberOfDisAggregates) != value.AggregateIDList.Count) throw new InvalidOperationException("Field 'numberOfDisAggregates' must match the encoded length of 'aggregateIDList'.");
+        value.NumberOfDisAggregates = checked((ushort)value.AggregateIDList.Count);
         ArgumentNullException.ThrowIfNull(value.EntityIDList);
         foreach (EntityID item in value.EntityIDList) PrepareEntityID(item);
-        if (Convert.ToInt64(value.NumberOfDisEntities) != value.EntityIDList.Count) throw new InvalidOperationException("Field 'numberOfDisEntities' must match the encoded length of 'entityIDList'.");
+        value.NumberOfDisEntities = checked((ushort)value.EntityIDList.Count);
         ArgumentNullException.ThrowIfNull(value.SilentAggregateSystemList);
         foreach (EntityType item in value.SilentAggregateSystemList) PrepareEntityType(item);
-        if (Convert.ToInt64(value.NumberOfSilentAggregateTypes) != value.SilentAggregateSystemList.Count) throw new InvalidOperationException("Field 'numberOfSilentAggregateTypes' must match the encoded length of 'silentAggregateSystemList'.");
+        value.NumberOfSilentAggregateTypes = checked((ushort)value.SilentAggregateSystemList.Count);
         ArgumentNullException.ThrowIfNull(value.SilentEntitySystemList);
         foreach (EntityType item in value.SilentEntitySystemList) PrepareEntityType(item);
-        if (Convert.ToInt64(value.NumberOfSilentEntityTypes) != value.SilentEntitySystemList.Count) throw new InvalidOperationException("Field 'numberOfSilentEntityTypes' must match the encoded length of 'silentEntitySystemList'.");
+        value.NumberOfSilentEntityTypes = checked((ushort)value.SilentEntitySystemList.Count);
         ArgumentNullException.ThrowIfNull(value.VariableDatumList);
         foreach (VariableDatum item in value.VariableDatumList) PrepareVariableDatum(item);
-        if (Convert.ToInt64(value.NumberOfVariableDatumRecords) != value.VariableDatumList.Count) throw new InvalidOperationException("Field 'numberOfVariableDatumRecords' must match the encoded length of 'variableDatumList'.");
+        value.NumberOfVariableDatumRecords = checked((uint)value.VariableDatumList.Count);
     }
 
     private static void WriteAggregateStatePduFields(ref DisBinaryWriter writer, AggregateStatePdu value)
@@ -2315,7 +2315,7 @@ public static partial class Dis7PduCodec
         PrepareSimulationAddress(value.ReceivingID);
         ArgumentNullException.ThrowIfNull(value.ObjectLocation);
         foreach (Vector3Double item in value.ObjectLocation) PrepareVector3Double(item);
-        if (Convert.ToInt64(value.NumberOfPoints) != value.ObjectLocation.Count) throw new InvalidOperationException("Field 'numberOfPoints' must match the encoded length of 'objectLocation'.");
+        value.NumberOfPoints = checked((ushort)value.ObjectLocation.Count);
     }
 
     private static void WriteArealObjectStatePduFields(ref DisBinaryWriter writer, ArealObjectStatePdu value)
@@ -2422,7 +2422,7 @@ public static partial class Dis7PduCodec
         PrepareEntityID(value.LiveEntityId);
         ArgumentNullException.ThrowIfNull(value.VariableParameters);
         foreach (VariableParameter item in value.VariableParameters) PrepareVariableParameter(item);
-        if (Convert.ToInt64(value.NumberOfParameterRecords) != value.VariableParameters.Count) throw new InvalidOperationException("Field 'numberOfParameterRecords' must match the encoded length of 'variableParameters'.");
+        value.NumberOfParameterRecords = checked((byte)value.VariableParameters.Count);
     }
 
     private static void WriteArticulatedPartsPduFields(ref DisBinaryWriter writer, ArticulatedPartsPdu value)
@@ -2574,7 +2574,7 @@ public static partial class Dis7PduCodec
     private static void PrepareAttributeFields(Attribute value)
     {
         ArgumentNullException.ThrowIfNull(value.RecordSpecificFields);
-        if (Convert.ToInt64(value.RecordLength) != value.RecordSpecificFields.Length) throw new InvalidOperationException("Field 'recordLength' must match the encoded length of 'recordSpecificFields'.");
+        value.RecordLength = checked((ushort)value.RecordSpecificFields.Length);
     }
 
     private static void WriteAttribute(ref DisBinaryWriter writer, Attribute value)
@@ -2626,7 +2626,7 @@ public static partial class Dis7PduCodec
         PrepareSimulationAddress(value.OriginatingSimulationAddress);
         ArgumentNullException.ThrowIfNull(value.AttributeRecordSets);
         foreach (AttributeRecordSet item in value.AttributeRecordSets) PrepareAttributeRecordSet(item);
-        if (Convert.ToInt64(value.NumberAttributeRecordSet) != value.AttributeRecordSets.Count) throw new InvalidOperationException("Field 'numberAttributeRecordSet' must match the encoded length of 'attributeRecordSets'.");
+        value.NumberAttributeRecordSet = checked((ushort)value.AttributeRecordSets.Count);
     }
 
     private static void WriteAttributePduFields(ref DisBinaryWriter writer, AttributePdu value)
@@ -2685,7 +2685,7 @@ public static partial class Dis7PduCodec
         PrepareEntityID(value.EntityId);
         ArgumentNullException.ThrowIfNull(value.AttributeRecords);
         foreach (Attribute item in value.AttributeRecords) PrepareAttribute(item);
-        if (Convert.ToInt64(value.NumberOfAttributeRecords) != value.AttributeRecords.Count) throw new InvalidOperationException("Field 'numberOfAttributeRecords' must match the encoded length of 'attributeRecords'.");
+        value.NumberOfAttributeRecords = checked((ushort)value.AttributeRecords.Count);
     }
 
     private static void WriteAttributeRecordSet(ref DisBinaryWriter writer, AttributeRecordSet value)
@@ -3175,7 +3175,7 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.VariableDatums);
         foreach (VariableDatum item in value.VariableDatums) PrepareVariableDatum(item);
-        if (Convert.ToInt64(value.NumberOfVariableDatumRecords) != value.VariableDatums.Count) throw new InvalidOperationException("Field 'numberOfVariableDatumRecords' must match the encoded length of 'variableDatums'.");
+        value.NumberOfVariableDatumRecords = checked((uint)value.VariableDatums.Count);
     }
 
     private static void WriteCommentPduFields(ref DisBinaryWriter writer, CommentPdu value)
@@ -3206,7 +3206,7 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.VariableDatumRecords);
         foreach (VariableDatum item in value.VariableDatumRecords) PrepareVariableDatum(item);
-        if (Convert.ToInt64(value.NumberOfVariableDatumRecords) != value.VariableDatumRecords.Count) throw new InvalidOperationException("Field 'numberOfVariableDatumRecords' must match the encoded length of 'variableDatumRecords'.");
+        value.NumberOfVariableDatumRecords = checked((uint)value.VariableDatumRecords.Count);
     }
 
     private static void WriteCommentRPduFields(ref DisBinaryWriter writer, CommentRPdu value)
@@ -3453,10 +3453,10 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.FixedDatums);
         foreach (FixedDatum item in value.FixedDatums) PrepareFixedDatum(item);
-        if (Convert.ToInt64(value.NumberOfFixedDatumRecords) != value.FixedDatums.Count) throw new InvalidOperationException("Field 'numberOfFixedDatumRecords' must match the encoded length of 'fixedDatums'.");
+        value.NumberOfFixedDatumRecords = checked((uint)value.FixedDatums.Count);
         ArgumentNullException.ThrowIfNull(value.VariableDatums);
         foreach (VariableDatum item in value.VariableDatums) PrepareVariableDatum(item);
-        if (Convert.ToInt64(value.NumberOfVariableDatumRecords) != value.VariableDatums.Count) throw new InvalidOperationException("Field 'numberOfVariableDatumRecords' must match the encoded length of 'variableDatums'.");
+        value.NumberOfVariableDatumRecords = checked((uint)value.VariableDatums.Count);
     }
 
     private static void WriteDataPduFields(ref DisBinaryWriter writer, DataPdu value)
@@ -3509,10 +3509,10 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.FixedDatumIDList);
         foreach (UnsignedDISInteger item in value.FixedDatumIDList) PrepareUnsignedDISInteger(item);
-        if (Convert.ToInt64(value.NumberOfFixedDatums) != value.FixedDatumIDList.Count) throw new InvalidOperationException("Field 'numberOfFixedDatums' must match the encoded length of 'fixedDatumIDList'.");
+        value.NumberOfFixedDatums = checked((uint)value.FixedDatumIDList.Count);
         ArgumentNullException.ThrowIfNull(value.VariableDatumIDList);
         foreach (UnsignedDISInteger item in value.VariableDatumIDList) PrepareUnsignedDISInteger(item);
-        if (Convert.ToInt64(value.NumberOfVariableDatums) != value.VariableDatumIDList.Count) throw new InvalidOperationException("Field 'numberOfVariableDatums' must match the encoded length of 'variableDatumIDList'.");
+        value.NumberOfVariableDatums = checked((uint)value.VariableDatumIDList.Count);
     }
 
     private static void WriteDataQueryDatumSpecification(ref DisBinaryWriter writer, DataQueryDatumSpecification value)
@@ -3561,10 +3561,10 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.FixedDatums);
         foreach (FixedDatum item in value.FixedDatums) PrepareFixedDatum(item);
-        if (Convert.ToInt64(value.NumberOfFixedDatumRecords) != value.FixedDatums.Count) throw new InvalidOperationException("Field 'numberOfFixedDatumRecords' must match the encoded length of 'fixedDatums'.");
+        value.NumberOfFixedDatumRecords = checked((uint)value.FixedDatums.Count);
         ArgumentNullException.ThrowIfNull(value.VariableDatums);
         foreach (VariableDatum item in value.VariableDatums) PrepareVariableDatum(item);
-        if (Convert.ToInt64(value.NumberOfVariableDatumRecords) != value.VariableDatums.Count) throw new InvalidOperationException("Field 'numberOfVariableDatumRecords' must match the encoded length of 'variableDatums'.");
+        value.NumberOfVariableDatumRecords = checked((uint)value.VariableDatums.Count);
     }
 
     private static void WriteDataQueryPduFields(ref DisBinaryWriter writer, DataQueryPdu value)
@@ -3610,10 +3610,10 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.FixedDatumRecords);
         foreach (FixedDatum item in value.FixedDatumRecords) PrepareFixedDatum(item);
-        if (Convert.ToInt64(value.NumberOfFixedDatumRecords) != value.FixedDatumRecords.Count) throw new InvalidOperationException("Field 'numberOfFixedDatumRecords' must match the encoded length of 'fixedDatumRecords'.");
+        value.NumberOfFixedDatumRecords = checked((uint)value.FixedDatumRecords.Count);
         ArgumentNullException.ThrowIfNull(value.VariableDatumRecords);
         foreach (VariableDatum item in value.VariableDatumRecords) PrepareVariableDatum(item);
-        if (Convert.ToInt64(value.NumberOfVariableDatumRecords) != value.VariableDatumRecords.Count) throw new InvalidOperationException("Field 'numberOfVariableDatumRecords' must match the encoded length of 'variableDatumRecords'.");
+        value.NumberOfVariableDatumRecords = checked((uint)value.VariableDatumRecords.Count);
     }
 
     private static void WriteDataQueryRPduFields(ref DisBinaryWriter writer, DataQueryRPdu value)
@@ -3702,10 +3702,10 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.FixedDatumRecords);
         foreach (FixedDatum item in value.FixedDatumRecords) PrepareFixedDatum(item);
-        if (Convert.ToInt64(value.NumberOfFixedDatumRecords) != value.FixedDatumRecords.Count) throw new InvalidOperationException("Field 'numberOfFixedDatumRecords' must match the encoded length of 'fixedDatumRecords'.");
+        value.NumberOfFixedDatumRecords = checked((uint)value.FixedDatumRecords.Count);
         ArgumentNullException.ThrowIfNull(value.VariableDatumRecords);
         foreach (VariableDatum item in value.VariableDatumRecords) PrepareVariableDatum(item);
-        if (Convert.ToInt64(value.NumberOfVariableDatumRecords) != value.VariableDatumRecords.Count) throw new InvalidOperationException("Field 'numberOfVariableDatumRecords' must match the encoded length of 'variableDatumRecords'.");
+        value.NumberOfVariableDatumRecords = checked((uint)value.VariableDatumRecords.Count);
     }
 
     private static void WriteDataRPduFields(ref DisBinaryWriter writer, DataRPdu value)
@@ -3800,10 +3800,10 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.FixedDatumIDList);
         foreach (FixedDatum item in value.FixedDatumIDList) PrepareFixedDatum(item);
-        if (Convert.ToInt64(value.NumberOfFixedDatums) != value.FixedDatumIDList.Count) throw new InvalidOperationException("Field 'numberOfFixedDatums' must match the encoded length of 'fixedDatumIDList'.");
+        value.NumberOfFixedDatums = checked((uint)value.FixedDatumIDList.Count);
         ArgumentNullException.ThrowIfNull(value.VariableDatumIDList);
         foreach (VariableDatum item in value.VariableDatumIDList) PrepareVariableDatum(item);
-        if (Convert.ToInt64(value.NumberOfVariableDatums) != value.VariableDatumIDList.Count) throw new InvalidOperationException("Field 'numberOfVariableDatums' must match the encoded length of 'variableDatumIDList'.");
+        value.NumberOfVariableDatums = checked((uint)value.VariableDatumIDList.Count);
     }
 
     private static void WriteDatumSpecification(ref DisBinaryWriter writer, DatumSpecification value)
@@ -3991,7 +3991,7 @@ public static partial class Dis7PduCodec
         PrepareVector3Float(value.LocationOfEntityCoordinates);
         ArgumentNullException.ThrowIfNull(value.VariableParameters);
         foreach (VariableParameter item in value.VariableParameters) PrepareVariableParameter(item);
-        if (Convert.ToInt64(value.NumberOfVariableParameters) != value.VariableParameters.Count) throw new InvalidOperationException("Field 'numberOfVariableParameters' must match the encoded length of 'variableParameters'.");
+        value.NumberOfVariableParameters = checked((byte)value.VariableParameters.Count);
     }
 
     private static void WriteDetonationPduFields(ref DisBinaryWriter writer, DetonationPdu value)
@@ -4060,10 +4060,10 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.BeamAntennaParameterList);
         foreach (BeamAntennaPattern item in value.BeamAntennaParameterList) PrepareBeamAntennaPattern(item);
-        if (Convert.ToInt64(value.BeamAntennaPatternRecordCount) != value.BeamAntennaParameterList.Count) throw new InvalidOperationException("Field 'beamAntennaPatternRecordCount' must match the encoded length of 'beamAntennaParameterList'.");
+        value.BeamAntennaPatternRecordCount = checked((ushort)value.BeamAntennaParameterList.Count);
         ArgumentNullException.ThrowIfNull(value.DirectedEnergyTargetEnergyDepositionRecordList);
         foreach (DirectedEnergyTargetEnergyDeposition item in value.DirectedEnergyTargetEnergyDepositionRecordList) PrepareDirectedEnergyTargetEnergyDeposition(item);
-        if (Convert.ToInt64(value.DirectedEnergyTargetEnergyDepositionRecordCount) != value.DirectedEnergyTargetEnergyDepositionRecordList.Count) throw new InvalidOperationException("Field 'directedEnergyTargetEnergyDepositionRecordCount' must match the encoded length of 'directedEnergyTargetEnergyDepositionRecordList'.");
+        value.DirectedEnergyTargetEnergyDepositionRecordCount = checked((ushort)value.DirectedEnergyTargetEnergyDepositionRecordList.Count);
     }
 
     private static void WriteDirectedEnergyAreaAimpoint(ref DisBinaryWriter writer, DirectedEnergyAreaAimpoint value)
@@ -4217,7 +4217,7 @@ public static partial class Dis7PduCodec
         PrepareVector3Float(value.ApertureEmitterLocation);
         ArgumentNullException.ThrowIfNull(value.DERecords);
         foreach (StandardVariableSpecification item in value.DERecords) PrepareStandardVariableSpecification(item);
-        if (Convert.ToInt64(value.NumberOfDERecords) != value.DERecords.Count) throw new InvalidOperationException("Field 'numberOfDERecords' must match the encoded length of 'dERecords'.");
+        value.NumberOfDERecords = checked((ushort)value.DERecords.Count);
     }
 
     private static void WriteDirectedEnergyFirePduFields(ref DisBinaryWriter writer, DirectedEnergyFirePdu value)
@@ -4537,7 +4537,7 @@ public static partial class Dis7PduCodec
         PrepareEventIdentifier(value.EventID);
         ArgumentNullException.ThrowIfNull(value.Systems);
         foreach (ElectronicEmitter item in value.Systems) PrepareElectronicEmitter(item);
-        if (Convert.ToInt64(value.NumberOfSystems) != value.Systems.Count) throw new InvalidOperationException("Field 'numberOfSystems' must match the encoded length of 'systems'.");
+        value.NumberOfSystems = checked((byte)value.Systems.Count);
     }
 
     private static void WriteElectromagneticEmissionPduFields(ref DisBinaryWriter writer, ElectromagneticEmissionPdu value)
@@ -4593,7 +4593,7 @@ public static partial class Dis7PduCodec
         PrepareVector3Float(value.Location);
         ArgumentNullException.ThrowIfNull(value.Beams);
         foreach (EmitterBeam item in value.Beams) PrepareEmitterBeam(item);
-        if (Convert.ToInt64(value.NumberOfBeams) != value.Beams.Count) throw new InvalidOperationException("Field 'numberOfBeams' must match the encoded length of 'beams'.");
+        value.NumberOfBeams = checked((byte)value.Beams.Count);
     }
 
     private static void WriteElectronicEmitter(ref DisBinaryWriter writer, ElectronicEmitter value)
@@ -4668,7 +4668,7 @@ public static partial class Dis7PduCodec
         PrepareJammingTechnique(value.JammingTechnique);
         ArgumentNullException.ThrowIfNull(value.TrackJamData);
         foreach (TrackJamData item in value.TrackJamData) PrepareTrackJamData(item);
-        if (Convert.ToInt64(value.NumberOfTargets) != value.TrackJamData.Count) throw new InvalidOperationException("Field 'numberOfTargets' must match the encoded length of 'trackJamData'.");
+        value.NumberOfTargets = checked((byte)value.TrackJamData.Count);
     }
 
     private static void WriteEmitterBeam(ref DisBinaryWriter writer, EmitterBeam value)
@@ -4958,7 +4958,7 @@ public static partial class Dis7PduCodec
         PrepareEntityID(value.DamagedEntityID);
         ArgumentNullException.ThrowIfNull(value.DamageDescriptionRecords);
         foreach (DirectedEnergyDamage item in value.DamageDescriptionRecords) PrepareDirectedEnergyDamage(item);
-        if (Convert.ToInt64(value.NumberOfDamageDescription) != value.DamageDescriptionRecords.Count) throw new InvalidOperationException("Field 'numberOfDamageDescription' must match the encoded length of 'damageDescriptionRecords'.");
+        value.NumberOfDamageDescription = checked((ushort)value.DamageDescriptionRecords.Count);
     }
 
     private static void WriteEntityDamageStatusPduFields(ref DisBinaryWriter writer, EntityDamageStatusPdu value)
@@ -5192,7 +5192,7 @@ public static partial class Dis7PduCodec
         PrepareEntityMarking(value.Marking);
         ArgumentNullException.ThrowIfNull(value.VariableParameters);
         foreach (VariableParameter item in value.VariableParameters) PrepareVariableParameter(item);
-        if (Convert.ToInt64(value.NumberOfVariableParameters) != value.VariableParameters.Count) throw new InvalidOperationException("Field 'numberOfVariableParameters' must match the encoded length of 'variableParameters'.");
+        value.NumberOfVariableParameters = checked((byte)value.VariableParameters.Count);
     }
 
     private static void WriteEntityStatePduFields(ref DisBinaryWriter writer, EntityStatePdu value)
@@ -5256,7 +5256,7 @@ public static partial class Dis7PduCodec
         PrepareEulerAngles(value.EntityOrientation);
         ArgumentNullException.ThrowIfNull(value.VariableParameters);
         foreach (VariableParameter item in value.VariableParameters) PrepareVariableParameter(item);
-        if (Convert.ToInt64(value.NumberOfVariableParameters) != value.VariableParameters.Count) throw new InvalidOperationException("Field 'numberOfVariableParameters' must match the encoded length of 'variableParameters'.");
+        value.NumberOfVariableParameters = checked((byte)value.VariableParameters.Count);
     }
 
     private static void WriteEntityStateUpdatePduFields(ref DisBinaryWriter writer, EntityStateUpdatePdu value)
@@ -5540,7 +5540,7 @@ public static partial class Dis7PduCodec
         PrepareEntityType(value.EnvironmentType);
         ArgumentNullException.ThrowIfNull(value.EnvironmentRecords);
         foreach (Environment item in value.EnvironmentRecords) PrepareEnvironment(item);
-        if (Convert.ToInt64(value.NumberOfEnvironmentRecords) != value.EnvironmentRecords.Count) throw new InvalidOperationException("Field 'numberOfEnvironmentRecords' must match the encoded length of 'environmentRecords'.");
+        value.NumberOfEnvironmentRecords = checked((ushort)value.EnvironmentRecords.Count);
     }
 
     private static void WriteEnvironmentalProcessPduFields(ref DisBinaryWriter writer, EnvironmentalProcessPdu value)
@@ -5725,10 +5725,10 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.FixedDatums);
         foreach (FixedDatum item in value.FixedDatums) PrepareFixedDatum(item);
-        if (Convert.ToInt64(value.NumberOfFixedDatumRecords) != value.FixedDatums.Count) throw new InvalidOperationException("Field 'numberOfFixedDatumRecords' must match the encoded length of 'fixedDatums'.");
+        value.NumberOfFixedDatumRecords = checked((uint)value.FixedDatums.Count);
         ArgumentNullException.ThrowIfNull(value.VariableDatums);
         foreach (VariableDatum item in value.VariableDatums) PrepareVariableDatum(item);
-        if (Convert.ToInt64(value.NumberOfVariableDatumRecords) != value.VariableDatums.Count) throw new InvalidOperationException("Field 'numberOfVariableDatumRecords' must match the encoded length of 'variableDatums'.");
+        value.NumberOfVariableDatumRecords = checked((uint)value.VariableDatums.Count);
     }
 
     private static void WriteEventReportPduFields(ref DisBinaryWriter writer, EventReportPdu value)
@@ -5771,10 +5771,10 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.FixedDatumRecords);
         foreach (FixedDatum item in value.FixedDatumRecords) PrepareFixedDatum(item);
-        if (Convert.ToInt64(value.NumberOfFixedDatumRecords) != value.FixedDatumRecords.Count) throw new InvalidOperationException("Field 'numberOfFixedDatumRecords' must match the encoded length of 'fixedDatumRecords'.");
+        value.NumberOfFixedDatumRecords = checked((uint)value.FixedDatumRecords.Count);
         ArgumentNullException.ThrowIfNull(value.VariableDatumRecords);
         foreach (VariableDatum item in value.VariableDatumRecords) PrepareVariableDatum(item);
-        if (Convert.ToInt64(value.NumberOfVariableDatumRecords) != value.VariableDatumRecords.Count) throw new InvalidOperationException("Field 'numberOfVariableDatumRecords' must match the encoded length of 'variableDatumRecords'.");
+        value.NumberOfVariableDatumRecords = checked((uint)value.VariableDatumRecords.Count);
     }
 
     private static void WriteEventReportRPduFields(ref DisBinaryWriter writer, EventReportRPdu value)
@@ -6534,7 +6534,7 @@ public static partial class Dis7PduCodec
     private static void PrepareGridDataType0Fields(GridDataType0 value)
     {
         ArgumentNullException.ThrowIfNull(value.DataValues);
-        if (Convert.ToInt64(value.NumberOfBytes) != value.DataValues.Length) throw new InvalidOperationException("Field 'numberOfBytes' must match the encoded length of 'dataValues'.");
+        value.NumberOfBytes = checked((ushort)value.DataValues.Length);
     }
 
     private static void WriteGridDataType0(ref DisBinaryWriter writer, GridDataType0 value)
@@ -6592,7 +6592,7 @@ public static partial class Dis7PduCodec
     private static void PrepareGridDataType1Fields(GridDataType1 value)
     {
         ArgumentNullException.ThrowIfNull(value.DataValues);
-        if (Convert.ToInt64(value.NumberOfValues) != value.DataValues.Length) throw new InvalidOperationException("Field 'numberOfValues' must match the encoded length of 'dataValues'.");
+        value.NumberOfValues = checked((ushort)value.DataValues.Length);
     }
 
     private static void WriteGridDataType1(ref DisBinaryWriter writer, GridDataType1 value)
@@ -6652,7 +6652,7 @@ public static partial class Dis7PduCodec
     private static void PrepareGridDataType2Fields(GridDataType2 value)
     {
         ArgumentNullException.ThrowIfNull(value.DataValues);
-        if (Convert.ToInt64(value.NumberOfValues) != value.DataValues.Length) throw new InvalidOperationException("Field 'numberOfValues' must match the encoded length of 'dataValues'.");
+        value.NumberOfValues = checked((ushort)value.DataValues.Length);
     }
 
     private static void WriteGridDataType2(ref DisBinaryWriter writer, GridDataType2 value)
@@ -6719,7 +6719,7 @@ public static partial class Dis7PduCodec
         PrepareClockTime(value.SampleTime);
         ArgumentNullException.ThrowIfNull(value.GridAxisDescriptors);
         foreach (GridAxisDescriptor item in value.GridAxisDescriptors) PrepareGridAxisDescriptor(item);
-        if (Convert.ToInt64(value.NumberOfGridAxes) != value.GridAxisDescriptors.Count) throw new InvalidOperationException("Field 'numberOfGridAxes' must match the encoded length of 'gridAxisDescriptors'.");
+        value.NumberOfGridAxes = checked((byte)value.GridAxisDescriptors.Count);
         ArgumentNullException.ThrowIfNull(value.GridDataRecords);
         foreach (GridData item in value.GridDataRecords) PrepareGridData(item);
         if (Convert.ToInt64(value.NumberOfGridAxes) != value.GridDataRecords.Count) throw new InvalidOperationException("Field 'numberOfGridAxes' must match the encoded length of 'gridDataRecords'.");
@@ -6890,7 +6890,7 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.IffDataRecords);
         foreach (IFFData item in value.IffDataRecords) PrepareIFFData(item);
-        if (Convert.ToInt64(value.NumberOfIFFDataRecords) != value.IffDataRecords.Count) throw new InvalidOperationException("Field 'numberOfIFFDataRecords' must match the encoded length of 'iffDataRecords'.");
+        value.NumberOfIFFDataRecords = checked((ushort)value.IffDataRecords.Count);
     }
 
     private static void WriteIFFDataSpecification(ref DisBinaryWriter writer, IFFDataSpecification value)
@@ -7090,7 +7090,7 @@ public static partial class Dis7PduCodec
         PrepareBeamData(value.BeamData);
         ArgumentNullException.ThrowIfNull(value.IFFFundamentalParameterDataRecord);
         foreach (IFFFundamentalParameterData item in value.IFFFundamentalParameterDataRecord) PrepareIFFFundamentalParameterData(item);
-        if (Convert.ToInt64(value.NumberOfIFFFundamentalParameterDataRecordsParameters) != value.IFFFundamentalParameterDataRecord.Count) throw new InvalidOperationException("Field 'numberOfIFFFundamentalParameterDataRecordsParameters' must match the encoded length of 'IFFFundamentalParameterDataRecord'.");
+        value.NumberOfIFFFundamentalParameterDataRecordsParameters = checked((ushort)value.IFFFundamentalParameterDataRecord.Count);
     }
 
     private static void WriteIFFPduLayer2Data(ref DisBinaryWriter writer, IFFPduLayer2Data value)
@@ -7161,7 +7161,7 @@ public static partial class Dis7PduCodec
         PrepareMode5InterrogatorBasicData(value.Mode5InterrogatorBasicData);
         ArgumentNullException.ThrowIfNull(value.IFFFundamentalParameterDataRecord);
         foreach (IFFDataSpecification item in value.IFFFundamentalParameterDataRecord) PrepareIFFDataSpecification(item);
-        if (Convert.ToInt64(value.NumberOfIFFFundamentalParameterDataRecordsParameters) != value.IFFFundamentalParameterDataRecord.Count) throw new InvalidOperationException("Field 'numberOfIFFFundamentalParameterDataRecordsParameters' must match the encoded length of 'IFFFundamentalParameterDataRecord'.");
+        value.NumberOfIFFFundamentalParameterDataRecordsParameters = checked((ushort)value.IFFFundamentalParameterDataRecord.Count);
     }
 
     private static void WriteIFFPduLayer3InterrogatorFormatData(ref DisBinaryWriter writer, IFFPduLayer3InterrogatorFormatData value)
@@ -7234,7 +7234,7 @@ public static partial class Dis7PduCodec
         PrepareMode5TransponderBasicData(value.Mode5TransponderBasicData);
         ArgumentNullException.ThrowIfNull(value.IFFFundamentalParameterDataRecord);
         foreach (IFFDataSpecification item in value.IFFFundamentalParameterDataRecord) PrepareIFFDataSpecification(item);
-        if (Convert.ToInt64(value.NumberOfIFFFundamentalParameterDataRecordsParameters) != value.IFFFundamentalParameterDataRecord.Count) throw new InvalidOperationException("Field 'numberOfIFFFundamentalParameterDataRecordsParameters' must match the encoded length of 'IFFFundamentalParameterDataRecord'.");
+        value.NumberOfIFFFundamentalParameterDataRecordsParameters = checked((ushort)value.IFFFundamentalParameterDataRecord.Count);
     }
 
     private static void WriteIFFPduLayer3TransponderFormatData(ref DisBinaryWriter writer, IFFPduLayer3TransponderFormatData value)
@@ -7307,7 +7307,7 @@ public static partial class Dis7PduCodec
         PrepareModeSInterrogatorBasicData(value.ModeSInterrogatorBasicData);
         ArgumentNullException.ThrowIfNull(value.IFFFundamentalParameterDataRecord);
         foreach (IFFDataSpecification item in value.IFFFundamentalParameterDataRecord) PrepareIFFDataSpecification(item);
-        if (Convert.ToInt64(value.NumberOfIFFFundamentalParameterDataRecordsParameters) != value.IFFFundamentalParameterDataRecord.Count) throw new InvalidOperationException("Field 'numberOfIFFFundamentalParameterDataRecordsParameters' must match the encoded length of 'IFFFundamentalParameterDataRecord'.");
+        value.NumberOfIFFFundamentalParameterDataRecordsParameters = checked((ushort)value.IFFFundamentalParameterDataRecord.Count);
     }
 
     private static void WriteIFFPduLayer4InterrogatorFormatData(ref DisBinaryWriter writer, IFFPduLayer4InterrogatorFormatData value)
@@ -7380,7 +7380,7 @@ public static partial class Dis7PduCodec
         PrepareModeSTransponderBasicData(value.ModeSTransponderBasicData);
         ArgumentNullException.ThrowIfNull(value.IFFFundamentalParameterDataRecord);
         foreach (IFFDataSpecification item in value.IFFFundamentalParameterDataRecord) PrepareIFFDataSpecification(item);
-        if (Convert.ToInt64(value.NumberOfIFFFundamentalParameterDataRecordsParameters) != value.IFFFundamentalParameterDataRecord.Count) throw new InvalidOperationException("Field 'numberOfIFFFundamentalParameterDataRecordsParameters' must match the encoded length of 'IFFFundamentalParameterDataRecord'.");
+        value.NumberOfIFFFundamentalParameterDataRecordsParameters = checked((ushort)value.IFFFundamentalParameterDataRecord.Count);
     }
 
     private static void WriteIFFPduLayer4TransponderFormatData(ref DisBinaryWriter writer, IFFPduLayer4TransponderFormatData value)
@@ -7453,7 +7453,7 @@ public static partial class Dis7PduCodec
         PrepareLayerHeader(value.LayerHeader);
         ArgumentNullException.ThrowIfNull(value.IFFFundamentalParameterDataRecord);
         foreach (IFFDataSpecification item in value.IFFFundamentalParameterDataRecord) PrepareIFFDataSpecification(item);
-        if (Convert.ToInt64(value.NumberOfIFFFundamentalParameterDataRecordsParameters) != value.IFFFundamentalParameterDataRecord.Count) throw new InvalidOperationException("Field 'numberOfIFFFundamentalParameterDataRecordsParameters' must match the encoded length of 'IFFFundamentalParameterDataRecord'.");
+        value.NumberOfIFFFundamentalParameterDataRecordsParameters = checked((ushort)value.IFFFundamentalParameterDataRecord.Count);
     }
 
     private static void WriteIFFPduLayer5Data(ref DisBinaryWriter writer, IFFPduLayer5Data value)
@@ -7727,7 +7727,7 @@ public static partial class Dis7PduCodec
         PrepareEntityID(value.IoPrimaryTargetID);
         ArgumentNullException.ThrowIfNull(value.IoRecords);
         foreach (IORecord item in value.IoRecords) PrepareIORecord(item);
-        if (Convert.ToInt64(value.NumberOfIORecords) != value.IoRecords.Count) throw new InvalidOperationException("Field 'numberOfIORecords' must match the encoded length of 'ioRecords'.");
+        value.NumberOfIORecords = checked((ushort)value.IoRecords.Count);
     }
 
     private static void WriteInformationOperationsActionPduFields(ref DisBinaryWriter writer, InformationOperationsActionPdu value)
@@ -7807,7 +7807,7 @@ public static partial class Dis7PduCodec
         PrepareEntityID(value.IoPrimaryTargetID);
         ArgumentNullException.ThrowIfNull(value.IoRecords);
         foreach (IORecord item in value.IoRecords) PrepareIORecord(item);
-        if (Convert.ToInt64(value.NumberOfIORecords) != value.IoRecords.Count) throw new InvalidOperationException("Field 'numberOfIORecords' must match the encoded length of 'ioRecords'.");
+        value.NumberOfIORecords = checked((ushort)value.IoRecords.Count);
     }
 
     private static void WriteInformationOperationsReportPduFields(ref DisBinaryWriter writer, InformationOperationsReportPdu value)
@@ -7905,9 +7905,13 @@ public static partial class Dis7PduCodec
         value.MasterChannelID = reader.ReadUInt16("masterChannelID");
         value.IntercomParametersLength = reader.ReadUInt32("intercomParametersLength");
         int IntercomParametersCount = CheckedCount(checked((int)value.IntercomParametersLength), reader.Remaining, "intercomParameters");
-        value.IntercomParameters = new List<IntercomCommunicationsParameters>(IntercomParametersCount);
-        for (int index = 0; index < IntercomParametersCount; index++)
+        int IntercomParametersEnd = checked(reader.Offset + IntercomParametersCount);
+        value.IntercomParameters = [];
+        while (reader.Offset < IntercomParametersEnd)
+        {
             value.IntercomParameters.Add(ReadIntercomCommunicationsParameters(ref reader));
+            if (reader.Offset > IntercomParametersEnd) throw new FormatException("A intercomParameters record exceeds its declared byte length.");
+        }
     }
 
     private static void PrepareIntercomControlPduFields(IntercomControlPdu value)
@@ -7918,7 +7922,9 @@ public static partial class Dis7PduCodec
         PrepareEntityID(value.MasterIntercomReferenceID);
         ArgumentNullException.ThrowIfNull(value.IntercomParameters);
         foreach (IntercomCommunicationsParameters item in value.IntercomParameters) PrepareIntercomCommunicationsParameters(item);
-        if (Convert.ToInt64(value.IntercomParametersLength) != value.IntercomParameters.Count) throw new InvalidOperationException("Field 'intercomParametersLength' must match the encoded length of 'intercomParameters'.");
+        int IntercomParametersByteLength = 0;
+        foreach (IntercomCommunicationsParameters item in value.IntercomParameters) MeasureIntercomCommunicationsParameters(item, ref IntercomParametersByteLength);
+        value.IntercomParametersLength = checked((uint)IntercomParametersByteLength);
     }
 
     private static void WriteIntercomControlPduFields(ref DisBinaryWriter writer, IntercomControlPdu value)
@@ -8073,7 +8079,7 @@ public static partial class Dis7PduCodec
         ArgumentNullException.ThrowIfNull(value.IntercomReferenceID);
         PrepareIntercomReferenceID(value.IntercomReferenceID);
         ArgumentNullException.ThrowIfNull(value.Data);
-        if (Convert.ToInt64(value.DataLength) != value.Data.Length) throw new InvalidOperationException("Field 'dataLength' must match the encoded length of 'data'.");
+        value.DataLength = checked((ushort)value.Data.Length);
     }
 
     private static void WriteIntercomSignalPduFields(ref DisBinaryWriter writer, IntercomSignalPdu value)
@@ -8122,7 +8128,7 @@ public static partial class Dis7PduCodec
         PrepareEntityID(value.GroupEntityID);
         ArgumentNullException.ThrowIfNull(value.GroupedEntityDescriptions);
         foreach (VariableDatum item in value.GroupedEntityDescriptions) PrepareVariableDatum(item);
-        if (Convert.ToInt64(value.NumberOfGroupedEntities) != value.GroupedEntityDescriptions.Count) throw new InvalidOperationException("Field 'numberOfGroupedEntities' must match the encoded length of 'groupedEntityDescriptions'.");
+        value.NumberOfGroupedEntities = checked((byte)value.GroupedEntityDescriptions.Count);
     }
 
     private static void WriteIsGroupOfPduFields(ref DisBinaryWriter writer, IsGroupOfPdu value)
@@ -8561,7 +8567,7 @@ public static partial class Dis7PduCodec
         PrepareObjectType(value.ObjectType);
         ArgumentNullException.ThrowIfNull(value.LinearSegmentParameters);
         foreach (LinearSegmentParameter item in value.LinearSegmentParameters) PrepareLinearSegmentParameter(item);
-        if (Convert.ToInt64(value.NumberOfLinearSegments) != value.LinearSegmentParameters.Count) throw new InvalidOperationException("Field 'numberOfLinearSegments' must match the encoded length of 'linearSegmentParameters'.");
+        value.NumberOfLinearSegments = checked((byte)value.LinearSegmentParameters.Count);
     }
 
     private static void WriteLinearObjectStatePduFields(ref DisBinaryWriter writer, LinearObjectStatePdu value)
@@ -9290,7 +9296,7 @@ public static partial class Dis7PduCodec
     {
         value.MinefieldID = ReadMinefieldIdentifier(ref reader);
         value.RequestingEntityID = ReadSimulationIdentifier(ref reader);
-        value.MinefieldSequenceNumbeer = reader.ReadUInt16("minefieldSequenceNumbeer");
+        value.MinefieldSequenceNumber = reader.ReadUInt16("minefieldSequenceNumber");
         value.RequestID = reader.ReadByte("requestID");
         value.PduSequenceNumber = reader.ReadByte("pduSequenceNumber");
         value.NumberOfPdus = reader.ReadByte("numberOfPdus");
@@ -9308,60 +9314,96 @@ public static partial class Dis7PduCodec
         value.MineLocation = new List<Vector3Float>(MineLocationCount);
         for (int index = 0; index < MineLocationCount; index++)
             value.MineLocation.Add(ReadVector3Float(ref reader));
+        if ((value.DataFilter.BitFlags & (1u << 0)) != 0)
+        {
         int GroundBurialDepthOffsetCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "groundBurialDepthOffset");
         value.GroundBurialDepthOffset = new float[GroundBurialDepthOffsetCount];
         for (int index = 0; index < GroundBurialDepthOffsetCount; index++)
             value.GroundBurialDepthOffset[index] = reader.ReadSingle("groundBurialDepthOffset");
+        }
+        if ((value.DataFilter.BitFlags & (1u << 1)) != 0)
+        {
         int WaterBurialDepthOffsetCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "waterBurialDepthOffset");
         value.WaterBurialDepthOffset = new float[WaterBurialDepthOffsetCount];
         for (int index = 0; index < WaterBurialDepthOffsetCount; index++)
             value.WaterBurialDepthOffset[index] = reader.ReadSingle("waterBurialDepthOffset");
+        }
+        if ((value.DataFilter.BitFlags & (1u << 2)) != 0)
+        {
         int SnowBurialDepthOffsetCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "snowBurialDepthOffset");
         value.SnowBurialDepthOffset = new float[SnowBurialDepthOffsetCount];
         for (int index = 0; index < SnowBurialDepthOffsetCount; index++)
             value.SnowBurialDepthOffset[index] = reader.ReadSingle("snowBurialDepthOffset");
+        }
+        if ((value.DataFilter.BitFlags & (1u << 3)) != 0)
+        {
         int MineOrientationCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "mineOrientation");
         value.MineOrientation = new List<EulerAngles>(MineOrientationCount);
         for (int index = 0; index < MineOrientationCount; index++)
             value.MineOrientation.Add(ReadEulerAngles(ref reader));
+        }
+        if ((value.DataFilter.BitFlags & (1u << 4)) != 0)
+        {
         int ThermalContrastCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "thermalContrast");
         value.ThermalContrast = new float[ThermalContrastCount];
         for (int index = 0; index < ThermalContrastCount; index++)
             value.ThermalContrast[index] = reader.ReadSingle("thermalContrast");
+        }
+        if ((value.DataFilter.BitFlags & (1u << 5)) != 0)
+        {
         int ReflectanceCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "reflectance");
         value.Reflectance = new float[ReflectanceCount];
         for (int index = 0; index < ReflectanceCount; index++)
             value.Reflectance[index] = reader.ReadSingle("reflectance");
+        }
+        if ((value.DataFilter.BitFlags & (1u << 6)) != 0)
+        {
         int MineEmplacementTimeCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "mineEmplacementTime");
         value.MineEmplacementTime = new List<MineEmplacementTime>(MineEmplacementTimeCount);
         for (int index = 0; index < MineEmplacementTimeCount; index++)
             value.MineEmplacementTime.Add(ReadMineEmplacementTime(ref reader));
+        }
         int MineEntityNumberCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "mineEntityNumber");
         value.MineEntityNumber = new ushort[MineEntityNumberCount];
         for (int index = 0; index < MineEntityNumberCount; index++)
             value.MineEntityNumber[index] = reader.ReadUInt16("mineEntityNumber");
+        if ((value.DataFilter.BitFlags & (1u << 8)) != 0)
+        {
         int FusingCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "fusing");
         value.Fusing = new List<ushort>(FusingCount);
         for (int index = 0; index < FusingCount; index++)
             value.Fusing.Add(reader.ReadUInt16("fusing"));
+        }
+        if ((value.DataFilter.BitFlags & (1u << 9)) != 0)
+        {
         int ScalarDetectionCoefficientCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "scalarDetectionCoefficient");
         value.ScalarDetectionCoefficient = new byte[ScalarDetectionCoefficientCount];
         for (int index = 0; index < ScalarDetectionCoefficientCount; index++)
             value.ScalarDetectionCoefficient[index] = reader.ReadByte("scalarDetectionCoefficient");
+        }
+        if ((value.DataFilter.BitFlags & (1u << 10)) != 0)
+        {
         int PaintSchemeCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "paintScheme");
         value.PaintScheme = new List<byte>(PaintSchemeCount);
         for (int index = 0; index < PaintSchemeCount; index++)
             value.PaintScheme.Add(reader.ReadByte("paintScheme"));
+        }
         reader.Skip(Padding(reader.Offset, 4), "padTo32_2");
+        if ((value.DataFilter.BitFlags & (1u << 7)) != 0)
+        {
         int NumberOfTripDetonationWiresCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "numberOfTripDetonationWires");
         value.NumberOfTripDetonationWires = new byte[NumberOfTripDetonationWiresCount];
         for (int index = 0; index < NumberOfTripDetonationWiresCount; index++)
             value.NumberOfTripDetonationWires[index] = reader.ReadByte("numberOfTripDetonationWires");
+        }
         reader.Skip(Padding(reader.Offset, 4), "padTo32_3");
+        if ((value.DataFilter.BitFlags & (1u << 7)) != 0)
+        {
         int NumberOfVerticesCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "numberOfVertices");
         value.NumberOfVertices = new byte[NumberOfVerticesCount];
         for (int index = 0; index < NumberOfVerticesCount; index++)
             value.NumberOfVertices[index] = reader.ReadByte("numberOfVertices");
+        }
     }
 
     private static void PrepareMinefieldDataPduFields(MinefieldDataPdu value)
@@ -9376,45 +9418,93 @@ public static partial class Dis7PduCodec
         PrepareEntityType(value.MineType);
         ArgumentNullException.ThrowIfNull(value.SensorTypes);
         foreach (MinefieldSensorType item in value.SensorTypes) PrepareMinefieldSensorType(item);
-        if (Convert.ToInt64(value.NumberOfSensorTypes) != value.SensorTypes.Count) throw new InvalidOperationException("Field 'numberOfSensorTypes' must match the encoded length of 'sensorTypes'.");
+        value.NumberOfSensorTypes = checked((byte)value.SensorTypes.Count);
         ArgumentNullException.ThrowIfNull(value.MineLocation);
         foreach (Vector3Float item in value.MineLocation) PrepareVector3Float(item);
-        if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.MineLocation.Count) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'mineLocation'.");
+        value.NumberOfMinesInThisPdu = checked((byte)value.MineLocation.Count);
+        if (value.GroundBurialDepthOffset.Length != 0) value.DataFilter.BitFlags |= 1u << 0;
+        if ((value.DataFilter.BitFlags & (1u << 0)) != 0)
+        {
         ArgumentNullException.ThrowIfNull(value.GroundBurialDepthOffset);
         if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.GroundBurialDepthOffset.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'groundBurialDepthOffset'.");
+        }
+        if (value.WaterBurialDepthOffset.Length != 0) value.DataFilter.BitFlags |= 1u << 1;
+        if ((value.DataFilter.BitFlags & (1u << 1)) != 0)
+        {
         ArgumentNullException.ThrowIfNull(value.WaterBurialDepthOffset);
         if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.WaterBurialDepthOffset.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'waterBurialDepthOffset'.");
+        }
+        if (value.SnowBurialDepthOffset.Length != 0) value.DataFilter.BitFlags |= 1u << 2;
+        if ((value.DataFilter.BitFlags & (1u << 2)) != 0)
+        {
         ArgumentNullException.ThrowIfNull(value.SnowBurialDepthOffset);
         if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.SnowBurialDepthOffset.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'snowBurialDepthOffset'.");
+        }
+        if (value.MineOrientation.Count != 0) value.DataFilter.BitFlags |= 1u << 3;
+        if ((value.DataFilter.BitFlags & (1u << 3)) != 0)
+        {
         ArgumentNullException.ThrowIfNull(value.MineOrientation);
         foreach (EulerAngles item in value.MineOrientation) PrepareEulerAngles(item);
         if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.MineOrientation.Count) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'mineOrientation'.");
+        }
+        if (value.ThermalContrast.Length != 0) value.DataFilter.BitFlags |= 1u << 4;
+        if ((value.DataFilter.BitFlags & (1u << 4)) != 0)
+        {
         ArgumentNullException.ThrowIfNull(value.ThermalContrast);
         if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.ThermalContrast.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'thermalContrast'.");
+        }
+        if (value.Reflectance.Length != 0) value.DataFilter.BitFlags |= 1u << 5;
+        if ((value.DataFilter.BitFlags & (1u << 5)) != 0)
+        {
         ArgumentNullException.ThrowIfNull(value.Reflectance);
         if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.Reflectance.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'reflectance'.");
+        }
+        if (value.MineEmplacementTime.Count != 0) value.DataFilter.BitFlags |= 1u << 6;
+        if ((value.DataFilter.BitFlags & (1u << 6)) != 0)
+        {
         ArgumentNullException.ThrowIfNull(value.MineEmplacementTime);
         foreach (MineEmplacementTime item in value.MineEmplacementTime) PrepareMineEmplacementTime(item);
         if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.MineEmplacementTime.Count) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'mineEmplacementTime'.");
+        }
         ArgumentNullException.ThrowIfNull(value.MineEntityNumber);
         if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.MineEntityNumber.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'mineEntityNumber'.");
+        if (value.Fusing.Count != 0) value.DataFilter.BitFlags |= 1u << 8;
+        if ((value.DataFilter.BitFlags & (1u << 8)) != 0)
+        {
         ArgumentNullException.ThrowIfNull(value.Fusing);
         if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.Fusing.Count) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'fusing'.");
+        }
+        if (value.ScalarDetectionCoefficient.Length != 0) value.DataFilter.BitFlags |= 1u << 9;
+        if ((value.DataFilter.BitFlags & (1u << 9)) != 0)
+        {
         ArgumentNullException.ThrowIfNull(value.ScalarDetectionCoefficient);
         if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.ScalarDetectionCoefficient.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'scalarDetectionCoefficient'.");
+        }
+        if (value.PaintScheme.Count != 0) value.DataFilter.BitFlags |= 1u << 10;
+        if ((value.DataFilter.BitFlags & (1u << 10)) != 0)
+        {
         ArgumentNullException.ThrowIfNull(value.PaintScheme);
         if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.PaintScheme.Count) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'paintScheme'.");
+        }
+        if (value.NumberOfTripDetonationWires.Length != 0) value.DataFilter.BitFlags |= 1u << 7;
+        if ((value.DataFilter.BitFlags & (1u << 7)) != 0)
+        {
         ArgumentNullException.ThrowIfNull(value.NumberOfTripDetonationWires);
         if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.NumberOfTripDetonationWires.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'numberOfTripDetonationWires'.");
+        }
+        if (value.NumberOfVertices.Length != 0) value.DataFilter.BitFlags |= 1u << 7;
+        if ((value.DataFilter.BitFlags & (1u << 7)) != 0)
+        {
         ArgumentNullException.ThrowIfNull(value.NumberOfVertices);
         if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.NumberOfVertices.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'numberOfVertices'.");
+        }
     }
 
     private static void WriteMinefieldDataPduFields(ref DisBinaryWriter writer, MinefieldDataPdu value)
     {
         WriteMinefieldIdentifier(ref writer, value.MinefieldID);
         WriteSimulationIdentifier(ref writer, value.RequestingEntityID);
-        writer.WriteUInt16(value.MinefieldSequenceNumbeer, "minefieldSequenceNumbeer");
+        writer.WriteUInt16(value.MinefieldSequenceNumber, "minefieldSequenceNumber");
         writer.WriteByte(value.RequestID, "requestID");
         writer.WriteByte(value.PduSequenceNumber, "pduSequenceNumber");
         writer.WriteByte(value.NumberOfPdus, "numberOfPdus");
@@ -9426,21 +9516,57 @@ public static partial class Dis7PduCodec
         foreach (MinefieldSensorType item in value.SensorTypes) WriteMinefieldSensorType(ref writer, item);
         writer.WriteZeros(Padding(writer.Offset, 4), "padTo32");
         foreach (Vector3Float item in value.MineLocation) WriteVector3Float(ref writer, item);
+        if ((value.DataFilter.BitFlags & (1u << 0)) != 0)
+        {
         foreach (float item in value.GroundBurialDepthOffset) writer.WriteSingle(item, "groundBurialDepthOffset");
+        }
+        if ((value.DataFilter.BitFlags & (1u << 1)) != 0)
+        {
         foreach (float item in value.WaterBurialDepthOffset) writer.WriteSingle(item, "waterBurialDepthOffset");
+        }
+        if ((value.DataFilter.BitFlags & (1u << 2)) != 0)
+        {
         foreach (float item in value.SnowBurialDepthOffset) writer.WriteSingle(item, "snowBurialDepthOffset");
+        }
+        if ((value.DataFilter.BitFlags & (1u << 3)) != 0)
+        {
         foreach (EulerAngles item in value.MineOrientation) WriteEulerAngles(ref writer, item);
+        }
+        if ((value.DataFilter.BitFlags & (1u << 4)) != 0)
+        {
         foreach (float item in value.ThermalContrast) writer.WriteSingle(item, "thermalContrast");
+        }
+        if ((value.DataFilter.BitFlags & (1u << 5)) != 0)
+        {
         foreach (float item in value.Reflectance) writer.WriteSingle(item, "reflectance");
+        }
+        if ((value.DataFilter.BitFlags & (1u << 6)) != 0)
+        {
         foreach (MineEmplacementTime item in value.MineEmplacementTime) WriteMineEmplacementTime(ref writer, item);
+        }
         foreach (ushort item in value.MineEntityNumber) writer.WriteUInt16(item, "mineEntityNumber");
+        if ((value.DataFilter.BitFlags & (1u << 8)) != 0)
+        {
         foreach (ushort item in value.Fusing) writer.WriteUInt16(item, "fusing");
+        }
+        if ((value.DataFilter.BitFlags & (1u << 9)) != 0)
+        {
         foreach (byte item in value.ScalarDetectionCoefficient) writer.WriteByte(item, "scalarDetectionCoefficient");
+        }
+        if ((value.DataFilter.BitFlags & (1u << 10)) != 0)
+        {
         foreach (byte item in value.PaintScheme) writer.WriteByte(item, "paintScheme");
+        }
         writer.WriteZeros(Padding(writer.Offset, 4), "padTo32_2");
+        if ((value.DataFilter.BitFlags & (1u << 7)) != 0)
+        {
         foreach (byte item in value.NumberOfTripDetonationWires) writer.WriteByte(item, "numberOfTripDetonationWires");
+        }
         writer.WriteZeros(Padding(writer.Offset, 4), "padTo32_3");
+        if ((value.DataFilter.BitFlags & (1u << 7)) != 0)
+        {
         foreach (byte item in value.NumberOfVertices) writer.WriteByte(item, "numberOfVertices");
+        }
     }
 
     private static void MeasureMinefieldDataPduFields(in MinefieldDataPdu value, ref int offset)
@@ -9459,21 +9585,57 @@ public static partial class Dis7PduCodec
         foreach (MinefieldSensorType item in value.SensorTypes) MeasureMinefieldSensorType(item, ref offset);
         offset += Padding(offset, 4);
         foreach (Vector3Float item in value.MineLocation) MeasureVector3Float(item, ref offset);
+        if ((value.DataFilter.BitFlags & (1u << 0)) != 0)
+        {
         offset += checked(value.GroundBurialDepthOffset.Length * 4);
+        }
+        if ((value.DataFilter.BitFlags & (1u << 1)) != 0)
+        {
         offset += checked(value.WaterBurialDepthOffset.Length * 4);
+        }
+        if ((value.DataFilter.BitFlags & (1u << 2)) != 0)
+        {
         offset += checked(value.SnowBurialDepthOffset.Length * 4);
+        }
+        if ((value.DataFilter.BitFlags & (1u << 3)) != 0)
+        {
         foreach (EulerAngles item in value.MineOrientation) MeasureEulerAngles(item, ref offset);
+        }
+        if ((value.DataFilter.BitFlags & (1u << 4)) != 0)
+        {
         offset += checked(value.ThermalContrast.Length * 4);
+        }
+        if ((value.DataFilter.BitFlags & (1u << 5)) != 0)
+        {
         offset += checked(value.Reflectance.Length * 4);
+        }
+        if ((value.DataFilter.BitFlags & (1u << 6)) != 0)
+        {
         foreach (MineEmplacementTime item in value.MineEmplacementTime) MeasureMineEmplacementTime(item, ref offset);
+        }
         offset += checked(value.MineEntityNumber.Length * 2);
+        if ((value.DataFilter.BitFlags & (1u << 8)) != 0)
+        {
         offset += checked(value.Fusing.Count * 2);
+        }
+        if ((value.DataFilter.BitFlags & (1u << 9)) != 0)
+        {
         offset += checked(value.ScalarDetectionCoefficient.Length * 1);
+        }
+        if ((value.DataFilter.BitFlags & (1u << 10)) != 0)
+        {
         offset += checked(value.PaintScheme.Count * 1);
+        }
         offset += Padding(offset, 4);
+        if ((value.DataFilter.BitFlags & (1u << 7)) != 0)
+        {
         offset += checked(value.NumberOfTripDetonationWires.Length * 1);
+        }
         offset += Padding(offset, 4);
+        if ((value.DataFilter.BitFlags & (1u << 7)) != 0)
+        {
         offset += checked(value.NumberOfVertices.Length * 1);
+        }
     }
 
     private static void ReadMinefieldFamilyPduFields(ref DisBinaryReader reader, MinefieldFamilyPdu value)
@@ -9570,10 +9732,10 @@ public static partial class Dis7PduCodec
         PrepareEntityType(value.RequestedMineType);
         ArgumentNullException.ThrowIfNull(value.RequestedPerimeterPoints);
         foreach (Vector2Float item in value.RequestedPerimeterPoints) PrepareVector2Float(item);
-        if (Convert.ToInt64(value.NumberOfPerimeterPoints) != value.RequestedPerimeterPoints.Count) throw new InvalidOperationException("Field 'numberOfPerimeterPoints' must match the encoded length of 'requestedPerimeterPoints'.");
+        value.NumberOfPerimeterPoints = checked((byte)value.RequestedPerimeterPoints.Count);
         ArgumentNullException.ThrowIfNull(value.SensorTypes);
         foreach (MinefieldSensorType item in value.SensorTypes) PrepareMinefieldSensorType(item);
-        if (Convert.ToInt64(value.NumberOfSensorTypes) != value.SensorTypes.Count) throw new InvalidOperationException("Field 'numberOfSensorTypes' must match the encoded length of 'sensorTypes'.");
+        value.NumberOfSensorTypes = checked((byte)value.SensorTypes.Count);
     }
 
     private static void WriteMinefieldQueryPduFields(ref DisBinaryWriter writer, MinefieldQueryPdu value)
@@ -9623,7 +9785,7 @@ public static partial class Dis7PduCodec
         ArgumentNullException.ThrowIfNull(value.RequestingEntityID);
         PrepareSimulationIdentifier(value.RequestingEntityID);
         ArgumentNullException.ThrowIfNull(value.MissingPduSequenceNumbers);
-        if (Convert.ToInt64(value.NumberOfMissingPdus) != value.MissingPduSequenceNumbers.Length) throw new InvalidOperationException("Field 'numberOfMissingPdus' must match the encoded length of 'missingPduSequenceNumbers'.");
+        value.NumberOfMissingPdus = checked((byte)value.MissingPduSequenceNumbers.Length);
     }
 
     private static void WriteMinefieldResponseNACKPduFields(ref DisBinaryWriter writer, MinefieldResponseNACKPdu value)
@@ -9721,10 +9883,10 @@ public static partial class Dis7PduCodec
         PrepareProtocolMode(value.ProtocolMode);
         ArgumentNullException.ThrowIfNull(value.PerimeterPoints);
         foreach (Vector2Float item in value.PerimeterPoints) PrepareVector2Float(item);
-        if (Convert.ToInt64(value.NumberOfPerimeterPoints) != value.PerimeterPoints.Count) throw new InvalidOperationException("Field 'numberOfPerimeterPoints' must match the encoded length of 'perimeterPoints'.");
+        value.NumberOfPerimeterPoints = checked((byte)value.PerimeterPoints.Count);
         ArgumentNullException.ThrowIfNull(value.MineType);
         foreach (EntityType item in value.MineType) PrepareEntityType(item);
-        if (Convert.ToInt64(value.NumberOfMineTypes) != value.MineType.Count) throw new InvalidOperationException("Field 'numberOfMineTypes' must match the encoded length of 'mineType'.");
+        value.NumberOfMineTypes = checked((ushort)value.MineType.Count);
     }
 
     private static void WriteMinefieldStatePduFields(ref DisBinaryWriter writer, MinefieldStatePdu value)
@@ -10902,7 +11064,7 @@ public static partial class Dis7PduCodec
 
     private static void ReadReceiverPduFields(ref DisBinaryReader reader, ReceiverPdu value)
     {
-        value.Header = ReadRadioCommsHeader(ref reader);
+        value.RadioHeader = ReadRadioCommsHeader(ref reader);
         value.ReceiverState = reader.ReadUInt16("receiverState");
         value.Padding1 = reader.ReadUInt16("padding1");
         value.ReceivedPower = reader.ReadSingle("receivedPower");
@@ -10912,15 +11074,15 @@ public static partial class Dis7PduCodec
 
     private static void PrepareReceiverPduFields(ReceiverPdu value)
     {
-        ArgumentNullException.ThrowIfNull(value.Header);
-        PrepareRadioCommsHeader(value.Header);
+        ArgumentNullException.ThrowIfNull(value.RadioHeader);
+        PrepareRadioCommsHeader(value.RadioHeader);
         ArgumentNullException.ThrowIfNull(value.TransmitterEntityId);
         PrepareEntityID(value.TransmitterEntityId);
     }
 
     private static void WriteReceiverPduFields(ref DisBinaryWriter writer, ReceiverPdu value)
     {
-        WriteRadioCommsHeader(ref writer, value.Header);
+        WriteRadioCommsHeader(ref writer, value.RadioHeader);
         writer.WriteUInt16(value.ReceiverState, "receiverState");
         writer.WriteUInt16(value.Padding1, "padding1");
         writer.WriteSingle(value.ReceivedPower, "receivedPower");
@@ -10930,7 +11092,7 @@ public static partial class Dis7PduCodec
 
     private static void MeasureReceiverPduFields(in ReceiverPdu value, ref int offset)
     {
-        MeasureRadioCommsHeader(value.Header, ref offset);
+        MeasureRadioCommsHeader(value.RadioHeader, ref offset);
         offset += 2;
         offset += 2;
         offset += 4;
@@ -10956,7 +11118,7 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.RecordIDs);
         foreach (RecordQuerySpecification item in value.RecordIDs) PrepareRecordQuerySpecification(item);
-        if (Convert.ToInt64(value.NumberOfRecords) != value.RecordIDs.Count) throw new InvalidOperationException("Field 'numberOfRecords' must match the encoded length of 'recordIDs'.");
+        value.NumberOfRecords = checked((uint)value.RecordIDs.Count);
     }
 
     private static void WriteRecordQueryRPduFields(ref DisBinaryWriter writer, RecordQueryRPdu value)
@@ -11043,7 +11205,7 @@ public static partial class Dis7PduCodec
     private static void PrepareRecordQuerySpecificationFields(RecordQuerySpecification value)
     {
         ArgumentNullException.ThrowIfNull(value.RecordIDs);
-        if (Convert.ToInt64(value.NumberOfRecords) != value.RecordIDs.Count) throw new InvalidOperationException("Field 'numberOfRecords' must match the encoded length of 'recordIDs'.");
+        value.NumberOfRecords = checked((uint)value.RecordIDs.Count);
     }
 
     private static void WriteRecordQuerySpecification(ref DisBinaryWriter writer, RecordQuerySpecification value)
@@ -11085,7 +11247,7 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.RecordSets);
         foreach (RecordSpecification item in value.RecordSets) PrepareRecordSpecification(item);
-        if (Convert.ToInt64(value.NumberOfRecordSets) != value.RecordSets.Count) throw new InvalidOperationException("Field 'numberOfRecordSets' must match the encoded length of 'recordSets'.");
+        value.NumberOfRecordSets = checked((uint)value.RecordSets.Count);
     }
 
     private static void WriteRecordRPduFields(ref DisBinaryWriter writer, RecordRPdu value)
@@ -11171,7 +11333,7 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.RecordSets);
         foreach (RecordSpecificationElement item in value.RecordSets) PrepareRecordSpecificationElement(item);
-        if (Convert.ToInt64(value.NumberOfRecordSets) != value.RecordSets.Count) throw new InvalidOperationException("Field 'numberOfRecordSets' must match the encoded length of 'recordSets'.");
+        value.NumberOfRecordSets = checked((uint)value.RecordSets.Count);
     }
 
     private static void WriteRecordSpecification(ref DisBinaryWriter writer, RecordSpecification value)
@@ -11547,7 +11709,7 @@ public static partial class Dis7PduCodec
         PrepareEntityID(value.SupplyingEntityID);
         ArgumentNullException.ThrowIfNull(value.Supplies);
         foreach (SupplyQuantity item in value.Supplies) PrepareSupplyQuantity(item);
-        if (Convert.ToInt64(value.NumberOfSupplyTypes) != value.Supplies.Count) throw new InvalidOperationException("Field 'numberOfSupplyTypes' must match the encoded length of 'supplies'.");
+        value.NumberOfSupplyTypes = checked((byte)value.Supplies.Count);
     }
 
     private static void WriteResupplyOfferPduFields(ref DisBinaryWriter writer, ResupplyOfferPdu value)
@@ -11591,7 +11753,7 @@ public static partial class Dis7PduCodec
         PrepareEntityID(value.SupplyingEntityID);
         ArgumentNullException.ThrowIfNull(value.Supplies);
         foreach (SupplyQuantity item in value.Supplies) PrepareSupplyQuantity(item);
-        if (Convert.ToInt64(value.NumberOfSupplyTypes) != value.Supplies.Count) throw new InvalidOperationException("Field 'numberOfSupplyTypes' must match the encoded length of 'supplies'.");
+        value.NumberOfSupplyTypes = checked((byte)value.Supplies.Count);
     }
 
     private static void WriteResupplyReceivedPduFields(ref DisBinaryWriter writer, ResupplyReceivedPdu value)
@@ -11638,10 +11800,10 @@ public static partial class Dis7PduCodec
         PrepareEntityID(value.OrginatingEntityID);
         ArgumentNullException.ThrowIfNull(value.PropulsionSystemData);
         foreach (PropulsionSystemData item in value.PropulsionSystemData) PreparePropulsionSystemData(item);
-        if (Convert.ToInt64(value.NumberOfPropulsionSystems) != value.PropulsionSystemData.Count) throw new InvalidOperationException("Field 'numberOfPropulsionSystems' must match the encoded length of 'propulsionSystemData'.");
+        value.NumberOfPropulsionSystems = checked((ushort)value.PropulsionSystemData.Count);
         ArgumentNullException.ThrowIfNull(value.VectoringSystemData);
         foreach (VectoringNozzleSystem item in value.VectoringSystemData) PrepareVectoringNozzleSystem(item);
-        if (Convert.ToInt64(value.NumberOfVectoringNozzleSystems) != value.VectoringSystemData.Count) throw new InvalidOperationException("Field 'numberOfVectoringNozzleSystems' must match the encoded length of 'vectoringSystemData'.");
+        value.NumberOfVectoringNozzleSystems = checked((ushort)value.VectoringSystemData.Count);
     }
 
     private static void WriteSEESPduFields(ref DisBinaryWriter writer, SEESPdu value)
@@ -11855,7 +12017,7 @@ public static partial class Dis7PduCodec
         PrepareEntityID(value.ServicingEntityID);
         ArgumentNullException.ThrowIfNull(value.Supplies);
         foreach (SupplyQuantity item in value.Supplies) PrepareSupplyQuantity(item);
-        if (Convert.ToInt64(value.NumberOfSupplyTypes) != value.Supplies.Count) throw new InvalidOperationException("Field 'numberOfSupplyTypes' must match the encoded length of 'supplies'.");
+        value.NumberOfSupplyTypes = checked((byte)value.Supplies.Count);
     }
 
     private static void WriteServiceRequestPduFields(ref DisBinaryWriter writer, ServiceRequestPdu value)
@@ -11898,10 +12060,10 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.FixedDatums);
         foreach (FixedDatum item in value.FixedDatums) PrepareFixedDatum(item);
-        if (Convert.ToInt64(value.NumberOfFixedDatumRecords) != value.FixedDatums.Count) throw new InvalidOperationException("Field 'numberOfFixedDatumRecords' must match the encoded length of 'fixedDatums'.");
+        value.NumberOfFixedDatumRecords = checked((uint)value.FixedDatums.Count);
         ArgumentNullException.ThrowIfNull(value.VariableDatums);
         foreach (VariableDatum item in value.VariableDatums) PrepareVariableDatum(item);
-        if (Convert.ToInt64(value.NumberOfVariableDatumRecords) != value.VariableDatums.Count) throw new InvalidOperationException("Field 'numberOfVariableDatumRecords' must match the encoded length of 'variableDatums'.");
+        value.NumberOfVariableDatumRecords = checked((uint)value.VariableDatums.Count);
     }
 
     private static void WriteSetDataPduFields(ref DisBinaryWriter writer, SetDataPdu value)
@@ -11946,10 +12108,10 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.FixedDatumRecords);
         foreach (FixedDatum item in value.FixedDatumRecords) PrepareFixedDatum(item);
-        if (Convert.ToInt64(value.NumberOfFixedDatumRecords) != value.FixedDatumRecords.Count) throw new InvalidOperationException("Field 'numberOfFixedDatumRecords' must match the encoded length of 'fixedDatumRecords'.");
+        value.NumberOfFixedDatumRecords = checked((uint)value.FixedDatumRecords.Count);
         ArgumentNullException.ThrowIfNull(value.VariableDatumRecords);
         foreach (VariableDatum item in value.VariableDatumRecords) PrepareVariableDatum(item);
-        if (Convert.ToInt64(value.NumberOfVariableDatumRecords) != value.VariableDatumRecords.Count) throw new InvalidOperationException("Field 'numberOfVariableDatumRecords' must match the encoded length of 'variableDatumRecords'.");
+        value.NumberOfVariableDatumRecords = checked((uint)value.VariableDatumRecords.Count);
     }
 
     private static void WriteSetDataRPduFields(ref DisBinaryWriter writer, SetDataRPdu value)
@@ -12032,7 +12194,7 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.RecordSets);
         foreach (RecordSpecification item in value.RecordSets) PrepareRecordSpecification(item);
-        if (Convert.ToInt64(value.NumberOfRecordSets) != value.RecordSets.Count) throw new InvalidOperationException("Field 'numberOfRecordSets' must match the encoded length of 'recordSets'.");
+        value.NumberOfRecordSets = checked((uint)value.RecordSets.Count);
     }
 
     private static void WriteSetRecordRPduFields(ref DisBinaryWriter writer, SetRecordRPdu value)
@@ -12144,7 +12306,7 @@ public static partial class Dis7PduCodec
 
     private static void ReadSignalPduFields(ref DisBinaryReader reader, SignalPdu value)
     {
-        value.Header = ReadRadioCommsHeader(ref reader);
+        value.RadioHeader = ReadRadioCommsHeader(ref reader);
         value.EncodingScheme = reader.ReadUInt16("encodingScheme");
         value.TdlType = reader.ReadUInt16("tdlType");
         value.SampleRate = reader.ReadUInt32("sampleRate");
@@ -12159,14 +12321,14 @@ public static partial class Dis7PduCodec
 
     private static void PrepareSignalPduFields(SignalPdu value)
     {
-        ArgumentNullException.ThrowIfNull(value.Header);
-        PrepareRadioCommsHeader(value.Header);
+        ArgumentNullException.ThrowIfNull(value.RadioHeader);
+        PrepareRadioCommsHeader(value.RadioHeader);
         ArgumentNullException.ThrowIfNull(value.Data);
     }
 
     private static void WriteSignalPduFields(ref DisBinaryWriter writer, SignalPdu value)
     {
-        WriteRadioCommsHeader(ref writer, value.Header);
+        WriteRadioCommsHeader(ref writer, value.RadioHeader);
         writer.WriteUInt16(value.EncodingScheme, "encodingScheme");
         writer.WriteUInt16(value.TdlType, "tdlType");
         writer.WriteUInt32(value.SampleRate, "sampleRate");
@@ -12178,7 +12340,7 @@ public static partial class Dis7PduCodec
 
     private static void MeasureSignalPduFields(in SignalPdu value, ref int offset)
     {
-        MeasureRadioCommsHeader(value.Header, ref offset);
+        MeasureRadioCommsHeader(value.RadioHeader, ref offset);
         offset += 2;
         offset += 2;
         offset += 4;
@@ -12216,7 +12378,7 @@ public static partial class Dis7PduCodec
         ArgumentNullException.ThrowIfNull(value.EntityType);
         PrepareEntityType(value.EntityType);
         ArgumentNullException.ThrowIfNull(value.AppearanceRecordList);
-        if (Convert.ToInt64(value.NumberOfAppearanceRecords) != value.AppearanceRecordList.Length) throw new InvalidOperationException("Field 'numberOfAppearanceRecords' must match the encoded length of 'appearanceRecordList'.");
+        value.NumberOfAppearanceRecords = checked((ushort)value.AppearanceRecordList.Length);
     }
 
     private static void WriteSilentEntitySystem(ref DisBinaryWriter writer, SilentEntitySystem value)
@@ -12413,7 +12575,7 @@ public static partial class Dis7PduCodec
     private static void PrepareStandardVariableRecordFields(StandardVariableRecord value)
     {
         ArgumentNullException.ThrowIfNull(value.RecordSpecificFields);
-        if (Convert.ToInt64(value.RecordLength) != value.RecordSpecificFields.Length) throw new InvalidOperationException("Field 'recordLength' must match the encoded length of 'recordSpecificFields'.");
+        value.RecordLength = checked((ushort)value.RecordSpecificFields.Length);
     }
 
     private static void WriteStandardVariableRecord(ref DisBinaryWriter writer, StandardVariableRecord value)
@@ -12467,7 +12629,7 @@ public static partial class Dis7PduCodec
     {
         ArgumentNullException.ThrowIfNull(value.StandardVariables);
         foreach (StandardVariableRecord item in value.StandardVariables) PrepareStandardVariableRecord(item);
-        if (Convert.ToInt64(value.NumberOfStandardVariableRecords) != value.StandardVariables.Count) throw new InvalidOperationException("Field 'numberOfStandardVariableRecords' must match the encoded length of 'standardVariables'.");
+        value.NumberOfStandardVariableRecords = checked((ushort)value.StandardVariables.Count);
     }
 
     private static void WriteStandardVariableSpecification(ref DisBinaryWriter writer, StandardVariableSpecification value)
@@ -13006,7 +13168,7 @@ public static partial class Dis7PduCodec
         ArgumentNullException.ThrowIfNull(value.DeadReckoningParameters);
         PrepareLiveDeadReckoningParameters(value.DeadReckoningParameters);
         ArgumentNullException.ThrowIfNull(value.SystemSpecificData);
-        if (Convert.ToInt64(value.SystemSpecificDataLength) != value.SystemSpecificData.Length) throw new InvalidOperationException("Field 'systemSpecificDataLength' must match the encoded length of 'systemSpecificData'.");
+        value.SystemSpecificDataLength = checked((byte)value.SystemSpecificData.Length);
     }
 
     private static void WriteTSPIPduFields(ref DisBinaryWriter writer, TSPIPdu value)
@@ -13217,7 +13379,7 @@ public static partial class Dis7PduCodec
 
     private static void ReadTransmitterPduFields(ref DisBinaryReader reader, TransmitterPdu value)
     {
-        value.Header = ReadRadioCommsHeader(ref reader);
+        value.RadioHeader = ReadRadioCommsHeader(ref reader);
         value.RadioEntityType = ReadRadioType(ref reader);
         value.TransmitState = reader.ReadByte("transmitState");
         value.InputSource = reader.ReadByte("inputSource");
@@ -13235,20 +13397,24 @@ public static partial class Dis7PduCodec
         value.ModulationParameterCount = reader.ReadByte("modulationParameterCount");
         value.Padding1 = reader.ReadByte("padding1");
         value.Padding2 = reader.ReadUInt16("padding2");
-        int ModulationParametersListCount = CheckedCount(checked((int)value.ModulationParameterCount), reader.Remaining, "modulationParametersList");
-        value.ModulationParametersList = new List<ModulationParameters>(ModulationParametersListCount);
-        for (int index = 0; index < ModulationParametersListCount; index++)
-            value.ModulationParametersList.Add(ReadModulationParameters(ref reader));
-        int AntennaPatternListCount = CheckedCount(checked((int)value.AntennaPatternCount), reader.Remaining, "antennaPatternList");
-        value.AntennaPatternList = new List<VariableTransmitterParameters>(AntennaPatternListCount);
-        for (int index = 0; index < AntennaPatternListCount; index++)
-            value.AntennaPatternList.Add(ReadVariableTransmitterParameters(ref reader));
+        int ModulationParametersCount = CheckedCount(checked((int)value.ModulationParameterCount), reader.Remaining, "modulationParameters");
+        value.ModulationParameters = new byte[ModulationParametersCount];
+        for (int index = 0; index < ModulationParametersCount; index++)
+            value.ModulationParameters[index] = reader.ReadByte("modulationParameters");
+        int AntennaPatternParametersCount = CheckedCount(checked((int)value.AntennaPatternCount), reader.Remaining, "antennaPatternParameters");
+        value.AntennaPatternParameters = new byte[AntennaPatternParametersCount];
+        for (int index = 0; index < AntennaPatternParametersCount; index++)
+            value.AntennaPatternParameters[index] = reader.ReadByte("antennaPatternParameters");
+        int VariableTransmitterParametersCount = CheckedCount(checked((int)value.VariableTransmitterParameterCount), reader.Remaining, "variableTransmitterParameters");
+        value.VariableTransmitterParameters = new List<VariableTransmitterParameters>(VariableTransmitterParametersCount);
+        for (int index = 0; index < VariableTransmitterParametersCount; index++)
+            value.VariableTransmitterParameters.Add(ReadVariableTransmitterParameters(ref reader));
     }
 
     private static void PrepareTransmitterPduFields(TransmitterPdu value)
     {
-        ArgumentNullException.ThrowIfNull(value.Header);
-        PrepareRadioCommsHeader(value.Header);
+        ArgumentNullException.ThrowIfNull(value.RadioHeader);
+        PrepareRadioCommsHeader(value.RadioHeader);
         ArgumentNullException.ThrowIfNull(value.RadioEntityType);
         PrepareRadioType(value.RadioEntityType);
         ArgumentNullException.ThrowIfNull(value.AntennaLocation);
@@ -13257,17 +13423,18 @@ public static partial class Dis7PduCodec
         PrepareVector3Float(value.RelativeAntennaLocation);
         ArgumentNullException.ThrowIfNull(value.ModulationType);
         PrepareModulationType(value.ModulationType);
-        ArgumentNullException.ThrowIfNull(value.ModulationParametersList);
-        foreach (ModulationParameters item in value.ModulationParametersList) PrepareModulationParameters(item);
-        if (Convert.ToInt64(value.ModulationParameterCount) != value.ModulationParametersList.Count) throw new InvalidOperationException("Field 'modulationParameterCount' must match the encoded length of 'modulationParametersList'.");
-        ArgumentNullException.ThrowIfNull(value.AntennaPatternList);
-        foreach (VariableTransmitterParameters item in value.AntennaPatternList) PrepareVariableTransmitterParameters(item);
-        if (Convert.ToInt64(value.AntennaPatternCount) != value.AntennaPatternList.Count) throw new InvalidOperationException("Field 'antennaPatternCount' must match the encoded length of 'antennaPatternList'.");
+        ArgumentNullException.ThrowIfNull(value.ModulationParameters);
+        value.ModulationParameterCount = checked((byte)value.ModulationParameters.Length);
+        ArgumentNullException.ThrowIfNull(value.AntennaPatternParameters);
+        value.AntennaPatternCount = checked((ushort)value.AntennaPatternParameters.Length);
+        ArgumentNullException.ThrowIfNull(value.VariableTransmitterParameters);
+        foreach (VariableTransmitterParameters item in value.VariableTransmitterParameters) PrepareVariableTransmitterParameters(item);
+        value.VariableTransmitterParameterCount = checked((ushort)value.VariableTransmitterParameters.Count);
     }
 
     private static void WriteTransmitterPduFields(ref DisBinaryWriter writer, TransmitterPdu value)
     {
-        WriteRadioCommsHeader(ref writer, value.Header);
+        WriteRadioCommsHeader(ref writer, value.RadioHeader);
         WriteRadioType(ref writer, value.RadioEntityType);
         writer.WriteByte(value.TransmitState, "transmitState");
         writer.WriteByte(value.InputSource, "inputSource");
@@ -13285,13 +13452,14 @@ public static partial class Dis7PduCodec
         writer.WriteByte(value.ModulationParameterCount, "modulationParameterCount");
         writer.WriteByte(value.Padding1, "padding1");
         writer.WriteUInt16(value.Padding2, "padding2");
-        foreach (ModulationParameters item in value.ModulationParametersList) WriteModulationParameters(ref writer, item);
-        foreach (VariableTransmitterParameters item in value.AntennaPatternList) WriteVariableTransmitterParameters(ref writer, item);
+        foreach (byte item in value.ModulationParameters) writer.WriteByte(item, "modulationParameters");
+        foreach (byte item in value.AntennaPatternParameters) writer.WriteByte(item, "antennaPatternParameters");
+        foreach (VariableTransmitterParameters item in value.VariableTransmitterParameters) WriteVariableTransmitterParameters(ref writer, item);
     }
 
     private static void MeasureTransmitterPduFields(in TransmitterPdu value, ref int offset)
     {
-        MeasureRadioCommsHeader(value.Header, ref offset);
+        MeasureRadioCommsHeader(value.RadioHeader, ref offset);
         MeasureRadioType(value.RadioEntityType, ref offset);
         offset += 1;
         offset += 1;
@@ -13309,8 +13477,9 @@ public static partial class Dis7PduCodec
         offset += 1;
         offset += 1;
         offset += 2;
-        foreach (ModulationParameters item in value.ModulationParametersList) MeasureModulationParameters(item, ref offset);
-        foreach (VariableTransmitterParameters item in value.AntennaPatternList) MeasureVariableTransmitterParameters(item, ref offset);
+        offset += checked(value.ModulationParameters.Length * 1);
+        offset += checked(value.AntennaPatternParameters.Length * 1);
+        foreach (VariableTransmitterParameters item in value.VariableTransmitterParameters) MeasureVariableTransmitterParameters(item, ref offset);
     }
 
     private static UABeam ReadUABeam(ref DisBinaryReader reader)
@@ -13398,7 +13567,7 @@ public static partial class Dis7PduCodec
         PrepareVector3Float(value.Location);
         ArgumentNullException.ThrowIfNull(value.Beams);
         foreach (UABeam item in value.Beams) PrepareUABeam(item);
-        if (Convert.ToInt64(value.NumberOfBeams) != value.Beams.Count) throw new InvalidOperationException("Field 'numberOfBeams' must match the encoded length of 'beams'.");
+        value.NumberOfBeams = checked((byte)value.Beams.Count);
     }
 
     private static void WriteUAEmitter(ref DisBinaryWriter writer, UAEmitter value)
@@ -13566,13 +13735,13 @@ public static partial class Dis7PduCodec
         PrepareEventIdentifier(value.EventID);
         ArgumentNullException.ThrowIfNull(value.ShaftRPMs);
         foreach (ShaftRPM item in value.ShaftRPMs) PrepareShaftRPM(item);
-        if (Convert.ToInt64(value.NumberOfShafts) != value.ShaftRPMs.Count) throw new InvalidOperationException("Field 'numberOfShafts' must match the encoded length of 'shaftRPMs'.");
+        value.NumberOfShafts = checked((byte)value.ShaftRPMs.Count);
         ArgumentNullException.ThrowIfNull(value.ApaData);
         foreach (APA item in value.ApaData) PrepareAPA(item);
-        if (Convert.ToInt64(value.NumberOfAPAs) != value.ApaData.Count) throw new InvalidOperationException("Field 'numberOfAPAs' must match the encoded length of 'apaData'.");
+        value.NumberOfAPAs = checked((byte)value.ApaData.Count);
         ArgumentNullException.ThrowIfNull(value.EmitterSystems);
         foreach (UAEmitter item in value.EmitterSystems) PrepareUAEmitter(item);
-        if (Convert.ToInt64(value.NumberOfUAEmitterSystems) != value.EmitterSystems.Count) throw new InvalidOperationException("Field 'numberOfUAEmitterSystems' must match the encoded length of 'emitterSystems'.");
+        value.NumberOfUAEmitterSystems = checked((byte)value.EmitterSystems.Count);
     }
 
     private static void WriteUnderwaterAcousticPduFields(ref DisBinaryWriter writer, UnderwaterAcousticPdu value)
@@ -13674,7 +13843,7 @@ public static partial class Dis7PduCodec
     private static void PrepareVariableDatumFields(VariableDatum value)
     {
         ArgumentNullException.ThrowIfNull(value.VariableDatumValue);
-        if (Convert.ToInt64(value.VariableDatumLength) != checked(value.VariableDatumValue.Length * 8)) throw new InvalidOperationException("Field 'variableDatumLength' must match the encoded length of 'variableDatumValue'.");
+        value.VariableDatumLength = checked((uint)checked(value.VariableDatumValue.Length * 8));
     }
 
     private static void WriteVariableDatum(ref DisBinaryWriter writer, VariableDatum value)

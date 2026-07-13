@@ -111,12 +111,12 @@ public partial class ActionRequestPdu : SimulationManagementFamilyPdu
     /// <summary>
     /// Number of fixed datum records
     /// </summary>
-    public uint NumberOfFixedDatumRecords { get; set; }
+    internal uint NumberOfFixedDatumRecords { get; set; }
 
     /// <summary>
     /// Number of variable datum records, handled automatically by marshaller at run time (and not modifiable by end-user programmers)
     /// </summary>
-    public uint NumberOfVariableDatumRecords { get; set; }
+    internal uint NumberOfVariableDatumRecords { get; set; }
 
     /// <summary>
     /// variable length list of fixed datums
@@ -163,12 +163,12 @@ public partial class ActionRequestRPdu : SimulationManagementWithReliabilityFami
     /// <summary>
     /// Fixed datum record count
     /// </summary>
-    public uint NumberOfFixedDatumRecords { get; set; }
+    internal uint NumberOfFixedDatumRecords { get; set; }
 
     /// <summary>
     /// variable datum record count
     /// </summary>
-    public uint NumberOfVariableDatumRecords { get; set; }
+    internal uint NumberOfVariableDatumRecords { get; set; }
 
     /// <summary>
     /// Fixed datum records
@@ -207,12 +207,12 @@ public partial class ActionResponsePdu : SimulationManagementFamilyPdu
     /// <summary>
     /// Number of fixed datum records
     /// </summary>
-    public uint NumberOfFixedDatumRecords { get; set; }
+    internal uint NumberOfFixedDatumRecords { get; set; }
 
     /// <summary>
     /// Number of variable datum records, handled automatically by marshaller at run time (and not modifiable by end-user programmers)
     /// </summary>
-    public uint NumberOfVariableDatumRecords { get; set; }
+    internal uint NumberOfVariableDatumRecords { get; set; }
 
     /// <summary>
     /// fixed length list of fixed datums
@@ -244,12 +244,12 @@ public partial class ActionResponseRPdu : SimulationManagementWithReliabilityFam
     /// <summary>
     /// Fixed datum record count
     /// </summary>
-    public uint NumberOfFixedDatumRecords { get; set; }
+    internal uint NumberOfFixedDatumRecords { get; set; }
 
     /// <summary>
     /// variable datum record count
     /// </summary>
-    public uint NumberOfVariableDatumRecords { get; set; }
+    internal uint NumberOfVariableDatumRecords { get; set; }
 
     /// <summary>
     /// Fixed datum records
@@ -362,22 +362,22 @@ public partial class AggregateStatePdu : EntityManagementFamilyPdu
     /// <summary>
     /// number of aggregates
     /// </summary>
-    public ushort NumberOfDisAggregates { get; set; }
+    internal ushort NumberOfDisAggregates { get; set; }
 
     /// <summary>
     /// number of entities
     /// </summary>
-    public ushort NumberOfDisEntities { get; set; }
+    internal ushort NumberOfDisEntities { get; set; }
 
     /// <summary>
     /// number of silent aggregate types
     /// </summary>
-    public ushort NumberOfSilentAggregateTypes { get; set; }
+    internal ushort NumberOfSilentAggregateTypes { get; set; }
 
     /// <summary>
     /// Number of silent entity types, handled automatically by marshaller at run time (and not modifiable by end-user programmers)
     /// </summary>
-    public ushort NumberOfSilentEntityTypes { get; set; }
+    internal ushort NumberOfSilentEntityTypes { get; set; }
 
     /// <summary>
     /// aggregates  list
@@ -402,7 +402,7 @@ public partial class AggregateStatePdu : EntityManagementFamilyPdu
     /// <summary>
     /// Number of variable datum records, handled automatically by marshaller at run time (and not modifiable by end-user programmers)
     /// </summary>
-    public uint NumberOfVariableDatumRecords { get; set; }
+    internal uint NumberOfVariableDatumRecords { get; set; }
 
     /// <summary>
     /// variableDatums
@@ -662,7 +662,7 @@ public partial class ArealObjectStatePdu : SyntheticEnvironmentFamilyPdu
     /// <summary>
     /// Number of points
     /// </summary>
-    public ushort NumberOfPoints { get; set; }
+    internal ushort NumberOfPoints { get; set; }
 
     /// <summary>
     /// requesterID
@@ -725,7 +725,7 @@ public partial class ArticulatedPartsPdu : LiveEntityFamilyPdu
 {
     public EntityID LiveEntityId { get; set; } = new EntityID();
 
-    public byte NumberOfParameterRecords { get; set; }
+    internal byte NumberOfParameterRecords { get; set; }
 
     public List<VariableParameter> VariableParameters { get; set; } = [];
 
@@ -803,7 +803,7 @@ public partial class Attribute
     /// <summary>
     /// Total length of the record in octets, including padding. The record shall end on a 64-bit boundary after any padding. = 6 + K + P
     /// </summary>
-    public ushort RecordLength { get; set; }
+    internal ushort RecordLength { get; set; }
 
     /// <summary>
     /// The attribute data format conforming to that specified by the record type. K bytes long
@@ -860,7 +860,7 @@ public partial class AttributePdu : EntityInformationInteractionFamilyPdu
     /// <summary>
     /// This field shall specify the number of Attribute Record Sets that make up the remainder of the PDU. It shall be represented by a 16-bit unsigned integer.
     /// </summary>
-    public ushort NumberAttributeRecordSet { get; set; }
+    internal ushort NumberAttributeRecordSet { get; set; }
 
     public List<AttributeRecordSet> AttributeRecordSets { get; set; } = [];
 
@@ -873,7 +873,7 @@ public partial class AttributeRecordSet
 {
     public EntityID EntityId { get; set; } = new EntityID();
 
-    public ushort NumberOfAttributeRecords { get; set; }
+    internal ushort NumberOfAttributeRecords { get; set; }
 
     public List<Attribute> AttributeRecords { get; set; } = [];
 
@@ -1215,12 +1215,12 @@ public partial class CommentPdu : SimulationManagementFamilyPdu
     /// <summary>
     /// Number of fixed datum records, not used in this Pdu
     /// </summary>
-    public uint NumberOfFixedDatumRecords { get; set; }
+    internal uint NumberOfFixedDatumRecords { get; set; }
 
     /// <summary>
     /// Number of variable datum records, handled automatically by marshaller at run time (and not modifiable by end-user programmers)
     /// </summary>
-    public uint NumberOfVariableDatumRecords { get; set; }
+    internal uint NumberOfVariableDatumRecords { get; set; }
 
     /// <summary>
     /// variable length list of variable length datums
@@ -1237,12 +1237,12 @@ public partial class CommentRPdu : SimulationManagementWithReliabilityFamilyPdu
     /// <summary>
     /// Fixed datum record count, not used in this Pdu
     /// </summary>
-    public uint NumberOfFixedDatumRecords { get; set; }
+    internal uint NumberOfFixedDatumRecords { get; set; }
 
     /// <summary>
     /// variable datum record count
     /// </summary>
-    public uint NumberOfVariableDatumRecords { get; set; }
+    internal uint NumberOfVariableDatumRecords { get; set; }
 
     /// <summary>
     /// Variable datum records
@@ -1339,12 +1339,12 @@ public partial class DataPdu : SimulationManagementFamilyPdu
     /// <summary>
     /// Number of fixed datum records
     /// </summary>
-    public uint NumberOfFixedDatumRecords { get; set; }
+    internal uint NumberOfFixedDatumRecords { get; set; }
 
     /// <summary>
     /// Number of variable datum records, handled automatically by marshaller at run time (and not modifiable by end-user programmers)
     /// </summary>
-    public uint NumberOfVariableDatumRecords { get; set; }
+    internal uint NumberOfVariableDatumRecords { get; set; }
 
     /// <summary>
     /// variable length list of fixed datums
@@ -1366,12 +1366,12 @@ public partial class DataQueryDatumSpecification
     /// <summary>
     /// Number of fixed datums
     /// </summary>
-    public uint NumberOfFixedDatums { get; set; }
+    internal uint NumberOfFixedDatums { get; set; }
 
     /// <summary>
     /// Number of variable datums
     /// </summary>
-    public uint NumberOfVariableDatums { get; set; }
+    internal uint NumberOfVariableDatums { get; set; }
 
     /// <summary>
     /// variable length list fixed datum IDs
@@ -1403,12 +1403,12 @@ public partial class DataQueryPdu : SimulationManagementFamilyPdu
     /// <summary>
     /// Number of fixed datum records
     /// </summary>
-    public uint NumberOfFixedDatumRecords { get; set; }
+    internal uint NumberOfFixedDatumRecords { get; set; }
 
     /// <summary>
     /// Number of variable datum records, handled automatically by marshaller at run time (and not modifiable by end-user programmers)
     /// </summary>
-    public uint NumberOfVariableDatumRecords { get; set; }
+    internal uint NumberOfVariableDatumRecords { get; set; }
 
     /// <summary>
     /// variable length list of fixed datums
@@ -1455,12 +1455,12 @@ public partial class DataQueryRPdu : SimulationManagementWithReliabilityFamilyPd
     /// <summary>
     /// Fixed datum record count
     /// </summary>
-    public uint NumberOfFixedDatumRecords { get; set; }
+    internal uint NumberOfFixedDatumRecords { get; set; }
 
     /// <summary>
     /// variable datum record count
     /// </summary>
-    public uint NumberOfVariableDatumRecords { get; set; }
+    internal uint NumberOfVariableDatumRecords { get; set; }
 
     /// <summary>
     /// Fixed datum records
@@ -1509,12 +1509,12 @@ public partial class DataRPdu : SimulationManagementWithReliabilityFamilyPdu
     /// <summary>
     /// Fixed datum record count
     /// </summary>
-    public uint NumberOfFixedDatumRecords { get; set; }
+    internal uint NumberOfFixedDatumRecords { get; set; }
 
     /// <summary>
     /// variable datum record count
     /// </summary>
-    public uint NumberOfVariableDatumRecords { get; set; }
+    internal uint NumberOfVariableDatumRecords { get; set; }
 
     /// <summary>
     /// Fixed datum records
@@ -1543,12 +1543,12 @@ public partial class DatumSpecification
     /// <summary>
     /// Number of fixed datums
     /// </summary>
-    public uint NumberOfFixedDatums { get; set; }
+    internal uint NumberOfFixedDatums { get; set; }
 
     /// <summary>
     /// Number of variable datums
     /// </summary>
-    public uint NumberOfVariableDatums { get; set; }
+    internal uint NumberOfVariableDatums { get; set; }
 
     /// <summary>
     /// variable length list fixed datums
@@ -1709,7 +1709,7 @@ public partial class DetonationPdu : WarfareFamilyPdu
     /// <summary>
     /// How many articulation parameters we have, Section 7.3.3
     /// </summary>
-    public byte NumberOfVariableParameters { get; set; }
+    internal byte NumberOfVariableParameters { get; set; }
 
     /// <summary>
     /// padding
@@ -1746,12 +1746,12 @@ public partial class DirectedEnergyAreaAimpoint
     /// <summary>
     /// Number of beam antenna pattern records
     /// </summary>
-    public ushort BeamAntennaPatternRecordCount { get; set; }
+    internal ushort BeamAntennaPatternRecordCount { get; set; }
 
     /// <summary>
     /// Number of DE target energy depositon records
     /// </summary>
-    public ushort DirectedEnergyTargetEnergyDepositionRecordCount { get; set; }
+    internal ushort DirectedEnergyTargetEnergyDepositionRecordCount { get; set; }
 
     /// <summary>
     /// list of beam antenna records. See 6.2.9.2
@@ -1902,7 +1902,7 @@ public partial class DirectedEnergyFirePdu : WarfareFamilyPdu
     /// <summary>
     /// Field shall specify the number of DE records, Section 7.3.4
     /// </summary>
-    public ushort NumberOfDERecords { get; set; }
+    internal ushort NumberOfDERecords { get; set; }
 
     /// <summary>
     /// Fields shall contain one or more DE records, records shall conform to the variable record format (Section6.2.82), Section 7.3.4
@@ -2089,7 +2089,7 @@ public partial class ElectromagneticEmissionPdu : DistributedEmissionsRegenerati
     /// <summary>
     /// This field shall specify the number of emission systems being described in the current PDU.
     /// </summary>
-    public byte NumberOfSystems { get; set; }
+    internal byte NumberOfSystems { get; set; }
 
     /// <summary>
     /// padding
@@ -2116,7 +2116,7 @@ public partial class ElectronicEmitter
     /// <summary>
     /// the number of beams being described in the current PDU for the emitter system being described.
     /// </summary>
-    public byte NumberOfBeams { get; set; }
+    internal byte NumberOfBeams { get; set; }
 
     /// <summary>
     /// padding
@@ -2157,7 +2157,7 @@ public partial class EmitterBeam
 
     public byte BeamFunction { get; set; }
 
-    public byte NumberOfTargets { get; set; }
+    internal byte NumberOfTargets { get; set; }
 
     public byte HighDensityTrackJam { get; set; }
 
@@ -2336,7 +2336,7 @@ public partial class EntityDamageStatusPdu : WarfareFamilyPdu
     /// <summary>
     /// field shall specify the number of Damage Description records, Section 7.3.5
     /// </summary>
-    public ushort NumberOfDamageDescription { get; set; }
+    internal ushort NumberOfDamageDescription { get; set; }
 
     /// <summary>
     /// Fields shall contain one or more Damage Description records (see 6.2.17) and may contain other Standard Variable records, Section 7.3.5
@@ -2433,7 +2433,7 @@ public partial class EntityStatePdu : EntityInformationInteractionFamilyPdu
     /// <summary>
     /// How many variable parameters are in the variable length list. In earlier versions of DIS these were known as articulation parameters
     /// </summary>
-    public byte NumberOfVariableParameters { get; set; }
+    internal byte NumberOfVariableParameters { get; set; }
 
     /// <summary>
     /// Describes the type of entity in the world
@@ -2502,7 +2502,7 @@ public partial class EntityStateUpdatePdu : EntityInformationInteractionFamilyPd
     /// <summary>
     /// This field shall specify the number of variable parameters present. This field shall be represented by an 8-bit unsigned integer (see Annex I).
     /// </summary>
-    public byte NumberOfVariableParameters { get; set; }
+    internal byte NumberOfVariableParameters { get; set; }
 
     /// <summary>
     /// This field shall specify an entity's linear velocity. The coordinate system for an entity's linear velocity depends on the dead reckoning algorithm used. This field shall be represented by a Linear Velocity Vector record [see 6.2.95 item c)]).
@@ -2698,7 +2698,7 @@ public partial class EnvironmentalProcessPdu : SyntheticEnvironmentFamilyPdu
     /// <summary>
     /// number of environment records
     /// </summary>
-    public ushort NumberOfEnvironmentRecords { get; set; }
+    internal ushort NumberOfEnvironmentRecords { get; set; }
 
     /// <summary>
     /// PDU sequence number for the environmental process if pdu sequencing required
@@ -2770,12 +2770,12 @@ public partial class EventReportPdu : SimulationManagementFamilyPdu
     /// <summary>
     /// Number of fixed datum records
     /// </summary>
-    public uint NumberOfFixedDatumRecords { get; set; }
+    internal uint NumberOfFixedDatumRecords { get; set; }
 
     /// <summary>
     /// Number of variable datum records, handled automatically by marshaller at run time (and not modifiable by end-user programmers)
     /// </summary>
-    public uint NumberOfVariableDatumRecords { get; set; }
+    internal uint NumberOfVariableDatumRecords { get; set; }
 
     /// <summary>
     /// variable length list of fixed datums
@@ -2807,12 +2807,12 @@ public partial class EventReportRPdu : SimulationManagementWithReliabilityFamily
     /// <summary>
     /// Fixed datum record count
     /// </summary>
-    public uint NumberOfFixedDatumRecords { get; set; }
+    internal uint NumberOfFixedDatumRecords { get; set; }
 
     /// <summary>
     /// variable datum record count
     /// </summary>
-    public uint NumberOfVariableDatumRecords { get; set; }
+    internal uint NumberOfVariableDatumRecords { get; set; }
 
     /// <summary>
     /// Fixed datum records
@@ -3224,7 +3224,7 @@ public partial class GridData
 /// </summary>
 public partial class GridDataType0 : GridData
 {
-    public ushort NumberOfBytes { get; set; }
+    internal ushort NumberOfBytes { get; set; }
 
     public byte[] DataValues { get; set; } = [];
 
@@ -3239,7 +3239,7 @@ public partial class GridDataType1 : GridData
 
     public float FieldOffset { get; set; }
 
-    public ushort NumberOfValues { get; set; }
+    internal ushort NumberOfValues { get; set; }
 
     public ushort[] DataValues { get; set; } = [];
 
@@ -3250,7 +3250,7 @@ public partial class GridDataType1 : GridData
 /// </summary>
 public partial class GridDataType2 : GridData
 {
-    public ushort NumberOfValues { get; set; }
+    internal ushort NumberOfValues { get; set; }
 
     /// <summary>
     /// zero-filled array of padding bits for byte alignment and consistent sizing of PDU data
@@ -3294,7 +3294,7 @@ public partial class GriddedDataPdu : SyntheticEnvironmentFamilyPdu
     /// <summary>
     /// number of grid axes for the environmental data
     /// </summary>
-    public byte NumberOfGridAxes { get; set; }
+    internal byte NumberOfGridAxes { get; set; }
 
     /// <summary>
     /// are domain grid axes identidal to those of the priveious domain update?
@@ -3386,7 +3386,7 @@ public partial class IFFDataSpecification
     /// <summary>
     /// Number of IFF records
     /// </summary>
-    public ushort NumberOfIFFDataRecords { get; set; }
+    internal ushort NumberOfIFFDataRecords { get; set; }
 
     /// <summary>
     /// IFF data records
@@ -3835,7 +3835,7 @@ public partial class InformationOperationsActionPdu : InformationOperationsFamil
 
     public ushort Padding2 { get; set; }
 
-    public ushort NumberOfIORecords { get; set; }
+    internal ushort NumberOfIORecords { get; set; }
 
     public List<IORecord> IoRecords { get; set; } = [];
 
@@ -3875,7 +3875,7 @@ public partial class InformationOperationsReportPdu : InformationOperationsFamil
 
     public ushort Padding3 { get; set; }
 
-    public ushort NumberOfIORecords { get; set; }
+    internal ushort NumberOfIORecords { get; set; }
 
     public List<IORecord> IoRecords { get; set; } = [];
 
@@ -3963,7 +3963,7 @@ public partial class IntercomControlPdu : RadioCommunicationsFamilyPdu
     /// <summary>
     /// number of intercom parameters
     /// </summary>
-    public uint IntercomParametersLength { get; set; }
+    internal uint IntercomParametersLength { get; set; }
 
     public List<IntercomCommunicationsParameters> IntercomParameters { get; set; } = [];
 
@@ -4030,7 +4030,7 @@ public partial class IntercomSignalPdu : RadioCommunicationsFamilyPdu
     /// <summary>
     /// data length
     /// </summary>
-    public ushort DataLength { get; set; }
+    internal ushort DataLength { get; set; }
 
     /// <summary>
     /// samples
@@ -4062,7 +4062,7 @@ public partial class IsGroupOfPdu : EntityManagementFamilyPdu
     /// <summary>
     /// Number of individual entities constituting the group
     /// </summary>
-    public byte NumberOfGroupedEntities { get; set; }
+    internal byte NumberOfGroupedEntities { get; set; }
 
     /// <summary>
     /// padding
@@ -4293,7 +4293,7 @@ public partial class LinearObjectStatePdu : SyntheticEnvironmentFamilyPdu
     /// <summary>
     /// number of linear segment parameters
     /// </summary>
-    public byte NumberOfLinearSegments { get; set; }
+    internal byte NumberOfLinearSegments { get; set; }
 
     /// <summary>
     /// requesterID
@@ -4572,7 +4572,7 @@ public partial class MinefieldDataPdu : MinefieldFamilyPdu
     /// <summary>
     /// Minefield sequence number
     /// </summary>
-    public ushort MinefieldSequenceNumbeer { get; set; }
+    public ushort MinefieldSequenceNumber { get; set; }
 
     /// <summary>
     /// request ID provides a unique identifier
@@ -4592,12 +4592,12 @@ public partial class MinefieldDataPdu : MinefieldFamilyPdu
     /// <summary>
     /// how many mines are in this PDU
     /// </summary>
-    public byte NumberOfMinesInThisPdu { get; set; }
+    internal byte NumberOfMinesInThisPdu { get; set; }
 
     /// <summary>
     /// how many sensor type are in this PDU
     /// </summary>
-    public byte NumberOfSensorTypes { get; set; }
+    internal byte NumberOfSensorTypes { get; set; }
 
     /// <summary>
     /// zero-filled array of padding bits for byte alignment and consistent sizing of PDU data
@@ -4693,7 +4693,7 @@ public partial class MinefieldQueryPdu : MinefieldFamilyPdu
     /// <summary>
     /// Number of perimeter points for the minefield
     /// </summary>
-    public byte NumberOfPerimeterPoints { get; set; }
+    internal byte NumberOfPerimeterPoints { get; set; }
 
     /// <summary>
     /// zero-filled array of padding bits for byte alignment and consistent sizing of PDU data
@@ -4703,7 +4703,7 @@ public partial class MinefieldQueryPdu : MinefieldFamilyPdu
     /// <summary>
     /// Number of sensor types
     /// </summary>
-    public byte NumberOfSensorTypes { get; set; }
+    internal byte NumberOfSensorTypes { get; set; }
 
     /// <summary>
     /// data filter, 32 boolean fields
@@ -4750,7 +4750,7 @@ public partial class MinefieldResponseNACKPdu : MinefieldFamilyPdu
     /// <summary>
     /// how many pdus were missing
     /// </summary>
-    public byte NumberOfMissingPdus { get; set; }
+    internal byte NumberOfMissingPdus { get; set; }
 
     /// <summary>
     /// PDU sequence numbers that were missing
@@ -4794,7 +4794,7 @@ public partial class MinefieldStatePdu : MinefieldFamilyPdu
     /// <summary>
     /// Number of permieter points
     /// </summary>
-    public byte NumberOfPerimeterPoints { get; set; }
+    internal byte NumberOfPerimeterPoints { get; set; }
 
     /// <summary>
     /// type of minefield
@@ -4804,7 +4804,7 @@ public partial class MinefieldStatePdu : MinefieldFamilyPdu
     /// <summary>
     /// the number of different mine types employed in the minefield
     /// </summary>
-    public ushort NumberOfMineTypes { get; set; }
+    internal ushort NumberOfMineTypes { get; set; }
 
     /// <summary>
     /// location of center of minefield in world coordinates
@@ -5522,7 +5522,7 @@ public partial class RadioType
 /// </summary>
 public partial class ReceiverPdu : RadioCommunicationsFamilyPdu
 {
-    public RadioCommsHeader Header { get; set; } = new RadioCommsHeader();
+    public RadioCommsHeader RadioHeader { get; set; } = new RadioCommsHeader();
 
     /// <summary>
     /// encoding scheme used, and enumeration
@@ -5581,7 +5581,7 @@ public partial class RecordQueryRPdu : SimulationManagementWithReliabilityFamily
     /// <summary>
     /// numberOfRecords
     /// </summary>
-    public uint NumberOfRecords { get; set; }
+    internal uint NumberOfRecords { get; set; }
 
     /// <summary>
     /// record IDs
@@ -5602,7 +5602,7 @@ public partial class RecordQueryReliablePdu
 /// </summary>
 public partial class RecordQuerySpecification
 {
-    public uint NumberOfRecords { get; set; }
+    internal uint NumberOfRecords { get; set; }
 
     /// <summary>
     /// variable length list of 32-bit record types
@@ -5633,7 +5633,7 @@ public partial class RecordRPdu : SimulationManagementWithReliabilityFamilyPdu
     /// <summary>
     /// Number of record sets in list
     /// </summary>
-    public uint NumberOfRecordSets { get; set; }
+    internal uint NumberOfRecordSets { get; set; }
 
     /// <summary>
     /// record sets
@@ -5657,7 +5657,7 @@ public partial class RecordSpecification
     /// <summary>
     /// The number of record sets
     /// </summary>
-    public uint NumberOfRecordSets { get; set; }
+    internal uint NumberOfRecordSets { get; set; }
 
     /// <summary>
     /// variable length list record specifications.
@@ -5871,7 +5871,7 @@ public partial class ResupplyOfferPdu : LogisticsFamilyPdu
     /// <summary>
     /// How many supplies types are being offered, Section 7.4.3
     /// </summary>
-    public byte NumberOfSupplyTypes { get; set; }
+    internal byte NumberOfSupplyTypes { get; set; }
 
     /// <summary>
     /// padding
@@ -5908,7 +5908,7 @@ public partial class ResupplyReceivedPdu : LogisticsFamilyPdu
     /// <summary>
     /// How many supplies are taken by receiving entity
     /// </summary>
-    public byte NumberOfSupplyTypes { get; set; }
+    internal byte NumberOfSupplyTypes { get; set; }
 
     /// <summary>
     /// padding
@@ -5955,12 +5955,12 @@ public partial class SEESPdu : DistributedEmissionsRegenerationFamilyPdu
     /// <summary>
     /// how many propulsion systems
     /// </summary>
-    public ushort NumberOfPropulsionSystems { get; set; }
+    internal ushort NumberOfPropulsionSystems { get; set; }
 
     /// <summary>
     /// how many vectoring nozzle systems
     /// </summary>
-    public ushort NumberOfVectoringNozzleSystems { get; set; }
+    internal ushort NumberOfVectoringNozzleSystems { get; set; }
 
     /// <summary>
     /// variable length list of propulsion system data
@@ -6098,7 +6098,7 @@ public partial class ServiceRequestPdu : LogisticsFamilyPdu
     /// <summary>
     /// How many requested, Section 7.4.2
     /// </summary>
-    public byte NumberOfSupplyTypes { get; set; }
+    internal byte NumberOfSupplyTypes { get; set; }
 
     public ushort Padding1 { get; set; }
 
@@ -6124,12 +6124,12 @@ public partial class SetDataPdu : SimulationManagementFamilyPdu
     /// <summary>
     /// Number of fixed datum records
     /// </summary>
-    public uint NumberOfFixedDatumRecords { get; set; }
+    internal uint NumberOfFixedDatumRecords { get; set; }
 
     /// <summary>
     /// Number of variable datum records, handled automatically by marshaller at run time (and not modifiable by end-user programmers)
     /// </summary>
-    public uint NumberOfVariableDatumRecords { get; set; }
+    internal uint NumberOfVariableDatumRecords { get; set; }
 
     /// <summary>
     /// variable length list of fixed datums
@@ -6171,12 +6171,12 @@ public partial class SetDataRPdu : SimulationManagementWithReliabilityFamilyPdu
     /// <summary>
     /// Fixed datum record count
     /// </summary>
-    public uint NumberOfFixedDatumRecords { get; set; }
+    internal uint NumberOfFixedDatumRecords { get; set; }
 
     /// <summary>
     /// variable datum record count
     /// </summary>
-    public uint NumberOfVariableDatumRecords { get; set; }
+    internal uint NumberOfVariableDatumRecords { get; set; }
 
     /// <summary>
     /// Fixed datum records
@@ -6221,7 +6221,7 @@ public partial class SetRecordRPdu : SimulationManagementWithReliabilityFamilyPd
     /// <summary>
     /// Number of record sets in list
     /// </summary>
-    public uint NumberOfRecordSets { get; set; }
+    internal uint NumberOfRecordSets { get; set; }
 
     /// <summary>
     /// record sets
@@ -6255,7 +6255,7 @@ public partial class ShaftRPM
 /// </summary>
 public partial class SignalPdu : RadioCommunicationsFamilyPdu
 {
-    public RadioCommsHeader Header { get; set; } = new RadioCommsHeader();
+    public RadioCommsHeader RadioHeader { get; set; } = new RadioCommsHeader();
 
     /// <summary>
     /// encoding scheme used, and enumeration
@@ -6302,7 +6302,7 @@ public partial class SilentEntitySystem
     /// <summary>
     /// number of entity appearance records that follow
     /// </summary>
-    public ushort NumberOfAppearanceRecords { get; set; }
+    internal ushort NumberOfAppearanceRecords { get; set; }
 
     /// <summary>
     /// Entity type
@@ -6391,7 +6391,7 @@ public partial class StandardVariableRecord
 {
     public uint RecordType { get; set; }
 
-    public ushort RecordLength { get; set; }
+    internal ushort RecordLength { get; set; }
 
     public byte[] RecordSpecificFields { get; set; } = new byte[0];
 
@@ -6713,7 +6713,7 @@ public partial class TSPIPdu : LiveEntityFamilyPdu
 
     public ushort MeasuredSpeed { get; set; }
 
-    public byte SystemSpecificDataLength { get; set; }
+    internal byte SystemSpecificDataLength { get; set; }
 
     public byte[] SystemSpecificData { get; set; } = [];
 
@@ -6809,7 +6809,7 @@ public partial class TransferOwnershipPdu : EntityManagementFamilyPdu
 /// </summary>
 public partial class TransmitterPdu : RadioCommunicationsFamilyPdu
 {
-    public RadioCommsHeader Header { get; set; } = new RadioCommsHeader();
+    public RadioCommsHeader RadioHeader { get; set; } = new RadioCommsHeader();
 
     /// <summary>
     /// Type of radio
@@ -6827,9 +6827,9 @@ public partial class TransmitterPdu : RadioCommunicationsFamilyPdu
     public byte InputSource { get; set; }
 
     /// <summary>
-    /// count field
+    /// number of Variable Transmitter Parameter records
     /// </summary>
-    public ushort VariableTransmitterParameterCount { get; set; }
+    internal ushort VariableTransmitterParameterCount { get; set; }
 
     /// <summary>
     /// Location of antenna
@@ -6847,9 +6847,9 @@ public partial class TransmitterPdu : RadioCommunicationsFamilyPdu
     public ushort AntennaPatternType { get; set; }
 
     /// <summary>
-    /// atenna pattern length
+    /// antenna pattern length in octets
     /// </summary>
-    public ushort AntennaPatternCount { get; set; }
+    internal ushort AntennaPatternCount { get; set; }
 
     /// <summary>
     /// frequency
@@ -6882,23 +6882,28 @@ public partial class TransmitterPdu : RadioCommunicationsFamilyPdu
     public ushort CryptoKeyId { get; set; }
 
     /// <summary>
-    /// how many modulation parameters we have
+    /// length in octets of the modulation parameters field, including end padding
     /// </summary>
-    public byte ModulationParameterCount { get; set; }
+    internal byte ModulationParameterCount { get; set; }
 
     public byte Padding1 { get; set; }
 
     public ushort Padding2 { get; set; }
 
     /// <summary>
-    /// variable length list of modulation parameters
+    /// radio-system-specific modulation parameters and end padding
     /// </summary>
-    public List<ModulationParameters> ModulationParametersList { get; set; } = [];
+    public byte[] ModulationParameters { get; set; } = [];
 
     /// <summary>
-    /// variable length list of antenna pattern records
+    /// antenna-pattern-specific parameters, including end padding
     /// </summary>
-    public List<VariableTransmitterParameters> AntennaPatternList { get; set; } = [];
+    public byte[] AntennaPatternParameters { get; set; } = [];
+
+    /// <summary>
+    /// DIS v7 variable transmitter parameter records
+    /// </summary>
+    public List<VariableTransmitterParameters> VariableTransmitterParameters { get; set; } = [];
 
 }
 
@@ -6933,7 +6938,7 @@ public partial class UAEmitter
     /// <summary>
     /// the number of beams being described in the current PDU for the emitter system being described.
     /// </summary>
-    public byte NumberOfBeams { get; set; }
+    internal byte NumberOfBeams { get; set; }
 
     /// <summary>
     /// zero-filled array of padding bits for byte alignment and consistent sizing of PDU data
@@ -7049,17 +7054,17 @@ public partial class UnderwaterAcousticPdu : DistributedEmissionsRegenerationFam
     /// <summary>
     /// This field shall represent the number of shafts on a platform
     /// </summary>
-    public byte NumberOfShafts { get; set; }
+    internal byte NumberOfShafts { get; set; }
 
     /// <summary>
     /// This field shall indicate the number of APAs described in the current UA PDU
     /// </summary>
-    public byte NumberOfAPAs { get; set; }
+    internal byte NumberOfAPAs { get; set; }
 
     /// <summary>
     /// This field shall specify the number of UA emitter systems being described in the current UA PDU
     /// </summary>
-    public byte NumberOfUAEmitterSystems { get; set; }
+    internal byte NumberOfUAEmitterSystems { get; set; }
 
     /// <summary>
     /// shaft RPM values.

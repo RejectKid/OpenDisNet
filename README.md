@@ -6,10 +6,9 @@
 OpenDisNet is a high-performance, type-safe .NET codec for Distributed
 Interactive Simulation (DIS) Protocol Version 7, defined by IEEE 1278.1-2012.
 
-> **Development status:** pre-release. The common framing and defensive binary
-> layer are implemented. Typed PDU coverage is tracked in
-> [`docs/conformance.md`](docs/conformance.md); do not assume unlisted PDUs are
-> semantically decoded.
+> **Development status:** pre-release. All 72 DIS v7 PDU identifiers have typed
+> models and generated binary codecs. Family-level semantic conformance and
+> independent vectors are tracked in [`docs/conformance.md`](docs/conformance.md).
 
 ## Install
 
@@ -23,7 +22,7 @@ dotnet add package OpenDisNet
 using OpenDisNet;
 using OpenDisNet.Pdus;
 
-if (DisPduReader.TryParse(datagram, out IDisPdu? pdu, out DisParseError error))
+if (DisSerializer.TryDeserialize(datagram, out IDisPdu? pdu, out DisParseError error))
 {
     Console.WriteLine($"{pdu.Header.PduType}: {pdu.Header.Length} bytes");
 }
@@ -35,15 +34,19 @@ else
 
 The parser checks framing, protocol version, declared length, and field bounds.
 Unknown and vendor-defined PDU bodies are retained rather than discarded.
+Use `DisSerializer.Serialize(pdu)` for the reverse operation. See the
+[public API design](docs/api-design.md) for the supported design rules.
 
 ## Standards and provenance
 
 - Wire format target: IEEE Std 1278.1-2012 (DIS v7).
 - Enumeration target: SISO-REF-010-2025 (version 36).
-- Reference baseline: NPS MOVES `open-dis/opendis7-java` and its source generator.
+- Cross-check sources include NPS MOVES Open-DIS projects and independent packet
+  decoders. OpenDisNet is not a port and does not copy their public API design.
 
 See [the standards baseline](docs/standards.md) and
-[conformance matrix](docs/conformance.md) for exact, release-specific coverage.
+[conformance matrix](docs/conformance.md) for exact, release-specific coverage,
+and [architecture](docs/architecture.md) for the independent .NET design.
 
 OpenDisNet is not affiliated with or endorsed by IEEE, SISO, NPS, or the U.S.
 Government. Users are responsible for obtaining standards needed for their own

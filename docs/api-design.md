@@ -1,0 +1,43 @@
+# Public API design
+
+OpenDisNet is designed for application developers who need to send or receive
+DIS packets, not for users of a particular source generator.
+
+## Primary workflow
+
+```csharp
+IDisPdu pdu = DisSerializer.Deserialize(datagram);
+
+if (pdu is EntityStatePdu entityState)
+{
+    Console.WriteLine(entityState.EntityId);
+}
+
+byte[] response = DisSerializer.Serialize(pdu);
+```
+
+The same serializer accepts caller-owned `Span<byte>` storage for allocation-
+sensitive applications. `TryDeserialize` returns a structured error for
+untrusted network input.
+
+## Design rules
+
+1. PDU class names and properties use normal .NET naming.
+2. Constructors provide valid defaults; object initializers are sufficient for
+   ordinary use.
+3. The serializer owns protocol version, PDU type, protocol family, PDU length,
+   list counts, bit lengths, record lengths, and required padding.
+4. Collections use `List<T>` or arrays according to whether records or raw
+   octets are represented. Callers never update a parallel count property.
+5. Known records are strongly typed. Standard-defined open or system-specific
+   payloads use an explicit raw-octet value that round-trips unchanged.
+6. Unknown PDU types and vendor data are preserved when their framing is valid.
+7. Parsing is bounded, big-endian, deterministic, and independent of reflection.
+8. Public APIs do not expose generator metadata, source XML terminology, or
+   classes copied from another DIS implementation.
+
+## Compatibility
+
+The package is pre-1.0 while the complete PDU surface is being reviewed. After
+1.0, public names and wire behavior follow semantic versioning. Internal codec
+generation may change without becoming part of the supported API.

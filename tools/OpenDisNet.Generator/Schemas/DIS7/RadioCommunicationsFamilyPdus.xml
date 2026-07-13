@@ -22,7 +22,7 @@
   
         <initialValue name="pduType" value="DisPduType.TRANSMITTER"/>
   
-        <attribute name="header">
+        <attribute name="radioHeader">
             <classRef name="RadioCommsHeader"/>
         </attribute> 
             
@@ -38,7 +38,7 @@
             <sisoenum type="TransmitterInputSource" comment="uid 165"/>
         </attribute>
   
-        <attribute name="variableTransmitterParameterCount" comment="count field">
+        <attribute name="variableTransmitterParameterCount" hidden="true" comment="number of Variable Transmitter Parameter records">
             <primitive type= "uint16" default="0"/>
         </attribute>
   
@@ -54,7 +54,7 @@
             <sisoenum type="TransmitterAntennaPatternType" comment="uid 167"/>
         </attribute>
   
-        <attribute name="antennaPatternCount" hidden="true" comment="atenna pattern length">
+        <attribute name="antennaPatternCount" hidden="true" comment="antenna pattern length in octets">
             <primitive type= "uint16"/>
         </attribute>
   
@@ -82,7 +82,7 @@
             <primitive type="uint16"/>
         </attribute>
   
-        <attribute name="modulationParameterCount" hidden="true" comment="how many modulation parameters we have">
+        <attribute name="modulationParameterCount" hidden="true" comment="length in octets of the modulation parameters field, including end padding">
             <primitive type="uint8"/>
         </attribute>
   
@@ -94,17 +94,23 @@
             <primitive type="uint16" defaultValue="0"/>
         </attribute>
   
-        <attribute name="modulationParametersList" comment="variable length list of modulation parameters">
-            <objectlist countFieldName="modulationParameterCount">
-                <classRef name="ModulationParameters"/>
-            </objectlist> 
+        <attribute name="modulationParameters" comment="radio-system-specific modulation parameters and end padding">
+            <primitivelist countFieldName="modulationParameterCount">
+                <primitive type="uint8"/>
+            </primitivelist>
         </attribute>
   
-        <attribute name="antennaPatternList" comment="variable length list of antenna pattern records">
-            <objectlist countFieldName="antennaPatternCount">
+        <attribute name="antennaPatternParameters" comment="antenna-pattern-specific parameters, including end padding">
+            <primitivelist countFieldName="antennaPatternCount">
+                <primitive type="uint8"/>
+            </primitivelist>
+        </attribute>
+
+        <attribute name="variableTransmitterParameters" comment="DIS v7 variable transmitter parameter records">
+            <objectlist countFieldName="variableTransmitterParameterCount">
                 <classRef name="VariableTransmitterParameters"/>
-            </objectlist> 
-        </attribute>       
+            </objectlist>
+        </attribute>
     </class>
 
     <!-- Special cased because of the dataLength fields which are a bit length 
@@ -114,7 +120,7 @@
     
         <initialValue name="pduType" value="DisPduType.SIGNAL"/>
     
-        <attribute name="header">
+        <attribute name="radioHeader">
             <classRef name="RadioCommsHeader"/>
         </attribute> 
          
@@ -199,7 +205,7 @@
     
         <initialValue name="pduType" value="DisPduType.RECEIVER"/>
         
-        <attribute name="header">
+        <attribute name="radioHeader">
             <classRef name="RadioCommsHeader"/>
         </attribute> 
  
