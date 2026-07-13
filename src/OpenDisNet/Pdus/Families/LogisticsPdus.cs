@@ -1,5 +1,8 @@
 // DIS v7 protocol models reviewed from LogisticsFamilyPdus.xml.
 #pragma warning disable CS0108
+using OpenDisNet.Enumerations;
+using OpenDisNet.Protocol;
+
 namespace OpenDisNet.Pdus;
 
 /// <summary>
@@ -30,7 +33,7 @@ public partial class RepairCompletePdu : LogisticsFamilyPdu
     /// <summary>
     /// Enumeration for type of repair.  See 6.2.74
     /// </summary>
-    public ushort Repair { get; set; }
+    public RepairCompleteRepair Repair { get; set; }
 
     /// <summary>
     /// padding, number prevents conflict with superclass ivar name
@@ -60,7 +63,7 @@ public partial class RepairResponsePdu : LogisticsFamilyPdu
     /// <summary>
     /// Result of repair operation
     /// </summary>
-    public ushort RepairResult { get; set; }
+    public RepairResponseRepairResult RepairResult { get; set; }
 
     /// <summary>
     /// padding
@@ -195,7 +198,7 @@ public partial class ServiceRequestPdu : LogisticsFamilyPdu
     /// <summary>
     /// Type of service requested, Section 7.4.2
     /// </summary>
-    public byte ServiceTypeRequested { get; set; }
+    public ServiceRequestServiceTypeRequested ServiceTypeRequested { get; set; }
 
     /// <summary>
     /// How many requested, Section 7.4.2

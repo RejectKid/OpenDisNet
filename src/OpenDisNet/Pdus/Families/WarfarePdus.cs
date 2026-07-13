@@ -1,5 +1,8 @@
 // DIS v7 protocol models reviewed from WarfareFamilyPdus.xml.
 #pragma warning disable CS0108
+using OpenDisNet.Enumerations;
+using OpenDisNet.Protocol;
+
 namespace OpenDisNet.Pdus;
 
 /// <summary>
@@ -53,7 +56,7 @@ public partial class DetonationPdu : WarfareFamilyPdu
     /// <summary>
     /// result of the detonation, Section 7.3.3
     /// </summary>
-    public byte DetonationResult { get; set; }
+    public DetonationResult DetonationResult { get; set; }
 
     /// <summary>
     /// How many articulation parameters we have, Section 7.3.3
@@ -129,12 +132,12 @@ public partial class DirectedEnergyFirePdu : WarfareFamilyPdu
     /// <summary>
     /// 16bit Boolean field shall contain various flags to indicate status information needed to process a DE, Section 7.3.4
     /// </summary>
-    public ushort Flags { get; set; }
+    public DeFireFlags Flags { get; set; }
 
     /// <summary>
     /// Field shall identify the pulse shape and shall be represented as an 8-bit enumeration, Section 7.3.4
     /// </summary>
-    public byte PulseShape { get; set; }
+    public DeFirePulseShape PulseShape { get; set; }
 
     public byte Pad2 { get; set; }
 

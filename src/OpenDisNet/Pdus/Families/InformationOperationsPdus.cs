@@ -1,5 +1,8 @@
 // DIS v7 protocol models reviewed from InformationOperationsFamilyPdus.xml.
 #pragma warning disable CS0108
+using OpenDisNet.Enumerations;
+using OpenDisNet.Protocol;
+
 namespace OpenDisNet.Pdus;
 
 /// <summary>
@@ -20,13 +23,13 @@ public partial class InformationOperationsActionPdu : InformationOperationsFamil
     /// </summary>
     public uint RequestId { get; set; }
 
-    public ushort IOWarfareType { get; set; }
+    public IoActionIoWarfareType IOWarfareType { get; set; }
 
-    public ushort IOSimulationSource { get; set; }
+    public IoActionIoSimulationSource IOSimulationSource { get; set; }
 
-    public ushort IOActionType { get; set; }
+    public IoActionIoActionType IOActionType { get; set; }
 
-    public ushort IOActionPhase { get; set; }
+    public IoActionIoActionPhase IOActionPhase { get; set; }
 
     public uint Padding1 { get; set; }
 
@@ -62,12 +65,12 @@ public partial class InformationOperationsReportPdu : InformationOperationsFamil
     /// <summary>Creates a DIS v7 InformationOperationsReportPdu with its wire discriminator fields initialized.</summary>
     public InformationOperationsReportPdu() => Initialize(71, 13);
 
-    public ushort IoSimSource { get; set; }
+    public IoActionIoSimulationSource IoSimSource { get; set; }
 
     /// <summary>
     /// request ID provides a unique identifier
     /// </summary>
-    public byte IoReportType { get; set; }
+    public IoReportIoReportType IoReportType { get; set; }
 
     public byte Padding1 { get; set; }
 

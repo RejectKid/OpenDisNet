@@ -6,9 +6,9 @@ public abstract partial class Pdu : IDisPdu
 {
     protected void Initialize(byte pduType, byte protocolFamily)
     {
-        ProtocolVersion = (byte)DisProtocolVersion.Ieee1278_1_2012;
-        PduType = pduType;
-        ProtocolFamily = protocolFamily;
+        ProtocolVersion = DisProtocolVersion.Ieee1278_1_2012;
+        PduType = (PduType)pduType;
+        ProtocolFamily = (ProtocolFamily)protocolFamily;
         if (this is PduBase body)
             body.PduStatus ??= new PduStatus();
     }

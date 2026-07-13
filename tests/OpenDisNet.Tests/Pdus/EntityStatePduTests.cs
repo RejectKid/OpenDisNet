@@ -1,4 +1,5 @@
 using System.Text;
+using OpenDisNet.Enumerations;
 using OpenDisNet.Pdus;
 using OpenDisNet.Protocol;
 
@@ -11,10 +12,10 @@ public sealed class EntityStatePduTests
     {
         var expected = (EntityStatePdu)PduFactory.Create(PduType.EntityState, exerciseId: 4);
         expected.EntityId = new EntityId(1, 2, 3);
-        expected.ForceId = 2;
+        expected.ForceId = ForceId.Opposing;
         expected.EntityLocation = new() { X = 100, Y = 200, Z = 300 };
         expected.EntityOrientation = new() { Psi = 1, Theta = 2, Phi = 3 };
-        expected.Marking.CharacterSet = 1;
+        expected.Marking.CharacterSet = EntityMarkingCharacterSet.Ascii;
         Encoding.ASCII.GetBytes("EAGLE-1").CopyTo(expected.Marking.Characters, 0);
 
         byte[] bytes = DisSerializer.Serialize(expected);

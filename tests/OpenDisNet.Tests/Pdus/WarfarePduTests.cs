@@ -1,3 +1,4 @@
+using OpenDisNet.Enumerations;
 using OpenDisNet.Pdus;
 using OpenDisNet.Protocol;
 
@@ -29,7 +30,7 @@ public sealed class WarfarePduTests
         var expected = (DetonationPdu)PduFactory.Create(PduType.Detonation);
         expected.VariableParameters.Add(new()
         {
-            RecordType = 5,
+            RecordType = (VariableParameterRecordType)5,
             RecordSpecificFields = Enumerable.Range(1, 15).Select(x => (byte)x).ToArray(),
         });
 

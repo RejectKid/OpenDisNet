@@ -5,7 +5,24 @@ namespace OpenDisNet.Generator;
 internal sealed record DisSchema(
     ImmutableArray<ClassDefinition> Classes,
     ImmutableArray<PduDefinition> Pdus,
-    ImmutableArray<string> SourceFiles);
+    ImmutableArray<string> SourceFiles,
+    ImmutableArray<SisoTypeDefinition> SisoTypes);
+
+internal sealed record SisoTypeDefinition(
+    string Name,
+    int Uid,
+    int Bits,
+    string Kind,
+    ImmutableArray<SisoMemberDefinition> Members);
+
+internal sealed record SisoMemberDefinition(
+    string Name,
+    ulong? Value,
+    int? BitPosition,
+    int? Length,
+    string? Description,
+    int? CrossReference,
+    bool Deprecated);
 
 internal sealed record ClassDefinition(
     string Name,
@@ -30,7 +47,8 @@ internal sealed record FieldDefinition(
     int? BitSize,
     bool IsDynamicLength,
     bool IsHidden,
-    string? Comment);
+    string? Comment,
+    FieldKind? ElementKind = null);
 
 internal enum FieldKind
 {

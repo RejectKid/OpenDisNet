@@ -1,5 +1,8 @@
 // DIS v7 protocol models reviewed from MinefieldFamilyPdus.xml.
 #pragma warning disable CS0108
+using OpenDisNet.Enumerations;
+using OpenDisNet.Protocol;
+
 namespace OpenDisNet.Pdus;
 
 /// <summary>
@@ -102,11 +105,11 @@ public partial class MinefieldDataPdu : MinefieldFamilyPdu
 
     public ushort[] MineEntityNumber { get; set; } = [];
 
-    public List<ushort> Fusing { get; set; } = [];
+    public List<MinefieldDataFusing> Fusing { get; set; } = [];
 
     public byte[] ScalarDetectionCoefficient { get; set; } = [];
 
-    public List<byte> PaintScheme { get; set; } = [];
+    public List<MinefieldDataPaintScheme> PaintScheme { get; set; } = [];
 
     public byte[] NumberOfTripDetonationWires { get; set; } = [];
 
@@ -237,7 +240,7 @@ public partial class MinefieldStatePdu : MinefieldFamilyPdu
     /// <summary>
     /// force ID provides a unique identifier
     /// </summary>
-    public byte ForceId { get; set; }
+    public ForceId ForceId { get; set; }
 
     /// <summary>
     /// Number of permieter points
@@ -267,7 +270,7 @@ public partial class MinefieldStatePdu : MinefieldFamilyPdu
     /// <summary>
     /// appearance bitflags information needed for displaying the symbology of the minefield as a doctrinal minefield graphic
     /// </summary>
-    public ushort Appearance { get; set; }
+    public MinefieldStateAppearanceBitMap Appearance { get; set; }
 
     /// <summary>
     /// protocolMode. First two bits are the protocol mode, 14 bits reserved.

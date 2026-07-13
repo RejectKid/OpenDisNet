@@ -29,9 +29,11 @@ untrusted network input.
    octets are represented. Callers never update a parallel count property.
 5. Known records are strongly typed. Standard-defined open or system-specific
    payloads use an explicit raw-octet value that round-trips unchanged.
-6. Unknown PDU types and vendor data are preserved when their framing is valid.
-7. Parsing is bounded, big-endian, deterministic, and independent of reflection.
-8. Public APIs do not expose generator metadata, source XML terminology, or
+6. SISO-defined values use enums and structured bitfield value types. Unknown
+   enumeration values and reserved bits always round-trip losslessly.
+7. Unknown PDU types and vendor data are preserved when their framing is valid.
+8. Parsing is bounded, big-endian, deterministic, and independent of reflection.
+9. Public APIs do not expose generator metadata, source XML terminology, or
    classes copied from another DIS implementation.
 
 ## Compatibility

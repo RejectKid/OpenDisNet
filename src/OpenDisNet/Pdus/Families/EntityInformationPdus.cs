@@ -1,5 +1,8 @@
 // DIS v7 protocol models reviewed from EntityInformationFamilyPdus.xml.
 #pragma warning disable CS0108
+using OpenDisNet.Enumerations;
+using OpenDisNet.Protocol;
+
 namespace OpenDisNet.Pdus;
 
 /// <summary>
@@ -28,22 +31,22 @@ public partial class AttributePdu : EntityInformationInteractionFamilyPdu
     /// <summary>
     /// This field shall represent the type of the PDU that is being extended or updated, if applicable. It shall be represented by an 8-bit enumeration.
     /// </summary>
-    public byte AttributeRecordPduType { get; set; }
+    public PduType AttributeRecordPduType { get; set; }
 
     /// <summary>
     /// This field shall indicate the Protocol Version associated with the Attribute Record PDU Type. It shall be represented by an 8-bit enumeration.
     /// </summary>
-    public byte AttributeRecordProtocolVersion { get; set; }
+    public ProtocolFamily AttributeRecordProtocolVersion { get; set; }
 
     /// <summary>
     /// This field shall contain the Attribute record type of the Attribute records in the PDU if they all have the same Attribute record type. It shall be represented by a 32-bit enumeration.
     /// </summary>
-    public uint MasterAttributeRecordType { get; set; }
+    public VariableRecordType MasterAttributeRecordType { get; set; }
 
     /// <summary>
     /// This field shall identify the action code applicable to this Attribute PDU. The Action Code shall apply to all Attribute records contained in the PDU. It shall be represented by an 8-bit enumeration.
     /// </summary>
-    public byte ActionCode { get; set; }
+    public DisAttributeActionCode ActionCode { get; set; }
 
     /// <summary>
     /// Padding
@@ -183,7 +186,7 @@ public partial class CollisionPdu : EntityInformationInteractionFamilyPdu
     /// <summary>
     /// This field shall identify the type of collision. The Collision Type field shall be represented by an 8-bit record of enumerations
     /// </summary>
-    public byte CollisionType { get; set; }
+    public CollisionType CollisionType { get; set; }
 
     /// <summary>
     /// some padding
@@ -230,7 +233,7 @@ public partial class EntityStatePdu : EntityInformationInteractionFamilyPdu
     /// <summary>
     /// What force this entity is affiliated with, eg red, blue, neutral, etc
     /// </summary>
-    public byte ForceId { get; set; }
+    public ForceId ForceId { get; set; }
 
     /// <summary>
     /// How many variable parameters are in the variable length list. In earlier versions of DIS these were known as articulation parameters
@@ -277,7 +280,7 @@ public partial class EntityStatePdu : EntityInformationInteractionFamilyPdu
     /// <summary>
     /// a series of bit flags
     /// </summary>
-    public uint Capabilities { get; set; }
+    public EntityCapabilities Capabilities { get; set; }
 
     /// <summary>
     /// variable length list of variable parameters. In earlier DIS versions this was articulation parameters.

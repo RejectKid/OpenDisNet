@@ -11,6 +11,7 @@ internal static class CodecWriter
 
         text.AppendLine("// DIS v7 binary codec. Every standardized PDU dispatch route is listed below.");
         text.AppendLine("using OpenDisNet.Binary;");
+        text.AppendLine("using OpenDisNet.Enumerations;");
         text.AppendLine("using OpenDisNet.Protocol;");
         text.AppendLine();
         text.AppendLine("namespace OpenDisNet.Pdus;");
@@ -89,10 +90,10 @@ internal static class CodecWriter
 
         text.AppendLine("    private static void ApplyHeader(Pdu value, DisHeader header)");
         text.AppendLine("    {");
-        text.AppendLine("        value.ProtocolVersion = (byte)header.ProtocolVersion;");
+        text.AppendLine("        value.ProtocolVersion = header.ProtocolVersion;");
         text.AppendLine("        value.ExerciseId = header.ExerciseId;");
-        text.AppendLine("        value.PduType = (byte)header.PduType;");
-        text.AppendLine("        value.ProtocolFamily = (byte)header.ProtocolFamily;");
+        text.AppendLine("        value.PduType = header.PduType;");
+        text.AppendLine("        value.ProtocolFamily = header.ProtocolFamily;");
         text.AppendLine("        value.Timestamp = header.Timestamp;");
         text.AppendLine("        value.Length = header.Length;");
         text.AppendLine("        if (value is PduBase body)");
@@ -234,8 +235,10 @@ internal static class CodecWriter
                 text.AppendLine($"        value.{property} = Read{field.TypeName}(ref reader);");
                 break;
             case FieldKind.Enumeration:
+                text.AppendLine($"        value.{property} = ({field.TypeName})reader.{ReadBits(field.BitSize)}(\"{field.Name}\");");
+                break;
             case FieldKind.BitField:
-                text.AppendLine($"        value.{property} = reader.{ReadBits(field.BitSize)}(\"{field.Name}\");");
+                text.AppendLine($"        value.{property} = new {field.TypeName}(reader.{ReadBits(field.BitSize)}(\"{field.Name}\"));");
                 break;
             case FieldKind.ObjectList:
                 WriteReadList(text, field, property, owner);
@@ -259,7 +262,7 @@ internal static class CodecWriter
     private static void WriteReadList(StringBuilder text, FieldDefinition field, string property, string owner)
     {
         string count = CountExpression(field, "value");
-        string itemType = field.BitSize is null ? field.TypeName : UnsignedBits(field.BitSize);
+        string itemType = field.TypeName;
         text.AppendLine($"        int {property}Count = CheckedCount({count}, reader.Remaining, \"{field.Name}\");");
 
         if (IsByteLengthObjectList(owner, field.Name))
@@ -276,7 +279,11 @@ internal static class CodecWriter
 
         text.AppendLine($"        value.{property} = new List<{itemType}>({property}Count);");
         text.AppendLine($"        for (int index = 0; index < {property}Count; index++)");
-        string read = field.BitSize is null ? $"Read{field.TypeName}(ref reader)" : $"reader.{ReadBits(field.BitSize)}(\"{field.Name}\")";
+        string read = field.BitSize is null
+            ? $"Read{field.TypeName}(ref reader)"
+            : field.ElementKind == FieldKind.BitField
+                ? $"new {field.TypeName}(reader.{ReadBits(field.BitSize)}(\"{field.Name}\"))"
+                : $"({field.TypeName})reader.{ReadBits(field.BitSize)}(\"{field.Name}\")";
         text.AppendLine($"            value.{property}.Add({read});");
     }
 
@@ -367,14 +374,19 @@ internal static class CodecWriter
                 text.AppendLine($"        Write{field.TypeName}(ref writer, value.{property});");
                 break;
             case FieldKind.Enumeration:
+                text.AppendLine($"        writer.{WriteBits(field.BitSize)}(({UnsignedBits(field.BitSize)})value.{property}, \"{field.Name}\");");
+                break;
             case FieldKind.BitField:
-                text.AppendLine($"        writer.{WriteBits(field.BitSize)}(value.{property}, \"{field.Name}\");");
+                text.AppendLine($"        writer.{WriteBits(field.BitSize)}(value.{property}.Value, \"{field.Name}\");");
                 break;
             case FieldKind.ObjectList:
                 if (field.BitSize is null)
                     text.AppendLine($"        foreach ({field.TypeName} item in value.{property}) Write{field.TypeName}(ref writer, item);");
                 else
-                    text.AppendLine($"        foreach ({UnsignedBits(field.BitSize)} item in value.{property}) writer.{WriteBits(field.BitSize)}(item, \"{field.Name}\");");
+                {
+                    string wireValue = field.ElementKind == FieldKind.BitField ? "item.Value" : $"({UnsignedBits(field.BitSize)})item";
+                    text.AppendLine($"        foreach ({field.TypeName} item in value.{property}) writer.{WriteBits(field.BitSize)}({wireValue}, \"{field.Name}\");");
+                }
                 break;
             case FieldKind.PrimitiveList:
                 text.AppendLine($"        foreach ({Primitive(field.TypeName)} item in value.{property}) writer.{WriteMethod(field.TypeName)}(item, \"{field.Name}\");");
@@ -533,6 +545,8 @@ internal static class CodecWriter
     {
         string normalized = value.Replace("ID", "Id", StringComparison.Ordinal);
         string property = char.ToUpperInvariant(normalized[0]) + normalized[1..];
+        if (owner is "SignalPdu" or "IntercomSignalPdu" && property == "Samples")
+            return "SampleCount";
         if (owner == "EntityId" && property == "EntityId")
             return "EntityNumber";
         return string.Equals(property, owner, StringComparison.Ordinal) ? property + "Value" : property;

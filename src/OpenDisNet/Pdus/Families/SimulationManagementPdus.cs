@@ -1,5 +1,8 @@
 // DIS v7 protocol models reviewed from SimulationManagementFamilyPdus.xml.
 #pragma warning disable CS0108
+using OpenDisNet.Enumerations;
+using OpenDisNet.Protocol;
+
 namespace OpenDisNet.Pdus;
 
 /// <summary>
@@ -13,12 +16,12 @@ public partial class AcknowledgePdu : SimulationManagementFamilyPdu
     /// <summary>
     /// type of message being acknowledged
     /// </summary>
-    public ushort AcknowledgeFlag { get; set; }
+    public AcknowledgeAcknowledgeFlag AcknowledgeFlag { get; set; }
 
     /// <summary>
     /// Whether or not the receiving entity was able to comply with the request
     /// </summary>
-    public ushort ResponseFlag { get; set; }
+    public AcknowledgeResponseFlag ResponseFlag { get; set; }
 
     /// <summary>
     /// Request ID that is unique
@@ -43,7 +46,7 @@ public partial class ActionRequestPdu : SimulationManagementFamilyPdu
     /// <summary>
     /// identifies the particular action being requested(see Section 7 of SISO-REF-010).
     /// </summary>
-    public uint ActionId { get; set; }
+    public ActionRequestActionId ActionId { get; set; }
 
     /// <summary>
     /// Number of fixed datum records
@@ -83,7 +86,7 @@ public partial class ActionResponsePdu : SimulationManagementFamilyPdu
     /// <summary>
     /// Status of response
     /// </summary>
-    public uint RequestStatus { get; set; }
+    public ActionResponseRequestStatus RequestStatus { get; set; }
 
     /// <summary>
     /// Number of fixed datum records
@@ -238,7 +241,7 @@ public partial class EventReportPdu : SimulationManagementFamilyPdu
     /// <summary>
     /// Type of event
     /// </summary>
-    public uint EventType { get; set; }
+    public EventReportEventType EventType { get; set; }
 
     /// <summary>
     /// padding
@@ -380,12 +383,12 @@ public partial class StopFreezePdu : SimulationManagementFamilyPdu
     /// <summary>
     /// Reason the simulation was stopped or frozen (see section 7 of SISO-REF-010) represented by an 8-bit enumeration
     /// </summary>
-    public byte Reason { get; set; }
+    public StopFreezeReason Reason { get; set; }
 
     /// <summary>
     /// Internal behavior of the entity (or simulation) and its appearance while frozen to the other participants
     /// </summary>
-    public byte FrozenBehavior { get; set; }
+    public StopFreezeFrozenBehavior FrozenBehavior { get; set; }
 
     /// <summary>
     /// padding

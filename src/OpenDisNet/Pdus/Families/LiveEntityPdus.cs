@@ -1,5 +1,8 @@
 // DIS v7 protocol models reviewed from LiveEntityFamilyPdus.xml.
 #pragma warning disable CS0108
+using OpenDisNet.Enumerations;
+using OpenDisNet.Protocol;
+
 namespace OpenDisNet.Pdus;
 
 /// <summary>
@@ -17,7 +20,7 @@ public partial class AppearancePdu : LiveEntityFamilyPdu
     /// </summary>
     public ushort AppearanceFlags { get; set; }
 
-    public byte ForceId { get; set; }
+    public ForceId ForceId { get; set; }
 
     public EntityType EntityType { get; set; } = new EntityType();
 
@@ -25,7 +28,7 @@ public partial class AppearancePdu : LiveEntityFamilyPdu
 
     public EntityMarking EntityMarking { get; set; } = new EntityMarking();
 
-    public uint Capabilities { get; set; }
+    public EntityCapabilities Capabilities { get; set; }
 
     public Appearance AppearanceFields { get; set; } = new Appearance();
 
@@ -50,10 +53,10 @@ public partial class ArticulatedPartsPdu : LiveEntityFamilyPdu
 /// <summary>
 /// 9.4.6 Communicate information associated with the impact or detonation of a munition.
 /// </summary>
-public partial class LEDetonationPdu : LiveEntityFamilyPdu
+public partial class LiveEntityDetonationPdu : LiveEntityFamilyPdu
 {
-    /// <summary>Creates a DIS v7 LEDetonationPdu with its wire discriminator fields initialized.</summary>
-    public LEDetonationPdu() => Initialize(50, 11);
+    /// <summary>Creates a DIS v7 LiveEntityDetonationPdu with its wire discriminator fields initialized.</summary>
+    public LiveEntityDetonationPdu() => Initialize(50, 11);
 
     public EntityId FiringLiveEntityId { get; set; } = new EntityId();
 
@@ -85,12 +88,19 @@ public partial class LEDetonationPdu : LiveEntityFamilyPdu
 }
 
 /// <summary>
+/// Does not inherit from PduBase.  See section 9.
+/// </summary>
+public abstract partial class LiveEntityFamilyPdu : Pdu
+{
+}
+
+/// <summary>
 /// 9.4.5 Representation of weapons fire in a DIS exercise involving LEs.
 /// </summary>
-public partial class LEFirePdu : LiveEntityFamilyPdu
+public partial class LiveEntityFirePdu : LiveEntityFamilyPdu
 {
-    /// <summary>Creates a DIS v7 LEFirePdu with its wire discriminator fields initialized.</summary>
-    public LEFirePdu() => Initialize(49, 11);
+    /// <summary>Creates a DIS v7 LiveEntityFirePdu with its wire discriminator fields initialized.</summary>
+    public LiveEntityFirePdu() => Initialize(49, 11);
 
     public EntityId FiringLiveEntityId { get; set; } = new EntityId();
 
@@ -116,33 +126,12 @@ public partial class LEFirePdu : LiveEntityFamilyPdu
 }
 
 /// <summary>
-/// Alias, more descriptive name for LEDetonationPdu.
-/// </summary>
-public partial class LiveEntityDetonationPdu
-{
-}
-
-/// <summary>
-/// Does not inherit from PduBase.  See section 9.
-/// </summary>
-public abstract partial class LiveEntityFamilyPdu : Pdu
-{
-}
-
-/// <summary>
-/// Alias, more descriptive name for LEFirePdu.
-/// </summary>
-public partial class LiveEntityFirePdu
-{
-}
-
-/// <summary>
 /// 9.4.2 The Time Space Position Information (TSPI) PDU shall communicate information about the LE’s state vector.
 /// </summary>
-public partial class TSPIPdu : LiveEntityFamilyPdu
+public partial class TimeSpacePositionInformationPdu : LiveEntityFamilyPdu
 {
-    /// <summary>Creates a DIS v7 TSPIPdu with its wire discriminator fields initialized.</summary>
-    public TSPIPdu() => Initialize(46, 11);
+    /// <summary>Creates a DIS v7 TimeSpacePositionInformationPdu with its wire discriminator fields initialized.</summary>
+    public TimeSpacePositionInformationPdu() => Initialize(46, 11);
 
     public EntityId LiveEntityId { get; set; } = new EntityId();
 
@@ -169,12 +158,5 @@ public partial class TSPIPdu : LiveEntityFamilyPdu
 
     public byte[] SystemSpecificData { get; set; } = [];
 
-}
-
-/// <summary>
-/// Alias, more descriptive name for TSPIPdu.
-/// </summary>
-public partial class TimeSpacePositionInformationPdu
-{
 }
 

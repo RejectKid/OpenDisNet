@@ -23,10 +23,10 @@ internal static class FactoryWriter
         text.AppendLine("            _ => throw new ArgumentOutOfRangeException(nameof(pduType), pduType, \"DIS v7 defines PDU types 1 through 72.\"),");
         text.AppendLine("        };");
         text.AppendLine();
-        text.AppendLine("        pdu.ProtocolVersion = 7;");
+        text.AppendLine("        pdu.ProtocolVersion = DisProtocolVersion.Ieee1278_1_2012;");
         text.AppendLine("        pdu.ExerciseId = exerciseId;");
-        text.AppendLine("        pdu.PduType = (byte)pduType;");
-        text.AppendLine("        pdu.ProtocolFamily = ProtocolFamilyFor((byte)pduType);");
+        text.AppendLine("        pdu.PduType = pduType;");
+        text.AppendLine("        pdu.ProtocolFamily = (ProtocolFamily)ProtocolFamilyFor((byte)pduType);");
         text.AppendLine("        if (pdu is PduBase body)");
         text.AppendLine("            body.PduStatus = new PduStatus();");
         text.AppendLine("        return pdu;");

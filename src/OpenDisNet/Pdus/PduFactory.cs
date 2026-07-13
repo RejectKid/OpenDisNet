@@ -36,9 +36,9 @@ public static class PduFactory
             25 => new TransmitterPdu(),
             26 => new SignalPdu(),
             27 => new ReceiverPdu(),
-            28 => new IFFPdu(),
+            28 => new IdentificationFriendOrFoePdu(),
             29 => new UnderwaterAcousticPdu(),
-            30 => new SEESPdu(),
+            30 => new SupplementalEmissionEntityStatePdu(),
             31 => new IntercomSignalPdu(),
             32 => new IntercomControlPdu(),
             33 => new AggregateStatePdu(),
@@ -54,26 +54,26 @@ public static class PduFactory
             43 => new PointObjectStatePdu(),
             44 => new LinearObjectStatePdu(),
             45 => new ArealObjectStatePdu(),
-            46 => new TSPIPdu(),
+            46 => new TimeSpacePositionInformationPdu(),
             47 => new AppearancePdu(),
             48 => new ArticulatedPartsPdu(),
-            49 => new LEFirePdu(),
-            50 => new LEDetonationPdu(),
-            51 => new CreateEntityRPdu(),
-            52 => new RemoveEntityRPdu(),
-            53 => new StartResumeRPdu(),
-            54 => new StopFreezeRPdu(),
-            55 => new AcknowledgeRPdu(),
-            56 => new ActionRequestRPdu(),
-            57 => new ActionResponseRPdu(),
-            58 => new DataQueryRPdu(),
-            59 => new SetDataRPdu(),
-            60 => new DataRPdu(),
-            61 => new EventReportRPdu(),
-            62 => new CommentRPdu(),
-            63 => new RecordRPdu(),
-            64 => new SetRecordRPdu(),
-            65 => new RecordQueryRPdu(),
+            49 => new LiveEntityFirePdu(),
+            50 => new LiveEntityDetonationPdu(),
+            51 => new CreateEntityReliablePdu(),
+            52 => new RemoveEntityReliablePdu(),
+            53 => new StartResumeReliablePdu(),
+            54 => new StopFreezeReliablePdu(),
+            55 => new AcknowledgeReliablePdu(),
+            56 => new ActionRequestReliablePdu(),
+            57 => new ActionResponseReliablePdu(),
+            58 => new DataQueryReliablePdu(),
+            59 => new SetDataReliablePdu(),
+            60 => new DataReliablePdu(),
+            61 => new EventReportReliablePdu(),
+            62 => new CommentReliablePdu(),
+            63 => new RecordReliablePdu(),
+            64 => new SetRecordReliablePdu(),
+            65 => new RecordQueryReliablePdu(),
             66 => new CollisionElasticPdu(),
             67 => new EntityStateUpdatePdu(),
             68 => new DirectedEnergyFirePdu(),
@@ -84,10 +84,10 @@ public static class PduFactory
             _ => throw new ArgumentOutOfRangeException(nameof(pduType), pduType, "DIS v7 defines PDU types 1 through 72."),
         };
 
-        pdu.ProtocolVersion = 7;
+        pdu.ProtocolVersion = DisProtocolVersion.Ieee1278_1_2012;
         pdu.ExerciseId = exerciseId;
-        pdu.PduType = (byte)pduType;
-        pdu.ProtocolFamily = ProtocolFamilyFor((byte)pduType);
+        pdu.PduType = pduType;
+        pdu.ProtocolFamily = (ProtocolFamily)ProtocolFamilyFor((byte)pduType);
         if (pdu is PduBase body)
             body.PduStatus = new PduStatus();
         return pdu;

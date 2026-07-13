@@ -10,7 +10,7 @@ input tests, and round-trip tests.
 - [x] Big-endian integer and IEEE-754 primitives
 - [x] Defensive length and version validation
 - [x] Unknown/future PDU preservation
-- [x] Public protocol models for all 253 reviewed DIS v7 schema classes
+- [x] Public protocol models for all 233 concrete DIS v7 wire classes
 - [x] Machine-verified catalog of all 72 standardized PDU model types
 - [x] Binary dispatch, parsing, and serialization for PDU types 1-72
 - [x] Default construction and byte-identical round trip for PDU types 1-72
@@ -18,7 +18,8 @@ input tests, and round-trip tests.
 - [x] Populated Signal, Transmitter, Intercom Control, and Minefield Data cases
 - [ ] Independent populated vectors for every variable-layout PDU
 - [ ] Truncation-at-every-boundary and mutation coverage for every PDU family
-- [ ] SISO-REF-010-2025 v36 generated enumerations
+- [x] SISO-REF-010-2025 v36 typed enumerations and structured bitfields
+- [x] Lossless round trip of unknown enumeration values and reserved bitfield bits
 
 ## PDU families
 
