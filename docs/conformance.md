@@ -37,6 +37,15 @@ input tests, and round-trip tests.
 - [x] 0.8 Live Entity
 - [x] 0.8 Information Operations
 
+## 0.9 release readiness
+
+- [x] Frozen, compiler-enforced public C# API baseline
+- [x] NuGet package compatibility validation against 0.8.0
+- [x] Packed-package consumer validation on .NET 9 and .NET 10
+- [x] Prerelease-aware GitHub and NuGet publishing workflow
+- [x] External RC validation checklist and structured feedback form
+- [ ] External RC feedback reviewed and high-impact findings resolved
+
 Family coverage is implemented and exercised entirely in C#/.NET. Frozen bytes
 from an independent implementation are test inputs only; they are not product
 code or a runtime/build dependency. Two default vectors and 28 aggressively

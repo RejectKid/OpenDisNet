@@ -38,6 +38,13 @@ untrusted network input.
 
 ## Compatibility
 
-The package is pre-1.0 while the complete PDU surface is being reviewed. After
-1.0, public names and wire behavior follow semantic versioning. Internal codec
-generation may change without becoming part of the supported API.
+The 0.9 release-candidate line freezes the complete public C# surface before
+1.0. `PublicAPI.Shipped.txt` is the reviewable contract. Compiler analyzers
+reject an unrecorded public addition or removal, and NuGet package validation
+compares new artifacts with version 0.8.0 for binary compatibility.
+
+New API belongs in `PublicAPI.Unshipped.txt` and requires tests plus a changelog
+entry. Removing or changing frozen API requires explicit breaking-change review
+and another release candidate. After 1.0, public names and wire behavior follow
+semantic versioning. Internal codec generation may change without becoming part
+of the supported API.
