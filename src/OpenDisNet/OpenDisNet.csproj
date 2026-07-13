@@ -4,7 +4,7 @@
     <AssemblyName>OpenDisNet</AssemblyName>
     <RootNamespace>OpenDisNet</RootNamespace>
     <PackageId>OpenDisNet</PackageId>
-    <Version>0.1.0</Version>
+    <Version>1.0.1</Version>
     <Authors>RejectKid</Authors>
     <Description>High-performance, type-safe DIS Protocol Version 7 binary codec for .NET.</Description>
     <PackageTags>DIS;IEEE-1278;simulation;PDU;protocol</PackageTags>
@@ -18,7 +18,7 @@
     <NoWarn>$(NoWarn);CS1591</NoWarn>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <EnablePackageValidation>true</EnablePackageValidation>
-    <PackageValidationBaselineVersion>0.9.0</PackageValidationBaselineVersion>
+    <PackageValidationBaselineVersion>1.0.0</PackageValidationBaselineVersion>
     <EnableStrictModeForCompatibleTfms>true</EnableStrictModeForCompatibleTfms>
   </PropertyGroup>
   <ItemGroup>

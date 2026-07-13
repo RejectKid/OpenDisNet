@@ -1,17 +1,17 @@
-# 0.9 external release candidate
+# External release candidates
 
-Version 0.9 is the public API freeze and external validation stage before 1.0.
-The current C# surface is recorded in `PublicAPI.Shipped.txt`; builds reject an
-undocumented addition or removal, and package validation compares every new
-artifact with the published 0.8.0 package.
+Release candidates provide an external validation stage before a stable minor
+or major release. The current C# surface is recorded in
+`PublicAPI.Shipped.txt`; builds reject an undocumented addition or removal, and
+package validation compares every new artifact with the stable 1.0.0 baseline.
 
 ## Install an RC
 
-Release candidates use SemVer tags such as `v0.9.0-rc.1`. After a candidate is
+Release candidates use SemVer tags such as `v1.1.0-rc.1`. After a candidate is
 published, install that exact version so test results remain reproducible:
 
 ```shell
-dotnet add package OpenDisNet --version 0.9.0-rc.1
+dotnet add package OpenDisNet --version 1.1.0-rc.1
 ```
 
 GitHub and NuGet identify RC builds as prereleases. Do not use an RC in a
@@ -42,9 +42,9 @@ exact package version, target framework, operating system, PDU families tested,
 and whether the problem concerns API usability, wire interoperability,
 performance, or documentation.
 
-## 1.0 exit criteria
+## Stable-release exit criteria
 
-- Public API analyzer and 0.8.0 package-compatibility validation remain clean.
+- Public API analyzer and stable-baseline package-compatibility validation remain clean.
 - The packed-package consumer passes on .NET 9 and .NET 10.
 - No unresolved high-impact wire-correctness or data-loss defect remains.
 - External testing covers real application workflows without relying on

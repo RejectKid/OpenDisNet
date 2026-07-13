@@ -332,7 +332,7 @@ dB and RPM)"/>
             <primitive type="float32"/>
         </attribute>
     
-        <attribute name="beamSweepSync" comment="allows receiver to synchronize its regenerated scan pattern to that of the emmitter. Specifies the percentage of time a scan is through its pattern from its origion.">
+        <attribute name="beamSweepSync" comment="Allows a receiver to synchronize its regenerated scan pattern to that of the emitter. Specifies the percentage of time a scan has progressed through its pattern from its origin.">
             <primitive type="float32"/>
         </attribute>
     

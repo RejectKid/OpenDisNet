@@ -6,7 +6,6 @@
     <Project Path="src/OpenDisNet/OpenDisNet.csproj" />
   </Folder>
   <Folder Name="/tests/">
-    <Project Path="tests/OpenDisNet.Reference/OpenDisNet.Reference.csproj" />
     <Project Path="tests/OpenDisNet.Tests/OpenDisNet.Tests.csproj" />
   </Folder>
   <Folder Name="/tools/">

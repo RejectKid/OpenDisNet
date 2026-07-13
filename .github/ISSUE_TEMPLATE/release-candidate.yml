@@ -1,5 +1,5 @@
 name: Release candidate feedback
-description: Report OpenDisNet 0.9 RC interoperability, API, performance, or documentation results.
+description: Report OpenDisNet prerelease interoperability, API, performance, or documentation results.
 title: "[RC feedback]: "
 body:
   - type: markdown
@@ -10,8 +10,8 @@ body:
     id: version
     attributes:
       label: Package version
-      description: Enter the exact prerelease version, for example 0.9.0-rc.1.
-      placeholder: 0.9.0-rc.1
+      description: Enter the exact prerelease version, for example 1.1.0-rc.1.
+      placeholder: 1.1.0-rc.1
     validations:
       required: true
   - type: input

@@ -23,7 +23,7 @@ input tests, and round-trip tests.
 - [x] SISO-REF-010-2025 v36 typed enumerations and structured bitfields
 - [x] Lossless round trip of unknown enumeration values and reserved bitfield bits
 
-## PDU families
+## Historical family delivery milestones
 
 - [x] 0.3 Entity Information/Interaction
 - [x] 0.3 Warfare
@@ -38,7 +38,7 @@ input tests, and round-trip tests.
 - [x] 0.8 Live Entity
 - [x] 0.8 Information Operations
 
-## 0.9 release readiness
+## Historical 0.9 release-readiness milestone
 
 - [x] Frozen, compiler-enforced public C# API baseline
 - [x] NuGet package compatibility validation against 0.8.0
@@ -47,7 +47,7 @@ input tests, and round-trip tests.
 - [x] External RC validation checklist and structured feedback form
 - [x] External RC feedback channel reviewed; no high-impact finding remains open
 
-## 1.0 release gates
+## Completed 1.0 release gates
 
 - [x] SHA-256-pinned conformance audit manifest and published audit report
 - [x] Every PDU type and protocol family accounted for exactly once
@@ -64,8 +64,10 @@ code or a runtime/build dependency. Two default vectors and 28 aggressively
 populated vectors expose documented defects in that reference generator and are
 retained as differential evidence rather than copied into OpenDisNet behavior.
 
-This file is a release gate. Version 1.0 will not be labeled complete until all
-applicable entries are checked and the reviewable project audit is complete.
+This file records the release gates completed for version 1.0. Future releases
+must retain the applicable checks and document any changed conformance scope.
 
 The completed scope, evidence, limitations, and differential exceptions are in
-the [1.0 conformance audit](conformance-audit-v1.0.md).
+the [1.0 conformance audit](conformance-audit-v1.0.md). The documentation-only
+schema corrections and test-harness cleanup in 1.0.1 are recorded in the
+[1.0.1 maintenance note](conformance-maintenance-v1.0.1.md).

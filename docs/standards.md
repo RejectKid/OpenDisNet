@@ -19,10 +19,10 @@ cross-checks:
 
 - `open-dis/opendis7-java`
 - `open-dis/opendis7-source-generator`
-- `open-dis/open-dis-csharp`
 
 The Java source generator reports 72 DIS v7 PDUs and provides machine-readable
-layout descriptions. It is an offline reference only: OpenDisNet is a native
-C#/.NET design with no Java code, dependency, or runtime requirement. Its
-conformance claim is based on its own coverage matrix and tests, not merely the
-presence of a corresponding reference class.
+layout descriptions and supplied the frozen independent byte-vector corpus. It
+is an offline reference only: OpenDisNet is a native C#/.NET design with no Java
+code, dependency, or runtime requirement. Its conformance claim is based on its
+own coverage matrix and tests, not merely the presence of a corresponding
+reference class.
