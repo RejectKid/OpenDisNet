@@ -1,0 +1,40 @@
+{
+  "auditVersion": "1.0.1",
+  "wireStandard": "IEEE Std 1278.1-2012 (DIS v7)",
+  "enumerationStandard": "SISO-REF-010-2025 v36",
+  "pduTypeCount": 72,
+  "concreteWireClassCount": 233,
+  "families": [
+    { "value": 1, "count": 5, "types": [1, 4, 66, 67, 72] },
+    { "value": 2, "count": 4, "types": [2, 3, 68, 69] },
+    { "value": 3, "count": 6, "types": [5, 6, 7, 8, 9, 10] },
+    { "value": 4, "count": 5, "types": [25, 26, 27, 31, 32] },
+    { "value": 5, "count": 12, "types": [11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22] },
+    { "value": 6, "count": 5, "types": [23, 24, 28, 29, 30] },
+    { "value": 7, "count": 4, "types": [33, 34, 35, 36] },
+    { "value": 8, "count": 4, "types": [37, 38, 39, 40] },
+    { "value": 9, "count": 5, "types": [41, 42, 43, 44, 45] },
+    { "value": 10, "count": 15, "types": [51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65] },
+    { "value": 11, "count": 5, "types": [46, 47, 48, 49, 50] },
+    { "value": 13, "count": 2, "types": [70, 71] }
+  ],
+  "artifacts": [
+    { "path": "tools/OpenDisNet.Generator/Schemas/DIS7/DIS_7_2012.xml", "sha256": "e1d89b7def1e2a76dbb277f3415a108c283ce94284648fd48eabb80080df0d9b" },
+    { "path": "tools/OpenDisNet.Generator/Schemas/DIS7/DistributedEmissionsFamilyPdus.xml", "sha256": "74207698837591da1f327f9b954f8ae7cde3dd1f5141d38f65262258b1eea66f" },
+    { "path": "tools/OpenDisNet.Generator/Schemas/DIS7/EntityInformationFamilyPdus.xml", "sha256": "bb68e679a86f9533202b5d8f68db667220b8f0f6e53ab0b0e02aa3cb121a4c82" },
+    { "path": "tools/OpenDisNet.Generator/Schemas/DIS7/EntityManagementFamilyPdus.xml", "sha256": "4404a634a648c95da3100b64489b8f8b08840b9fdeb56c297fe821df10ac4379" },
+    { "path": "tools/OpenDisNet.Generator/Schemas/DIS7/InformationOperationsFamilyPdus.xml", "sha256": "3348d7132d77138449e0c1a91545957fd6ed985d1bc5e426efc9c1732cb20e8a" },
+    { "path": "tools/OpenDisNet.Generator/Schemas/DIS7/LiveEntityFamilyPdus.xml", "sha256": "6dd57d0ae5ccf48cf09b0b936f116f590f85d0bf53688e243c94789433638d25" },
+    { "path": "tools/OpenDisNet.Generator/Schemas/DIS7/LogisticsFamilyPdus.xml", "sha256": "8e69464a7b421e8a048973d59b94736e95c71b623de9a250257c09179ca2a713" },
+    { "path": "tools/OpenDisNet.Generator/Schemas/DIS7/MinefieldFamilyPdus.xml", "sha256": "05a10725e81deb9572c67ca79ef3d2a0e6be38baac3c4bf3fc6640f611e19401" },
+    { "path": "tools/OpenDisNet.Generator/Schemas/DIS7/RadioCommunicationsFamilyPdus.xml", "sha256": "1e74bec4817d95695bb75831e191b75335b802874a52b296d3df9056630ac351" },
+    { "path": "tools/OpenDisNet.Generator/Schemas/DIS7/SimulationManagementFamilyPdus.xml", "sha256": "030d36634978c3e44434e360a61860386b43230e43b6f20751947ac00bfc44a3" },
+    { "path": "tools/OpenDisNet.Generator/Schemas/DIS7/SimulationManagementWithReliabilityFamilyPdus.xml", "sha256": "dbb32b2d541f715064397fc78e75b59a0be20b8b4a6a12150330c1fcd30bfdf1" },
+    { "path": "tools/OpenDisNet.Generator/Schemas/DIS7/SyntheticEnvironmentFamilyPdus.xml", "sha256": "5cac3fe21fa3fa8deb281e23ddebca164f4fcd22cf7b69928e2bf8c786908ee2" },
+    { "path": "tools/OpenDisNet.Generator/Schemas/DIS7/WarfareFamilyPdus.xml", "sha256": "518506834ce8a054994358a0bce4a773e3eabadce6a8465f009d91d3585bcd38" },
+    { "path": "tools/OpenDisNet.Generator/Schemas/SISO/referenced-types-v36.json", "sha256": "a845598c022fd38b79000ac434f039772a6a679979f7f8dd618261c833330089" },
+    { "path": "tests/OpenDisNet.Tests/Conformance/Vectors/opendis7-java-default.json", "sha256": "1caf4b724f17358de22012faf55377ff21d215fbc2395ef32b8cdef07ec221a6" },
+    { "path": "tests/OpenDisNet.Tests/Conformance/Vectors/opendis7-java-populated.json", "sha256": "6558f75e153194618e3a3b77c737a48cbbc849e5c27e478e42dc81219e78b792" },
+    { "path": "src/OpenDisNet/PublicAPI.Shipped.txt", "sha256": "d7325bf2bf1e3fcb50dc152050f6f0275f6e147fa6eb085e1c0c51779a251ba6" }
+  ]
+}

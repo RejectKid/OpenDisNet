@@ -19,7 +19,7 @@ public sealed class ConformanceAuditTests
         string root = FindRepositoryRoot();
         AuditManifest manifest = ReadManifest(root);
 
-        Assert.Equal("1.0", manifest.AuditVersion);
+        Assert.Equal("1.0.1", manifest.AuditVersion);
         Assert.Equal(72, manifest.PduTypeCount);
         Assert.Equal(233, manifest.ConcreteWireClassCount);
         Assert.Equal(17, manifest.Artifacts.Length);
@@ -58,9 +58,9 @@ public sealed class ConformanceAuditTests
 
     private static AuditManifest ReadManifest(string root)
     {
-        string path = Path.Combine(root, "tests", "OpenDisNet.Tests", "Conformance", "Audit", "v1.0.json");
+        string path = Path.Combine(root, "tests", "OpenDisNet.Tests", "Conformance", "Audit", "v1.0.1.json");
         return JsonSerializer.Deserialize<AuditManifest>(File.ReadAllText(path), JsonOptions)
-            ?? throw new InvalidDataException("The 1.0 conformance audit manifest is empty.");
+            ?? throw new InvalidDataException("The 1.0.1 conformance audit manifest is empty.");
     }
 
     private static string FindRepositoryRoot()

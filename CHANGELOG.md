@@ -1,9 +1,21 @@
 # Changelog
 
 All notable changes are documented here. This project follows Semantic
-Versioning after 1.0 and uses prerelease versions while conformance is incomplete.
+Versioning starting with 1.0 and uses prerelease versions when conformance is
+incomplete.
 
 ## Unreleased
+
+## 1.0.1 - 2026-07-13
+
+- Updated local package defaults and the binary-compatibility baseline for the
+  stable 1.x line.
+- Replaced completed prerelease language with durable stable-release guidance.
+- Corrected public XML documentation inherited from the generator schemas.
+- Removed the unused generated C# reference project while retaining the compact,
+  independently produced conformance-vector corpus.
+
+## 1.0.0 - 2026-07-13
 
 - Added the 1.0 conformance audit manifest and report, pinning DIS schemas, SISO
   data, independent vector corpora, family mappings, and the public API by
@@ -14,6 +26,9 @@ Versioning after 1.0 and uses prerelease versions while conformance is incomplet
   enforced low-or-higher transitive NuGet vulnerability auditing.
 - Added pull-request dependency review, main-branch tag verification, package
   checksums, and GitHub build-provenance attestations.
+
+## 0.9.0 - 2026-07-13
+
 - Froze the complete public C# surface with compiler-enforced API baselines and
   NuGet package compatibility validation against OpenDisNet 0.8.0.
 - Added an external-style smoke consumer that installs the packed artifact and
@@ -22,6 +37,9 @@ Versioning after 1.0 and uses prerelease versions while conformance is incomplet
   structured GitHub feedback form.
 - Corrected the `RadioId` construction example discovered by the package smoke
   consumer.
+
+## 0.8.0 - 2026-07-13
+
 - Added deterministic populated conformance cases for all 72 DIS v7 PDU types,
   independent byte vectors, and truncation checks at every byte boundary across
   all 12 protocol families planned for versions 0.3 through 0.8.
@@ -30,6 +48,9 @@ Versioning after 1.0 and uses prerelease versions while conformance is incomplet
   lengths and counts.
 - Added conditional IFF information layers and polymorphic Information
   Operations effect/communications records to the native C# codec.
+
+## 0.2.0 - 2026-07-13
+
 - Added strongly typed SISO-REF-010-2025 v36 enumerations for every DIS v7
   schema reference, with .NET-style public names.
 - Added structured bitfield value types with validated accessors, immutable
@@ -40,6 +61,14 @@ Versioning after 1.0 and uses prerelease versions while conformance is incomplet
   lossless unknown-value compatibility tests.
 - Made descriptive PDU names such as `AcknowledgeReliablePdu` canonical and
   removed 20 empty acronym-based alias shells from the public model surface.
+
+## 0.1.1 - 2026-07-13
+
+- Replaced hand-authored Signal PDU payload bytes in documentation with
+  realistic application-produced audio examples.
+
+## 0.1.0 - 2026-07-13
+
 - Added solution foundation, DIS v7 framing, binary primitives, and defensive
   unknown-PDU parsing.
 - Added typed Entity State, Fire, and Detonation PDU parsing and serialization.

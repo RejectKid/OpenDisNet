@@ -47,4 +47,4 @@ jobs:
         with:
           dotnet-version: 10.x
       - run: dotnet restore --locked-mode
-      - run: dotnet format --verify-no-changes --no-restore --exclude tests/OpenDisNet.Reference
+      - run: dotnet format --verify-no-changes --no-restore

@@ -450,7 +450,7 @@ public partial class BeamData
     public float BeamElevationSweep { get; set; }
 
     /// <summary>
-    /// allows receiver to synchronize its regenerated scan pattern to that of the emmitter. Specifies the percentage of time a scan is through its pattern from its origion.
+    /// Allows a receiver to synchronize its regenerated scan pattern to that of the emitter. Specifies the percentage of time a scan has progressed through its pattern from its origin.
     /// </summary>
     public float BeamSweepSync { get; set; }
 

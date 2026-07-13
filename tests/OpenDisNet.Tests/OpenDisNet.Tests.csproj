@@ -20,7 +20,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\src\OpenDisNet\OpenDisNet.csproj" />
-    <ProjectReference Include="..\OpenDisNet.Reference\OpenDisNet.Reference.csproj" />
   </ItemGroup>
 
   <ItemGroup>
