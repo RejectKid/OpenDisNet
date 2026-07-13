@@ -26,6 +26,7 @@ using OpenDisNet.Pdus;
 if (DisSerializer.TryDeserialize<SignalPdu>(datagram, out SignalPdu? signal, out DisParseError error))
 {
     Console.WriteLine($"Radio {signal.Radio.Number}: {signal.DataBitLength} meaningful bits");
+    audioDecoder.Decode(signal.Data, signal.SampleRate);
 }
 else
 {
@@ -38,11 +39,18 @@ Unknown and vendor-defined PDU bodies are retained rather than discarded.
 Use `DisSerializer.Serialize(pdu)` for the reverse operation. See the
 [public API design](docs/api-design.md) for the supported design rules.
 
-## Create and serialize a PDU
+## Create and serialize a Signal PDU
+
+Signal data normally comes from an audio codec, tactical-data-link implementation,
+file, or another application component. OpenDisNet handles its DIS framing without
+requiring callers to construct protocol bytes by hand.
 
 ```csharp
 using OpenDisNet;
 using OpenDisNet.Pdus;
+
+ReadOnlyMemory<byte> encodedAudio = audioEncoder.Encode(samples);
+
 var signal = new SignalPdu
 {
     ExerciseId = 1,
@@ -53,13 +61,16 @@ var signal = new SignalPdu
     SampleRate = 8_000,
     SampleCount = 1,
 };
-signal.SetData([0xaa, 0xbb, 0xc0], meaningfulBitLength: 20);
+signal.SetData(encodedAudio.Span);
 
 byte[] datagram = DisSerializer.Serialize(signal);
 ```
 
 Protocol version, family, PDU type, PDU length, collection counts, and padding
-are managed by the library.
+are managed by the library. Signal payload interpretation remains with the
+application because DIS can carry many audio encodings and tactical data-link
+formats. For the uncommon case of a non-byte-aligned payload, `SetData` also
+accepts an explicit meaningful bit length.
 
 ## Standards and provenance
 
