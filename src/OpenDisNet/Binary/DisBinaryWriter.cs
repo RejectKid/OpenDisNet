@@ -49,7 +49,7 @@ public ref struct DisBinaryWriter
     public void WriteSingle(float value, string field = "value") => WriteInt32(BitConverter.SingleToInt32Bits(value), field);
     public void WriteDouble(double value, string field = "value") => WriteInt64(BitConverter.DoubleToInt64Bits(value), field);
 
-    public void WriteBytes(ReadOnlySpan<byte> value, string field = "value")
+    public void WriteBytes(scoped ReadOnlySpan<byte> value, string field = "value")
     {
         Ensure(value.Length, field);
         value.CopyTo(_destination[_offset..]);
