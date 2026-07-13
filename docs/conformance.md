@@ -10,13 +10,13 @@ input tests, and round-trip tests.
 - [x] Big-endian integer and IEEE-754 primitives
 - [x] Defensive length and version validation
 - [x] Unknown/future PDU preservation
-- [ ] Typed DIS v7 PDU suite
+- [ ] Typed DIS v7 PDU suite (3 of 72 standardized PDU types implemented)
 - [ ] SISO-REF-010-2025 v36 generated enumerations
 
 ## PDU families
 
-- [ ] Entity Information/Interaction
-- [ ] Warfare
+- [ ] Entity Information/Interaction (Entity State implemented)
+- [ ] Warfare (Fire and Detonation implemented)
 - [ ] Logistics
 - [ ] Simulation Management
 - [ ] Distributed Emission Regeneration

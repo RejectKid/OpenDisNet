@@ -7,3 +7,6 @@ Versioning after 1.0 and uses prerelease versions while conformance is incomplet
 
 - Added solution foundation, DIS v7 framing, binary primitives, and defensive
   unknown-PDU parsing.
+- Added typed Entity State, Fire, and Detonation PDU parsing and serialization.
+- Added cross-platform CI, CodeQL, Dependabot, OIDC NuGet publishing, and a UDP
+  packet-inspector sample.
