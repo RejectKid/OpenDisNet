@@ -5318,7 +5318,7 @@ public abstract partial class PduBase : Pdu
 /// <summary>
 /// PduStatus provides a set of bit-masked indicator values, section 6.2.67.                       Bit fields include Transferred Entity Indicator (TEI), LVC Indicator (LVC), Coupled Extension Indicator (CEI),                     Fire Type Indicator (FTI), Detonation Type Indicator (DTI), Radio Attached Indicator (RAI),                     Intercom Attached Indicator (IAI), IFF Simulation Mode (ISM) and Active Interrogation Indicator (AII).
 /// </summary>
-public abstract partial class PduStatus
+public partial class PduStatus
 {
     /// <summary>
     /// PDU Status Record value containing bitmasked field

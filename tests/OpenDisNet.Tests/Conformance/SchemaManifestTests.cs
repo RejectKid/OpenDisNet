@@ -19,6 +19,7 @@ public sealed class SchemaManifestTests
         Type[] models = typeof(OpenDisNet.Dis7.EntityStatePdu).Assembly
             .GetExportedTypes()
             .Where(x => x.Namespace == "OpenDisNet.Dis7")
+            .Where(x => !(x.IsAbstract && x.IsSealed))
             .ToArray();
 
         Assert.Equal(253, models.Length);

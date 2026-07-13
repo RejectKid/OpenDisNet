@@ -15,7 +15,7 @@ internal static class ModelWriter
         foreach (ClassDefinition definition in schema.Classes.OrderBy(x => x.Name, StringComparer.Ordinal))
         {
             WriteDocumentation(text, definition.Comment, 0);
-            string abstractModifier = definition.IsAbstract ? "abstract " : string.Empty;
+            string abstractModifier = definition.IsAbstract && definition.Name != "PduStatus" ? "abstract " : string.Empty;
             string baseClause = definition.BaseName == "root" ? string.Empty : $" : {definition.BaseName}";
             text.AppendLine($"public {abstractModifier}partial class {definition.Name}{baseClause}");
             text.AppendLine("{");
