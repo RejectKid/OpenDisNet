@@ -6,7 +6,7 @@ cross-checks, not as API templates or source ports.
 ## Public surface
 
 - `IDisPdu` and the DIS v7 PDU classes are the protocol model.
-- `DisPduReader` and `DisPduWriter` are the stable datagram API.
+- `DisSerializer` is the stable datagram API for parsing and serialization.
 - `PduFactory` creates correctly initialized protocol-version-7 PDUs.
 - Length, count, and bit-length fields are synchronized by the writer rather
   than requiring callers to maintain duplicate wire metadata.

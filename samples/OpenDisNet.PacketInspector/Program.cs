@@ -10,7 +10,7 @@ Console.WriteLine($"Listening for DIS v7 datagrams on UDP {port}. Press Ctrl+C t
 while (true)
 {
     UdpReceiveResult received = await udp.ReceiveAsync();
-    if (DisPduReader.TryParse(received.Buffer, out IDisPdu? pdu, out DisParseError error))
+    if (DisSerializer.TryDeserialize(received.Buffer, out IDisPdu? pdu, out DisParseError error))
         Console.WriteLine($"{received.RemoteEndPoint} {pdu!.Header.PduType,-34} {pdu.Header.Length,5} bytes");
     else
         Console.Error.WriteLine($"{received.RemoteEndPoint} invalid at byte {error.Offset}: {error.Message}");

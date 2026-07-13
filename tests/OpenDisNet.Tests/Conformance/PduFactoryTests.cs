@@ -3,10 +3,10 @@ using OpenDisNet.Protocol;
 
 namespace OpenDisNet.Tests.Conformance;
 
-public sealed class GeneratedPduFactoryTests
+public sealed class PduFactoryTests
 {
     [Fact]
-    public void FactoryCreatesEveryStandardizedPduWithVersionAndFamily()
+    public void CreatesEveryStandardizedPduWithVersionAndFamily()
     {
         for (byte value = 1; value <= 72; value++)
         {

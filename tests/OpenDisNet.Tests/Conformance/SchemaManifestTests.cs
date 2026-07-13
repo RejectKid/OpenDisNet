@@ -1,4 +1,4 @@
-using OpenDisNet.Generated;
+using OpenDisNet.Internal;
 
 namespace OpenDisNet.Tests.Conformance;
 

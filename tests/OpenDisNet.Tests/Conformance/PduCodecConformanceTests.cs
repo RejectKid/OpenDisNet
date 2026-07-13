@@ -3,7 +3,7 @@ using OpenDisNet.Protocol;
 
 namespace OpenDisNet.Tests.Conformance;
 
-public sealed class GeneratedCodecSmokeTests
+public sealed class PduCodecConformanceTests
 {
     public static TheoryData<byte> StandardPduTypes =>
         new(Enumerable.Range(1, 72).Select(x => (byte)x));
@@ -23,7 +23,7 @@ public sealed class GeneratedCodecSmokeTests
     }
 
     [Fact]
-    public void PublicReaderAndWriterHandleGeneratedPdus()
+    public void PublicSerializerHandlesTypedPdus()
     {
         var original = (SignalPdu)PduFactory.Create(PduType.Signal, exerciseId: 9);
         original.EncodingScheme = 0x1234;
@@ -33,13 +33,13 @@ public sealed class GeneratedCodecSmokeTests
         original.Samples = 2;
         original.Data = [0xA5, 0xE0];
 
-        byte[] encoded = DisPduWriter.Write(original);
-        Assert.True(DisPduReader.TryParse(encoded, out global::OpenDisNet.Pdus.IDisPdu? parsed, out DisParseError error), error.Message);
+        byte[] encoded = DisSerializer.Serialize(original);
+        Assert.True(DisSerializer.TryDeserialize(encoded, out global::OpenDisNet.Pdus.IDisPdu? parsed, out DisParseError error), error.Message);
 
         SignalPdu signal = Assert.IsType<SignalPdu>(parsed);
         Assert.Equal(original.Data, signal.Data);
         Assert.Equal((ushort)13, signal.DataBitLength);
-        Assert.Equal(encoded, DisPduWriter.Write(signal));
+        Assert.Equal(encoded, DisSerializer.Serialize(signal));
     }
 
     [Fact]
@@ -55,7 +55,7 @@ public sealed class GeneratedCodecSmokeTests
     }
 
     [Fact]
-    public void GeneratedCodecRejectsDeclaredListThatExceedsBody()
+    public void RejectsDeclaredListThatExceedsBody()
     {
         var original = (SignalPdu)PduFactory.Create(PduType.Signal);
         original.DataBitLength = 16;
@@ -65,7 +65,7 @@ public sealed class GeneratedCodecSmokeTests
         truncated[8] = (byte)(truncated.Length >> 8);
         truncated[9] = (byte)truncated.Length;
 
-        Assert.False(DisPduReader.TryParse(truncated, out _, out DisParseError error));
+        Assert.False(DisSerializer.TryDeserialize(truncated, out _, out DisParseError error));
         Assert.Equal(DisParseErrorCode.InvalidField, error.Code);
     }
 

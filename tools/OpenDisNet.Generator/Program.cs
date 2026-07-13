@@ -1,10 +1,10 @@
 using OpenDisNet.Generator;
 
 string repositoryRoot = FindRepositoryRoot(AppContext.BaseDirectory);
-string output = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Generated", "Dis7SchemaManifest.g.cs");
-string modelsOutput = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Generated", "Dis7Models.g.cs");
-string factoryOutput = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Generated", "Dis7PduFactory.g.cs");
-string codecOutput = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Generated", "Dis7PduCodec.g.cs");
+string output = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Internal", "SchemaManifest.g.cs");
+string modelsOutput = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Pdus", "PduModels.g.cs");
+string factoryOutput = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Pdus", "PduFactory.g.cs");
+string codecOutput = Path.Combine(repositoryRoot, "src", "OpenDisNet", "Internal", "PduCodec.g.cs");
 bool verify = args.Contains("--verify", StringComparer.Ordinal);
 
 DisSchema schema = DisSchemaLoader.Load();
