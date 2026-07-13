@@ -101,6 +101,9 @@
       },
       "opendisnet": {
         "type": "Project"
+      },
+      "opendisnet.reference": {
+        "type": "Project"
       }
     }
   }
