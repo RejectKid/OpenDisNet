@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/samples/">
+    <Project Path="samples/OpenDisNet.PacketInspector/OpenDisNet.PacketInspector.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/OpenDisNet/OpenDisNet.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/OpenDisNet.Tests/OpenDisNet.Tests.csproj" />
+  </Folder>
+</Solution>
