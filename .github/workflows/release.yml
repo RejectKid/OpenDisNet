@@ -5,6 +5,7 @@ on:
     tags: ['v[0-9]+.[0-9]+.[0-9]+*']
 
 permissions:
+  attestations: write
   contents: write
   id-token: write
 
@@ -21,6 +22,9 @@ jobs:
           dotnet-version: |
             9.x
             10.x
+      - name: Verify tag commit is on main
+        shell: bash
+        run: git merge-base --is-ancestor "$GITHUB_SHA" origin/main
       - name: Derive version
         shell: bash
         run: echo "PACKAGE_VERSION=${GITHUB_REF_NAME#v}" >> "$GITHUB_ENV"
@@ -33,6 +37,15 @@ jobs:
         run: dotnet run --project tests/OpenDisNet.PackageSmoke/OpenDisNet.PackageSmoke.csproj --configuration Release --framework net9.0 --no-restore -p:OpenDisNetPackageVersion=${{ env.PACKAGE_VERSION }}
       - name: Run packed-package consumer on .NET 10
         run: dotnet run --project tests/OpenDisNet.PackageSmoke/OpenDisNet.PackageSmoke.csproj --configuration Release --framework net10.0 --no-restore -p:OpenDisNetPackageVersion=${{ env.PACKAGE_VERSION }}
+      - name: Create package checksums
+        shell: bash
+        run: |
+          cd artifacts/packages
+          sha256sum *.nupkg *.snupkg > SHA256SUMS
+      - name: Attest package provenance
+        uses: actions/attest-build-provenance@v4
+        with:
+          subject-path: artifacts/packages/*
       - name: Authenticate to NuGet.org
         uses: NuGet/login@v1
         id: nuget
@@ -49,4 +62,4 @@ jobs:
           if [[ "${{ github.ref_name }}" == *-* ]]; then
             flags+=(--prerelease)
           fi
-          gh release create "${{ github.ref_name }}" artifacts/packages/*.*nupkg "${flags[@]}"
+          gh release create "${{ github.ref_name }}" artifacts/packages/* "${flags[@]}"
