@@ -224,6 +224,7 @@ internal static class CodecWriter
             text.AppendLine($"        if ({condition})");
             text.AppendLine("        {");
         }
+        int contentStart = text.Length;
         switch (field.Kind)
         {
             case FieldKind.Primitive:
@@ -249,7 +250,10 @@ internal static class CodecWriter
                 break;
         }
         if (condition is not null)
+        {
+            IndentFrom(text, contentStart);
             text.AppendLine("        }");
+        }
     }
 
     private static void WriteReadList(StringBuilder text, FieldDefinition field, string property, string owner)
@@ -304,6 +308,7 @@ internal static class CodecWriter
             text.AppendLine($"        if ({condition})");
             text.AppendLine("        {");
         }
+        int contentStart = text.Length;
         if (field.Kind == FieldKind.ClassReference)
         {
             text.AppendLine($"        ArgumentNullException.ThrowIfNull(value.{property});");
@@ -337,7 +342,10 @@ internal static class CodecWriter
             }
         }
         if (condition is not null)
+        {
+            IndentFrom(text, contentStart);
             text.AppendLine("        }");
+        }
     }
 
     private static void WriteWriteField(StringBuilder text, FieldDefinition field, string owner)
@@ -349,6 +357,7 @@ internal static class CodecWriter
             text.AppendLine($"        if ({condition})");
             text.AppendLine("        {");
         }
+        int contentStart = text.Length;
         switch (field.Kind)
         {
             case FieldKind.Primitive:
@@ -377,7 +386,10 @@ internal static class CodecWriter
                 break;
         }
         if (condition is not null)
+        {
+            IndentFrom(text, contentStart);
             text.AppendLine("        }");
+        }
     }
 
     private static void WriteMeasureField(StringBuilder text, FieldDefinition field, string owner)
@@ -389,6 +401,7 @@ internal static class CodecWriter
             text.AppendLine($"        if ({condition})");
             text.AppendLine("        {");
         }
+        int contentStart = text.Length;
         switch (field.Kind)
         {
             case FieldKind.Primitive:
@@ -417,7 +430,20 @@ internal static class CodecWriter
                 break;
         }
         if (condition is not null)
+        {
+            IndentFrom(text, contentStart);
             text.AppendLine("        }");
+        }
+    }
+
+    private static void IndentFrom(StringBuilder text, int start)
+    {
+        string content = text.ToString(start, text.Length - start);
+        text.Length = start;
+        text.Append("    ");
+        text.Append(content.Replace("\n", "\n    ", StringComparison.Ordinal));
+        if (text.Length >= 4)
+            text.Length -= 4;
     }
 
     private static IReadOnlyList<ClassDefinition> Linearized(string name, IReadOnlyDictionary<string, ClassDefinition> classes)

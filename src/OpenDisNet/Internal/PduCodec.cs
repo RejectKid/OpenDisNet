@@ -9319,52 +9319,52 @@ internal static partial class PduCodec
             value.MineLocation.Add(ReadVector3Float(ref reader));
         if ((value.DataFilter.BitFlags & (1u << 0)) != 0)
         {
-        int GroundBurialDepthOffsetCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "groundBurialDepthOffset");
-        value.GroundBurialDepthOffset = new float[GroundBurialDepthOffsetCount];
-        for (int index = 0; index < GroundBurialDepthOffsetCount; index++)
-            value.GroundBurialDepthOffset[index] = reader.ReadSingle("groundBurialDepthOffset");
+            int GroundBurialDepthOffsetCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "groundBurialDepthOffset");
+            value.GroundBurialDepthOffset = new float[GroundBurialDepthOffsetCount];
+            for (int index = 0; index < GroundBurialDepthOffsetCount; index++)
+                value.GroundBurialDepthOffset[index] = reader.ReadSingle("groundBurialDepthOffset");
         }
         if ((value.DataFilter.BitFlags & (1u << 1)) != 0)
         {
-        int WaterBurialDepthOffsetCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "waterBurialDepthOffset");
-        value.WaterBurialDepthOffset = new float[WaterBurialDepthOffsetCount];
-        for (int index = 0; index < WaterBurialDepthOffsetCount; index++)
-            value.WaterBurialDepthOffset[index] = reader.ReadSingle("waterBurialDepthOffset");
+            int WaterBurialDepthOffsetCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "waterBurialDepthOffset");
+            value.WaterBurialDepthOffset = new float[WaterBurialDepthOffsetCount];
+            for (int index = 0; index < WaterBurialDepthOffsetCount; index++)
+                value.WaterBurialDepthOffset[index] = reader.ReadSingle("waterBurialDepthOffset");
         }
         if ((value.DataFilter.BitFlags & (1u << 2)) != 0)
         {
-        int SnowBurialDepthOffsetCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "snowBurialDepthOffset");
-        value.SnowBurialDepthOffset = new float[SnowBurialDepthOffsetCount];
-        for (int index = 0; index < SnowBurialDepthOffsetCount; index++)
-            value.SnowBurialDepthOffset[index] = reader.ReadSingle("snowBurialDepthOffset");
+            int SnowBurialDepthOffsetCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "snowBurialDepthOffset");
+            value.SnowBurialDepthOffset = new float[SnowBurialDepthOffsetCount];
+            for (int index = 0; index < SnowBurialDepthOffsetCount; index++)
+                value.SnowBurialDepthOffset[index] = reader.ReadSingle("snowBurialDepthOffset");
         }
         if ((value.DataFilter.BitFlags & (1u << 3)) != 0)
         {
-        int MineOrientationCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "mineOrientation");
-        value.MineOrientation = new List<EulerAngles>(MineOrientationCount);
-        for (int index = 0; index < MineOrientationCount; index++)
-            value.MineOrientation.Add(ReadEulerAngles(ref reader));
+            int MineOrientationCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "mineOrientation");
+            value.MineOrientation = new List<EulerAngles>(MineOrientationCount);
+            for (int index = 0; index < MineOrientationCount; index++)
+                value.MineOrientation.Add(ReadEulerAngles(ref reader));
         }
         if ((value.DataFilter.BitFlags & (1u << 4)) != 0)
         {
-        int ThermalContrastCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "thermalContrast");
-        value.ThermalContrast = new float[ThermalContrastCount];
-        for (int index = 0; index < ThermalContrastCount; index++)
-            value.ThermalContrast[index] = reader.ReadSingle("thermalContrast");
+            int ThermalContrastCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "thermalContrast");
+            value.ThermalContrast = new float[ThermalContrastCount];
+            for (int index = 0; index < ThermalContrastCount; index++)
+                value.ThermalContrast[index] = reader.ReadSingle("thermalContrast");
         }
         if ((value.DataFilter.BitFlags & (1u << 5)) != 0)
         {
-        int ReflectanceCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "reflectance");
-        value.Reflectance = new float[ReflectanceCount];
-        for (int index = 0; index < ReflectanceCount; index++)
-            value.Reflectance[index] = reader.ReadSingle("reflectance");
+            int ReflectanceCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "reflectance");
+            value.Reflectance = new float[ReflectanceCount];
+            for (int index = 0; index < ReflectanceCount; index++)
+                value.Reflectance[index] = reader.ReadSingle("reflectance");
         }
         if ((value.DataFilter.BitFlags & (1u << 6)) != 0)
         {
-        int MineEmplacementTimeCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "mineEmplacementTime");
-        value.MineEmplacementTime = new List<MineEmplacementTime>(MineEmplacementTimeCount);
-        for (int index = 0; index < MineEmplacementTimeCount; index++)
-            value.MineEmplacementTime.Add(ReadMineEmplacementTime(ref reader));
+            int MineEmplacementTimeCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "mineEmplacementTime");
+            value.MineEmplacementTime = new List<MineEmplacementTime>(MineEmplacementTimeCount);
+            for (int index = 0; index < MineEmplacementTimeCount; index++)
+                value.MineEmplacementTime.Add(ReadMineEmplacementTime(ref reader));
         }
         int MineEntityNumberCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "mineEntityNumber");
         value.MineEntityNumber = new ushort[MineEntityNumberCount];
@@ -9372,40 +9372,40 @@ internal static partial class PduCodec
             value.MineEntityNumber[index] = reader.ReadUInt16("mineEntityNumber");
         if ((value.DataFilter.BitFlags & (1u << 8)) != 0)
         {
-        int FusingCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "fusing");
-        value.Fusing = new List<ushort>(FusingCount);
-        for (int index = 0; index < FusingCount; index++)
-            value.Fusing.Add(reader.ReadUInt16("fusing"));
+            int FusingCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "fusing");
+            value.Fusing = new List<ushort>(FusingCount);
+            for (int index = 0; index < FusingCount; index++)
+                value.Fusing.Add(reader.ReadUInt16("fusing"));
         }
         if ((value.DataFilter.BitFlags & (1u << 9)) != 0)
         {
-        int ScalarDetectionCoefficientCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "scalarDetectionCoefficient");
-        value.ScalarDetectionCoefficient = new byte[ScalarDetectionCoefficientCount];
-        for (int index = 0; index < ScalarDetectionCoefficientCount; index++)
-            value.ScalarDetectionCoefficient[index] = reader.ReadByte("scalarDetectionCoefficient");
+            int ScalarDetectionCoefficientCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "scalarDetectionCoefficient");
+            value.ScalarDetectionCoefficient = new byte[ScalarDetectionCoefficientCount];
+            for (int index = 0; index < ScalarDetectionCoefficientCount; index++)
+                value.ScalarDetectionCoefficient[index] = reader.ReadByte("scalarDetectionCoefficient");
         }
         if ((value.DataFilter.BitFlags & (1u << 10)) != 0)
         {
-        int PaintSchemeCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "paintScheme");
-        value.PaintScheme = new List<byte>(PaintSchemeCount);
-        for (int index = 0; index < PaintSchemeCount; index++)
-            value.PaintScheme.Add(reader.ReadByte("paintScheme"));
+            int PaintSchemeCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "paintScheme");
+            value.PaintScheme = new List<byte>(PaintSchemeCount);
+            for (int index = 0; index < PaintSchemeCount; index++)
+                value.PaintScheme.Add(reader.ReadByte("paintScheme"));
         }
         reader.Skip(Padding(reader.Offset, 4), "padTo32_2");
         if ((value.DataFilter.BitFlags & (1u << 7)) != 0)
         {
-        int NumberOfTripDetonationWiresCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "numberOfTripDetonationWires");
-        value.NumberOfTripDetonationWires = new byte[NumberOfTripDetonationWiresCount];
-        for (int index = 0; index < NumberOfTripDetonationWiresCount; index++)
-            value.NumberOfTripDetonationWires[index] = reader.ReadByte("numberOfTripDetonationWires");
+            int NumberOfTripDetonationWiresCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "numberOfTripDetonationWires");
+            value.NumberOfTripDetonationWires = new byte[NumberOfTripDetonationWiresCount];
+            for (int index = 0; index < NumberOfTripDetonationWiresCount; index++)
+                value.NumberOfTripDetonationWires[index] = reader.ReadByte("numberOfTripDetonationWires");
         }
         reader.Skip(Padding(reader.Offset, 4), "padTo32_3");
         if ((value.DataFilter.BitFlags & (1u << 7)) != 0)
         {
-        int NumberOfVerticesCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "numberOfVertices");
-        value.NumberOfVertices = new byte[NumberOfVerticesCount];
-        for (int index = 0; index < NumberOfVerticesCount; index++)
-            value.NumberOfVertices[index] = reader.ReadByte("numberOfVertices");
+            int NumberOfVerticesCount = CheckedCount(checked((int)value.NumberOfMinesInThisPdu), reader.Remaining, "numberOfVertices");
+            value.NumberOfVertices = new byte[NumberOfVerticesCount];
+            for (int index = 0; index < NumberOfVerticesCount; index++)
+                value.NumberOfVertices[index] = reader.ReadByte("numberOfVertices");
         }
     }
 
@@ -9428,78 +9428,78 @@ internal static partial class PduCodec
         if (value.GroundBurialDepthOffset.Length != 0) value.DataFilter.BitFlags |= 1u << 0;
         if ((value.DataFilter.BitFlags & (1u << 0)) != 0)
         {
-        ArgumentNullException.ThrowIfNull(value.GroundBurialDepthOffset);
-        if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.GroundBurialDepthOffset.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'groundBurialDepthOffset'.");
+            ArgumentNullException.ThrowIfNull(value.GroundBurialDepthOffset);
+            if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.GroundBurialDepthOffset.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'groundBurialDepthOffset'.");
         }
         if (value.WaterBurialDepthOffset.Length != 0) value.DataFilter.BitFlags |= 1u << 1;
         if ((value.DataFilter.BitFlags & (1u << 1)) != 0)
         {
-        ArgumentNullException.ThrowIfNull(value.WaterBurialDepthOffset);
-        if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.WaterBurialDepthOffset.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'waterBurialDepthOffset'.");
+            ArgumentNullException.ThrowIfNull(value.WaterBurialDepthOffset);
+            if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.WaterBurialDepthOffset.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'waterBurialDepthOffset'.");
         }
         if (value.SnowBurialDepthOffset.Length != 0) value.DataFilter.BitFlags |= 1u << 2;
         if ((value.DataFilter.BitFlags & (1u << 2)) != 0)
         {
-        ArgumentNullException.ThrowIfNull(value.SnowBurialDepthOffset);
-        if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.SnowBurialDepthOffset.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'snowBurialDepthOffset'.");
+            ArgumentNullException.ThrowIfNull(value.SnowBurialDepthOffset);
+            if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.SnowBurialDepthOffset.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'snowBurialDepthOffset'.");
         }
         if (value.MineOrientation.Count != 0) value.DataFilter.BitFlags |= 1u << 3;
         if ((value.DataFilter.BitFlags & (1u << 3)) != 0)
         {
-        ArgumentNullException.ThrowIfNull(value.MineOrientation);
-        foreach (EulerAngles item in value.MineOrientation) PrepareEulerAngles(item);
-        if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.MineOrientation.Count) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'mineOrientation'.");
+            ArgumentNullException.ThrowIfNull(value.MineOrientation);
+            foreach (EulerAngles item in value.MineOrientation) PrepareEulerAngles(item);
+            if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.MineOrientation.Count) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'mineOrientation'.");
         }
         if (value.ThermalContrast.Length != 0) value.DataFilter.BitFlags |= 1u << 4;
         if ((value.DataFilter.BitFlags & (1u << 4)) != 0)
         {
-        ArgumentNullException.ThrowIfNull(value.ThermalContrast);
-        if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.ThermalContrast.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'thermalContrast'.");
+            ArgumentNullException.ThrowIfNull(value.ThermalContrast);
+            if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.ThermalContrast.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'thermalContrast'.");
         }
         if (value.Reflectance.Length != 0) value.DataFilter.BitFlags |= 1u << 5;
         if ((value.DataFilter.BitFlags & (1u << 5)) != 0)
         {
-        ArgumentNullException.ThrowIfNull(value.Reflectance);
-        if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.Reflectance.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'reflectance'.");
+            ArgumentNullException.ThrowIfNull(value.Reflectance);
+            if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.Reflectance.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'reflectance'.");
         }
         if (value.MineEmplacementTime.Count != 0) value.DataFilter.BitFlags |= 1u << 6;
         if ((value.DataFilter.BitFlags & (1u << 6)) != 0)
         {
-        ArgumentNullException.ThrowIfNull(value.MineEmplacementTime);
-        foreach (MineEmplacementTime item in value.MineEmplacementTime) PrepareMineEmplacementTime(item);
-        if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.MineEmplacementTime.Count) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'mineEmplacementTime'.");
+            ArgumentNullException.ThrowIfNull(value.MineEmplacementTime);
+            foreach (MineEmplacementTime item in value.MineEmplacementTime) PrepareMineEmplacementTime(item);
+            if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.MineEmplacementTime.Count) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'mineEmplacementTime'.");
         }
         ArgumentNullException.ThrowIfNull(value.MineEntityNumber);
         if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.MineEntityNumber.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'mineEntityNumber'.");
         if (value.Fusing.Count != 0) value.DataFilter.BitFlags |= 1u << 8;
         if ((value.DataFilter.BitFlags & (1u << 8)) != 0)
         {
-        ArgumentNullException.ThrowIfNull(value.Fusing);
-        if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.Fusing.Count) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'fusing'.");
+            ArgumentNullException.ThrowIfNull(value.Fusing);
+            if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.Fusing.Count) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'fusing'.");
         }
         if (value.ScalarDetectionCoefficient.Length != 0) value.DataFilter.BitFlags |= 1u << 9;
         if ((value.DataFilter.BitFlags & (1u << 9)) != 0)
         {
-        ArgumentNullException.ThrowIfNull(value.ScalarDetectionCoefficient);
-        if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.ScalarDetectionCoefficient.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'scalarDetectionCoefficient'.");
+            ArgumentNullException.ThrowIfNull(value.ScalarDetectionCoefficient);
+            if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.ScalarDetectionCoefficient.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'scalarDetectionCoefficient'.");
         }
         if (value.PaintScheme.Count != 0) value.DataFilter.BitFlags |= 1u << 10;
         if ((value.DataFilter.BitFlags & (1u << 10)) != 0)
         {
-        ArgumentNullException.ThrowIfNull(value.PaintScheme);
-        if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.PaintScheme.Count) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'paintScheme'.");
+            ArgumentNullException.ThrowIfNull(value.PaintScheme);
+            if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.PaintScheme.Count) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'paintScheme'.");
         }
         if (value.NumberOfTripDetonationWires.Length != 0) value.DataFilter.BitFlags |= 1u << 7;
         if ((value.DataFilter.BitFlags & (1u << 7)) != 0)
         {
-        ArgumentNullException.ThrowIfNull(value.NumberOfTripDetonationWires);
-        if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.NumberOfTripDetonationWires.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'numberOfTripDetonationWires'.");
+            ArgumentNullException.ThrowIfNull(value.NumberOfTripDetonationWires);
+            if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.NumberOfTripDetonationWires.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'numberOfTripDetonationWires'.");
         }
         if (value.NumberOfVertices.Length != 0) value.DataFilter.BitFlags |= 1u << 7;
         if ((value.DataFilter.BitFlags & (1u << 7)) != 0)
         {
-        ArgumentNullException.ThrowIfNull(value.NumberOfVertices);
-        if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.NumberOfVertices.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'numberOfVertices'.");
+            ArgumentNullException.ThrowIfNull(value.NumberOfVertices);
+            if (Convert.ToInt64(value.NumberOfMinesInThisPdu) != value.NumberOfVertices.Length) throw new InvalidOperationException("Field 'numberOfMinesInThisPdu' must match the encoded length of 'numberOfVertices'.");
         }
     }
 
@@ -9521,54 +9521,54 @@ internal static partial class PduCodec
         foreach (Vector3Float item in value.MineLocation) WriteVector3Float(ref writer, item);
         if ((value.DataFilter.BitFlags & (1u << 0)) != 0)
         {
-        foreach (float item in value.GroundBurialDepthOffset) writer.WriteSingle(item, "groundBurialDepthOffset");
+            foreach (float item in value.GroundBurialDepthOffset) writer.WriteSingle(item, "groundBurialDepthOffset");
         }
         if ((value.DataFilter.BitFlags & (1u << 1)) != 0)
         {
-        foreach (float item in value.WaterBurialDepthOffset) writer.WriteSingle(item, "waterBurialDepthOffset");
+            foreach (float item in value.WaterBurialDepthOffset) writer.WriteSingle(item, "waterBurialDepthOffset");
         }
         if ((value.DataFilter.BitFlags & (1u << 2)) != 0)
         {
-        foreach (float item in value.SnowBurialDepthOffset) writer.WriteSingle(item, "snowBurialDepthOffset");
+            foreach (float item in value.SnowBurialDepthOffset) writer.WriteSingle(item, "snowBurialDepthOffset");
         }
         if ((value.DataFilter.BitFlags & (1u << 3)) != 0)
         {
-        foreach (EulerAngles item in value.MineOrientation) WriteEulerAngles(ref writer, item);
+            foreach (EulerAngles item in value.MineOrientation) WriteEulerAngles(ref writer, item);
         }
         if ((value.DataFilter.BitFlags & (1u << 4)) != 0)
         {
-        foreach (float item in value.ThermalContrast) writer.WriteSingle(item, "thermalContrast");
+            foreach (float item in value.ThermalContrast) writer.WriteSingle(item, "thermalContrast");
         }
         if ((value.DataFilter.BitFlags & (1u << 5)) != 0)
         {
-        foreach (float item in value.Reflectance) writer.WriteSingle(item, "reflectance");
+            foreach (float item in value.Reflectance) writer.WriteSingle(item, "reflectance");
         }
         if ((value.DataFilter.BitFlags & (1u << 6)) != 0)
         {
-        foreach (MineEmplacementTime item in value.MineEmplacementTime) WriteMineEmplacementTime(ref writer, item);
+            foreach (MineEmplacementTime item in value.MineEmplacementTime) WriteMineEmplacementTime(ref writer, item);
         }
         foreach (ushort item in value.MineEntityNumber) writer.WriteUInt16(item, "mineEntityNumber");
         if ((value.DataFilter.BitFlags & (1u << 8)) != 0)
         {
-        foreach (ushort item in value.Fusing) writer.WriteUInt16(item, "fusing");
+            foreach (ushort item in value.Fusing) writer.WriteUInt16(item, "fusing");
         }
         if ((value.DataFilter.BitFlags & (1u << 9)) != 0)
         {
-        foreach (byte item in value.ScalarDetectionCoefficient) writer.WriteByte(item, "scalarDetectionCoefficient");
+            foreach (byte item in value.ScalarDetectionCoefficient) writer.WriteByte(item, "scalarDetectionCoefficient");
         }
         if ((value.DataFilter.BitFlags & (1u << 10)) != 0)
         {
-        foreach (byte item in value.PaintScheme) writer.WriteByte(item, "paintScheme");
+            foreach (byte item in value.PaintScheme) writer.WriteByte(item, "paintScheme");
         }
         writer.WriteZeros(Padding(writer.Offset, 4), "padTo32_2");
         if ((value.DataFilter.BitFlags & (1u << 7)) != 0)
         {
-        foreach (byte item in value.NumberOfTripDetonationWires) writer.WriteByte(item, "numberOfTripDetonationWires");
+            foreach (byte item in value.NumberOfTripDetonationWires) writer.WriteByte(item, "numberOfTripDetonationWires");
         }
         writer.WriteZeros(Padding(writer.Offset, 4), "padTo32_3");
         if ((value.DataFilter.BitFlags & (1u << 7)) != 0)
         {
-        foreach (byte item in value.NumberOfVertices) writer.WriteByte(item, "numberOfVertices");
+            foreach (byte item in value.NumberOfVertices) writer.WriteByte(item, "numberOfVertices");
         }
     }
 
@@ -9590,54 +9590,54 @@ internal static partial class PduCodec
         foreach (Vector3Float item in value.MineLocation) MeasureVector3Float(item, ref offset);
         if ((value.DataFilter.BitFlags & (1u << 0)) != 0)
         {
-        offset += checked(value.GroundBurialDepthOffset.Length * 4);
+            offset += checked(value.GroundBurialDepthOffset.Length * 4);
         }
         if ((value.DataFilter.BitFlags & (1u << 1)) != 0)
         {
-        offset += checked(value.WaterBurialDepthOffset.Length * 4);
+            offset += checked(value.WaterBurialDepthOffset.Length * 4);
         }
         if ((value.DataFilter.BitFlags & (1u << 2)) != 0)
         {
-        offset += checked(value.SnowBurialDepthOffset.Length * 4);
+            offset += checked(value.SnowBurialDepthOffset.Length * 4);
         }
         if ((value.DataFilter.BitFlags & (1u << 3)) != 0)
         {
-        foreach (EulerAngles item in value.MineOrientation) MeasureEulerAngles(item, ref offset);
+            foreach (EulerAngles item in value.MineOrientation) MeasureEulerAngles(item, ref offset);
         }
         if ((value.DataFilter.BitFlags & (1u << 4)) != 0)
         {
-        offset += checked(value.ThermalContrast.Length * 4);
+            offset += checked(value.ThermalContrast.Length * 4);
         }
         if ((value.DataFilter.BitFlags & (1u << 5)) != 0)
         {
-        offset += checked(value.Reflectance.Length * 4);
+            offset += checked(value.Reflectance.Length * 4);
         }
         if ((value.DataFilter.BitFlags & (1u << 6)) != 0)
         {
-        foreach (MineEmplacementTime item in value.MineEmplacementTime) MeasureMineEmplacementTime(item, ref offset);
+            foreach (MineEmplacementTime item in value.MineEmplacementTime) MeasureMineEmplacementTime(item, ref offset);
         }
         offset += checked(value.MineEntityNumber.Length * 2);
         if ((value.DataFilter.BitFlags & (1u << 8)) != 0)
         {
-        offset += checked(value.Fusing.Count * 2);
+            offset += checked(value.Fusing.Count * 2);
         }
         if ((value.DataFilter.BitFlags & (1u << 9)) != 0)
         {
-        offset += checked(value.ScalarDetectionCoefficient.Length * 1);
+            offset += checked(value.ScalarDetectionCoefficient.Length * 1);
         }
         if ((value.DataFilter.BitFlags & (1u << 10)) != 0)
         {
-        offset += checked(value.PaintScheme.Count * 1);
+            offset += checked(value.PaintScheme.Count * 1);
         }
         offset += Padding(offset, 4);
         if ((value.DataFilter.BitFlags & (1u << 7)) != 0)
         {
-        offset += checked(value.NumberOfTripDetonationWires.Length * 1);
+            offset += checked(value.NumberOfTripDetonationWires.Length * 1);
         }
         offset += Padding(offset, 4);
         if ((value.DataFilter.BitFlags & (1u << 7)) != 0)
         {
-        offset += checked(value.NumberOfVertices.Length * 1);
+            offset += checked(value.NumberOfVertices.Length * 1);
         }
     }
 
