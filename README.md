@@ -7,10 +7,11 @@
 OpenDisNet is a high-performance, type-safe .NET codec for Distributed
 Interactive Simulation (DIS) Protocol Version 7, defined by IEEE 1278.1-2012.
 
-> **Development status:** pre-release. All 72 DIS v7 PDU identifiers have typed
-> models and native C# binary codecs. Every protocol family has populated
-> round-trip and boundary-truncation coverage; remaining 1.0 release gates are
-> tracked in [`docs/conformance.md`](docs/conformance.md).
+> **Development status:** 0.9 release-candidate hardening. All 72 DIS v7 PDU
+> identifiers have typed native C# codecs, every family has populated and
+> boundary-truncation coverage, and the public API is frozen for external
+> validation. See the [`RC testing guide`](docs/release-candidate.md) and
+> [`conformance matrix`](docs/conformance.md).
 
 ## Install
 
@@ -57,7 +58,7 @@ var signal = new SignalPdu
 {
     ExerciseId = 1,
     Timestamp = 42,
-    Radio = new RadioId(new EntityId(1, 10, 42), number: 7),
+    Radio = new RadioId(new EntityId(1, 10, 42), 7),
     EncodingScheme = SignalEncodingScheme.EncodedAudio(SignalEncodingType.Opus),
     TdlType = SignalTdlType.Other,
     SampleRate = 8_000,

@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <UseAppHost>false</UseAppHost>
+    <TargetFrameworks>net9.0;net10.0</TargetFrameworks>
+    <OpenDisNetPackageVersion Condition="'$(OpenDisNetPackageVersion)' == ''">0.1.0</OpenDisNetPackageVersion>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Deliberately consume the packed artifact; never add a ProjectReference here. -->
+    <PackageReference Include="OpenDisNet" Version="$(OpenDisNetPackageVersion)" />
+  </ItemGroup>
+</Project>

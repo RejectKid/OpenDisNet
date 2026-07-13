@@ -26,7 +26,13 @@ jobs:
       - run: dotnet run --project tools/OpenDisNet.Generator/OpenDisNet.Generator.csproj --configuration Release --no-restore -- --verify
       - run: dotnet build --configuration Release --no-restore
       - run: dotnet test --configuration Release --no-build
-      - run: dotnet pack src/OpenDisNet/OpenDisNet.csproj --configuration Release --no-build --output artifacts/packages
+      - run: dotnet pack src/OpenDisNet/OpenDisNet.csproj --configuration Release --no-build --output artifacts/packages -p:PackageVersion=0.0.0-ci.${{ github.run_id }}
+      - name: Restore packed-package consumer
+        run: dotnet restore tests/OpenDisNet.PackageSmoke/OpenDisNet.PackageSmoke.csproj --source "${{ github.workspace }}/artifacts/packages" --force --no-cache -p:OpenDisNetPackageVersion=0.0.0-ci.${{ github.run_id }}
+      - name: Run packed-package consumer on .NET 9
+        run: dotnet run --project tests/OpenDisNet.PackageSmoke/OpenDisNet.PackageSmoke.csproj --configuration Release --framework net9.0 --no-restore -p:OpenDisNetPackageVersion=0.0.0-ci.${{ github.run_id }}
+      - name: Run packed-package consumer on .NET 10
+        run: dotnet run --project tests/OpenDisNet.PackageSmoke/OpenDisNet.PackageSmoke.csproj --configuration Release --framework net10.0 --no-restore -p:OpenDisNetPackageVersion=0.0.0-ci.${{ github.run_id }}
       - uses: actions/upload-artifact@v7
         if: matrix.os == 'ubuntu-latest'
         with:

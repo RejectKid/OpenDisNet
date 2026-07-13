@@ -5,6 +5,14 @@ Versioning after 1.0 and uses prerelease versions while conformance is incomplet
 
 ## Unreleased
 
+- Froze the complete public C# surface with compiler-enforced API baselines and
+  NuGet package compatibility validation against OpenDisNet 0.8.0.
+- Added an external-style smoke consumer that installs the packed artifact and
+  exercises all 72 PDU factory/codec paths on .NET 9 and .NET 10.
+- Added prerelease-aware publishing, an external 0.9 RC test checklist, and a
+  structured GitHub feedback form.
+- Corrected the `RadioId` construction example discovered by the package smoke
+  consumer.
 - Added deterministic populated conformance cases for all 72 DIS v7 PDU types,
   independent byte vectors, and truncation checks at every byte boundary across
   all 12 protocol families planned for versions 0.3 through 0.8.

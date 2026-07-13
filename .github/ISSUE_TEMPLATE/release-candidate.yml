@@ -1,0 +1,58 @@
+name: Release candidate feedback
+description: Report OpenDisNet 0.9 RC interoperability, API, performance, or documentation results.
+title: "[RC feedback]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for testing the OpenDisNet release candidate. Do not attach controlled, private, or operational packet captures.
+  - type: input
+    id: version
+    attributes:
+      label: Package version
+      description: Enter the exact prerelease version, for example 0.9.0-rc.1.
+      placeholder: 0.9.0-rc.1
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Include the target framework, operating system, architecture, and application type.
+      placeholder: .NET 10, Windows 11 x64, UDP simulation gateway
+    validations:
+      required: true
+  - type: dropdown
+    id: category
+    attributes:
+      label: Feedback category
+      options:
+        - Wire interoperability
+        - API usability
+        - Performance or allocation
+        - Packaging or installation
+        - Documentation
+        - Successful validation
+    validations:
+      required: true
+  - type: textarea
+    id: families
+    attributes:
+      label: PDU families and workflows tested
+      description: Describe the representative workflows and protocol families you exercised.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: Result
+      description: Explain what worked or failed, the expected behavior, and a minimal synthetic reproduction when applicable.
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Data handling
+      options:
+        - label: I confirm this report contains no controlled, private, or operational packet capture.
+          required: true
