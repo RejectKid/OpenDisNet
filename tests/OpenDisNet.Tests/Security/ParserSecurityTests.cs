@@ -4,6 +4,7 @@ using OpenDisNet.Tests.Conformance;
 
 namespace OpenDisNet.Tests.Security;
 
+[TestClass]
 public sealed class ParserSecurityTests
 {
     private static readonly DisParseOptions BoundedOptions = new()
@@ -13,7 +14,7 @@ public sealed class ParserSecurityTests
         RequireVersion7 = true,
     };
 
-    [Fact]
+    [TestMethod]
     public void DeterministicRandomDatagramsNeverEscapeTryDeserialize()
     {
         var random = new Random(0x1278_0001);
@@ -26,19 +27,19 @@ public sealed class ParserSecurityTests
 
             if (DisSerializer.TryDeserialize(datagram, out IDisPdu? pdu, out DisParseError error, BoundedOptions))
             {
-                Assert.NotNull(pdu);
+                Assert.IsNotNull(pdu);
                 byte[] canonical = DisSerializer.Serialize(pdu);
-                Assert.InRange(canonical.Length, DisHeader.MinimumSize, ushort.MaxValue);
+                Assert.IsTrue(canonical.Length is >= DisHeader.MinimumSize and <= ushort.MaxValue);
             }
             else
             {
-                Assert.NotEqual(DisParseErrorCode.None, error.Code);
-                Assert.InRange(error.Offset, 0, Math.Max(datagram.Length, DisHeader.Size));
+                Assert.AreNotEqual(DisParseErrorCode.None, error.Code);
+                Assert.IsTrue(error.Offset >= 0 && error.Offset <= Math.Max(datagram.Length, DisHeader.Size));
             }
         }
     }
 
-    [Fact]
+    [TestMethod]
     public void BitMutationsAcrossEveryPduNeverEscapeTryDeserialize()
     {
         byte[] masks = [0x01, 0x80, 0xFF];
@@ -55,27 +56,27 @@ public sealed class ParserSecurityTests
 
                     if (DisSerializer.TryDeserialize(mutated, out IDisPdu? parsed, out _, BoundedOptions))
                     {
-                        Assert.NotNull(parsed);
+                        Assert.IsNotNull(parsed);
                         byte[] canonical = DisSerializer.Serialize(parsed);
-                        Assert.InRange(canonical.Length, DisHeader.MinimumSize, ushort.MaxValue);
+                        Assert.IsTrue(canonical.Length is >= DisHeader.MinimumSize and <= ushort.MaxValue);
                     }
                 }
             }
         }
     }
 
-    [Fact]
+    [TestMethod]
     public void ConfiguredLengthLimitIsEnforcedBeforeBodyParsing()
     {
         byte[] datagram = DisSerializer.Serialize(DeterministicPduFixture.Create(PduType.EntityState));
         var options = new DisParseOptions { MaximumPduLength = datagram.Length - 1 };
 
-        Assert.False(DisSerializer.TryDeserialize(datagram, out _, out DisParseError error, options));
-        Assert.Equal(DisParseErrorCode.InvalidLength, error.Code);
-        Assert.Equal(8, error.Offset);
+        Assert.IsFalse(DisSerializer.TryDeserialize(datagram, out _, out DisParseError error, options));
+        Assert.AreEqual(DisParseErrorCode.InvalidLength, error.Code);
+        Assert.AreEqual(8, error.Offset);
     }
 
-    [Fact]
+    [TestMethod]
     public void MaximumDeclaredLengthCannotAllocateFromATruncatedDatagram()
     {
         byte[] datagram =
@@ -86,7 +87,7 @@ public sealed class ParserSecurityTests
             0, 0,
         ];
 
-        Assert.False(DisSerializer.TryDeserialize(datagram, out _, out DisParseError error, BoundedOptions));
-        Assert.Equal(DisParseErrorCode.InvalidLength, error.Code);
+        Assert.IsFalse(DisSerializer.TryDeserialize(datagram, out _, out DisParseError error, BoundedOptions));
+        Assert.AreEqual(DisParseErrorCode.InvalidLength, error.Code);
     }
 }

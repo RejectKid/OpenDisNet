@@ -5,9 +5,10 @@ using OpenDisNet.Protocol;
 
 namespace OpenDisNet.Tests.Enumerations;
 
+[TestClass]
 public sealed class SisoEnumerationTests
 {
-    [Fact]
+    [TestMethod]
     public void SignalUsesNamedSisoValuesOnTheWire()
     {
         var original = new SignalPdu
@@ -20,27 +21,27 @@ public sealed class SisoEnumerationTests
         original.SetData("test"u8);
 
         byte[] bytes = DisSerializer.Serialize(original);
-        var decoded = Assert.IsType<SignalPdu>(DisSerializer.Deserialize(bytes));
+        var decoded = Assert.IsInstanceOfType<SignalPdu>(DisSerializer.Deserialize(bytes));
 
-        Assert.Equal(SignalTdlType.Link16StandardizedFormatJtidsMidsTadilJ, decoded.TdlType);
-        Assert.Equal(SignalEncodingClass.EncodedAudio, decoded.EncodingScheme.Class);
-        Assert.Equal(SignalEncodingType.Opus, decoded.EncodingScheme.AudioType);
-        Assert.Equal("test", Encoding.UTF8.GetString(decoded.Data));
-        Assert.Equal(bytes, DisSerializer.Serialize(decoded));
+        Assert.AreEqual(SignalTdlType.Link16StandardizedFormatJtidsMidsTadilJ, decoded.TdlType);
+        Assert.AreEqual(SignalEncodingClass.EncodedAudio, decoded.EncodingScheme.Class);
+        Assert.AreEqual(SignalEncodingType.Opus, decoded.EncodingScheme.AudioType);
+        Assert.AreEqual("test", Encoding.UTF8.GetString(decoded.Data));
+        Assert.AreSequenceEqual(bytes, DisSerializer.Serialize(decoded));
     }
 
-    [Fact]
+    [TestMethod]
     public void SignalEncodingSchemeSeparatesClassAndFourteenBitDetail()
     {
         SignalEncodingScheme value = SignalEncodingScheme.Data(SignalEncodingClass.RawBinaryData, messageCount: 12);
 
-        Assert.Equal(SignalEncodingClass.RawBinaryData, value.Class);
-        Assert.Equal((ushort)12, value.TypeOrMessageCount);
-        Assert.Equal((ushort)0x400C, value.Value);
-        Assert.Throws<ArgumentOutOfRangeException>(() => value.WithTypeOrMessageCount(0x4000));
+        Assert.AreEqual(SignalEncodingClass.RawBinaryData, value.Class);
+        Assert.AreEqual((ushort)12, value.TypeOrMessageCount);
+        Assert.AreEqual((ushort)0x400C, value.Value);
+        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => value.WithTypeOrMessageCount(0x4000));
     }
 
-    [Fact]
+    [TestMethod]
     public void UnknownEnumerationValuesRoundTripLosslessly()
     {
         var original = new SignalPdu
@@ -49,13 +50,13 @@ public sealed class SisoEnumerationTests
         };
 
         byte[] bytes = DisSerializer.Serialize(original);
-        var decoded = Assert.IsType<SignalPdu>(DisSerializer.Deserialize(bytes));
+        var decoded = Assert.IsInstanceOfType<SignalPdu>(DisSerializer.Deserialize(bytes));
 
-        Assert.Equal((SignalTdlType)0xFEED, decoded.TdlType);
-        Assert.Equal(bytes, DisSerializer.Serialize(decoded));
+        Assert.AreEqual((SignalTdlType)0xFEED, decoded.TdlType);
+        Assert.AreSequenceEqual(bytes, DisSerializer.Serialize(decoded));
     }
 
-    [Fact]
+    [TestMethod]
     public void BitfieldHelpersPreserveReservedBitsAndRoundTrip()
     {
         StopFreezeFrozenBehavior behavior = new StopFreezeFrozenBehavior(0x80)
@@ -68,16 +69,16 @@ public sealed class SisoEnumerationTests
         };
 
         byte[] bytes = DisSerializer.Serialize(original);
-        var decoded = Assert.IsType<StopFreezePdu>(DisSerializer.Deserialize(bytes));
+        var decoded = Assert.IsInstanceOfType<StopFreezePdu>(DisSerializer.Deserialize(bytes));
 
-        Assert.True(decoded.FrozenBehavior.RunSimulationClock);
-        Assert.False(decoded.FrozenBehavior.TransmitUpdates);
-        Assert.True(decoded.FrozenBehavior.ProcessUpdates);
-        Assert.Equal((byte)0x85, decoded.FrozenBehavior.Value);
-        Assert.Equal(bytes, DisSerializer.Serialize(decoded));
+        Assert.IsTrue(decoded.FrozenBehavior.RunSimulationClock);
+        Assert.IsFalse(decoded.FrozenBehavior.TransmitUpdates);
+        Assert.IsTrue(decoded.FrozenBehavior.ProcessUpdates);
+        Assert.AreEqual((byte)0x85, decoded.FrozenBehavior.Value);
+        Assert.AreSequenceEqual(bytes, DisSerializer.Serialize(decoded));
     }
 
-    [Fact]
+    [TestMethod]
     public void MultiBitFieldsHaveValidatedImmutableSetters()
     {
         MinefieldDataFusing value = MinefieldDataFusing.None
@@ -85,9 +86,9 @@ public sealed class SisoEnumerationTests
             .WithSecondary(7)
             .WithHasAntiHandlingDevice(true);
 
-        Assert.Equal((ushort)42, value.Primary);
-        Assert.Equal((ushort)7, value.Secondary);
-        Assert.True(value.HasAntiHandlingDevice);
-        Assert.Throws<ArgumentOutOfRangeException>(() => value.WithPrimary(128));
+        Assert.AreEqual((ushort)42, value.Primary);
+        Assert.AreEqual((ushort)7, value.Secondary);
+        Assert.IsTrue(value.HasAntiHandlingDevice);
+        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => value.WithPrimary(128));
     }
 }

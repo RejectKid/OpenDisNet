@@ -8,8 +8,8 @@ incomplete.
 
 - Ensured NuGet package, assembly, file, and informational versions agree for
   release and CI builds, with package-level validation for both target frameworks.
-- Refreshed the test platform and GitHub Actions dependencies and removed the
-  unused code-coverage collector.
+- Migrated the test suite to MSTest, refreshed the test platform and GitHub
+  Actions dependencies, and removed the unused code-coverage collector.
 - Expanded NuGet metadata and search terms for Distributed Interactive
   Simulation, IEEE 1278.1, DIS v7, SISO, PDU parsing, and binary serialization.
 - Added a package icon, explicit project/repository links, release-notes link,

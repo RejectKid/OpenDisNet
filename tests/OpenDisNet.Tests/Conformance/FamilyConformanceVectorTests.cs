@@ -4,6 +4,7 @@ using OpenDisNet.Protocol;
 
 namespace OpenDisNet.Tests.Conformance;
 
+[TestClass]
 public sealed class FamilyConformanceVectorTests
 {
     // These fixtures expose known defects in the reference generator's
@@ -15,89 +16,76 @@ public sealed class FamilyConformanceVectorTests
         43, 44, 45, 56, 57, 58, 59, 60, 61, 62, 63, 64, 68, 72,
     ];
 
-    public static TheoryData<byte, string> AllFamilies => new()
-    {
-        { 1, "0.3 Entity Information" }, { 2, "0.3 Warfare" },
-        { 3, "0.4 Logistics" }, { 5, "0.4 Simulation Management" },
-        { 6, "0.5 Distributed Emissions" }, { 4, "0.5 Radio Communications" },
-        { 7, "0.6 Entity Management" }, { 8, "0.6 Minefield" },
-        { 9, "0.7 Synthetic Environment" }, { 10, "0.7 Simulation Management with Reliability" },
-        { 11, "0.8 Live Entity" }, { 13, "0.8 Information Operations" },
-    };
+    public static IEnumerable<object[]> AllFamilies =>
+    [
+        [(byte)1, "0.3 Entity Information"], [(byte)2, "0.3 Warfare"],
+        [(byte)3, "0.4 Logistics"], [(byte)5, "0.4 Simulation Management"],
+        [(byte)6, "0.5 Distributed Emissions"], [(byte)4, "0.5 Radio Communications"],
+        [(byte)7, "0.6 Entity Management"], [(byte)8, "0.6 Minefield"],
+        [(byte)9, "0.7 Synthetic Environment"], [(byte)10, "0.7 Simulation Management with Reliability"],
+        [(byte)11, "0.8 Live Entity"], [(byte)13, "0.8 Information Operations"],
+    ];
 
-    public static TheoryData<byte> StandardPduTypes =>
-        new(Enumerable.Range(1, 72).Select(x => (byte)x));
+    public static IEnumerable<object[]> StandardPduTypes =>
+        Enumerable.Range(1, 72).Select(x => new object[] { (byte)x });
 
-    public static TheoryData<byte, string, string> OpenDisJavaVectors
-    {
-        get
-        {
-            var data = new TheoryData<byte, string, string>();
-            foreach (OpenDisJavaVector vector in ReadOpenDisJavaVectors().Where(x => x.Type is not 43 and not 45))
-                data.Add((byte)vector.Type, vector.Name, vector.Hex);
-            return data;
-        }
-    }
+    public static IEnumerable<object[]> OpenDisJavaVectors =>
+        ReadOpenDisJavaVectors()
+            .Where(x => x.Type is not 43 and not 45)
+            .Select(x => new object[] { (byte)x.Type, x.Name, x.Hex });
 
-    public static TheoryData<byte, string, string> OpenDisJavaPopulatedVectors
-    {
-        get
-        {
-            var data = new TheoryData<byte, string, string>();
-            foreach (OpenDisJavaVector vector in ReadOpenDisJavaVectors("opendis7-java-populated.json")
-                         .Where(x => !PopulatedReferenceIncompatibilities.Contains(x.Type)))
-                data.Add((byte)vector.Type, vector.Name, vector.Hex);
-            return data;
-        }
-    }
+    public static IEnumerable<object[]> OpenDisJavaPopulatedVectors =>
+        ReadOpenDisJavaVectors("opendis7-java-populated.json")
+            .Where(x => !PopulatedReferenceIncompatibilities.Contains(x.Type))
+            .Select(x => new object[] { (byte)x.Type, x.Name, x.Hex });
 
-    [Theory]
-    [MemberData(nameof(StandardPduTypes))]
+    [TestMethod]
+    [DynamicData(nameof(StandardPduTypes))]
     public void PopulatedPduRoundTripsByteIdentically(byte value)
     {
         Pdu original = DeterministicPduFixture.Create((PduType)value);
 
         byte[] bytes = DisSerializer.Serialize(original);
-        Pdu decoded = Assert.IsAssignableFrom<Pdu>(DisSerializer.Deserialize(bytes));
+        Pdu decoded = Assert.IsInstanceOfType<Pdu>(DisSerializer.Deserialize(bytes));
 
-        Assert.Equal(original.GetType(), decoded.GetType());
-        Assert.Equal(bytes, DisSerializer.Serialize(decoded));
-        Assert.True(bytes.Length > 12);
+        Assert.AreEqual(original.GetType(), decoded.GetType());
+        Assert.AreSequenceEqual(bytes, DisSerializer.Serialize(decoded));
+        Assert.IsTrue(bytes.Length > 12);
     }
 
-    [Theory]
-    [MemberData(nameof(OpenDisJavaVectors))]
+    [TestMethod]
+    [DynamicData(nameof(OpenDisJavaVectors))]
     public void IndependentOpenDisJavaVectorRoundTrips(byte value, string referenceName, string hex)
     {
         byte[] bytes = Convert.FromHexString(hex);
-        Pdu decoded = Assert.IsAssignableFrom<Pdu>(DisSerializer.Deserialize(bytes));
+        Pdu decoded = Assert.IsInstanceOfType<Pdu>(DisSerializer.Deserialize(bytes));
 
-        Assert.Equal((PduType)value, decoded.PduType);
-        Assert.Equal(bytes, DisSerializer.Serialize(decoded));
-        Assert.False(string.IsNullOrWhiteSpace(referenceName));
+        Assert.AreEqual((PduType)value, decoded.PduType);
+        Assert.AreSequenceEqual(bytes, DisSerializer.Serialize(decoded));
+        Assert.IsFalse(string.IsNullOrWhiteSpace(referenceName));
     }
 
-    [Theory]
-    [MemberData(nameof(OpenDisJavaPopulatedVectors))]
+    [TestMethod]
+    [DynamicData(nameof(OpenDisJavaPopulatedVectors))]
     public void IndependentPopulatedOpenDisJavaVectorRoundTrips(byte value, string referenceName, string hex)
     {
         byte[] bytes = Convert.FromHexString(hex);
-        Pdu decoded = Assert.IsAssignableFrom<Pdu>(DisSerializer.Deserialize(bytes));
+        Pdu decoded = Assert.IsInstanceOfType<Pdu>(DisSerializer.Deserialize(bytes));
 
-        Assert.Equal((PduType)value, decoded.PduType);
-        Assert.Equal(bytes, DisSerializer.Serialize(decoded));
-        Assert.False(string.IsNullOrWhiteSpace(referenceName));
+        Assert.AreEqual((PduType)value, decoded.PduType);
+        Assert.AreSequenceEqual(bytes, DisSerializer.Serialize(decoded));
+        Assert.IsFalse(string.IsNullOrWhiteSpace(referenceName));
     }
 
-    [Theory]
-    [MemberData(nameof(AllFamilies))]
+    [TestMethod]
+    [DynamicData(nameof(AllFamilies))]
     public void EveryByteBoundaryRejectsTruncation(byte family, string milestone)
     {
         Pdu[] pdus = Enumerable.Range(1, 72)
             .Select(x => DeterministicPduFixture.Create((PduType)x))
             .Where(x => (byte)x.ProtocolFamily == family)
             .ToArray();
-        Assert.NotEmpty(pdus);
+        Assert.IsTrue(pdus.Length > 0);
 
         foreach (Pdu pdu in pdus)
         {
@@ -105,42 +93,42 @@ public sealed class FamilyConformanceVectorTests
             for (int length = 0; length < bytes.Length; length++)
             {
                 bool parsed = DisSerializer.TryDeserialize(bytes.AsSpan(0, length), out _, out DisParseError error);
-                Assert.False(parsed, $"{milestone}: {pdu.GetType().Name} accepted truncation at byte {length}.");
-                Assert.NotEqual(DisParseErrorCode.None, error.Code);
+                Assert.IsFalse(parsed, $"{milestone}: {pdu.GetType().Name} accepted truncation at byte {length}.");
+                Assert.AreNotEqual(DisParseErrorCode.None, error.Code);
             }
         }
     }
 
-    [Fact]
+    [TestMethod]
     public void IndependentVectorSetCoversEveryStandardPduExactlyOnce()
     {
         OpenDisJavaVector[] vectors = ReadOpenDisJavaVectors();
-        Assert.Equal(72, vectors.Length);
-        Assert.Equal(Enumerable.Range(1, 72), vectors.Select(x => x.Type).Order());
+        Assert.AreEqual(72, vectors.Length);
+        Assert.AreSequenceEqual(Enumerable.Range(1, 72), vectors.Select(x => x.Type).Order());
     }
 
-    [Fact]
+    [TestMethod]
     public void CompatiblePopulatedReferenceVectorsCoverEveryPduFamily()
     {
         OpenDisJavaVector[] vectors = ReadOpenDisJavaVectors("opendis7-java-populated.json")
             .Where(x => !PopulatedReferenceIncompatibilities.Contains(x.Type))
             .ToArray();
 
-        Assert.Equal(44, vectors.Length);
-        Assert.Equal(
+        Assert.AreEqual(44, vectors.Length);
+        Assert.AreSequenceEqual(
             AllFamilies.Select(row => (byte)row[0]).Order(),
             vectors.Select(x => Convert.FromHexString(x.Hex)[3]).Distinct().Order());
     }
 
-    [Theory]
-    [InlineData(43)]
-    [InlineData(45)]
+    [TestMethod]
+    [DataRow(43)]
+    [DataRow(45)]
     public void OpenDisJavaBitfieldWidthDifferencesRemainExplicit(int type)
     {
-        OpenDisJavaVector vector = Assert.Single(ReadOpenDisJavaVectors(), x => x.Type == type);
+        OpenDisJavaVector vector = ReadOpenDisJavaVectors().Single(x => x.Type == type);
 
-        Assert.False(DisSerializer.TryDeserialize(Convert.FromHexString(vector.Hex), out _, out DisParseError error));
-        Assert.Equal(DisParseErrorCode.InvalidField, error.Code);
+        Assert.IsFalse(DisSerializer.TryDeserialize(Convert.FromHexString(vector.Hex), out _, out DisParseError error));
+        Assert.AreEqual(DisParseErrorCode.InvalidField, error.Code);
     }
 
     private static OpenDisJavaVector[] ReadOpenDisJavaVectors(string fileName = "opendis7-java-default.json")

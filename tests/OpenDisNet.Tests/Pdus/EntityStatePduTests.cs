@@ -5,9 +5,10 @@ using OpenDisNet.Protocol;
 
 namespace OpenDisNet.Tests.Pdus;
 
+[TestClass]
 public sealed class EntityStatePduTests
 {
-    [Fact]
+    [TestMethod]
     public void EntityStatePduUsesObjectInitializerAndRoundTrips()
     {
         var expected = (EntityStatePdu)PduFactory.Create(PduType.EntityState, exerciseId: 4);
@@ -19,11 +20,11 @@ public sealed class EntityStatePduTests
         Encoding.ASCII.GetBytes("EAGLE-1").CopyTo(expected.Marking.Characters, 0);
 
         byte[] bytes = DisSerializer.Serialize(expected);
-        var actual = Assert.IsType<EntityStatePdu>(DisSerializer.Deserialize(bytes));
+        var actual = Assert.IsInstanceOfType<EntityStatePdu>(DisSerializer.Deserialize(bytes));
 
-        Assert.Equal(144, bytes.Length);
-        Assert.Equal((ushort)3, actual.EntityId.EntityNumber);
-        Assert.Equal(300, actual.EntityLocation.Z);
-        Assert.StartsWith("EAGLE-1", Encoding.ASCII.GetString(actual.Marking.Characters));
+        Assert.AreEqual(144, bytes.Length);
+        Assert.AreEqual((ushort)3, actual.EntityId.EntityNumber);
+        Assert.AreEqual(300, actual.EntityLocation.Z);
+        StringAssert.StartsWith(Encoding.ASCII.GetString(actual.Marking.Characters), "EAGLE-1");
     }
 }

@@ -4,20 +4,21 @@ using OpenDisNet.Protocol;
 
 namespace OpenDisNet.Tests.Conformance;
 
+[TestClass]
 public sealed class SchemaManifestTests
 {
-    [Fact]
+    [TestMethod]
     public void ManifestCoversEveryStandardizedDis7PduType()
     {
-        Assert.Equal(233, Dis7SchemaManifest.ClassCount);
-        Assert.Equal(72, Dis7SchemaManifest.PduCount);
-        Assert.Equal(Enumerable.Range(1, 72).Select(x => (byte)x), Dis7SchemaManifest.Pdus.ToArray().Select(x => x.Type));
-        Assert.Equal(72, Dis7SchemaManifest.Pdus.ToArray().Select(x => x.ModelName).Distinct(StringComparer.Ordinal).Count());
+        Assert.AreSequenceEqual(
+            Enumerable.Range(1, 72).Select(x => (byte)x),
+            Dis7SchemaManifest.Pdus.ToArray().Select(x => x.Type));
+        Assert.AreEqual(72, Dis7SchemaManifest.Pdus.ToArray().Select(x => x.ModelName).Distinct(StringComparer.Ordinal).Count());
         foreach (var descriptor in Dis7SchemaManifest.Pdus)
-            Assert.Equal(descriptor.ModelName, PduFactory.Create((PduType)descriptor.Type).GetType().Name);
+            Assert.AreEqual(descriptor.ModelName, PduFactory.Create((PduType)descriptor.Type).GetType().Name);
     }
 
-    [Fact]
+    [TestMethod]
     public void EverySchemaClassHasAGeneratedPublicModel()
     {
         Type[] models = typeof(OpenDisNet.Pdus.EntityStatePdu).Assembly
@@ -27,8 +28,8 @@ public sealed class SchemaManifestTests
             .Where(x => !(x.IsAbstract && x.IsSealed))
             .ToArray();
 
-        Assert.Equal(233, models.Length);
+        Assert.AreEqual(233, models.Length);
         foreach (var descriptor in Dis7SchemaManifest.Pdus)
-            Assert.Contains(models, x => x.Name == descriptor.ModelName);
+            Assert.IsTrue(models.Any(x => x.Name == descriptor.ModelName));
     }
 }

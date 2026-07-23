@@ -3,37 +3,39 @@ using OpenDisNet.Protocol;
 
 namespace OpenDisNet.Tests;
 
+[TestClass]
 public sealed class PublicApiTests
 {
-    [Fact]
+    [TestMethod]
     public void ProtocolModelsUseOneConsumerNamespace()
     {
         Type[] exported = typeof(Pdu).Assembly.GetExportedTypes();
 
-        Assert.DoesNotContain(exported, x => x.Namespace is "OpenDisNet.Dis7" or "OpenDisNet.Generated" or "OpenDisNet.Records");
-        Assert.Equal(72, exported.Count(x => x.Namespace == "OpenDisNet.Pdus" && typeof(Pdu).IsAssignableFrom(x) && !x.IsAbstract));
+        Assert.IsFalse(exported.Any(
+            x => x.Namespace is "OpenDisNet.Dis7" or "OpenDisNet.Generated" or "OpenDisNet.Records"));
+        Assert.AreEqual(72, exported.Count(x => x.Namespace == "OpenDisNet.Pdus" && typeof(Pdu).IsAssignableFrom(x) && !x.IsAbstract));
     }
 
-    [Fact]
+    [TestMethod]
     public void DerivedWireCountsAreNotPartOfThePublicModel()
     {
-        Assert.Null(typeof(EntityStatePdu).GetProperty("NumberOfVariableParameters"));
-        Assert.Null(typeof(SignalPdu).GetProperty("DataLength"));
-        Assert.Null(typeof(TransmitterPdu).GetProperty("ModulationParameterCount"));
-        Assert.NotNull(typeof(SignalPdu).GetProperty("DataBitLength"));
+        Assert.IsNull(typeof(EntityStatePdu).GetProperty("NumberOfVariableParameters"));
+        Assert.IsNull(typeof(SignalPdu).GetProperty("DataLength"));
+        Assert.IsNull(typeof(TransmitterPdu).GetProperty("ModulationParameterCount"));
+        Assert.IsNotNull(typeof(SignalPdu).GetProperty("DataBitLength"));
     }
 
-    [Fact]
+    [TestMethod]
     public void EveryConcretePduCanBeConstructedWithCorrectWireIdentity()
     {
         foreach (byte value in Enumerable.Range(1, 72).Select(x => (byte)x))
         {
             Pdu factoryPdu = PduFactory.Create((PduType)value);
-            var directlyCreated = Assert.IsAssignableFrom<Pdu>(Activator.CreateInstance(factoryPdu.GetType()));
+            var directlyCreated = Assert.IsInstanceOfType<Pdu>(Activator.CreateInstance(factoryPdu.GetType()));
 
-            Assert.Equal((PduType)value, directlyCreated.Header.PduType);
-            Assert.Equal(DisProtocolVersion.Ieee1278_1_2012, directlyCreated.Header.ProtocolVersion);
-            Assert.NotEqual(ProtocolFamily.Other, directlyCreated.Header.ProtocolFamily);
+            Assert.AreEqual((PduType)value, directlyCreated.Header.PduType);
+            Assert.AreEqual(DisProtocolVersion.Ieee1278_1_2012, directlyCreated.Header.ProtocolVersion);
+            Assert.AreNotEqual(ProtocolFamily.Other, directlyCreated.Header.ProtocolFamily);
         }
     }
 }
