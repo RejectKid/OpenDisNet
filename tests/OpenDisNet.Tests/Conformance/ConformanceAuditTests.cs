@@ -6,6 +6,7 @@ using OpenDisNet.Protocol;
 
 namespace OpenDisNet.Tests.Conformance;
 
+[TestClass]
 public sealed class ConformanceAuditTests
 {
     private static readonly JsonSerializerOptions JsonOptions = new()
@@ -13,45 +14,45 @@ public sealed class ConformanceAuditTests
         PropertyNameCaseInsensitive = true,
     };
 
-    [Fact]
+    [TestMethod]
     public void AuditedInputsHaveNotChanged()
     {
         string root = FindRepositoryRoot();
         AuditManifest manifest = ReadManifest(root);
 
-        Assert.Equal("1.0.1", manifest.AuditVersion);
-        Assert.Equal(72, manifest.PduTypeCount);
-        Assert.Equal(233, manifest.ConcreteWireClassCount);
-        Assert.Equal(17, manifest.Artifacts.Length);
+        Assert.AreEqual("1.0.1", manifest.AuditVersion);
+        Assert.AreEqual(72, manifest.PduTypeCount);
+        Assert.AreEqual(233, manifest.ConcreteWireClassCount);
+        Assert.AreEqual(17, manifest.Artifacts.Length);
 
         foreach (AuditArtifact artifact in manifest.Artifacts)
         {
             string path = Path.Combine(root, artifact.Path.Replace('/', Path.DirectorySeparatorChar));
-            Assert.True(File.Exists(path), $"Audited input is missing: {artifact.Path}");
+            Assert.IsTrue(File.Exists(path), $"Audited input is missing: {artifact.Path}");
             byte[] normalized = Encoding.UTF8.GetBytes(File.ReadAllText(path).ReplaceLineEndings("\n"));
             string actual = Convert.ToHexStringLower(SHA256.HashData(normalized));
-            Assert.Equal(artifact.Sha256, actual);
+            Assert.AreEqual(artifact.Sha256, actual);
         }
     }
 
-    [Fact]
+    [TestMethod]
     public void AuditAccountsForEveryStandardPduAndFamily()
     {
         string root = FindRepositoryRoot();
         AuditManifest manifest = ReadManifest(root);
         int[] auditedTypes = manifest.Families.SelectMany(x => x.Types).Order().ToArray();
 
-        Assert.Equal(Enumerable.Range(1, 72), auditedTypes);
-        Assert.Equal(72, manifest.Families.Sum(x => x.Count));
-        Assert.Equal(12, manifest.Families.Length);
+        Assert.AreSequenceEqual(Enumerable.Range(1, 72), auditedTypes);
+        Assert.AreEqual(72, manifest.Families.Sum(x => x.Count));
+        Assert.AreEqual(12, manifest.Families.Length);
 
         foreach (AuditFamily family in manifest.Families)
         {
-            Assert.Equal(family.Count, family.Types.Length);
+            Assert.AreEqual(family.Count, family.Types.Length);
             foreach (int type in family.Types)
             {
                 Pdu pdu = PduFactory.Create((PduType)type);
-                Assert.Equal((ProtocolFamily)family.Value, pdu.ProtocolFamily);
+                Assert.AreEqual((ProtocolFamily)family.Value, pdu.ProtocolFamily);
             }
         }
     }

@@ -4,9 +4,10 @@ using OpenDisNet.Protocol;
 
 namespace OpenDisNet.Tests.Pdus;
 
+[TestClass]
 public sealed class WarfarePduTests
 {
-    [Fact]
+    [TestMethod]
     public void FirePduRoundTrips()
     {
         var expected = (FirePdu)PduFactory.Create(PduType.Fire, exerciseId: 1);
@@ -17,14 +18,14 @@ public sealed class WarfarePduTests
         expected.Range = 5_000;
 
         byte[] bytes = DisSerializer.Serialize(expected);
-        var actual = Assert.IsType<FirePdu>(DisSerializer.Deserialize(bytes));
+        var actual = Assert.IsInstanceOfType<FirePdu>(DisSerializer.Deserialize(bytes));
 
-        Assert.Equal(96, bytes.Length);
-        Assert.Equal((ushort)3, actual.FiringEntityId.EntityNumber);
-        Assert.Equal(5_000, actual.Range);
+        Assert.AreEqual(96, bytes.Length);
+        Assert.AreEqual((ushort)3, actual.FiringEntityId.EntityNumber);
+        Assert.AreEqual(5_000, actual.Range);
     }
 
-    [Fact]
+    [TestMethod]
     public void DetonationPduRoundTripsVariableParameters()
     {
         var expected = (DetonationPdu)PduFactory.Create(PduType.Detonation);
@@ -35,9 +36,11 @@ public sealed class WarfarePduTests
         });
 
         byte[] bytes = DisSerializer.Serialize(expected);
-        var actual = Assert.IsType<DetonationPdu>(DisSerializer.Deserialize(bytes));
+        var actual = Assert.IsInstanceOfType<DetonationPdu>(DisSerializer.Deserialize(bytes));
 
-        Assert.Equal(120, bytes.Length);
-        Assert.Equal(expected.VariableParameters[0].RecordSpecificFields, actual.VariableParameters[0].RecordSpecificFields);
+        Assert.AreEqual(120, bytes.Length);
+        Assert.AreSequenceEqual(
+            expected.VariableParameters[0].RecordSpecificFields,
+            actual.VariableParameters[0].RecordSpecificFields);
     }
 }

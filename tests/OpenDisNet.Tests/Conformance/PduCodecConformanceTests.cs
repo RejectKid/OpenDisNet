@@ -4,26 +4,27 @@ using OpenDisNet.Protocol;
 
 namespace OpenDisNet.Tests.Conformance;
 
+[TestClass]
 public sealed class PduCodecConformanceTests
 {
-    public static TheoryData<byte> StandardPduTypes =>
-        new(Enumerable.Range(1, 72).Select(x => (byte)x));
+    public static IEnumerable<object[]> StandardPduTypes =>
+        Enumerable.Range(1, 72).Select(x => new object[] { (byte)x });
 
-    [Theory]
-    [MemberData(nameof(StandardPduTypes))]
+    [TestMethod]
+    [DynamicData(nameof(StandardPduTypes))]
     public void DefaultPduRoundTripsWithoutUnreadBytes(byte value)
     {
         Pdu original = PduFactory.Create((PduType)value, exerciseId: 4);
 
         byte[] encoded = DisSerializer.Serialize(original);
-        Pdu decoded = Assert.IsAssignableFrom<Pdu>(DisSerializer.Deserialize(encoded));
+        Pdu decoded = Assert.IsInstanceOfType<Pdu>(DisSerializer.Deserialize(encoded));
 
-        Assert.Equal(value, (byte)decoded.PduType);
-        Assert.Equal(encoded.Length, original.Length);
-        Assert.Equal(encoded, DisSerializer.Serialize(decoded));
+        Assert.AreEqual(value, (byte)decoded.PduType);
+        Assert.AreEqual(encoded.Length, original.Length);
+        Assert.AreSequenceEqual(encoded, DisSerializer.Serialize(decoded));
     }
 
-    [Fact]
+    [TestMethod]
     public void PublicSerializerHandlesTypedPdus()
     {
         var original = (SignalPdu)PduFactory.Create(PduType.Signal, exerciseId: 9);
@@ -35,15 +36,15 @@ public sealed class PduCodecConformanceTests
         original.Data = [0xA5, 0xE0];
 
         byte[] encoded = DisSerializer.Serialize(original);
-        Assert.True(DisSerializer.TryDeserialize(encoded, out global::OpenDisNet.Pdus.IDisPdu? parsed, out DisParseError error), error.Message);
+        Assert.IsTrue(DisSerializer.TryDeserialize(encoded, out global::OpenDisNet.Pdus.IDisPdu? parsed, out DisParseError error), error.Message);
 
-        SignalPdu signal = Assert.IsType<SignalPdu>(parsed);
-        Assert.Equal(original.Data, signal.Data);
-        Assert.Equal((ushort)13, signal.DataBitLength);
-        Assert.Equal(encoded, DisSerializer.Serialize(signal));
+        SignalPdu signal = Assert.IsInstanceOfType<SignalPdu>(parsed);
+        Assert.AreSequenceEqual(original.Data, signal.Data);
+        Assert.AreEqual((ushort)13, signal.DataBitLength);
+        Assert.AreSequenceEqual(encoded, DisSerializer.Serialize(signal));
     }
 
-    [Fact]
+    [TestMethod]
     public void SerializerFacadeHidesCodecImplementation()
     {
         Pdu original = PduFactory.Create(PduType.Acknowledge, exerciseId: 3);
@@ -51,11 +52,11 @@ public sealed class PduCodecConformanceTests
         byte[] encoded = DisSerializer.Serialize(original);
         global::OpenDisNet.Pdus.IDisPdu decoded = DisSerializer.Deserialize(encoded);
 
-        Assert.Equal(PduType.Acknowledge, decoded.Header.PduType);
-        Assert.Equal(encoded, DisSerializer.Serialize(decoded));
+        Assert.AreEqual(PduType.Acknowledge, decoded.Header.PduType);
+        Assert.AreSequenceEqual(encoded, DisSerializer.Serialize(decoded));
     }
 
-    [Fact]
+    [TestMethod]
     public void RejectsDeclaredListThatExceedsBody()
     {
         var original = (SignalPdu)PduFactory.Create(PduType.Signal);
@@ -66,11 +67,11 @@ public sealed class PduCodecConformanceTests
         truncated[8] = (byte)(truncated.Length >> 8);
         truncated[9] = (byte)truncated.Length;
 
-        Assert.False(DisSerializer.TryDeserialize(truncated, out _, out DisParseError error));
-        Assert.Equal(DisParseErrorCode.InvalidField, error.Code);
+        Assert.IsFalse(DisSerializer.TryDeserialize(truncated, out _, out DisParseError error));
+        Assert.AreEqual(DisParseErrorCode.InvalidField, error.Code);
     }
 
-    [Fact]
+    [TestMethod]
     public void TransmitterUsesOctetLengthsAndSynchronizesThemAutomatically()
     {
         var original = (TransmitterPdu)PduFactory.Create(PduType.Transmitter);
@@ -78,14 +79,14 @@ public sealed class PduCodecConformanceTests
         original.AntennaPatternParameters = Enumerable.Range(0, 40).Select(x => (byte)x).ToArray();
 
         byte[] encoded = DisSerializer.Serialize(original);
-        var decoded = Assert.IsType<TransmitterPdu>(DisSerializer.Deserialize(encoded));
+        var decoded = Assert.IsInstanceOfType<TransmitterPdu>(DisSerializer.Deserialize(encoded));
 
-        Assert.Equal(original.ModulationParameters, decoded.ModulationParameters);
-        Assert.Equal(original.AntennaPatternParameters, decoded.AntennaPatternParameters);
-        Assert.Equal(encoded, DisSerializer.Serialize(decoded));
+        Assert.AreSequenceEqual(original.ModulationParameters, decoded.ModulationParameters);
+        Assert.AreSequenceEqual(original.AntennaPatternParameters, decoded.AntennaPatternParameters);
+        Assert.AreSequenceEqual(encoded, DisSerializer.Serialize(decoded));
     }
 
-    [Fact]
+    [TestMethod]
     public void IntercomParameterByteLengthFramesMultipleRecords()
     {
         var original = (IntercomControlPdu)PduFactory.Create(PduType.IntercomControl);
@@ -96,15 +97,15 @@ public sealed class PduCodecConformanceTests
         ];
 
         byte[] encoded = DisSerializer.Serialize(original);
-        var decoded = Assert.IsType<IntercomControlPdu>(DisSerializer.Deserialize(encoded));
+        var decoded = Assert.IsInstanceOfType<IntercomControlPdu>(DisSerializer.Deserialize(encoded));
 
-        Assert.Equal(2, decoded.IntercomParameters.Count);
-        Assert.Equal([1, 2, 3, 4], decoded.IntercomParameters[0].RecordSpecificField);
-        Assert.Equal([5, 6, 7, 8], decoded.IntercomParameters[1].RecordSpecificField);
-        Assert.Equal(encoded, DisSerializer.Serialize(decoded));
+        Assert.AreEqual(2, decoded.IntercomParameters.Count);
+        Assert.AreSequenceEqual(new byte[] { 1, 2, 3, 4 }, decoded.IntercomParameters[0].RecordSpecificField);
+        Assert.AreSequenceEqual(new byte[] { 5, 6, 7, 8 }, decoded.IntercomParameters[1].RecordSpecificField);
+        Assert.AreSequenceEqual(encoded, DisSerializer.Serialize(decoded));
     }
 
-    [Fact]
+    [TestMethod]
     public void MinefieldDataFilterControlsOptionalPerMineFields()
     {
         var original = (MinefieldDataPdu)PduFactory.Create(PduType.MinefieldData);
@@ -118,12 +119,12 @@ public sealed class PduCodecConformanceTests
         original.MineEntityNumber = [101, 102];
 
         byte[] encoded = DisSerializer.Serialize(original);
-        var decoded = Assert.IsType<MinefieldDataPdu>(DisSerializer.Deserialize(encoded));
+        var decoded = Assert.IsInstanceOfType<MinefieldDataPdu>(DisSerializer.Deserialize(encoded));
 
-        Assert.Equal(1u, original.DataFilter.BitFlags);
-        Assert.Equal(original.GroundBurialDepthOffset, decoded.GroundBurialDepthOffset);
-        Assert.Empty(decoded.WaterBurialDepthOffset);
-        Assert.Equal(original.MineEntityNumber, decoded.MineEntityNumber);
-        Assert.Equal(encoded, DisSerializer.Serialize(decoded));
+        Assert.AreEqual(1u, original.DataFilter.BitFlags);
+        Assert.AreSequenceEqual(original.GroundBurialDepthOffset, decoded.GroundBurialDepthOffset);
+        Assert.AreEqual(0, decoded.WaterBurialDepthOffset.Length);
+        Assert.AreSequenceEqual(original.MineEntityNumber, decoded.MineEntityNumber);
+        Assert.AreSequenceEqual(encoded, DisSerializer.Serialize(decoded));
     }
 }
