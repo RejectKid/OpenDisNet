@@ -4,8 +4,9 @@
 [![NuGet](https://img.shields.io/nuget/v/OpenDisNet.svg)](https://www.nuget.org/packages/OpenDisNet)
 [![GitHub Release](https://img.shields.io/github/v/release/RejectKid/OpenDisNet)](https://github.com/RejectKid/OpenDisNet/releases/latest)
 
-OpenDisNet is a high-performance, type-safe .NET codec for Distributed
-Interactive Simulation (DIS) Protocol Version 7, defined by IEEE 1278.1-2012.
+OpenDisNet is a high-performance, type-safe, native C#/.NET parser and
+serializer for IEEE 1278.1-2012 Distributed Interactive Simulation (DIS)
+Protocol Version 7. It provides binary codecs for all 72 standardized PDU types.
 
 > **Development status:** Stable 1.x release. All 72 DIS v7 PDU identifiers have
 > typed native C# codecs, every family has populated, independent, malformed,

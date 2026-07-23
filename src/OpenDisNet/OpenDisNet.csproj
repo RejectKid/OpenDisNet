@@ -4,10 +4,15 @@
     <AssemblyName>OpenDisNet</AssemblyName>
     <RootNamespace>OpenDisNet</RootNamespace>
     <PackageId>OpenDisNet</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Authors>RejectKid</Authors>
-    <Description>High-performance, type-safe DIS Protocol Version 7 binary codec for .NET.</Description>
-    <PackageTags>DIS;IEEE-1278;simulation;PDU;protocol</PackageTags>
+    <Title>OpenDisNet — Distributed Interactive Simulation (DIS v7) for .NET</Title>
+    <Description>Native C#/.NET binary parser and serializer for IEEE 1278.1 Distributed Interactive Simulation (DIS) version 7, covering all 72 PDU types.</Description>
+    <PackageTags>DIS;DIS7;DIS-v7;Distributed-Interactive-Simulation;IEEE1278;IEEE1278.1;SISO;SISO-REF-010;PDU;CSharp;dotnet;simulation;interoperability;modeling-and-simulation;binary-serialization;network-protocol;parser;serializer;codec</PackageTags>
+    <PackageProjectUrl>https://github.com/RejectKid/OpenDisNet</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/RejectKid/OpenDisNet.git</RepositoryUrl>
+    <PackageReleaseNotes>https://github.com/RejectKid/OpenDisNet/releases/tag/v$(PackageVersion)</PackageReleaseNotes>
+    <PackageIcon>opendisnet-icon.png</PackageIcon>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <RepositoryType>git</RepositoryType>
@@ -26,5 +31,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\assets\opendisnet-icon.png" Pack="true" PackagePath="\" />
   </ItemGroup>
 </Project>

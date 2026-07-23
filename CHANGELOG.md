@@ -4,7 +4,14 @@ All notable changes are documented here. This project follows Semantic
 Versioning starting with 1.0 and uses prerelease versions when conformance is
 incomplete.
 
-## Unreleased
+## 1.0.2 - Unreleased
+
+- Expanded NuGet metadata and search terms for Distributed Interactive
+  Simulation, IEEE 1278.1, DIS v7, SISO, PDU parsing, and binary serialization.
+- Added a package icon, explicit project/repository links, release-notes link,
+  and clearer package title and description.
+- Added a coordinated GitHub social preview and expanded repository discovery
+  topics.
 
 ## 1.0.1 - 2026-07-13
 
