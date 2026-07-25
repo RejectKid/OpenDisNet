@@ -9,7 +9,8 @@ Prerelease tags use SemVer identifiers such as `v1.1.0-rc.1`. The workflow
 derives the package version from the tag and marks the GitHub release as a
 prerelease automatically. Before publishing any tag, the workflow validates the
 public API, compares the package with the 1.0.0 compatibility baseline, and runs
-an external-style consumer against the packed artifact on .NET 9 and .NET 10.
+an external-style consumer against the packed artifact on .NET 8, .NET 9, and
+.NET 10.
 
 The RC testing contract and feedback process are documented in
 [`release-candidate.md`](release-candidate.md). Promote an RC to a stable tag

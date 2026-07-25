@@ -20,6 +20,7 @@ try {
     $requiredEntries = @(
         'README.md',
         'opendisnet-icon.png',
+        'lib/net8.0/OpenDisNet.dll',
         'lib/net9.0/OpenDisNet.dll',
         'lib/net10.0/OpenDisNet.dll'
     )
@@ -60,6 +61,7 @@ try {
 
     $expectedAssemblyVersion = "$($Matches[1]).$($Matches[2]).$($Matches[3]).0"
     $assemblyEntries = @(
+        'lib/net8.0/OpenDisNet.dll',
         'lib/net9.0/OpenDisNet.dll',
         'lib/net10.0/OpenDisNet.dll'
     )

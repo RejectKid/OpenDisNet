@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/benchmarks/">
+    <Project Path="benchmarks/OpenDisNet.Benchmarks/OpenDisNet.Benchmarks.csproj" />
+  </Folder>
   <Folder Name="/samples/">
     <Project Path="samples/OpenDisNet.PacketInspector/OpenDisNet.PacketInspector.csproj" />
   </Folder>

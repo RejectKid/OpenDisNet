@@ -30,7 +30,7 @@ public sealed class ConformanceAuditTests
             string path = Path.Combine(root, artifact.Path.Replace('/', Path.DirectorySeparatorChar));
             Assert.IsTrue(File.Exists(path), $"Audited input is missing: {artifact.Path}");
             byte[] normalized = Encoding.UTF8.GetBytes(File.ReadAllText(path).ReplaceLineEndings("\n"));
-            string actual = Convert.ToHexStringLower(SHA256.HashData(normalized));
+            string actual = Convert.ToHexString(SHA256.HashData(normalized)).ToLowerInvariant();
             Assert.AreEqual(artifact.Sha256, actual);
         }
     }

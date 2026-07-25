@@ -4,7 +4,14 @@ All notable changes are documented here. This project follows Semantic
 Versioning starting with 1.0 and uses prerelease versions when conformance is
 incomplete.
 
-## 1.0.2 - Unreleased
+## 1.1.0 - Unreleased
+
+- Added first-class .NET 8 support alongside .NET 9 and .NET 10, including
+  full unit-test, package validation, and packed-package consumer coverage.
+- Added BenchmarkDotNet coverage for representative Signal PDU parsing and
+  serialization paths, including caller-owned buffers and allocation reporting.
+
+## 1.0.2 - 2026-07-23
 
 - Ensured NuGet package, assembly, file, and informational versions agree for
   release and CI builds, with package-level validation for both target frameworks.
