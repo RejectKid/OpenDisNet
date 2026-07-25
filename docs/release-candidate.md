@@ -45,7 +45,7 @@ performance, or documentation.
 ## Stable-release exit criteria
 
 - Public API analyzer and stable-baseline package-compatibility validation remain clean.
-- The packed-package consumer passes on .NET 9 and .NET 10.
+- The packed-package consumer passes on .NET 8, .NET 9, and .NET 10.
 - No unresolved high-impact wire-correctness or data-loss defect remains.
 - External testing covers real application workflows without relying on
   sensitive captures.

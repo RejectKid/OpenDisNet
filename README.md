@@ -122,7 +122,7 @@ dotnet test --configuration Release
 dotnet pack src/OpenDisNet/OpenDisNet.csproj --configuration Release
 ```
 
-The library targets .NET 9 and .NET 10 and uses nullable annotations,
+The library targets .NET 8, .NET 9, and .NET 10 and uses nullable annotations,
 deterministic builds, and symbol packages.
 
 The implementation is reviewable in ordinary source files: PDU classes are
@@ -131,6 +131,19 @@ all 72 binary dispatch paths are in
 [`src/OpenDisNet/Internal/PduCodec.cs`](src/OpenDisNet/Internal/PduCodec.cs),
 and checked big-endian primitives are under
 [`src/OpenDisNet/Binary`](src/OpenDisNet/Binary).
+
+## Benchmarks
+
+The BenchmarkDotNet suite measures typed parsing, non-throwing parsing, allocated
+serialization, and serialization into caller-owned storage for representative
+Signal PDU payload sizes. Run it on any supported runtime:
+
+```shell
+dotnet run --project benchmarks/OpenDisNet.Benchmarks -c Release -f net10.0
+```
+
+Replace `net10.0` with `net8.0` or `net9.0` for runtime comparisons. Benchmark
+artifacts are written beneath `BenchmarkDotNet.Artifacts` and are not committed.
 
 ## Security
 

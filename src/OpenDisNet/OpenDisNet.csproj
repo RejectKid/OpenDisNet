@@ -1,10 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net9.0;net10.0</TargetFrameworks>
+    <TargetFrameworks>net8.0;net9.0;net10.0</TargetFrameworks>
     <AssemblyName>OpenDisNet</AssemblyName>
     <RootNamespace>OpenDisNet</RootNamespace>
     <PackageId>OpenDisNet</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.1.0</Version>
     <Authors>RejectKid</Authors>
     <Title>OpenDisNet — Distributed Interactive Simulation (DIS v7) for .NET</Title>
     <Description>Native C#/.NET binary parser and serializer for IEEE 1278.1 Distributed Interactive Simulation (DIS) version 7, covering all 72 PDU types.</Description>

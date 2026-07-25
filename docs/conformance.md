@@ -42,7 +42,7 @@ input tests, and round-trip tests.
 
 - [x] Frozen, compiler-enforced public C# API baseline
 - [x] NuGet package compatibility validation against 0.8.0
-- [x] Packed-package consumer validation on .NET 9 and .NET 10
+- [x] Packed-package consumer validation on .NET 8, .NET 9, and .NET 10
 - [x] Prerelease-aware GitHub and NuGet publishing workflow
 - [x] External RC validation checklist and structured feedback form
 - [x] External RC feedback channel reviewed; no high-impact finding remains open
