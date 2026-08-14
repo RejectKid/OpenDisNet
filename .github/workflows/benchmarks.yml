@@ -1,0 +1,126 @@
+name: Benchmarks
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/benchmarks.yml
+      - benchmarks/**
+      - src/**
+      - Directory.Build.props
+      - OpenDisNet.slnx
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/benchmarks.yml
+      - benchmarks/**
+      - src/**
+      - Directory.Build.props
+      - OpenDisNet.slnx
+  schedule:
+    - cron: "17 5 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: benchmarks-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  smoke:
+    name: Benchmark harness smoke test
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: |
+            8.x
+            9.x
+            10.x
+      - run: dotnet restore --locked-mode
+      - name: Build benchmark harness
+        run: dotnet build benchmarks/OpenDisNet.Benchmarks/OpenDisNet.Benchmarks.csproj --configuration Release --framework net10.0 --no-restore --no-incremental
+      - name: Exercise every benchmark and runtime once
+        run: >-
+          dotnet run
+          --project benchmarks/OpenDisNet.Benchmarks/OpenDisNet.Benchmarks.csproj
+          --configuration Release
+          --framework net10.0
+          --no-build
+          --no-restore
+          --
+          --filter '*'
+          --job Dry
+          --runtimes net8.0 net9.0 net10.0
+          --join
+          --exporters JSON
+          --artifacts artifacts/benchmarks
+      - name: Add diagnostic report to job summary
+        shell: bash
+        run: |
+          report="$(find artifacts/benchmarks/results -name '*-report-github.md' -print -quit)"
+          {
+            echo '## Benchmark harness smoke test'
+            echo
+            echo '> BenchmarkDotNet Dry mode validates that every benchmark builds and runs. Its timings are diagnostic only and are not performance measurements.'
+            echo
+            cat "$report"
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload diagnostic results
+        uses: actions/upload-artifact@v7
+        with:
+          name: benchmark-smoke-${{ github.run_id }}
+          path: artifacts/benchmarks/**
+          retention-days: 7
+
+  benchmark:
+    name: Full cross-runtime benchmarks
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: |
+            8.x
+            9.x
+            10.x
+      - run: dotnet restore --locked-mode
+      - name: Build benchmark harness
+        run: dotnet build benchmarks/OpenDisNet.Benchmarks/OpenDisNet.Benchmarks.csproj --configuration Release --framework net10.0 --no-restore --no-incremental
+      - name: Measure all supported runtimes
+        run: >-
+          dotnet run
+          --project benchmarks/OpenDisNet.Benchmarks/OpenDisNet.Benchmarks.csproj
+          --configuration Release
+          --framework net10.0
+          --no-build
+          --no-restore
+          --
+          --filter '*'
+          --runtimes net8.0 net9.0 net10.0
+          --join
+          --exporters JSON
+          --artifacts artifacts/benchmarks
+      - name: Add results to job summary
+        shell: bash
+        run: |
+          report="$(find artifacts/benchmarks/results -name '*-report-github.md' -print -quit)"
+          {
+            echo '## Cross-runtime benchmark results'
+            echo
+            echo '> GitHub-hosted runner results are useful for comparisons within this run. Use controlled, dedicated hardware for strict historical regression decisions.'
+            echo
+            cat "$report"
+          } >> "$GITHUB_STEP_SUMMARY"
+      - name: Upload benchmark results
+        uses: actions/upload-artifact@v7
+        with:
+          name: benchmark-results-${{ github.run_id }}
+          path: artifacts/benchmarks/**
+          retention-days: 30

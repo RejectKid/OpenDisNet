@@ -1,6 +1,7 @@
 # OpenDisNet
 
 [![CI](https://github.com/RejectKid/OpenDisNet/actions/workflows/ci.yml/badge.svg)](https://github.com/RejectKid/OpenDisNet/actions/workflows/ci.yml)
+[![Benchmarks](https://github.com/RejectKid/OpenDisNet/actions/workflows/benchmarks.yml/badge.svg)](https://github.com/RejectKid/OpenDisNet/actions/workflows/benchmarks.yml)
 [![NuGet](https://img.shields.io/nuget/v/OpenDisNet.svg)](https://www.nuget.org/packages/OpenDisNet)
 [![GitHub Release](https://img.shields.io/github/v/release/RejectKid/OpenDisNet)](https://github.com/RejectKid/OpenDisNet/releases/latest)
 
@@ -144,6 +145,18 @@ dotnet run --project benchmarks/OpenDisNet.Benchmarks -c Release -f net10.0
 
 Replace `net10.0` with `net8.0` or `net9.0` for runtime comparisons. Benchmark
 artifacts are written beneath `BenchmarkDotNet.Artifacts` and are not committed.
+
+The [benchmark workflow](https://github.com/RejectKid/OpenDisNet/actions/workflows/benchmarks.yml)
+runs a fast BenchmarkDotNet `Dry` smoke test across .NET 8, 9, and 10 for
+relevant pull requests. Dry-mode timings only validate the harness; they are not
+performance measurements. Full cross-runtime measurements run after relevant
+changes land on `main`, every Monday, and on manual dispatch. The workflow adds
+the Markdown table to its job summary and retains the HTML, Markdown, CSV, and
+JSON results as downloadable artifacts for 30 days.
+
+GitHub-hosted runners are appropriate for comparing runtimes within one run.
+Use controlled, dedicated hardware before treating results from different runs
+as a strict performance regression gate.
 
 ## Security
 
