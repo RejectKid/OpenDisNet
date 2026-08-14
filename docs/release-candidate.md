@@ -7,11 +7,11 @@ package validation compares every new artifact with the stable 1.0.0 baseline.
 
 ## Install an RC
 
-Release candidates use SemVer tags such as `v1.1.0-rc.1`. After a candidate is
+Release candidates use SemVer tags such as `vX.Y.Z-rc.1`. After a candidate is
 published, install that exact version so test results remain reproducible:
 
 ```shell
-dotnet add package OpenDisNet --version 1.1.0-rc.1
+dotnet add package OpenDisNet --version <next-version>-rc.1
 ```
 
 GitHub and NuGet identify RC builds as prereleases. Do not use an RC in a

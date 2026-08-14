@@ -28,7 +28,11 @@ not authorization decisions.
 - Low-or-higher vulnerabilities in direct or transitive NuGet dependencies fail
   restore.
 - Pull requests receive dependency review, cross-platform tests, parser hostile-
-  input regression tests, formatting checks, and CodeQL analysis.
+  input regression tests, bounded parser fuzzing, formatting checks, and CodeQL
+  analysis.
 - Weekly CodeQL analysis covers changes outside pull-request activity.
+- A SharpFuzz target exercises header, datagram, framed-span, segmented-sequence,
+  validation, serialization, and round-trip paths; its bounded mutation corpus
+  runs in CI and supports sustained coverage-guided campaigns.
 - Release packages include SHA-256 checksums and GitHub build-provenance
   attestations and are published to NuGet through short-lived OIDC credentials.

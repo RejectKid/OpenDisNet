@@ -5,7 +5,7 @@ publishes to NuGet.org, and creates a GitHub release for tags such as `v1.0.1`.
 GitHub-generated notes are categorized using `.github/release.yml`, and package
 plus symbol artifacts are attached to the release shown on the repository page.
 
-Prerelease tags use SemVer identifiers such as `v1.1.0-rc.1`. The workflow
+Prerelease tags use SemVer identifiers such as `vX.Y.Z-rc.1`. The workflow
 derives the package version from the tag and marks the GitHub release as a
 prerelease automatically. Before publishing any tag, the workflow validates the
 public API, compares the package with the 1.0.0 compatibility baseline, and runs

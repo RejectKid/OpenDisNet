@@ -1,0 +1,39 @@
+name: Fuzz smoke
+
+on:
+  pull_request:
+    paths:
+      - .github/workflows/fuzz.yml
+      - src/**
+      - tests/OpenDisNet.Fuzz/**
+      - Directory.Build.props
+      - OpenDisNet.slnx
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/fuzz.yml
+      - src/**
+      - tests/OpenDisNet.Fuzz/**
+      - Directory.Build.props
+      - OpenDisNet.slnx
+  schedule:
+    - cron: "43 4 * * 3"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  parser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-dotnet@v6
+        with:
+          dotnet-version: 10.x
+      - run: dotnet restore --locked-mode
+      - name: Build fuzz target
+        run: dotnet build tests/OpenDisNet.Fuzz/OpenDisNet.Fuzz.csproj --configuration Release --no-restore --no-incremental
+      - name: Run bounded parser fuzz smoke corpus
+        run: dotnet run --project tests/OpenDisNet.Fuzz/OpenDisNet.Fuzz.csproj --configuration Release --no-build --no-restore -- --smoke
