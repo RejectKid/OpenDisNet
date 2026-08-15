@@ -4,7 +4,20 @@ All notable changes are documented here. This project follows Semantic
 Versioning starting with 1.0 and uses prerelease versions when conformance is
 incomplete.
 
-## 1.1.0 - Unreleased
+## 1.2.0 - Unreleased
+
+- Added framed span and segmented-sequence readers that distinguish incomplete
+  input from invalid data and report the number of consumed octets.
+- Added header-only inspection and safe raw preservation for explicitly allowed
+  non-v7 datagrams instead of interpreting them with v7 body layouts.
+- Added builders for Entity State, Fire, Detonation, and Transmitter PDUs plus
+  non-mutating semantic validation with structured warnings and errors.
+- Expanded BenchmarkDotNet coverage to fixed, variable, vendor-defined, framed,
+  header-only, and invalid-input paths.
+- Added a SharpFuzz parser target, deterministic mutation corpus, and scheduled
+  CI smoke-fuzz workflow.
+
+## 1.1.0 - 2026-07-25
 
 - Added first-class .NET 8 support alongside .NET 9 and .NET 10, including
   full unit-test, package validation, and packed-package consumer coverage.

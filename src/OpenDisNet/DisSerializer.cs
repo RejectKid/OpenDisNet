@@ -1,3 +1,4 @@
+using System.Buffers;
 using OpenDisNet.Binary;
 using OpenDisNet.Pdus;
 using OpenDisNet.Protocol;
@@ -7,6 +8,129 @@ namespace OpenDisNet;
 /// <summary>Serializes and deserializes Distributed Interactive Simulation PDUs.</summary>
 public static class DisSerializer
 {
+    /// <summary>Attempts to inspect a DIS header without decoding its PDU body.</summary>
+    public static bool TryReadHeader(ReadOnlySpan<byte> source, out DisHeader header, out DisParseError error)
+    {
+        header = default;
+        error = default;
+
+        if (source.Length < 4)
+            return Fail(DisParseErrorCode.TruncatedHeader, "A DIS header requires at least 4 bytes to identify its layout.", source.Length, out error);
+
+        int requiredHeaderSize = RequiredHeaderSize(source[3]);
+        if (source.Length < requiredHeaderSize)
+            return Fail(DisParseErrorCode.TruncatedHeader, $"This DIS header requires {requiredHeaderSize} bytes.", source.Length, out error);
+
+        try
+        {
+            var reader = new DisBinaryReader(source[..requiredHeaderSize]);
+            header = DisHeaderCodec.Read(ref reader);
+            if (header.Length < requiredHeaderSize)
+                return Fail(DisParseErrorCode.InvalidLength, $"Invalid PDU length {header.Length}.", 8, out error);
+            return true;
+        }
+        catch (DisParseException exception)
+        {
+            return Fail(DisParseErrorCode.InvalidField, exception.Message, exception.Offset, out error);
+        }
+    }
+
+    /// <summary>Attempts to inspect a possibly segmented DIS header without decoding its PDU body.</summary>
+    public static bool TryReadHeader(ReadOnlySequence<byte> source, out DisHeader header, out DisParseError error)
+    {
+        int available = (int)Math.Min(source.Length, DisHeader.Size);
+        if (source.IsSingleSegment)
+            return TryReadHeader(source.FirstSpan[..available], out header, out error);
+
+        Span<byte> headerBytes = stackalloc byte[DisHeader.Size];
+        source.Slice(0, available).CopyTo(headerBytes);
+        return TryReadHeader(headerBytes[..available], out header, out error);
+    }
+
+    /// <summary>Attempts to read the first complete DIS PDU from a buffer.</summary>
+    public static DisReadStatus TryRead(
+        ReadOnlySpan<byte> source,
+        out IDisPdu? pdu,
+        out int bytesConsumed,
+        out DisParseError error) =>
+        TryRead(source, out pdu, out bytesConsumed, out error, null);
+
+    /// <summary>Attempts to read the first complete DIS PDU from a buffer with explicit parse options.</summary>
+    public static DisReadStatus TryRead(
+        ReadOnlySpan<byte> source,
+        out IDisPdu? pdu,
+        out int bytesConsumed,
+        out DisParseError error,
+        DisParseOptions? options)
+    {
+        pdu = null;
+        bytesConsumed = 0;
+        if (!TryReadHeader(source, out DisHeader header, out error))
+            return error.Code == DisParseErrorCode.TruncatedHeader ? DisReadStatus.NeedMoreData : DisReadStatus.InvalidData;
+
+        options ??= DisParseOptions.Default;
+        if (header.Length > options.MaximumPduLength)
+        {
+            Fail(DisParseErrorCode.InvalidLength, $"Invalid PDU length {header.Length}.", 8, out error);
+            return DisReadStatus.InvalidData;
+        }
+
+        if (source.Length < header.Length)
+        {
+            Fail(DisParseErrorCode.TruncatedPdu, $"The header declares {header.Length} bytes; only {source.Length} were received.", source.Length, out error);
+            return DisReadStatus.NeedMoreData;
+        }
+
+        DisParseOptions framedOptions = options with { RequireExactDatagramLength = true };
+        if (!TryDeserialize(source[..header.Length], out pdu, out error, framedOptions))
+            return DisReadStatus.InvalidData;
+
+        bytesConsumed = header.Length;
+        return DisReadStatus.Done;
+    }
+
+    /// <summary>Attempts to read the first complete DIS PDU from a possibly segmented buffer.</summary>
+    public static DisReadStatus TryRead(
+        ReadOnlySequence<byte> source,
+        out IDisPdu? pdu,
+        out int bytesConsumed,
+        out DisParseError error) =>
+        TryRead(source, out pdu, out bytesConsumed, out error, null);
+
+    /// <summary>Attempts to read the first complete DIS PDU from a possibly segmented buffer with explicit parse options.</summary>
+    public static DisReadStatus TryRead(
+        ReadOnlySequence<byte> source,
+        out IDisPdu? pdu,
+        out int bytesConsumed,
+        out DisParseError error,
+        DisParseOptions? options)
+    {
+        pdu = null;
+        bytesConsumed = 0;
+        if (!TryReadHeader(source, out DisHeader header, out error))
+            return error.Code == DisParseErrorCode.TruncatedHeader ? DisReadStatus.NeedMoreData : DisReadStatus.InvalidData;
+
+        options ??= DisParseOptions.Default;
+        if (header.Length > options.MaximumPduLength)
+        {
+            Fail(DisParseErrorCode.InvalidLength, $"Invalid PDU length {header.Length}.", 8, out error);
+            return DisReadStatus.InvalidData;
+        }
+
+        if (source.Length < header.Length)
+        {
+            Fail(DisParseErrorCode.TruncatedPdu, $"The header declares {header.Length} bytes; only {source.Length} were received.", (int)Math.Min(source.Length, int.MaxValue), out error);
+            return DisReadStatus.NeedMoreData;
+        }
+
+        ReadOnlySequence<byte> frame = source.Slice(0, header.Length);
+        if (frame.IsSingleSegment)
+            return TryRead(frame.FirstSpan, out pdu, out bytesConsumed, out error, options);
+
+        byte[] contiguousFrame = frame.ToArray();
+        return TryRead(contiguousFrame, out pdu, out bytesConsumed, out error, options);
+    }
+
     /// <summary>Deserializes one complete DIS datagram and requires the specified PDU type.</summary>
     public static TPdu Deserialize<TPdu>(ReadOnlySpan<byte> datagram, DisParseOptions? options = null)
         where TPdu : class, IDisPdu
@@ -51,19 +175,11 @@ public static class DisSerializer
         pdu = null;
         error = default;
 
-        if (datagram.Length < 4)
-            return Fail(DisParseErrorCode.TruncatedHeader, "A DIS header requires at least 4 bytes to identify its layout.", datagram.Length, out error);
-
-        int requiredHeaderSize = datagram[3] == (byte)ProtocolFamily.LiveEntity
-            ? DisHeader.MinimumSize
-            : DisHeader.Size;
-        if (datagram.Length < requiredHeaderSize)
-            return Fail(DisParseErrorCode.TruncatedHeader, $"This DIS header requires {requiredHeaderSize} bytes.", datagram.Length, out error);
+        if (!TryReadHeader(datagram, out DisHeader header, out error))
+            return false;
 
         try
         {
-            var reader = new DisBinaryReader(datagram);
-            DisHeader header = DisHeaderCodec.Read(ref reader);
             int headerSize = header.EncodedSize;
 
             if (options.RequireVersion7 && header.ProtocolVersion != DisProtocolVersion.Ieee1278_1_2012)
@@ -75,7 +191,10 @@ public static class DisSerializer
             if (options.RequireExactDatagramLength && header.Length != datagram.Length)
                 return Fail(DisParseErrorCode.TrailingData, $"The datagram contains {datagram.Length - header.Length} trailing bytes.", header.Length, out error);
 
-            pdu = PduRegistry.Parse(header, datagram.Slice(headerSize, header.Length - headerSize));
+            ReadOnlySpan<byte> body = datagram.Slice(headerSize, header.Length - headerSize);
+            pdu = header.ProtocolVersion == DisProtocolVersion.Ieee1278_1_2012
+                ? PduRegistry.Parse(header, body)
+                : new UnknownPdu(header, body.ToArray());
             return true;
         }
         catch (DisParseException exception)
@@ -131,4 +250,7 @@ public static class DisSerializer
         error = new(code, message, offset);
         return false;
     }
+
+    private static int RequiredHeaderSize(byte protocolFamily) =>
+        protocolFamily == (byte)ProtocolFamily.LiveEntity ? DisHeader.MinimumSize : DisHeader.Size;
 }

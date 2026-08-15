@@ -2,6 +2,7 @@
 
 [![CI](https://github.com/RejectKid/OpenDisNet/actions/workflows/ci.yml/badge.svg)](https://github.com/RejectKid/OpenDisNet/actions/workflows/ci.yml)
 [![Benchmarks](https://github.com/RejectKid/OpenDisNet/actions/workflows/benchmarks.yml/badge.svg)](https://github.com/RejectKid/OpenDisNet/actions/workflows/benchmarks.yml)
+[![Fuzz smoke](https://github.com/RejectKid/OpenDisNet/actions/workflows/fuzz.yml/badge.svg)](https://github.com/RejectKid/OpenDisNet/actions/workflows/fuzz.yml)
 [![NuGet](https://img.shields.io/nuget/v/OpenDisNet.svg)](https://www.nuget.org/packages/OpenDisNet)
 [![GitHub Release](https://img.shields.io/github/v/release/RejectKid/OpenDisNet)](https://github.com/RejectKid/OpenDisNet/releases/latest)
 
@@ -44,6 +45,55 @@ The parser checks framing, protocol version, declared length, and field bounds.
 Unknown and vendor-defined PDU bodies are retained rather than discarded.
 Use `DisSerializer.Serialize(pdu)` for the reverse operation. See the
 [public API design](docs/api-design.md) for the supported design rules.
+
+When reading packet captures, pipelines, or buffers containing multiple PDUs,
+use the framed API. It distinguishes incomplete input from invalid input and
+reports exactly how many octets to advance:
+
+```csharp
+DisReadStatus status = DisSerializer.TryRead(
+    buffer,
+    out IDisPdu? pdu,
+    out int consumed,
+    out DisParseError error);
+
+if (status == DisReadStatus.Done)
+    buffer = buffer[consumed..];
+```
+
+The same API accepts `ReadOnlySequence<byte>`. `TryReadHeader` inspects routing
+fields without decoding or allocating a PDU body. If version enforcement is
+explicitly disabled, non-v7 bodies are returned as `UnknownPdu`; they are never
+interpreted using a v7 layout.
+
+## Build and validate common PDUs
+
+`DisPduBuilder` establishes discriminators and related fields for common
+workflows. Semantic validation remains separate from bounded wire parsing:
+
+```csharp
+using OpenDisNet.Validation;
+
+FirePdu fire = DisPduBuilder.CreateFire(
+    firingEntity,
+    targetEntity,
+    munitionEntity,
+    42,
+    descriptor,
+    launchLocation,
+    velocity,
+    range: 5_000,
+    exerciseId: 1);
+
+DisValidationResult validation = DisValidator.Validate(fire);
+foreach (DisValidationIssue issue in validation.Issues)
+    Console.WriteLine($"{issue.Severity}: {issue.Path}: {issue.Message}");
+```
+
+Builders are also available for Entity State, Detonation, and Transmitter PDUs.
+Validation reports discriminator inconsistencies, non-finite coordinates,
+invalid physical values, incomplete radio state, and unset primary identifiers
+without changing the PDU.
 
 ## Create and serialize a Signal PDU
 
@@ -135,9 +185,9 @@ and checked big-endian primitives are under
 
 ## Benchmarks
 
-The BenchmarkDotNet suite measures typed parsing, non-throwing parsing, allocated
-serialization, and serialization into caller-owned storage for representative
-Signal PDU payload sizes. Run it on any supported runtime:
+The BenchmarkDotNet suite measures typed, framed, and header-only parsing plus
+caller-owned serialization across Signal payload sizes and representative fixed,
+variable, vendor-defined, and malformed PDUs. Run it on any supported runtime:
 
 ```shell
 dotnet run --project benchmarks/OpenDisNet.Benchmarks -c Release -f net10.0
@@ -157,6 +207,10 @@ JSON results as downloadable artifacts for 30 days.
 GitHub-hosted runners are appropriate for comparing runtimes within one run.
 Use controlled, dedicated hardware before treating results from different runs
 as a strict performance regression gate.
+
+The parser also has a coverage-guided SharpFuzz target and a bounded CI mutation
+campaign. See [parser fuzzing](docs/fuzzing.md) for local smoke, corpus creation,
+instrumentation, and sustained fuzzing instructions.
 
 ## Security
 

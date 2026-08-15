@@ -1,1 +1,29 @@
 #nullable enable
+OpenDisNet.DisReadStatus
+OpenDisNet.DisReadStatus.Done = 0 -> OpenDisNet.DisReadStatus
+OpenDisNet.DisReadStatus.InvalidData = 2 -> OpenDisNet.DisReadStatus
+OpenDisNet.DisReadStatus.NeedMoreData = 1 -> OpenDisNet.DisReadStatus
+OpenDisNet.Pdus.DisPduBuilder
+OpenDisNet.Validation.DisValidationIssue
+OpenDisNet.Validation.DisValidationIssue.Message.get -> string!
+OpenDisNet.Validation.DisValidationIssue.Path.get -> string!
+OpenDisNet.Validation.DisValidationIssue.Severity.get -> OpenDisNet.Validation.DisValidationSeverity
+OpenDisNet.Validation.DisValidationResult
+OpenDisNet.Validation.DisValidationResult.HasWarnings.get -> bool
+OpenDisNet.Validation.DisValidationResult.Issues.get -> System.Collections.Generic.IReadOnlyList<OpenDisNet.Validation.DisValidationIssue!>!
+OpenDisNet.Validation.DisValidationResult.IsValid.get -> bool
+OpenDisNet.Validation.DisValidationSeverity
+OpenDisNet.Validation.DisValidationSeverity.Error = 1 -> OpenDisNet.Validation.DisValidationSeverity
+OpenDisNet.Validation.DisValidationSeverity.Warning = 0 -> OpenDisNet.Validation.DisValidationSeverity
+OpenDisNet.Validation.DisValidator
+static OpenDisNet.DisSerializer.TryRead(System.Buffers.ReadOnlySequence<byte> source, out OpenDisNet.Pdus.IDisPdu? pdu, out int bytesConsumed, out OpenDisNet.DisParseError error) -> OpenDisNet.DisReadStatus
+static OpenDisNet.DisSerializer.TryRead(System.Buffers.ReadOnlySequence<byte> source, out OpenDisNet.Pdus.IDisPdu? pdu, out int bytesConsumed, out OpenDisNet.DisParseError error, OpenDisNet.DisParseOptions? options) -> OpenDisNet.DisReadStatus
+static OpenDisNet.DisSerializer.TryRead(System.ReadOnlySpan<byte> source, out OpenDisNet.Pdus.IDisPdu? pdu, out int bytesConsumed, out OpenDisNet.DisParseError error) -> OpenDisNet.DisReadStatus
+static OpenDisNet.DisSerializer.TryRead(System.ReadOnlySpan<byte> source, out OpenDisNet.Pdus.IDisPdu? pdu, out int bytesConsumed, out OpenDisNet.DisParseError error, OpenDisNet.DisParseOptions? options) -> OpenDisNet.DisReadStatus
+static OpenDisNet.DisSerializer.TryReadHeader(System.Buffers.ReadOnlySequence<byte> source, out OpenDisNet.Protocol.DisHeader header, out OpenDisNet.DisParseError error) -> bool
+static OpenDisNet.DisSerializer.TryReadHeader(System.ReadOnlySpan<byte> source, out OpenDisNet.Protocol.DisHeader header, out OpenDisNet.DisParseError error) -> bool
+static OpenDisNet.Pdus.DisPduBuilder.CreateDetonation(OpenDisNet.Pdus.EntityId! sourceEntityId, OpenDisNet.Pdus.EntityId! targetEntityId, OpenDisNet.Pdus.EntityId! explodingEntityId, ushort eventNumber, OpenDisNet.Pdus.MunitionDescriptor! descriptor, OpenDisNet.Pdus.Vector3Double! location, OpenDisNet.Pdus.Vector3Float! velocity, OpenDisNet.Enumerations.DetonationResult result, byte exerciseId = 0) -> OpenDisNet.Pdus.DetonationPdu!
+static OpenDisNet.Pdus.DisPduBuilder.CreateEntityState(OpenDisNet.Pdus.EntityId! entityId, OpenDisNet.Pdus.EntityType! entityType, OpenDisNet.Pdus.Vector3Double! location, OpenDisNet.Enumerations.ForceId forceId = OpenDisNet.Enumerations.ForceId.Other, byte exerciseId = 0) -> OpenDisNet.Pdus.EntityStatePdu!
+static OpenDisNet.Pdus.DisPduBuilder.CreateFire(OpenDisNet.Pdus.EntityId! firingEntityId, OpenDisNet.Pdus.EntityId! targetEntityId, OpenDisNet.Pdus.EntityId! munitionEntityId, ushort eventNumber, OpenDisNet.Pdus.MunitionDescriptor! descriptor, OpenDisNet.Pdus.Vector3Double! location, OpenDisNet.Pdus.Vector3Float! velocity, float range = 0, byte exerciseId = 0) -> OpenDisNet.Pdus.FirePdu!
+static OpenDisNet.Pdus.DisPduBuilder.CreateTransmitter(OpenDisNet.Pdus.RadioId radio, OpenDisNet.Pdus.RadioType! radioType, ulong frequency, float power, OpenDisNet.Enumerations.TransmitterTransmitState transmitState = OpenDisNet.Enumerations.TransmitterTransmitState.OnAndTransmitting, OpenDisNet.Enumerations.TransmitterInputSource inputSource = OpenDisNet.Enumerations.TransmitterInputSource.Other, byte exerciseId = 0) -> OpenDisNet.Pdus.TransmitterPdu!
+static OpenDisNet.Validation.DisValidator.Validate(OpenDisNet.Pdus.IDisPdu! pdu) -> OpenDisNet.Validation.DisValidationResult!
