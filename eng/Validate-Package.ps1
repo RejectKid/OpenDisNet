@@ -22,7 +22,8 @@ try {
         'opendisnet-icon.png',
         'lib/net8.0/OpenDisNet.dll',
         'lib/net9.0/OpenDisNet.dll',
-        'lib/net10.0/OpenDisNet.dll'
+        'lib/net10.0/OpenDisNet.dll',
+        'lib/net11.0/OpenDisNet.dll'
     )
 
     foreach ($entry in $requiredEntries) {
@@ -63,7 +64,8 @@ try {
     $assemblyEntries = @(
         'lib/net8.0/OpenDisNet.dll',
         'lib/net9.0/OpenDisNet.dll',
-        'lib/net10.0/OpenDisNet.dll'
+        'lib/net10.0/OpenDisNet.dll',
+        'lib/net11.0/OpenDisNet.dll'
     )
     $temporaryDirectory = Join-Path ([System.IO.Path]::GetTempPath()) (
         'opendisnet-package-validation-' + [System.Guid]::NewGuid().ToString('N'))

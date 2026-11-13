@@ -173,8 +173,10 @@ dotnet test --configuration Release
 dotnet pack src/OpenDisNet/OpenDisNet.csproj --configuration Release
 ```
 
-The library targets .NET 8, .NET 9, and .NET 10 and uses nullable annotations,
-deterministic builds, and symbol packages.
+Building the solution requires the .NET 11 SDK.
+
+The library targets .NET 8, .NET 9, .NET 10, and .NET 11 and uses nullable
+annotations, deterministic builds, and symbol packages.
 
 The implementation is reviewable in ordinary source files: PDU classes are
 grouped under [`src/OpenDisNet/Pdus/Families`](src/OpenDisNet/Pdus/Families),
@@ -190,14 +192,16 @@ caller-owned serialization across Signal payload sizes and representative fixed,
 variable, vendor-defined, and malformed PDUs. Run it on any supported runtime:
 
 ```shell
-dotnet run --project benchmarks/OpenDisNet.Benchmarks -c Release -f net10.0
+dotnet run --project benchmarks/OpenDisNet.Benchmarks -c Release -f net11.0
 ```
 
-Replace `net10.0` with `net8.0` or `net9.0` for runtime comparisons. Benchmark
-artifacts are written beneath `BenchmarkDotNet.Artifacts` and are not committed.
+Replace `net11.0` with `net8.0`, `net9.0`, or `net10.0` for runtime comparisons.
+Benchmark artifacts are written beneath `BenchmarkDotNet.Artifacts` and are not
+committed. The harness uses BenchmarkDotNet 0.16 preview for .NET 11 runtime
+support; this development dependency is not included in the library package.
 
 The [benchmark workflow](https://github.com/RejectKid/OpenDisNet/actions/workflows/benchmarks.yml)
-runs a fast BenchmarkDotNet `Dry` smoke test across .NET 8, 9, and 10 for
+runs a fast BenchmarkDotNet `Dry` smoke test across .NET 8, 9, 10, and 11 for
 relevant pull requests. Dry-mode timings only validate the harness; they are not
 performance measurements. Full cross-runtime measurements run after relevant
 changes land on `main`, every Monday, and on manual dispatch. The workflow adds
